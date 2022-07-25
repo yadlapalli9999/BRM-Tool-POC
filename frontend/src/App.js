@@ -1,24 +1,24 @@
-import logo from './logo.svg';
+import React from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Home from './layout/components/home/Home';
+import Navbar from './layout/components/navbar/Navbar';
+import BenchHome from './modules/bench/BenchHome';
+import POCHome from './modules/poc/POCHome';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+       
+       <BrowserRouter>
+       <Navbar/>
+         <Routes>
+            <Route path='/' element={<Home/>}/>
+            <Route path='/poc' element={<POCHome/>}/>
+            <Route path='/bench' element={<BenchHome/>}/>
+         </Routes>
+       </BrowserRouter>
+    </React.Fragment>
   );
 }
 
