@@ -12,6 +12,12 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+.modal-content{
+  border-radius: 0.5rem !important;
+}
+.modal-footer{
+  margin-bottom: 20px !important;
+}
 
 .App-header {
   background-color: #282c34;
