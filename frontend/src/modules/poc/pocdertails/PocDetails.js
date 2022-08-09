@@ -31,12 +31,23 @@ const PocDetails = () => {
         <div className="row">
           <div className="all-pocdetails-buttons ">
             <div className="editButton ">
-              <button type="button" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-mdb-toggle="modal"
+                data-mdb-target="#exampleModal"
+                onClick={() => navigate("/editpoc")}
+              >
                 Edit
               </button>
             </div>
             <div className="deleteButton ">
-              <button type="button" className="btn btn-danger ">
+              <button
+                type="button"
+                className="btn btn-danger"
+                data-mdb-toggle="modal"
+                data-mdb-target="#exampledModal"
+              >
                 Delete
               </button>
             </div>
@@ -132,7 +143,7 @@ const PocDetails = () => {
                 data-mdb-perfect-scrollbar="true"
                 style={{ position: "relative", height: "200px" }}
               >
-                <table className="table mb-0">
+                <table className="table mb-0  table-hover">
                   <tbody>
                     {members &&
                       members
@@ -146,7 +157,7 @@ const PocDetails = () => {
                             style={{ cursor: "pointer" }}
                             onClick={handlePocDetailsNameClick}
                           >
-                            <td className="align-middle">
+                            <td className="align-middle ">
                               <span>{filterMember?.memberName}</span>
                             </td>
                           </tr>
@@ -169,12 +180,14 @@ const PocDetails = () => {
           </div>
         </div>
       </div>
+
+      {/* ADD RESOURCES MODAL */}
       <div
         className={` ${
           show === true ? "pocDetailsModal modal fade" : "modal fade"
         }`}
         id="modalRegisterForm"
-        tabIndex="-1"
+        c="-1"
         role="dialog"
         aria-labelledby="myModalLabel"
         aria-hidden="true"
@@ -216,45 +229,174 @@ const PocDetails = () => {
                   htmlFor="orangeForm-name"
                   className="pocDetailsLabel"
                 >
-                  Your name
-                </label>
-              </div>
-              <div className="md-form mb-5">
-                <i className="fas fa-envelope prefix grey-text"></i>
-                <input
-                  type="email"
-                  id="orangeForm-email"
-                  className="form-control validate"
-                />
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-email"
-                  className="pocDetailsLabel"
-                >
-                  Your email
-                </label>
-              </div>
-
-              <div className="md-form mb-4">
-                <i className="fas fa-lock prefix grey-text"></i>
-                <input
-                  type="password"
-                  id="orangeForm-pass"
-                  className="form-control validate"
-                />
-                <label
-                  data-error="wrong"
-                  data-success="right"
-                  htmlFor="orangeForm-pass"
-                  className="pocDetailsLabel"
-                >
-                  Your password
+                  Search By Name , Email
                 </label>
               </div>
             </div>
             <div className="modal-footer d-flex justify-content-center">
               <button className="btn btn-deep-orange">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* EDIT MODAL */}
+      {/* <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog ">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                Edit POC
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-mdb-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <form className="mt-5">
+                <div className="row mb-2 mt-2">
+                  <div className="col-12">
+                    <div className="group">
+                      <input
+                        className="pocHomeInput"
+                        type="text"
+                        id="form3Example1"
+                        required
+                        name="Name"
+                      />
+                      <label htmlFor="form3Example1">Name</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row mb-2 mt-2">
+                  <div className="col-12">
+                    <div className="group">
+                      <input
+                        className="pocHomeInput"
+                        type="text"
+                        id="form3Example2"
+                        required
+                        name="Description"
+                      />
+                      <label htmlFor="form3Example2">Description</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row mb-2 mt-2">
+                  <div className="col-12">
+                    <div className="group">
+                      <input
+                        className="pocHomeInput"
+                        type="text"
+                        id="form3Example1"
+                        required
+                        name="Name"
+                      />
+                      <label htmlFor="form3Example1">Duration</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row mb-2 mt-2">
+                  <div className="col-12">
+                    <div className="group">
+                      <input
+                        className="pocHomeInput"
+                        type="text"
+                        id="form3Example1"
+                        required
+                        name="Name"
+                      />
+                      <label htmlFor="form3Example1">Created By</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row mb-2 mt-2">
+                  <div className="col-12">
+                    <div className="group">
+                      <input
+                        className="pocHomeInput"
+                        type="text"
+                        id="form3Example10"
+                        required
+                        name="TotalExpInFission"
+                      />
+                      <label htmlFor="form3Example10">Members</label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="row mb-2 mt-2">
+                  <div className="col-12">
+                    <div className="group">
+                      <input
+                        className="pocHomeInput"
+                        type="file"
+                        id="form3Example10"
+                        required
+                        name="TotalExpInFission"
+                      />
+                      <label htmlFor="form3Example10"></label>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-center">
+                  <button type="submit" className="btn btn-primary  mb-4">
+                    Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div> */}
+
+      {/* DELETE MODAL */}
+      <div
+        className="modal fade"
+        id="exampledModal"
+        tabIndex="-1"
+        aria-labelledby="exampledModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampledModalLabel">
+                Delete
+              </h5>
+              <button
+                type="button"
+                className="btn-close"
+                data-mdb-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">Are You Sure You Want To Delete?</div>
+            <div className="modal-footer">
+              <button
+                type="button"
+                className="btn btn-primary"
+                data-mdb-dismiss="modal"
+              >
+                Close
+              </button>
+              <button type="button" className="btn btn-danger">
+                Delete
+              </button>
             </div>
           </div>
         </div>

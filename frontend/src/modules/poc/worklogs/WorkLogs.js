@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./WorkLogs.css";
 
 const WorkLogs = () => {
@@ -32,6 +33,34 @@ const WorkLogs = () => {
     <div class="container">
       <div className="workLogsTitle mt-5 mb-5">
         <h2>Work Logs</h2>
+      </div>
+      <div class="dropdown d-flex justify-content-end mb-4">
+        <button
+          class="btn btn-primary dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Select Dates
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <li>
+            <Link class="dropdown-item" to="#">
+              Today
+            </Link>
+          </li>
+          <li>
+            <Link class="dropdown-item" to="#">
+              Current Week
+            </Link>
+          </li>
+          <li>
+            <Link class="dropdown-item" to="#">
+              Past Week
+            </Link>
+          </li>
+        </ul>
       </div>
       <table className="table align-middle  mb-0 bg-white table-hover WorkLogsTable">
         <thead className="bg-secondary ">

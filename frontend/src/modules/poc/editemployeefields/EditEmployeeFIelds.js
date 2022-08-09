@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./EmployeeFields.css";
+import "./EditEmployeeFields.css";
 
-const EmployeeFields = () => {
+const EditEmployeeFields = () => {
   let navigate = useNavigate();
   const [inputData, setinputData] = useState({
     Name: "",
@@ -128,10 +128,10 @@ const EmployeeFields = () => {
             className="btn btn-primary  mb-4"
             style={{ marginRight: "30px" }}
           >
-            Add
+            Save
           </button>
           <button
-            onClick={() => navigate("/poc")}
+            onClick={() => navigate("/pocdetails")}
             className="btn btn-primary  mb-4 "
           >
             Cancel
@@ -142,4 +142,4 @@ const EmployeeFields = () => {
   );
 };
 
-export default EmployeeFields;
+export default EditEmployeeFields;

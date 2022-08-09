@@ -1,18 +1,15 @@
-.pocTitle{
+.employeeFieldsInputs{
+    border-radius: 0;
+    border-bottom: 1px solid lightgrey !important;
+}
+
+.employeeFieldsTitle{
     text-align: center;
 }
-.table-headings{
-    color: white;
-}
-.all-pochome-buttons{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-}
-.name:hover{
-    cursor: pointer;
-}
+
+
+
+
 
 
 
@@ -22,15 +19,14 @@
     position: relative;
     margin-bottom: 45px;
   }
-  .pocHomeInput {
+  input {
     background-color: #fbfbfb;
     padding: 10px 10px 10px 5px;
     display: block;
     border: none;
     border-bottom: 1px solid #757575;
-    width: 100%;
   }
-  .pocHomeInput:focus {
+  input:focus {
     outline: none;
   }
   
@@ -48,11 +44,16 @@
   }
   
   /* active state */
- .pocHomeInput:focus ~ label,
-  .pocHomeInput:valid ~ label {
+  input:focus ~ label,
+  input:valid ~ label {
     top: -20px;
     font-size: 14px;
   }
+  
 
-
+  .modal-backdrop.show {
+    /* opacity: .5; */
+    /* opacity: 0; */
+    display: none;
+}
 

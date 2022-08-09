@@ -73,7 +73,13 @@ let POCHome = () => {
         </div>
         <div className="all-pochome-buttons mt-5 mb-4">
           <div class="addButton ">
-            <button type="button" className="btn  btn-primary">
+            <button
+              onClick={() => navigate("/addpoc")}
+              type="button"
+              class="btn btn-primary"
+              data-mdb-toggle="modal"
+              data-mdb-target="#exampleModal"
+            >
               Add
             </button>
           </div>

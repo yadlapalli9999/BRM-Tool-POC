@@ -1,6 +1,13 @@
 // import '@fortawesome/fontawesome-free/css/all.css';
 // import 'mdbootstrap/css/bootstrap.css';
 // import 'mdbootstrap/css/mdb.css';
+import "@fortawesome/fontawesome-free/css/all.css";
+// import "@mdbootstrap/css/mdb.min.css";
+import "mdb-ui-kit/css/mdb.min.css";
+import "mdb-ui-kit/js/mdb.min.js";
+import "mdbootstrap/js/bootstrap.min.js";
+// import "mdbootstrap/js/popper.min.js";
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
