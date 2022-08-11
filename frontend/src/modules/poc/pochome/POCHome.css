@@ -1,0 +1,58 @@
+.pocTitle{
+    text-align: center;
+}
+.table-headings{
+    color: white;
+}
+.all-pochome-buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+.name:hover{
+    cursor: pointer;
+}
+
+
+
+
+/* form starting stylings ------------------------------- */
+.group {
+    position: relative;
+    margin-bottom: 45px;
+  }
+  .pocHomeInput {
+    background-color: #fbfbfb;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #757575;
+    width: 100%;
+  }
+  .pocHomeInput:focus {
+    outline: none;
+  }
+  
+  /* LABEL ======================================= */
+  label {
+    color: #999;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+  
+  /* active state */
+ .pocHomeInput:focus ~ label,
+  .pocHomeInput:valid ~ label {
+    top: -20px;
+    font-size: 14px;
+  }
+
+
+

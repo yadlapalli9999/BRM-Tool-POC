@@ -1,0 +1,34 @@
+.all-pocdetails-buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 41px !important;
+}
+
+
+.pocDetailsModal{
+    display: block !important;
+    opacity: 1 !important;
+
+}
+.pocDetailsModalDialog{
+
+    transform: none !important;
+}
+.pocDetailsClose{
+    outline: none;
+    border: none;
+    background-color: white;
+    font-weight: bolder;
+    font-size: x-large;
+}
+.pocDetailsLabel{
+    position: initial;
+}
+
+.editButton  {
+    margin-right: 30px;
+}
+
+
