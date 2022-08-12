@@ -149,7 +149,7 @@ let POCHome = () => {
                               <img
                                 src={ExcelImg}
                                 alt=""
-                                style={{ width: "45px", height: "45px" }}
+                                style={{ width: "40px", height: "45px" }}
                                 className="rounded-circle pocHomeExcelLogo "
                               />
                             </Link>
@@ -168,7 +168,7 @@ let POCHome = () => {
                                 <img
                                   src={ExcelImg}
                                   alt=""
-                                  style={{ width: "45px", height: "45px" }}
+                                  style={{ width: "40px", height: "45px" }}
                                   className="rounded-circle pocHomeExcelLogo"
                                 />
                               </Link>

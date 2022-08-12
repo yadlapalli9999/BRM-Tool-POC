@@ -8,7 +8,7 @@ let Navbar = () => {
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item" style={{ paddingRight: "6rem" }}>
-                <Link to="/" className="nav-link">
+                <Link to="/home" className="nav-link">
                   <i
                     className="fas fa-home"
                     style={{ fontColor: "white", fontSize: "28px" }}
@@ -16,21 +16,14 @@ let Navbar = () => {
                 </Link>
               </li>
               <li className="nav-item" style={{ paddingRight: "6rem" }}>
-                <Link to="/poc" className="nav-link">
+                <Link to="/benchlist" className="nav-link">
                   <i
                     className="fas fa-users"
                     style={{ fontColor: "white", fontSize: "28px" }}
                   />
                 </Link>
               </li>
-              <li className="nav-item" style={{ paddingRight: "6rem" }}>
-                <Link to="/benchlist" className="nav-link">
-                  <i
-                    className="fas fa-id-card"
-                    style={{ fontColor: "white", fontSize: "28px" }}
-                  />
-                </Link>
-              </li>
+              
             </ul>
             <ul className="navbar navbar-nav ml-auto">
               <li className="nav-item" style={{ paddingRight: "6rem" }}>

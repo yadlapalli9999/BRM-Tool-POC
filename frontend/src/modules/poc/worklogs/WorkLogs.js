@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./WorkLogs.css";
+import $ from 'jquery'
 
 const WorkLogs = () => {
   const dummyData = [
@@ -29,39 +30,55 @@ const WorkLogs = () => {
       __v: 0,
     },
   ];
+
+  // $(document).ready(()=>{
+  //   $('.dropdown').dropdown()
+  // })
+
   return (
-    <div class="container">
+    <div className="container">
       <div className="workLogsTitle mt-5 mb-5">
         <h2>Work Logs</h2>
       </div>
-      <div class="dropdown d-flex justify-content-end mb-4">
-        <button
-          class="btn btn-primary dropdown-toggle"
+      <div className="dropdown d-flex justify-content-end mb-4">
+        {/* <button
+          className="btn btn-primary dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
-          data-mdb-toggle="dropdown"
+          data-toggle="dropdown"
           aria-expanded="false"
         >
           Select Dates
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
           <li>
-            <Link class="dropdown-item" to="#">
+            <Link className="dropdown-item" to="#">
               Today
             </Link>
           </li>
           <li>
-            <Link class="dropdown-item" to="#">
+            <Link className="dropdown-item" to="#">
               Current Week
             </Link>
           </li>
           <li>
-            <Link class="dropdown-item" to="#">
+            <Link className="dropdown-item" to="#">
               Past Week
             </Link>
           </li>
-        </ul>
+        </ul> */}
+
+<select className="btn btn-primary dropdown-toggle"
+          type="button">
+         <option>          Select Dates
+</option>   
+        <option>Today</option>
+        <option>Current Week</option>
+        <option>Past Week</option>
+
+      </select>
       </div>
+      
       <table className="table align-middle  mb-0 bg-white table-hover WorkLogsTable">
         <thead className="bg-secondary ">
           <tr className="table-headings">
@@ -77,8 +94,8 @@ const WorkLogs = () => {
         </thead>
         <tbody>
           {dummyData &&
-            dummyData?.map((data) => (
-              <tr>
+            dummyData?.map((data,index) => (
+              <tr key={index+1}>
                 <td>
                   <div className="d-flex align-items-center">
                     <div>

@@ -34,7 +34,7 @@ let Login = () => {
   return (
     <React.Fragment>
       <div className="container">
-        <div className="row d-flex justify-content-center align-items-center vh-100">
+        <div className="row d-flex justify-content-center align-items-center h-100 py-5">
           <div className="col">
             <div className="h-100 gradient-form">
               <div className="container py-5 h-100">

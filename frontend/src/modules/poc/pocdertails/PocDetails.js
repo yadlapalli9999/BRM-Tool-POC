@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import $ from 'jquery';
+import {Chart,registerables} from 'chart.js';
 import "./PocDetails.css";
+
+Chart.register(...registerables)
 
 const PocDetails = () => {
   const members = [
@@ -17,13 +21,34 @@ const PocDetails = () => {
       memberName: "Sudhanshu Jain",
     },
   ];
-
+  $(document).ready(function() {
+    var ctx = $("#pieChart");
+    var myLineChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ["Kunal Rokhle","Alok Kumar","Sudhanshu Jain"],
+            datasets: [{
+                data: [20, 40, 25],
+                backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)"]
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: 'empData'
+            }
+        }
+    });
+});
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const handlePocDetailsNameClick = () => {
     navigate("/worklogs");
   };
+  
+  
+  
 
   return (
     <section>
@@ -122,9 +147,9 @@ const PocDetails = () => {
         </div>
         <div
           className="row d-flex align-items-center h-100 mt-5"
-          style={{ width: "50%" }}
+          // style={{ width: "50%" }}
         >
-          <div className="col-md-12 col-xl-10">
+          <div className="col-md-6">
             <div className="card">
               <div className="card-header p-3 d-flex justify-content-between align-items-center ">
                 <h5 className="mb-0">
@@ -177,6 +202,12 @@ const PocDetails = () => {
                 </div>
               </div>
             </div>
+          </div>
+          {/* <!-- pie chart --> */}
+          <div className="col-md-2"></div>
+          <div className="col-md-4">
+             <canvas id="pieChart" width="200" height="200"></canvas>
+            
           </div>
         </div>
       </div>

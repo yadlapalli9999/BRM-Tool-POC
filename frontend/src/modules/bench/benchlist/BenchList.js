@@ -551,20 +551,23 @@ let BenchList = () => {
             />
           </div>
           <div className="col-md-6">
-            <button
-              className=" btn btn-secondary btn-rounded"
-              style={{ float: "right" }}
-            >
-              <select
-                className="bg-secondary text-white"
-                style={{ border: "0px" }}
-              >
-                <option>Current Year</option>
-                <option>Last Year</option>
-                <option>Current Year</option>
-                <option>Last Year</option>
-              </select>
-            </button>
+          <div class="dropdown d-flex justify-content-end mb-4">
+            <select class="btn btn-primary dropdown-toggle" type="button" style={{fontSize:'1rem'}}>
+              <option>Select Year</option>
+              <option>1-2</option>
+              <option>2-3</option>
+              <option>3-4</option>
+              <option>4-5</option>
+              <option>5-6</option>
+              <option>6-7</option>
+              <option>7-8</option>
+              <option>8-9</option>
+              <option>9-10</option>
+              <option>10-11</option>
+              <option>11-12</option>
+
+            </select>
+          </div>
           </div>
         </div>
         <div className="row" style={{ marginTop: "30px" }}>
@@ -606,18 +609,18 @@ let BenchList = () => {
                         <td>{item.reportingManager}</td>
                         <td>{item.teamLead}</td>
                         <td>
-                          <div
+                          <span
                             data-toggle="modal"
                             data-target="#modalContactForm"
                           >
                             <i
-                              className="fas fa-edit"
+                              className="fas fa-edit text-primary"
                               onClick={() => handleUpdateBechEmployee(item)}
                             />
-                          </div>
+                          </span>
                           &nbsp;&nbsp;
                           <i
-                            className="fa fa-trash"
+                            className="fa fa-trash text-danger"
                             onClick={() => {
                               // handleDelete(item.id);
                             }}
