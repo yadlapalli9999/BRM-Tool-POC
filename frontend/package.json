@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "bootstrap": "^5.2.0",
+    "chart.js": "^3.9.1",
     "datatables.net-dt": "^1.12.1",
     "jquery": "^3.6.0",
     "mdb-ui-kit": "^4.4.0",
