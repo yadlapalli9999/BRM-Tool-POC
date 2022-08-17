@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AdminRole } from "../../../Roles";
 import "./Login.css";
 
-let Login = () => {
+let Login = (props) => {
+  props.funcNav(false)
+
   let navigate = useNavigate();
   let [user, setUser] = useState({
     email: String,
@@ -25,7 +27,7 @@ let Login = () => {
     //   navigate("/home");
     // }
     if (AdminRole.role === "ADMIN") {
-      navigate("/home");
+        navigate("/home");
     } else if (AdminRole.role === "EMPLOYEE") {
       navigate("/employeeworklogs");
     }
@@ -34,7 +36,7 @@ let Login = () => {
   return (
     <React.Fragment>
       <div className="container">
-        <div className="row d-flex justify-content-center align-items-center h-100 py-5">
+        <div className="row d-flex justify-content-center align-items-center vh-100">
           <div className="col">
             <div className="h-100 gradient-form">
               <div className="container py-5 h-100">
@@ -103,13 +105,13 @@ let Login = () => {
                                   Sign In With Google
                                 </button>
 
-                                <a className="text-muted" href="#!">
+                                {/* <a className="text-muted" href="#!">
                                   Forgot password?
-                                </a>
+                                </a> */}
                               </div>
 
                               <div className="d-flex align-items-center justify-content-center pb-4">
-                                <p className="mb-0 me-2">
+                                {/* <p className="mb-0 me-2">
                                   Don't have an account?
                                 </p>
                                 <Link
@@ -118,7 +120,7 @@ let Login = () => {
                                   className="btn btn-outline-danger"
                                 >
                                   Create new
-                                </Link>
+                                </Link> */}
                               </div>
                             </form>
                           </div>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
-let Register = () => {
+let Register = (props) => {
+  props.funcNav(false)
   let navigate = useNavigate();
   let [user, setUser] = useState({
     name: String,
@@ -24,7 +25,7 @@ let Register = () => {
   return (
     <React.Fragment>
       <div className="container">
-        <div className="row d-flex justify-content-center align-items-center h-100 py-5">
+        <div className="row d-flex justify-content-center align-items-center vh-100">
           <div className="col">
             <div className="h-100 gradient-form">
               <div className="container py-5 h-100">
