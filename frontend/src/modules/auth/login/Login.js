@@ -4,7 +4,7 @@ import { AdminRole } from "../../../Roles";
 import "./Login.css";
 
 let Login = (props) => {
-  props.funcNav(false)
+  props.funcNav(false);
 
   let navigate = useNavigate();
   let [user, setUser] = useState({
@@ -27,7 +27,7 @@ let Login = (props) => {
     //   navigate("/home");
     // }
     if (AdminRole.role === "ADMIN") {
-        navigate("/home");
+      navigate("/dashboard");
     } else if (AdminRole.role === "EMPLOYEE") {
       navigate("/employeeworklogs");
     }
