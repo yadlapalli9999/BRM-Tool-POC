@@ -22,7 +22,7 @@ const AdminDashboard = (props) => {
         "62e15a9cf09d35dcf465f2c1",
         "62e7e0684f2e38bf99f1db88",
       ],
-      _id: "62e8c8266415e94f7d503cdd",
+      _id: "1122112321211",
       __v: 0,
     },
     {
@@ -38,7 +38,7 @@ const AdminDashboard = (props) => {
         "62e15a9cf09d35dcf465f2c1",
         "62e7e0684f2e38bf99f1db88",
       ],
-      _id: "62e8c8266415e94f7d503cdd",
+      _id: "1122112321211",
       __v: 0,
     },
     {
@@ -56,7 +56,7 @@ const AdminDashboard = (props) => {
         "62e15a9cf09d35dcf465f2c1",
         "62e7e0684f2e38bf99f1db88",
       ],
-      _id: "62e8c8266415e94f7d503cdd",
+      _id: "1122112321211",
       __v: 0,
     },
     {
@@ -74,7 +74,7 @@ const AdminDashboard = (props) => {
         "62e15a9cf09d35dcf465f2c1",
         "62e7e0684f2e38bf99f1db88",
       ],
-      _id: "62e8c8266415e94f7d503cdd",
+      _id: "1122112321211",
       __v: 0,
     },
   ];
@@ -238,35 +238,35 @@ const AdminDashboard = (props) => {
             <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
               <div className="card personBench">
                 <div
-                  className="card-body d-flex align-items-center flex-row justify-content-evenly"
+                  className="card-body d-flex align-items-center flex-row justify-content-between"
                   style={{ height: 0 }}
                 >
-                  <h3 className="mb-0 text-center">Active</h3>
+                  <h3 className="mb-0 text-center ">Active</h3>
                   <div className=" text-center px-md-1 ">
-                    <div>
-                      <h1 className="text-danger">0</h1>
+                    <div style={{ marginRight: "100px" }}>
+                      <h1 className="text-success">0</h1>
                     </div>
                   </div>
                 </div>
                 <div
-                  className="card-body d-flex align-items-center flex-row justify-content-evenly"
+                  className="card-body d-flex align-items-center flex-row justify-content-between"
                   style={{ height: 0 }}
                 >
                   <h3 className="mb-0 text-center">Inactive</h3>
                   <div className=" text-center px-md-1 ">
-                    <div>
+                    <div style={{ marginRight: "100px" }}>
                       <h1 className="text-danger">0</h1>
                     </div>
                   </div>
                 </div>
                 <div
-                  className="card-body d-flex align-items-center flex-row justify-content-evenly"
+                  className="card-body d-flex align-items-center flex-row justify-content-between "
                   style={{ height: 0 }}
                 >
                   <h3 className="mb-0 text-center">Project</h3>
                   <div className=" text-center px-md-1 ">
-                    <div>
-                      <h1 className="text-danger">0</h1>
+                    <div style={{ marginRight: "100px" }}>
+                      <h1 className="text-warning">0</h1>
                     </div>
                   </div>
                 </div>
@@ -302,9 +302,9 @@ const AdminDashboard = (props) => {
                 <thead className="admindashboardTableHead">
                   <tr className="table-headings">
                     <th>Id</th>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>POC</th>
+                    <th>POC Name</th>
+                    <th>Duration</th>
+                    <th>Created By</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -319,7 +319,7 @@ const AdminDashboard = (props) => {
                           </div>
                         </td>
                         <td>
-                          <p className="fw-normal mb-1">{data?.name}</p>
+                          <p className="fw-normal mb-1">POC Name</p>
                         </td>
                         <td>
                           <span
@@ -331,10 +331,10 @@ const AdminDashboard = (props) => {
                                 : "badge-success"
                             } rounded-pill d-inline`}
                           >
-                            16-aug-2022
+                            1 Month
                           </span>
                         </td>
-                        <td>POC Name</td>
+                        <td>Team Lead</td>
                       </tr>
                     ))}
                 </tbody>
