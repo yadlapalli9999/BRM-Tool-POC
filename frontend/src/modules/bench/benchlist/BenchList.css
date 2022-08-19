@@ -17,3 +17,14 @@ table.dataTable thead th, table.dataTable thead td{
 #dtBasicExample_length,#dtBasicExample_filter{
     margin-bottom: 25px;
 }
+/* .form-switch .form-check-input {width: 3rem !important} */
+
+.form-switch .form-check-input:after,.form-switch .form-check-input:checked[type=checkbox]:after{
+  margin-top: -9px !important
+}
+.form-switch{
+  padding-left: 4.5rem !important;
+}
+.form-switch input{
+  padding-left: 0px !important;
+}

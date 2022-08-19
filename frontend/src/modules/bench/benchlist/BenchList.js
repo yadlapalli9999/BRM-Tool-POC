@@ -3,10 +3,20 @@ import $ from "jquery";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import Axios from "axios";
-//import "./BenchList.css";
+import "./BenchList.css";
 import { Link, useNavigate } from "react-router-dom";
+import ExcelImg from "../../../assets/excel.png";
+import Chat from "../../../assets/chat.png";
 
 let BenchList = () => {
+  let [role,setRole] = useState(true);
+  //  let updateRole = (event) =>{
+  //     setRole(!role)
+  //     //{role == true ? alert('falied'):alert("success")}
+  //     {role == true ? alert('falied'):navigate(`/empDetails/${id}`)}
+
+  //  }
+     
   const data = [
     {
       id: "FL1303",
@@ -314,7 +324,7 @@ let BenchList = () => {
           </div>
           <div className="col-md-6">
           <div class="dropdown d-flex justify-content-end mb-4">
-            <select class="btn btn-secondary dropdown-toggle" type="button" style={{fontSize:'1rem'}}>
+            <select class="btn btn-rounded  btn-secondary dropdown-toggle" type="button" style={{fontSize:'1rem'}}>
               <option>Select Year</option>
               <option>1-2</option>
               <option>2-3</option>
@@ -346,10 +356,10 @@ let BenchList = () => {
                   <th className="th-sm">Name</th>
                   <th className="th-sm">Email</th>
                   <th className="th-sm">TotalWorkExp</th>
-                  <th className="th-sm">TotalExpFission</th>
+                  <th className="th-sm">Chat</th>
                   {/* <th className="th-sm">Skills</th> */}
-                  <th className="th-sm">ReportingManager</th>
-                  <th className="th-sm">TeamLead</th>
+                  <th className="th-sm">Worklogs</th>
+                  <th className="th-sm">Reseverd Bench</th>
                   <th className="th-sm">Actions</th>
                 </tr>
               </thead>
@@ -361,15 +371,40 @@ let BenchList = () => {
                       <tr key={item.id}>
                         <td>
                           {/* <Link to={`/worklog/${item.id}`}>{item.id}</Link> */}
-                          <Link to={`/benchworklogs`}>{item.id}</Link>
+                          <Link to={`/empDetails/${item.id}`}>{item.id}</Link>
                         </td>
                         <td>{item.name}</td>
                         <td>{item.email}</td>
                         <td>{item.totalWorkExp}</td>
-                        <td>{item.totalExpinFission}</td>
+                        <td>
+                        <a href="https://mail.google.com/chat/u/1/#chat/dm/8_H9X4AAAAE">
+                              <img
+                                src={Chat}
+                                alt=""
+                                style={{ maxWidth:'100%'}}
+                                className="rounded-circle pocHomeExcelLogo "
+                              />
+                        </a>
+                        </td>
                         {/* <td>{item}</td> */}
-                        <td>{item.reportingManager}</td>
-                        <td>{item.teamLead}</td>
+                        <td><a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0">
+                              <img
+                                src={ExcelImg}
+                                alt=""
+                                style={{ width: "40px", height: "40px" }}
+                                className="rounded-circle pocHomeExcelLogo "
+                              />
+                            </a></td>
+                        <td>
+                        <div class="form-check form-switch">
+                          <input class="form-check-input" value={role} onChange={()=>{ setRole(true); localStorage.getItem('role');
+
+
+      //{role == true ? alert('falied'):alert("success")}
+      { localStorage.getItem("role") === true ? navigate(`/empDetails/${item.id}`):alert("falied")}}}  type="checkbox" on="yes" off="on" id="flexSwitchCheck" />
+                          {/* <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> */}
+                        </div>
+                          </td>
                         <td>
                           <Link to="/newbenchEmployee">
                             <i
