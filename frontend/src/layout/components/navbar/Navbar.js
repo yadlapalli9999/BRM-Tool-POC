@@ -26,7 +26,7 @@ let Navbar = () => {
               <li className="nav-item" style={{ paddingRight: "6rem" }}>
                 <Link to="/poc" className="nav-link">
                   <i
-                    className="fas fa-users"
+                    class="fas fa-file"
                     style={{ fontColor: "white", fontSize: "28px" }}
                   />
                 </Link>
