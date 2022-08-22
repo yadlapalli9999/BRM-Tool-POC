@@ -85,7 +85,7 @@ const PocDetails = () => {
                     <p className="mb-0"> Name</p>
                   </div>
                   <div className="col-sm-9">
-                    <p className="text-muted mb-0">Abhishek Dwivedi</p>
+                    <p className="text-muted mb-0">BRM Tool POC</p>
                   </div>
                 </div>
                 <hr />

@@ -7,7 +7,7 @@ import GoogleImg from "../../../assets/google.png";
 let POCHome = () => {
   const dummyData = [
     {
-      name: "Abhishek Dwivedi",
+      name: "BRM Tool",
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, dicta?",
       duration: 20,
@@ -24,7 +24,7 @@ let POCHome = () => {
       __v: 0,
     },
     {
-      name: "Ayush Gurjar",
+      name: "CRM Tool",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
       duration: 4,
       createdBy: "Dipesh Ingle",
@@ -40,7 +40,7 @@ let POCHome = () => {
       __v: 0,
     },
     {
-      name: "Surendra Singh Rajput",
+      name: "GRM Tool",
       description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum architecto eveniet incidunt dolorem magnam rem.",
       duration: 2,
@@ -69,7 +69,7 @@ let POCHome = () => {
     <React.Fragment>
       <div className="container">
         <div className="pocTitle mt-5 mb-5">
-          <h2>POC Home</h2>
+          <h2>ACTIVE POC</h2>
         </div>
         <div className="all-pochome-buttons mt-5 mb-4">
           <div class="addButton ">
@@ -136,42 +136,42 @@ let POCHome = () => {
                       {data?.documents?.map((doc) => (
                         <>
                           {doc.includes("docs.google.com") ? (
-                            <Link to="/googledocs">
+                            <a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
                               <img
                                 src={GoogleImg}
                                 alt=""
                                 style={{ width: "45px", height: "45px" }}
                                 className="rounded-circle pocHomeGoogleDocsLogo "
                               />
-                            </Link>
+                            </a>
                           ) : doc.includes("docs.excel.com") ? (
-                            <Link to="/exceldocs">
+                            <a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
                               <img
                                 src={ExcelImg}
                                 alt=""
                                 style={{ width: "40px", height: "45px" }}
                                 className="rounded-circle pocHomeExcelLogo "
                               />
-                            </Link>
+                            </a>
                           ) : doc.includes("docs.google.com") &&
                             doc.includes("docs.excel.com") ? (
                             <>
-                              <Link to="/googledocs">
+                              <a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
                                 <img
                                   src={GoogleImg}
                                   alt=""
                                   style={{ width: "45px", height: "45px" }}
                                   className="rounded-circle pocHomeGoogleDocsLogo "
                                 />
-                              </Link>
-                              <Link to="/exceldocs">
+                              </a>
+                              <a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
                                 <img
                                   src={ExcelImg}
                                   alt=""
                                   style={{ width: "40px", height: "45px" }}
                                   className="rounded-circle pocHomeExcelLogo"
                                 />
-                              </Link>
+                              </a>
                             </>
                           ) : (
                             ""
