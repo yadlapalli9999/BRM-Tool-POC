@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./layout/components/home/Home";
@@ -20,16 +20,24 @@ import EditEmployeeFields from "./modules/poc/editemployeefields/EditEmployeeFIe
 import EmployeeWorklogs from "./modules/EmployeeWorklogs";
 import EditEmployee from "./modules/bench/EditEmployee";
 
+import NewBenchEmployee from "./modules/bench/benchnewemployee/NewBenchEmployee";
+
+import AdminDashboard from "./modules/admindashboard/AdminDashboard";
+import BenchEmployeeDetail from "./modules/bench/benchemployeeDetails/BenchEmployeeDetail";
+
 function App() {
+  const [showNav, setShowNav] = useState(true);
+
   return (
     <React.Fragment>
       <BrowserRouter>
-        <Navbar />
+        {showNav && <Navbar />}
+
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Login funcNav={setShowNav} />} />
+          <Route path="/register" element={<Register funcNav={setShowNav} />} />
           {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Home funcNav={setShowNav} />} />
           )}
           {AdminRole.role === "ADMIN" && (
             <Route path="/poc" element={<POCHome />} />
@@ -69,6 +77,20 @@ function App() {
           )}
           {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
             <Route path="/editemployee" element={<EditEmployee />} />
+          )}
+
+          {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+            <Route path="/newbenchEmployee" element={<NewBenchEmployee />} />
+          )}
+           {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+            <Route path="/empDetails/:empId" element={<BenchEmployeeDetail />} />
+          )}
+
+          {AdminRole.role === "ADMIN" && (
+            <Route
+              path="/dashboard"
+              element={<AdminDashboard funcNav={setShowNav} />}
+            />
           )}
 
           <Route path="*" element={<NotFound />} />

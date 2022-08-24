@@ -1,31 +1,33 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AdminRole } from "../../../Roles";
 import "./Login.css";
 
-let Login = () => {
-  let navigate = useNavigate();
-  let [user, setUser] = useState({
+const Login = (props) => {
+  props.funcNav(false);
+
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
     email: String,
     password: String,
   });
 
-  let updateInput = (event) => {
+  const updateInput = (event) => {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
   };
 
-  let { email, password } = user;
-  let handleLoginForm = (event) => {
+  const { email, password } = user;
+  const handleLoginForm = (event) => {
     event.preventDefault();
     // if (email && password) {
     //   console.log(user);
     //   navigate("/home");
     // }
     if (AdminRole.role === "ADMIN") {
-      navigate("/home");
+      navigate("/dashboard");
     } else if (AdminRole.role === "EMPLOYEE") {
       navigate("/employeeworklogs");
     }
@@ -47,8 +49,8 @@ let Login = () => {
                             <div className="text-center">
                               <img
                                 src="https://uploads-ssl.webflow.com/61ffed246e785f28c1a44633/62026bbe9515a02ec226fcfe_Group%201917%20(1).svg"
-                                style={{ width: "320px" }}
                                 alt="logo"
+                                className="loginImg"
                               />
                             </div>
 
@@ -103,13 +105,13 @@ let Login = () => {
                                   Sign In With Google
                                 </button>
 
-                                <a className="text-muted" href="#!">
+                                {/* <a className="text-muted" href="#!">
                                   Forgot password?
-                                </a>
+                                </a> */}
                               </div>
 
                               <div className="d-flex align-items-center justify-content-center pb-4">
-                                <p className="mb-0 me-2">
+                                {/* <p className="mb-0 me-2">
                                   Don't have an account?
                                 </p>
                                 <Link
@@ -118,7 +120,7 @@ let Login = () => {
                                   className="btn btn-outline-danger"
                                 >
                                   Create new
-                                </Link>
+                                </Link> */}
                               </div>
                             </form>
                           </div>

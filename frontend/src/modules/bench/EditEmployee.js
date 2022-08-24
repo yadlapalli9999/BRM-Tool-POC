@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-let EditEmployee = () => {
-  let [bench, setBench] = useState({
+import "./EditEmployee.css";
+const EditEmployee = () => {
+  const [bench, setBench] = useState({
     name: "",
     id: "",
     email: "",
@@ -15,14 +16,14 @@ let EditEmployee = () => {
     teamLead: "",
     notes: "",
   });
-  let updateInput = (event) => {
+  const updateInput = (event) => {
     setBench({
       ...bench,
       [event.target.name]: event.target.value,
     });
   };
 
-  let updatePrimarySkills = (event) => {
+  const updatePrimarySkills = (event) => {
     setBench({
       ...bench,
       primarySkills: {
@@ -31,7 +32,7 @@ let EditEmployee = () => {
       },
     });
   };
-  let {
+  const {
     name,
     id,
     email,
@@ -42,14 +43,11 @@ let EditEmployee = () => {
     reportingManager,
     notes,
   } = bench;
-  let handleBenchEmployeeSubmit = (event) => {};
+  const handleBenchEmployeeSubmit = (event) => {};
   return (
     <React.Fragment>
       <div className="container">
-        <div
-          className="row justify-content-center"
-          style={{ marginTop: "30px" }}
-        >
+        <div className="row justify-content-center editEmployeeMainRow">
           <div className="col-md-9">
             <div className="card">
               <div className="card-header text-center">
@@ -60,16 +58,15 @@ let EditEmployee = () => {
                   <form onSubmit={handleBenchEmployeeSubmit}>
                     <div className="row mb-3">
                       <div className="col-md-6">
-                        <div className="md-form mb-0">
+                        <div className="md-form mb-0  ">
                           <input
                             type="text"
                             id="name"
                             name="name"
                             value={name}
                             onChange={updateInput}
-                            className="form-control"
+                            className="form-control editEmployeeInput"
                             placeholder="Name"
-                            style={{ height: "50px" }}
                           />
                         </div>
                       </div>
@@ -82,9 +79,8 @@ let EditEmployee = () => {
                             name="id"
                             value={id}
                             onChange={updateInput}
-                            className="form-control"
+                            className="form-control editEmployeeInput"
                             placeholder="EmpId"
-                            style={{ height: "50px" }}
                           />
                         </div>
                       </div>
@@ -98,9 +94,8 @@ let EditEmployee = () => {
                             name="email"
                             value={email}
                             onChange={updateInput}
-                            className="form-control"
+                            className="form-control editEmployeeInput"
                             placeholder="Email"
-                            style={{ height: "50px" }}
                           />
                         </div>
                       </div>
@@ -113,9 +108,8 @@ let EditEmployee = () => {
                             name="totalWorkExp"
                             value={totalWorkExp}
                             onChange={updateInput}
-                            className="form-control"
+                            className="form-control editEmployeeInput"
                             placeholder="TotalWorkExp"
-                            style={{ height: "50px" }}
                           />
                         </div>
                       </div>
@@ -129,9 +123,8 @@ let EditEmployee = () => {
                             name="totalExpinFission"
                             value={totalExpinFission}
                             onChange={updateInput}
-                            className="form-control"
+                            className="form-control editEmployeeInput"
                             placeholder="TotalExpinFission"
-                            style={{ height: "50px" }}
                           />
                         </div>
                       </div>
@@ -144,9 +137,8 @@ let EditEmployee = () => {
                             name="skillName"
                             value={primarySkills.skillName}
                             onChange={updatePrimarySkills}
-                            className="form-control"
+                            className="form-control editEmployeeInput"
                             placeholder="SkillName"
-                            style={{ height: "50px" }}
                           />
                         </div>
                       </div>
@@ -161,9 +153,8 @@ let EditEmployee = () => {
                             name="totalExp"
                             value={primarySkills.totalExp}
                             onChange={updatePrimarySkills}
-                            className="form-control"
+                            className="form-control editEmployeeInput"
                             placeholder="TotalExp"
-                            style={{ height: "50px" }}
                           />
                         </div>
                       </div>
@@ -176,9 +167,8 @@ let EditEmployee = () => {
                             name="reportingManager"
                             value={reportingManager}
                             onChange={updateInput}
-                            className="form-control"
+                            className="form-control editEmployeeInput"
                             placeholder="ReportingManager"
-                            style={{ height: "50px" }}
                           />
                         </div>
                       </div>
@@ -193,9 +183,8 @@ let EditEmployee = () => {
                             name="teamLead"
                             value={teamLead}
                             onChange={updateInput}
-                            className="form-control"
+                            className="form-control editEmployeeInput"
                             placeholder="teamLead"
-                            style={{ height: "50px" }}
                           />
                         </div>
                       </div>
@@ -208,17 +197,15 @@ let EditEmployee = () => {
                             name="notes"
                             value={notes}
                             onChange={updateInput}
-                            className="form-control"
+                            className="form-control editEmployeeInput"
                             placeholder="notes"
-                            style={{ height: "50px" }}
                           />
                         </div>
                       </div>
                     </div>
                     <div className="text-center text-md-left">
                       <input
-                        className="btn btn-primary "
-                        style={{ marginRight: "15px" }}
+                        className="btn btn-primary editEmployeeInput"
                         type="submit"
                         value="Save"
                       />
