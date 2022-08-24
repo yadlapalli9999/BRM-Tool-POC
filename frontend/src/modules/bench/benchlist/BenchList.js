@@ -10,6 +10,8 @@ import Chat from "../../../assets/chat.png";
 
 let BenchList = () => {
   let [role,setRole] = useState(true);
+  const [query, setQuery] = useState("");
+
   //  let updateRole = (event) =>{
   //     setRole(!role)
   //     //{role == true ? alert('falied'):alert("success")}
@@ -33,7 +35,7 @@ let BenchList = () => {
     },
     {
       id: "FL1304",
-      name: "Abhishek Rane",
+      name: "Abhishek",
       email: "Abhishek.rane@fissionlabs.com",
       totalWorkExp: 4,
       totalExpFission: 1,
@@ -46,7 +48,7 @@ let BenchList = () => {
     },
     {
       id: "FL1305",
-      name: "Abhishek Rane",
+      name: "Ganesh",
       email: "Abhishek.rane@fissionlabs.com",
       teamLead: "Adil",
       primarySkills: {
@@ -292,22 +294,22 @@ let BenchList = () => {
     <React.Fragment>
       <div className="container">
         <div className="row">
-          <div className="col">
+          <div className="col-md-6">
             <h2 style={{ marginTop: "30px" }}>Bench List</h2>
           </div>
-          <div className="col">
+          <div className="col-md-6">
             
 
             <div
               className="text-center"
-              style={{ marginTop: "30px", marginLeft: "450px" }}
+              style={{ marginTop: "30px",float:'right',marginRight:'10px'}}
             >
               <Link
                 to="/newbenchEmployee"
                 className="btn btn-secondary btn-rounded mb-4"
                 
               >
-                New Bench Employee
+                ADD
               </Link>
             </div>
           </div>
@@ -315,11 +317,11 @@ let BenchList = () => {
         <div className="row">
           <div className="col-md-6">
             <input
-              type="search"
-              name=""
-              id=""
+              type="text"
+              
               style={{ width: "660px" }}
               placeholder="Search..."
+              onChange={(e) => setQuery(e.target.value)}
             />
           </div>
           <div className="col-md-6">
@@ -364,20 +366,22 @@ let BenchList = () => {
                 </tr>
               </thead>
               <tbody>
-                {data.length > 0 &&
-                  data.map((item) => {
-                    // console.log(JSON.parse(item.primarySkills.map((skillName,totalExp)=>{ return {skillName:a.skillName}})))
-                    return (
-                      <tr key={item.id}>
+                {data &&
+                      data
+                        ?.filter((filterData) =>
+                          filterData?.name.toLowerCase().includes(query)
+                        )
+                        ?.map((filterData) => (
+                      <tr key={filterData.id}>
                         <td>
                           {/* <Link to={`/worklog/${item.id}`}>{item.id}</Link> */}
-                          <Link to={`/empDetails/${item.id}`}>{item.id}</Link>
+                          <Link to={`/empDetails/${filterData.id}`}>{filterData.id}</Link>
                         </td>
-                        <td>{item.name}</td>
-                        <td>{item.email}</td>
-                        <td>{item.totalWorkExp}</td>
+                        <td>{filterData?.name}</td>
+                        <td>{filterData.email}</td>
+                        <td>{filterData.totalWorkExp}</td>
                         <td>
-                        <a href="https://mail.google.com/chat/u/1/#chat/dm/8_H9X4AAAAE">
+                        <a href="https://mail.google.com/chat/u/1/#chat/dm/8_H9X4AAAAE" target="_blank">
                               <img
                                 src={Chat}
                                 alt=""
@@ -387,7 +391,7 @@ let BenchList = () => {
                         </a>
                         </td>
                         {/* <td>{item}</td> */}
-                        <td><a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0">
+                        <td><a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
                               <img
                                 src={ExcelImg}
                                 alt=""
@@ -401,12 +405,12 @@ let BenchList = () => {
 
 
       //{role == true ? alert('falied'):alert("success")}
-      { localStorage.getItem("role") === true ? navigate(`/empDetails/${item.id}`):alert("falied")}}}  type="checkbox" on="yes" off="on" id="flexSwitchCheck" />
+      { localStorage.getItem("role") === true ? navigate(`/empDetails/${filterData.id}`):alert("falied")}}}  type="checkbox" on="yes" off="on" id="flexSwitchCheck" />
                           {/* <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> */}
                         </div>
                           </td>
                         <td>
-                          <Link to="/newbenchEmployee">
+                          <Link to="/editbenchEmployee">
                             <i
                               className="fas fa-edit text-primary"
                             />
@@ -418,8 +422,8 @@ let BenchList = () => {
                           />
                         </td>
                       </tr>
-                    );
-                  })}
+                    )
+                  )}
               </tbody>
             </table>
           </div>

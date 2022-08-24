@@ -6,7 +6,10 @@ import "./AdminDashboard.css";
 
 const AdminDashboard = (props) => {
   const [show, setShow] = useState(true);
+
   ChartJS.register(ArcElement, Tooltip, Legend);
+  
+
   const dummyData = [
     {
       name: "Abhishek Dwivedi",
@@ -131,11 +134,11 @@ const AdminDashboard = (props) => {
               marginTop: "20px",
             }}
           >
-            <button onClick={() => setShow(true)} className="button-56 ">
+            <button onClick={() => setShow(true)} className="button-56" style={{background:'wheat !important' ,color:'black !important'}} >
               {" "}
               <h1>POC</h1>
             </button>
-            <button className="button-56 ">
+            <button className="button-56" style={{background:'linear-gradient(to right, #3d3335, #db24db)',color:'white'}}>
               {" "}
               <h1>Bench</h1>
             </button>
@@ -192,14 +195,14 @@ const AdminDashboard = (props) => {
           </div>
           <div className="row mt-3">
             <h3>Leave</h3>
-            <div className="col-xl-8 col-sm-6 col-12 col-md-4 mb-4 table-responsive">
+            <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4 table-responsive">
               <table className="table align-middle mb-0 bg-white table-hover ">
                 <thead className=" admindashboardTableHead">
                   <tr className="table-headings">
-                    <th>Id</th>
+                    {/* <th>Id</th> */}
                     <th>Name</th>
                     <th>Date</th>
-                    <th>POC</th>
+                    {/* <th>POC</th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -209,13 +212,12 @@ const AdminDashboard = (props) => {
                         <td>
                           <div className="d-flex align-items-center">
                             <div className="name" onClick={handleNameClick}>
-                              <p className="fw-bold mb-1">{data?._id}</p>
-                            </div>
+                            <p className="fw-normal mb-1">{data?.name}</p>                            </div>
                           </div>
                         </td>
-                        <td>
+                        {/* <td>
                           <p className="fw-normal mb-1">{data?.name}</p>
-                        </td>
+                        </td> */}
                         <td>
                           <span
                             className={`badge ${
@@ -229,11 +231,25 @@ const AdminDashboard = (props) => {
                             16-aug-2022
                           </span>
                         </td>
-                        <td>POC Name</td>
+                        {/* <td>POC Name</td> */}
                       </tr>
                     ))}
                 </tbody>
               </table>
+            </div>
+            <div className="col-xl-4 col-md-4 col-ms-6 col-12 mb-4">
+              <div className="card">
+                <div className="card-header admindashboardTableHead text-white">
+                   <h3 className="mb-0 text-center">Missed Worklogs</h3>
+                </div>
+                <div className="card-body">
+                  <ul className="list-group">
+                    <li className="list-group-item">
+                      Ramarao <span class="badge bg-danger ms-2">8</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
             <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
               <div className="card personBench">
@@ -286,11 +302,11 @@ const AdminDashboard = (props) => {
               marginTop: "14px",
             }}
           >
-            <button className="button-56 ">
+            <button className="button-56 " style={{background:'linear-gradient(to right, #3d3335, #db24db)',color:'white'}} >
               {" "}
               <h1>POC</h1>
             </button>
-            <button className="button-56 " onClick={() => setShow(false)}>
+            <button className="button-56 " onClick={() => setShow(false)} style={{background:'wheat !important' ,color:'black !important'}} >
               {" "}
               <h1>Bench</h1>
             </button>

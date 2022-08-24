@@ -11,12 +11,12 @@
 .button-56 {
   align-items: initial;
   width: 250px;
-  background: linear-gradient(to right, #3d3335, #db24db);
+  /* background: linear-gradient(to right, #3d3335, #db24db); */
 
   border: 2px solid #111;
   border-radius: 8px;
   box-sizing: border-box;
-  color: #fff;
+  /* color: #fff; */
   cursor: pointer;
   display: flex;
   font-family: Inter,sans-serif;
@@ -53,10 +53,12 @@
 
 .button-56:hover:after {
   transform: translate(0, 0);
+
 }
 
 .button-56:active {
   outline: 0;
+
 }
 
 .button-56:hover {
@@ -70,4 +72,12 @@
   .button-56 {
     padding: 0 40px;
   }
+}
+
+.badge{
+  float: right;
+  border-radius: 1.25rem !important;
+}
+.button1:focus{
+  background-color: red;
 }

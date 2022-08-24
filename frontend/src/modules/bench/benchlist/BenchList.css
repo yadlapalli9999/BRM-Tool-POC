@@ -28,3 +28,7 @@ table.dataTable thead th, table.dataTable thead td{
 .form-switch input{
   padding-left: 0px !important;
 }
+.dropdown-toggle{
+  padding: 0.625rem 1rem 0.5rem 0.5rem !important;
+
+}

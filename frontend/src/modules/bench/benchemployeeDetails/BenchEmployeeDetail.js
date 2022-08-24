@@ -1,10 +1,115 @@
-import React from "react";
-import {useNavigate,Link} from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import {useNavigate,Link, useParams} from 'react-router-dom'
 
 let BenchEmployeeDetail = (props)=>{
     let navigate = useNavigate();
+    let params  = useParams();
+    const [user,setUser] = useState({})
+    const data = [
+      {
+        id: "FL1303",
+        name: "Abhishek Rane",
+        email: "Abhishek.rane@fissionlabs.com",
+        totalWorkExp: 4,
+        totalExpFission: 1,
+        primarySkills: {
+          skillName: "nodejs",
+          totalExp: 1,
+        },
+        reportingManager: "Shwetha Rajpurohit",
+        teamLead: "Adil",
+      },
+      {
+        id: "FL1304",
+        name: "Abhishek",
+        email: "Abhishek.rane@fissionlabs.com",
+        totalWorkExp: 4,
+        totalExpFission: 1,
+        primarySkills: {
+          skillName: "nodejs",
+          totalExp: 1,
+        },
+        reportingManager: "Shwetha Rajpurohit",
+        teamLead: "Adil",
+      },
+      {
+        id: "FL1305",
+        name: "Ganesh",
+        email: "Abhishek.rane@fissionlabs.com",
+        teamLead: "Adil",
+        primarySkills: {
+          skillName: "nodejs",
+          totalExp: 1,
+        },
+        reportingManager: "Shwetha Rajpurohit",
+        totalWorkExp: 4,
+        totalExpinFission: "9",
+        totalExp: 1,
+        notes: "Hello",
+      },
+      {
+        id: "FL1306",
+        name: "Abhishek Rane",
+        email: "Abhishek.rane@fissionlabs.com",
+        totalWorkExp: 4,
+        totalExpFission: 1,
+        primarySkills: {
+          skillName: "nodejs",
+          totalExp: 1,
+        },
+        reportingManager: "Shwetha Rajpurohit",
+        teamLead: "Adil",
+      },
+      {
+        id: "FL1307",
+        name: "Abhishek Rane",
+        email: "Abhishek.rane@fissionlabs.com",
+        teamLead: "Adil",
+        skillName: "nodejs",
+        reportingManager: "Shwetha Rajpurohit",
+        totalWorkExp: 4,
+        totalExpinFission: "3",
+        totalExp: 1,
+      },
+      {
+        id: "FL1308",
+        name: "Abhishek Rane",
+        email: "Abhishek.rane@fissionlabs.com",
+        totalWorkExp: 4,
+        totalExpFission: 1,
+        primarySkills: {
+          skillName: "nodejs",
+          totalExp: 1,
+        },
+        reportingManager: "Shwetha Rajpurohit",
+        teamLead: "Adil",
+      },
+      {
+        id: "FL1309",
+        name: "Abhishek Rane",
+        email: "Abhishek.rane@fissionlabs.com",
+        totalWorkExp: 4,
+        totalExpFission: 1,
+        primarySkills: {
+          skillName: "nodejs",
+          totalExp: 1,
+        },
+        reportingManager: "Shwetha Rajpurohit",
+        teamLead: "Adil",
+      },
+    ];
+    //const user = {}
+    //let [user,setUser] = useState({})
+    useEffect(()=>{
+      const filterData = data.find((itme)=>itme.id === (params.id))
+     console.log(filterData)
+     setUser(filterData)
+    },[])
+
+    
     return(
         <React.Fragment>
+          {/* <pre>{params}</pre> */}
         <div className="container py-5">
         <div className="row">
           <div className="all-pocdetails-buttons ">
@@ -31,46 +136,45 @@ let BenchEmployeeDetail = (props)=>{
               </button>
             </div>
           </div>
+          <pre>{JSON.stringify(user)}</pre>
           <div className="col-lg-12 ">
             <div className="card ">
               <div className="card-body">
                 <div className="row">
                   <div className="col-sm-3">
-                    <p className="mb-0"> Name</p>
+                    <p className="mb-0">Name </p>
                   </div>
                   <div className="col-sm-9">
-                    <p className="text-muted mb-0">Abhishek Dwivedi</p>
+                    <p className="text-muted mb-0">{user.name}</p>
                   </div>
                 </div>
                 <hr />
                 <div className="row">
                   <div className="col-sm-3">
-                    <p className="mb-0">Description</p>
+                    <p className="mb-0">Email</p>
                   </div>
                   <div className="col-sm-9">
                     <p className="text-muted mb-0">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Cupiditate voluptatem porro optio tempore voluptate modi
-                      non molestias officia dolor aliquid.
+                      {user.email}
                     </p>
                   </div>
                 </div>
                 <hr />
                 <div className="row">
                   <div className="col-sm-3">
-                    <p className="mb-0">Duration</p>
+                    <p className="mb-0">Reporting Mangaer</p>
                   </div>
                   <div className="col-sm-9">
-                    <p className="text-muted mb-0">20 Months</p>
+                    <p className="text-muted mb-0">{user.reportingManager}</p>
                   </div>
                 </div>
                 <hr />
                 <div className="row">
                   <div className="col-sm-3">
-                    <p className="mb-0">CreatedBy</p>
+                    <p className="mb-0">Team Lead</p>
                   </div>
                   <div className="col-sm-9">
-                    <p className="text-muted mb-0"> Dipesh Ingle</p>
+                    <p className="text-muted mb-0">{user.teamLead}</p>
                   </div>
                 </div>
                 <hr />

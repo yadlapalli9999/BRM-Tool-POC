@@ -24,6 +24,7 @@ import NewBenchEmployee from "./modules/bench/benchnewemployee/NewBenchEmployee"
 
 import AdminDashboard from "./modules/admindashboard/AdminDashboard";
 import BenchEmployeeDetail from "./modules/bench/benchemployeeDetails/BenchEmployeeDetail";
+import EditBenchEmployee from "./modules/bench/editBenchEmployee/EditBenchEmployee";
 
 function App() {
   const [showNav, setShowNav] = useState(true);
@@ -82,8 +83,11 @@ function App() {
           {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
             <Route path="/newbenchEmployee" element={<NewBenchEmployee />} />
           )}
+          {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+            <Route path="/editbenchEmployee" element={<EditBenchEmployee/>} />
+          )}
            {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
-            <Route path="/empDetails/:empId" element={<BenchEmployeeDetail />} />
+            <Route path="/empDetails/:id" element={<BenchEmployeeDetail />} />
           )}
 
           {AdminRole.role === "ADMIN" && (
