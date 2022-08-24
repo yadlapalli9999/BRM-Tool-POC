@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./BenchWorklogs.css";
-let BenchWorklogs = () => {
-  let [workLogList, setWorkLogList] = useState([
+const BenchWorklogs = () => {
+  const [workLogList, setWorkLogList] = useState([
     {
       duration: 8,
       resourceId: "62e8ba7c59e2ad549fba94b3",
@@ -29,40 +29,32 @@ let BenchWorklogs = () => {
       __v: 0,
     },
   ]);
-  let [worklog, setWorklog] = useState({
+  const [worklog, setWorklog] = useState({
     taskDetails: "",
     taskDescription: "",
     duration: "",
     logDate: "",
   });
 
-  let UpdateInput = (event) => {
+  const UpdateInput = (event) => {
     setWorklog({
       ...worklog,
       [event.target.name]: event.target.value,
     });
   };
-  let { taskDescription, taskDetails, duration, logDate } = worklog;
-  let handleWorkLogSubmit = () => {};
+  const { taskDescription, taskDetails, duration, logDate } = worklog;
+  const handleWorkLogSubmit = () => {};
 
-  let deleteTask = (id) => {};
+  const deleteTask = (id) => {};
 
   return (
     <React.Fragment>
       <div className="container">
         <div className="row">
-          <div
-            className="col-md-6 workLogsTitle mt-5 mb-3 text-center"
-            style={{ display: "inline-block", width: "50%" }}
-          >
-            <h2 className="text-center" style={{ marginRight: "479px" }}>
-              Work Logs
-            </h2>
+          <div className="col-md-6 workLogsTitle mt-5 mb-3 text-center w-50 d.inline-block">
+            <h2 className="text-center benchWorkLogsTitle">Work Logs</h2>
           </div>
-          <div
-            className="col-md-6 workLogsTitle mt-5 mb-3"
-            style={{ display: "inline-block", width: "50%", float: "right" }}
-          >
+          <div className="col-md-6 workLogsTitle mt-5 mb-3  d.inline-block w-50 .float-right ">
             <div class="dropdown">
               <ul
                 className="dropdown-menu dropdown-menu-end"
@@ -194,7 +186,7 @@ let BenchWorklogs = () => {
             <div className="row d-flex justify-content-end mb-3">
               <div className="col-md-6">
                 <button
-                  className=" btn btn-secondary btn-rounded"
+                  className=" btn btn-secondary btn-rounded "
                   style={{ float: "right" }}
                 >
                   <select

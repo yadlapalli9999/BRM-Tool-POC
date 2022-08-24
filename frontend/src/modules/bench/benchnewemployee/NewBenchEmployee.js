@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./newbenchEmployee.css";
 
 let NewBenchEmployee = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <React.Fragment>
       <div className="container-lg">
@@ -121,18 +121,14 @@ let NewBenchEmployee = () => {
                   id="form3Example10"
                   name="notes"
                   required
-                  style={{ width: "100%" }}
+                  className="w-100"
                 />
                 <label htmlFor="form3Example10">Notes</label>
               </div>
             </div>
           </div>
           <div className="text-center">
-            <button
-              type="submit"
-              className="btn btn-primary  mb-4"
-              style={{ marginRight: "30px" }}
-            >
+            <button type="submit" className="btn btn-primary  mb-4 newBenchEmployeeAddButton">
               Add
             </button>
             <button

@@ -1,15 +1,17 @@
 import React from "react";
-import {useNavigate,Link} from 'react-router-dom'
+import { useNavigate, Link } from "react-router-dom";
 
-let BenchEmployeeDetail = (props)=>{
-    let navigate = useNavigate();
-    return(
-        <React.Fragment>
-        <div className="container py-5">
+let BenchEmployeeDetail = (props) => {
+  const navigate = useNavigate();
+  return (
+    <React.Fragment>
+      <div className="container py-5">
         <div className="row">
           <div className="all-pocdetails-buttons ">
             <div className="editButton ">
-                <Link to="/newbenchEmployee" className="btn btn-primary">Edit</Link>
+              <Link to="/newbenchEmployee" className="btn btn-primary">
+                Edit
+              </Link>
               {/* <button
                 type="button"
                 className="btn btn-primary"
@@ -100,10 +102,17 @@ let BenchEmployeeDetail = (props)=>{
           </div>
         </div>
         <div className="text-left py-5">
-          <button className="btn btn-secondary btn-sm" onClick={()=>{navigate("/benchlist")}}>Back</button>
+          <button
+            className="btn btn-secondary btn-sm"
+            onClick={() => {
+              navigate("/benchlist");
+            }}
+          >
+            Back
+          </button>
         </div>
-        </div>
-        {/* DELETE MODAL */}
+      </div>
+      {/* DELETE MODAL */}
       <div
         className="modal fade"
         id="exampledModal"
@@ -140,8 +149,8 @@ let BenchEmployeeDetail = (props)=>{
           </div>
         </div>
       </div>
-        </React.Fragment>
-    )
-}
+    </React.Fragment>
+  );
+};
 
-export default BenchEmployeeDetail
+export default BenchEmployeeDetail;

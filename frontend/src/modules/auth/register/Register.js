@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Register.css";
-let Register = (props) => {
-  props.funcNav(false)
-  let navigate = useNavigate();
-  let [user, setUser] = useState({
+const Register = (props) => {
+  props.funcNav(false);
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
     name: String,
     email: String,
     password: String,
   });
 
-  let handleInput = (event) => {
+  const handleInput = (event) => {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
   };
-  let { name, email, password } = user;
-  let handleRegisterForm = (event) => {
+  const { name, email, password } = user;
+  const handleRegisterForm = (event) => {
     event.preventDefault();
     console.log(user);
     navigate("/");
@@ -47,10 +47,9 @@ let Register = (props) => {
                         </div>
                         <div className="col-lg-6">
                           <div className="card-body p-md-5 mx-md-4">
-                            <div className="text-center">
+                            <div className="text-center register">
                               <img
                                 src="https://uploads-ssl.webflow.com/61ffed246e785f28c1a44633/62026bbe9515a02ec226fcfe_Group%201917%20(1).svg"
-                                style={{ width: "320px" }}
                                 alt="logo"
                               />
                             </div>

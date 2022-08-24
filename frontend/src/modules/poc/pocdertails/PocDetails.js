@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import $ from 'jquery';
-import {Chart,registerables} from 'chart.js';
+import $ from "jquery";
+import { Chart, registerables } from "chart.js";
 import "./PocDetails.css";
 
-Chart.register(...registerables)
+Chart.register(...registerables);
 
 const PocDetails = () => {
   const members = [
@@ -21,34 +21,38 @@ const PocDetails = () => {
       memberName: "Sudhanshu Jain",
     },
   ];
-  $(document).ready(function() {
+  $(document).ready(function () {
     var ctx = $("#pieChart");
     var myLineChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ["Kunal Rokhle","Alok Kumar","Sudhanshu Jain"],
-            datasets: [{
-                data: [20, 40, 25],
-                backgroundColor: ["rgba(255, 0, 0, 0.5)", "rgba(100, 255, 0, 0.5)", "rgba(200, 50, 255, 0.5)", "rgba(0, 100, 255, 0.5)"]
-            }]
+      type: "pie",
+      data: {
+        labels: ["Kunal Rokhle", "Alok Kumar", "Sudhanshu Jain"],
+        datasets: [
+          {
+            data: [20, 40, 25],
+            backgroundColor: [
+              "rgba(255, 0, 0, 0.5)",
+              "rgba(100, 255, 0, 0.5)",
+              "rgba(200, 50, 255, 0.5)",
+              "rgba(0, 100, 255, 0.5)",
+            ],
+          },
+        ],
+      },
+      options: {
+        title: {
+          display: true,
+          text: "empData",
         },
-        options: {
-            title: {
-                display: true,
-                text: 'empData'
-            }
-        }
+      },
     });
-});
+  });
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const handlePocDetailsNameClick = () => {
     navigate("/worklogs");
   };
-  
-  
-  
 
   return (
     <section>
@@ -145,10 +149,7 @@ const PocDetails = () => {
             </div>
           </div>
         </div>
-        <div
-          className="row d-flex align-items-center h-100 mt-5"
-          // style={{ width: "50%" }}
-        >
+        <div className="row d-flex align-items-center h-100 mt-5">
           <div className="col-md-6">
             <div className="card">
               <div className="card-header p-3 d-flex justify-content-between align-items-center ">
@@ -164,9 +165,9 @@ const PocDetails = () => {
               </div>
 
               <div
-                className="card-body"
+                className="card-body memberCard"
                 data-mdb-perfect-scrollbar="true"
-                style={{ position: "relative", height: "200px" }}
+
               >
                 <table className="table mb-0  table-hover">
                   <tbody>
@@ -177,9 +178,8 @@ const PocDetails = () => {
                         )
                         ?.map((filterMember) => (
                           <tr
-                            className="fw-normal"
+                            className="fw-normal memberTableRow"
                             key={filterMember?.id}
-                            style={{ cursor: "pointer" }}
                             onClick={handlePocDetailsNameClick}
                           >
                             <td className="align-middle ">
@@ -206,8 +206,7 @@ const PocDetails = () => {
           {/* <!-- pie chart --> */}
           <div className="col-md-2"></div>
           <div className="col-md-4">
-             <canvas id="pieChart" width="200" height="200"></canvas>
-            
+            <canvas id="pieChart" width="200" height="200"></canvas>
           </div>
         </div>
       </div>

@@ -8,15 +8,16 @@ import { Link, useNavigate } from "react-router-dom";
 import ExcelImg from "../../../assets/excel.png";
 import Chat from "../../../assets/chat.png";
 
-let BenchList = () => {
-  let [role,setRole] = useState(true);
-  //  let updateRole = (event) =>{
+const BenchList = () => {
+  const [role, setRole] = useState(false);
+
+  //  const updateRole = (event) =>{
   //     setRole(!role)
   //     //{role == true ? alert('falied'):alert("success")}
   //     {role == true ? alert('falied'):navigate(`/empDetails/${id}`)}
 
   //  }
-     
+
   const data = [
     {
       id: "FL1303",
@@ -111,8 +112,8 @@ let BenchList = () => {
     },
   ];
 
-  let [benchList, setBenchList] = useState([]);
-  let [isEdit, setIsEdit] = useState(false);
+  const [benchList, setBenchList] = useState([]);
+  const [isEdit, setIsEdit] = useState(false);
 
   // useEffect(() => {
   //   fetchData();
@@ -142,9 +143,9 @@ let BenchList = () => {
   //       console.log(error);
   //     });
   // };
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  let [bench, setBench] = useState({
+  const [bench, setBench] = useState({
     name: "",
     id: "",
     email: "",
@@ -163,7 +164,7 @@ let BenchList = () => {
   //   totalExp:''
   // })
 
-  let updateInput = (event) => {
+  const updateInput = (event) => {
     setBench({
       ...bench,
       [event.target.name]: event.target.value,
@@ -183,7 +184,7 @@ let BenchList = () => {
   //     },
   //   });
   // };
-  let updatePrimarySkills = (event) => {
+  const updatePrimarySkills = (event) => {
     setBench({
       ...bench,
       primarySkills: {
@@ -192,7 +193,7 @@ let BenchList = () => {
       },
     });
   };
-  let {
+  const {
     name,
     id,
     email,
@@ -203,7 +204,7 @@ let BenchList = () => {
     reportingManager,
     notes,
   } = bench;
-  // let handleBenchEmployeeSubmit = (event) => {
+  // const handleBenchEmployeeSubmit = (event) => {
   //   event.preventDefault();
   //   if (
   //     !name &&
@@ -250,7 +251,7 @@ let BenchList = () => {
   //   }
   // };
 
-  let handleUpdateBechEmployee = (item) => {
+  const handleUpdateBechEmployee = (item) => {
     setIsEdit(true);
     console.log(item);
     Axios.get(`http://localhost:5000/EmployeeList/${item.id}`)
@@ -274,7 +275,7 @@ let BenchList = () => {
         console.log(error);
       });
   };
-  let clearForm = () => {
+  const clearForm = () => {
     setBench({
       id: "",
       name: "",
@@ -287,25 +288,30 @@ let BenchList = () => {
       notes: "",
     });
   };
+  const handleInputChange = (item) => {
+    if (role === false) {
+      localStorage.setItem("role", true);
+      navigate(`/empDetails/${item.id}`);
+      setRole(!role);
+    } else if (localStorage.getItem("role") === true) {
+      alert("failed");
+    }
+  };
+  const [dataInfo, setDataInfo] = useState([]);
+  console.log(dataInfo);
 
   return (
     <React.Fragment>
       <div className="container">
         <div className="row">
-          <div className="col">
-            <h2 style={{ marginTop: "30px" }}>Bench List</h2>
+          <div className="col mt-4">
+            <h2>Bench List</h2>
           </div>
           <div className="col">
-            
-
-            <div
-              className="text-center"
-              style={{ marginTop: "30px", marginLeft: "450px" }}
-            >
+            <div className="text-center mt-4" style={{ marginLeft: "450px" }}>
               <Link
                 to="/newbenchEmployee"
                 className="btn btn-secondary btn-rounded mb-4"
-                
               >
                 New Bench Employee
               </Link>
@@ -323,32 +329,40 @@ let BenchList = () => {
             />
           </div>
           <div className="col-md-6">
-          <div class="dropdown d-flex justify-content-end mb-4">
-            <select class="btn btn-rounded  btn-secondary dropdown-toggle" type="button" style={{fontSize:'1rem'}}>
-              <option>Select Year</option>
-              <option>1-2</option>
-              <option>2-3</option>
-              <option>3-4</option>
-              <option>4-5</option>
-              <option>5-6</option>
-              <option>6-7</option>
-              <option>7-8</option>
-              <option>8-9</option>
-              <option>9-10</option>
-              <option>10-11</option>
-              <option>11-12</option>
-
-            </select>
-          </div>
+            <div class="dropdown d-flex justify-content-end mb-4">
+              <select
+                class="btn btn-rounded  btn-secondary dropdown-toggle"
+                type="button"
+                style={{ fontSize: "1rem" }}
+              >
+                <option>Select Year</option>
+                <option>1-2</option>
+                <option>2-3</option>
+                <option>3-4</option>
+                <option>4-5</option>
+                <option>5-6</option>
+                <option>6-7</option>
+                <option>7-8</option>
+                <option>8-9</option>
+                <option>9-10</option>
+                <option>10-11</option>
+                <option>11-12</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div className="row" style={{ marginTop: "30px" }}>
+        <div className="row mt-4">
           <div className="col">
             <table
               id="dtBasicExample"
               className="table table-striped table-sm cell-border"
               cellSpacing="0"
-              width="100%" style={{fontSize:'1rem',lineHeight:'2.2rem',textAlign:'center'}}
+              width="100%"
+              style={{
+                fontSize: "1rem",
+                lineHeight: "2.2rem",
+                textAlign: "center",
+              }}
             >
               <thead>
                 <tr>
@@ -377,44 +391,75 @@ let BenchList = () => {
                         <td>{item.email}</td>
                         <td>{item.totalWorkExp}</td>
                         <td>
-                        <a href="https://mail.google.com/chat/u/1/#chat/dm/8_H9X4AAAAE">
-                              <img
-                                src={Chat}
-                                alt=""
-                                style={{ maxWidth:'100%'}}
-                                className="rounded-circle pocHomeExcelLogo "
-                              />
-                        </a>
+                          <a href="https://mail.google.com/chat/u/1/#chat/dm/8_H9X4AAAAE">
+                            <img
+                              src={Chat}
+                              alt=""
+                              style={{ maxWidth: "100%" }}
+                              className="rounded-circle pocHomeExcelLogo "
+                            />
+                          </a>
                         </td>
                         {/* <td>{item}</td> */}
-                        <td><a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0">
-                              <img
-                                src={ExcelImg}
-                                alt=""
-                                style={{ width: "40px", height: "40px" }}
-                                className="rounded-circle pocHomeExcelLogo "
-                              />
-                            </a></td>
                         <td>
-                        <div class="form-check form-switch">
-                          <input class="form-check-input" value={role} onChange={()=>{ setRole(true); localStorage.getItem('role');
-
-
-      //{role == true ? alert('falied'):alert("success")}
-      { localStorage.getItem("role") === true ? navigate(`/empDetails/${item.id}`):alert("falied")}}}  type="checkbox" on="yes" off="on" id="flexSwitchCheck" />
-                          {/* <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> */}
-                        </div>
-                          </td>
+                          <a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0">
+                            <img
+                              src={ExcelImg}
+                              alt=""
+                              style={{ width: "40px", height: "40px" }}
+                              className="rounded-circle pocHomeExcelLogo "
+                            />
+                          </a>
+                        </td>
+                        <td>
+                          <div class="form-check form-switch">
+                            <input
+                              class="form-check-input"
+                              value={dataInfo}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  setDataInfo([
+                                    ...dataInfo,
+                                    {
+                                      id: item.id,
+                                      name: item.name,
+                                      email: item.email,
+                                      totalWorkExp: item.totalWorkExp,
+                                      totalExpFission: item.totalExpFission,
+                                      primarySkills: {
+                                        skillName: item.primarySkills.skillName,
+                                        totalExp: item.primarySkills.totalExp,
+                                      },
+                                      reportingManager: item.reportingManager,
+                                      teamLead: item.teamLead,
+                                    },
+                                  ]);
+                                  navigate(`/empDetails/${item.id}`);
+                                } else {
+                                  setDataInfo(
+                                    dataInfo.filter(
+                                      (people) => people.id !== item.id
+                                    )
+                                  );
+                                }
+                              }}
+                              type="checkbox"
+                              on="yes"
+                              off="on"
+                              id="flexSwitchCheck"
+                            />
+                            {/* <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> */}
+                          </div>
+                        </td>
                         <td>
                           <Link to="/newbenchEmployee">
-                            <i
-                              className="fas fa-edit text-primary"
-                            />
+                            <i className="fas fa-edit text-primary benchListEditi" />
                           </Link>
                           &nbsp;&nbsp;
-                          <i data-mdb-toggle="modal"
-                          data-mdb-target="#exampledModal"
-                            className="fa fa-trash text-danger"
+                          <i
+                            data-mdb-toggle="modal"
+                            data-mdb-target="#exampledModal"
+                            className="fa fa-trash text-danger benchListdeletei"
                           />
                         </td>
                       </tr>

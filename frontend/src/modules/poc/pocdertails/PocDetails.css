@@ -31,4 +31,10 @@
     margin-right: 30px;
 }
 
-
+.memberTableRow{
+    cursor: pointer;
+}
+.memberCard{
+    position: relative;
+    height: 200px;
+}

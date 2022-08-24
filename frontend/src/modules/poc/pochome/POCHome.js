@@ -59,7 +59,7 @@ let POCHome = () => {
     },
   ];
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleNameClick = () => {
     navigate("/pocdetails");

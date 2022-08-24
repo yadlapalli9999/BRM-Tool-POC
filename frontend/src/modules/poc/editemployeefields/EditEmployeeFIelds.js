@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./EditEmployeeFields.css";
 
 const EditEmployeeFields = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const members = [
     {
       id: 1,
@@ -49,72 +49,72 @@ const EditEmployeeFields = () => {
   };
   return (
     <React.Fragment>
-    <div className="container-lg ">
-      <div className="employeeFieldsTitle mt-5 mb-5">
-        <h2> Fields</h2>
-      </div>
-      <form className="mt-5" onSubmit={handleSubmit}>
-        <div className="row mb-2 mt-2">
-          <div className="col-4">
-            <div className="group">
-              <input
-                type="text"
-                id="form3Example1"
-                required
-                onChange={handleChangeInputFields}
-                value={inputData.Name}
-                name="Name"
-              />
-              <label htmlFor="form3Example1">Name</label>
-            </div>
-          </div>
-          <div className="col-4">
-            <div className="group">
-              <input
-                type="text"
-                id="form3Example2"
-                onChange={handleChangeInputFields}
-                value={inputData.PrimarySkills}
-                name="PrimarySkills"
-                required
-              />
-              <label htmlFor="form3Example2">Duration</label>
-            </div>
-          </div>
+      <div className="container-lg ">
+        <div className="employeeFieldsTitle mt-5 mb-5">
+          <h2> Fields</h2>
         </div>
-
-        <div className="row mb-2 mt-2">
-          <div className="col-12">
-            <div className="group">
-              <input
-                type="text"
-                id="form3Example3"
-                onChange={handleChangeInputFields}
-                value={inputData.TotalWorkExp}
-                name="TotalWorkExp"
-                required
-                style={{ width: "100%" }}
-              />
-              <label htmlFor="form3Example3">Description</label>
+        <form className="mt-5" onSubmit={handleSubmit}>
+          <div className="row mb-2 mt-2">
+            <div className="col-4">
+              <div className="group">
+                <input
+                  type="text"
+                  id="form3Example1"
+                  required
+                  onChange={handleChangeInputFields}
+                  value={inputData.Name}
+                  name="Name"
+                />
+                <label htmlFor="form3Example1">Name</label>
+              </div>
+            </div>
+            <div className="col-4">
+              <div className="group">
+                <input
+                  type="text"
+                  id="form3Example2"
+                  onChange={handleChangeInputFields}
+                  value={inputData.PrimarySkills}
+                  name="PrimarySkills"
+                  required
+                />
+                <label htmlFor="form3Example2">Duration</label>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="row mb-2 mt-2">
-          <div className="col-4">
-            <div className="group">
-              <input
-                type="text"
-                id="form3Example4"
-                onChange={handleChangeInputFields}
-                value={inputData.EmpId}
-                name="EmpId"
-                required
-              />
-              <label htmlFor="form3Example4">Created By</label>
+          <div className="row mb-2 mt-2">
+            <div className="col-12">
+              <div className="group">
+                <input
+                  type="text"
+                  id="form3Example3"
+                  onChange={handleChangeInputFields}
+                  value={inputData.TotalWorkExp}
+                  name="TotalWorkExp"
+                  required
+                  className="w-100"
+                />
+                <label htmlFor="form3Example3">Description</label>
+              </div>
             </div>
           </div>
-          {/* <div className="col-4">
+
+          <div className="row mb-2 mt-2">
+            <div className="col-4">
+              <div className="group">
+                <input
+                  type="text"
+                  id="form3Example4"
+                  onChange={handleChangeInputFields}
+                  value={inputData.EmpId}
+                  name="EmpId"
+                  required
+                />
+                <label htmlFor="form3Example4">Created By</label>
+              </div>
+            </div>
+            {/* <div className="col-4">
             <div className="group">
               <input
                 type="number"
@@ -127,27 +127,22 @@ const EditEmployeeFields = () => {
               <label htmlFor="form3Example5">Members</label>
             </div>
           </div> */}
-          <div className="col-4">
-            <div className="group">
-              <input
-                type="text"
-                id="form3Example6"
-                onChange={handleChangeInputFields}
-                value={inputData.Notes}
-                name="Notes"
-                required
-              />
-              <label htmlFor="form3Example6">Documents</label>
+            <div className="col-4">
+              <div className="group">
+                <input
+                  type="text"
+                  id="form3Example6"
+                  onChange={handleChangeInputFields}
+                  value={inputData.Notes}
+                  name="Notes"
+                  required
+                />
+                <label htmlFor="form3Example6">Documents</label>
+              </div>
             </div>
           </div>
-        </div>
-
-        
-      </form>
-      <div
-          className="row d-flex align-items-center h-100 mt-5"
-          style={{ width: "50%" }}
-        >
+        </form>
+        <div className="row d-flex align-items-center h-100 mt-5 w-50">
           <div className="col-md-12 col-xl-10">
             <div className="card">
               <div className="card-header p-3 d-flex justify-content-between align-items-center ">
@@ -163,9 +158,8 @@ const EditEmployeeFields = () => {
               </div>
 
               <div
-                className="card-body"
+                className="card-body editEmployeeFieldsCards"
                 data-mdb-perfect-scrollbar="true"
-                style={{ position: "relative", height: "200px" }}
               >
                 <table className="table mb-0  table-hover">
                   <tbody>
@@ -176,9 +170,8 @@ const EditEmployeeFields = () => {
                         )
                         ?.map((filterMember) => (
                           <tr
-                            className="fw-normal"
+                            className="fw-normal editEmployeeFieldsInput"
                             key={filterMember?.id}
-                            style={{ cursor: "pointer" }}
                             onClick={handlePocDetailsNameClick}
                           >
                             <td className="align-middle ">
@@ -203,9 +196,9 @@ const EditEmployeeFields = () => {
             </div>
           </div>
         </div>
-    </div>
-    {/* ADD RESOURCES MODAL */}
-    <div
+      </div>
+      {/* ADD RESOURCES MODAL */}
+      <div
         className={` ${
           show === true ? "pocDetailsModal modal fade" : "modal fade"
         }`}
@@ -263,20 +256,16 @@ const EditEmployeeFields = () => {
         </div>
       </div>
       <div className="text-center">
-          <button
-            type="submit"
-            className="btn btn-primary  mb-4"
-            style={{ marginRight: "30px" }}
-          >
-            Save
-          </button>
-          <button
-            onClick={() => navigate("/pocdetails")}
-            className="btn btn-primary  mb-4 "
-          >
-            Cancel
-          </button>
-        </div>
+        <button type="submit" className="btn btn-primary  mb-4 editEmployeeFieldsSaveButton">
+          Save
+        </button>
+        <button
+          onClick={() => navigate("/pocdetails")}
+          className="btn btn-primary  mb-4 "
+        >
+          Cancel
+        </button>
+      </div>
     </React.Fragment>
   );
 };

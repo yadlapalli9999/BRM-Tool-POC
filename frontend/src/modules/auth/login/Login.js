@@ -3,24 +3,24 @@ import { useNavigate } from "react-router-dom";
 import { AdminRole } from "../../../Roles";
 import "./Login.css";
 
-let Login = (props) => {
+const Login = (props) => {
   props.funcNav(false);
 
-  let navigate = useNavigate();
-  let [user, setUser] = useState({
+  const navigate = useNavigate();
+  const [user, setUser] = useState({
     email: String,
     password: String,
   });
 
-  let updateInput = (event) => {
+  const updateInput = (event) => {
     setUser({
       ...user,
       [event.target.name]: event.target.value,
     });
   };
 
-  let { email, password } = user;
-  let handleLoginForm = (event) => {
+  const { email, password } = user;
+  const handleLoginForm = (event) => {
     event.preventDefault();
     // if (email && password) {
     //   console.log(user);
@@ -49,8 +49,8 @@ let Login = (props) => {
                             <div className="text-center">
                               <img
                                 src="https://uploads-ssl.webflow.com/61ffed246e785f28c1a44633/62026bbe9515a02ec226fcfe_Group%201917%20(1).svg"
-                                style={{ width: "320px" }}
                                 alt="logo"
+                                className="loginImg"
                               />
                             </div>
 

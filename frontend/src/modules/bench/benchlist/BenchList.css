@@ -28,3 +28,9 @@ table.dataTable thead th, table.dataTable thead td{
 .form-switch input{
   padding-left: 0px !important;
 }
+.benchListdeletei{
+  font-size: 20px;
+}
+.benchListEditi{
+  font-size: 20px;
+}

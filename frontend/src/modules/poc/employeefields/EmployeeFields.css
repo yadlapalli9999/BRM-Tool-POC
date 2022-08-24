@@ -49,5 +49,15 @@
     top: -20px;
     font-size: 14px;
   }
-  
+  .employeeFieldCard{
+    position: relative;
+    height: 200px;
+  }
+.employeeFieldInput{
+  width: 100%;
+}
 
+
+.employeeFieldsAddButton{
+  margin-right: 30px;
+}

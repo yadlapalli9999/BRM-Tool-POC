@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./BenchWorklogs.css";
-let EmployeeWorkLogs = () => {
-  let [workLogList, setWorkLogList] = useState([
+const EmployeeWorkLogs = () => {
+  const [workLogList, setWorkLogList] = useState([
     {
       duration: 8,
       resourceId: "62e8ba7c59e2ad549fba94b3",
@@ -29,23 +29,23 @@ let EmployeeWorkLogs = () => {
       __v: 0,
     },
   ]);
-  let [worklog, setWorklog] = useState({
+  const [worklog, setWorklog] = useState({
     taskDetails: "",
     taskDescription: "",
     duration: "",
     logDate: "",
   });
 
-  let UpdateInput = (event) => {
+  const UpdateInput = (event) => {
     setWorklog({
       ...worklog,
       [event.target.name]: event.target.value,
     });
   };
-  let { taskDescription, taskDetails, duration, logDate } = worklog;
-  let handleWorkLogSubmit = () => {};
+  const { taskDescription, taskDetails, duration, logDate } = worklog;
+  const handleWorkLogSubmit = () => {};
 
-  let deleteTask = (id) => {};
+  const deleteTask = (id) => {};
 
   return (
     <React.Fragment>
