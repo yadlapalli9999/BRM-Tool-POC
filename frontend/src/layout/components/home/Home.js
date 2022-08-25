@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
 
-let Home = () => {
+let Home = (props) => {
+  props.funcNav(true)
   return (
     <React.Fragment>
       <div className="container">

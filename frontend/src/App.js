@@ -1,35 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./layout/components/home/Home";
-import Navbar from "./layout/components/navbar/Navbar";
-import EmployeeFields from "./modules/poc/employeefields/EmployeeFields";
-import PocDetails from "./modules/poc/pocdertails/PocDetails";
-import POCHome from "./modules/poc/pochome/POCHome";
-import PocList from "./modules/poc/poclist/PocList";
-import WorkLogs from "./modules/poc/worklogs/WorkLogs";
-import GoogleDoc from "./modules/poc/googledoc/GoogleDoc";
-import ExcelDoc from "./modules/poc/exceldoc/ExcelDoc";
-import Login from "./modules/auth/login/Login";
+import Navbar from "./components/navbar/Navbar";
+import EmployeeFields from "./routes/poc/employeefields/EmployeeFields";
+import PocDetails from "./routes/poc/pocdertails/PocDetails";
+import POCHome from "./routes/poc/pochome/POCHome";
+import PocList from "./routes/poc/poclist/PocList";
+import WorkLogs from "./routes/poc/worklogs/WorkLogs";
+import GoogleDoc from "./routes/poc/googledoc/GoogleDoc";
+import ExcelDoc from "./routes/poc/exceldoc/ExcelDoc";
+import Login from "./routes/auth/login/Login";
 import { AdminRole } from "./Roles";
-import Register from "./modules/auth/register/Register";
+import Register from "./routes/auth/register/Register";
 import NotFound from "./layout/components/notfound/NotFound";
-import BenchList from "./modules/bench/benchlist/BenchList";
-import BenchWorklogs from "./modules/bench/benchworklogs/BenchWorklogs";
-import EditEmployeeFields from "./modules/poc/editemployeefields/EditEmployeeFIelds";
+import BenchList from "./routes/bench/benchlist/BenchList";
+import BenchWorklogs from "./routes/bench/benchworklogs/BenchWorklogs";
+import EditEmployeeFields from "./routes/poc/editemployeefields/EditEmployeeFIelds";
 import EmployeeWorklogs from "./modules/EmployeeWorklogs";
-import EditEmployee from "./modules/bench/EditEmployee";
+import EditEmployee from "./routes/bench/EditEmployee";
 
+import NewBenchEmployee from "./routes/bench/benchnewemployee/NewBenchEmployee";
+
+import AdminDashboard from "./routes/admindashboard/AdminDashboard";
+import BenchEmployeeDetail from "./routes/bench/benchemployeeDetails/BenchEmployeeDetail";
+import EditBenchEmployee from "./routes/bench/editBenchEmployee/EditBenchEmployee";
+
+export const  BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/`;
 function App() {
+  const [showNav, setShowNav] = useState(true);
+
   return (
     <React.Fragment>
       <BrowserRouter>
-        <Navbar />
+        {showNav && <Navbar />}
+
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Login funcNav={setShowNav} />} />
+          <Route path="/register" element={<Register funcNav={setShowNav} />} />
           {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
-            <Route path="/home" element={<Home />} />
+            <Route path="/home" element={<Home funcNav={setShowNav} />} />
           )}
           {AdminRole.role === "ADMIN" && (
             <Route path="/poc" element={<POCHome />} />
@@ -69,6 +79,23 @@ function App() {
           )}
           {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
             <Route path="/editemployee" element={<EditEmployee />} />
+          )}
+
+          {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+            <Route path="/newbenchEmployee" element={<NewBenchEmployee />} />
+          )}
+          {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+            <Route path="/editbenchEmployee" element={<EditBenchEmployee/>} />
+          )}
+           {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+            <Route path="/empDetails/:id" element={<BenchEmployeeDetail />} />
+          )}
+
+          {AdminRole.role === "ADMIN" && (
+            <Route
+              path="/dashboard"
+              element={<AdminDashboard funcNav={setShowNav} />}
+            />
           )}
 
           <Route path="*" element={<NotFound />} />
