@@ -1,0 +1,15 @@
+.worklogListTitle{
+    text-align: center;
+}
+
+.worklogListTable{
+    width: 100%;
+    margin: auto;
+
+}
+.table-headings{
+    color: white;
+}
+.benchWorkLogsTitle{
+    margin-right: 480px;
+}

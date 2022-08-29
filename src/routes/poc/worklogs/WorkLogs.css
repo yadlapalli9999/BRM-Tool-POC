@@ -1,0 +1,14 @@
+.workLogsTitle{
+    text-align: center;
+}
+
+.WorkLogsTable{
+    width: initial;
+    margin: auto;
+
+}
+
+
+.WorkLogsTable>thead{
+vertical-align: middle !important;
+}
