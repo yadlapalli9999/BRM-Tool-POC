@@ -1,11 +1,22 @@
 import { createSlice ,createAsyncThunk} from "@reduxjs/toolkit"
+import axios from "axios";
+import { setAuthToken } from "../../../util/tokenUtil";
 import AuthService from '../../services/auth/auth.service';
 import { setMessage } from "./message";
-const user = JSON.parse(localStorage.getItem("user"));
+//const user = JSON.parse(localStorage.getItem("user"));
 const BASE_URL ='http://brm-tool.ap-south-1.elasticbeanstalk.com';
+// initialize userToken from local storage
+// const access_token = localStorage.getItem('access_token')
+//   ? localStorage.getItem('access_token')
+//   : null
 
+const access_token = localStorage.getItem('access_token')
+  ? localStorage.getItem('access_token')
+  : null
 const initialState = {
-  user:{},
+  access_token,
+  userInfo:null,
+  isAuthenticated : false,
   loading:false,
   errorMessage:''
 }
@@ -31,47 +42,60 @@ const initialState = {
 
 export const loginUser = createAsyncThunk(
   "auth/login",
-  async ({ email, password }, thunkAPI) => {
+  async ({ email, password }, {rejectWithValue}) => {
     try {
-      const response = await fetch(
-        `${BASE_URL}/resource/login`,
+      const {data} = await axios.post(
+        `${BASE_URL}/resources/login`,{email,password},
         {
           method: "POST",
           headers: {
-            Accept: "application/json",
             "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email,
-            password,
-          }),
+          }
         }
       )
-      let data = await response.json()
-      console.log("response", data)
-      if (response.status === 200) {
-        localStorage.setItem("token", data.token)
-        return data
-      } else {
-        return thunkAPI.rejectWithValue(data)
+      setAuthToken(data.access_token);
+      localStorage.setItem("access_token",data.access_token)
+      return data;
+      //let data = await response.json()
+      // console.log("response", data)
+      // if (response.status === 200) {
+      //   localStorage.setItem("token", data.access_token)
+      //   console(data.access_token)
+      //   return {user:data}
+      // } else {
+      //   return thunkAPI.rejectWithValue(data)
+      // }
+    } catch (error) {
+      if(error.reponse && error.reponse.data.message){
+        return rejectWithValue(error.reponse.data.message)
       }
-    } catch (e) {
-      console.log("Error", e.response.data)
-      thunkAPI.rejectWithValue(e.response.data)
+      else{
+        return rejectWithValue(error.message)
+      }
     }
   }
 )
 const authSlice = createSlice({
     name:'auth',
-    initialState:initialState,
+    initialState,
     extrareducers:{
+        [loginUser.pending]:(state,action)=>{
+          state.loading= true,
+          state.errorMessage = null;
+        },
         [loginUser.fulfilled]: (state, action) => {
-            state.isLoggedIn = true;
-            state.user = action.payload.user;
+          localStorage.setItem('access_token', action.payload.access_token)
+            state.loading = false;
+            state.userInfo = action.payload;
+            state.access_token =action.payload.access_token;
+            state.isAuthenticated = true
         },
         [loginUser.rejected]: (state, action) => {
-            state.isLoggedIn = false;
-            state.user = null;
+          localStorage.removeItem('access_token')
+            state.loading = false;
+            state.errorMessage = null;
+            state.isAuthenticated = false
+
         },
     }
 })

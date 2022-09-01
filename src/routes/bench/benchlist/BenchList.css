@@ -32,3 +32,17 @@ table.dataTable thead th, table.dataTable thead td{
   padding: 0.625rem 1rem 0.5rem 0.5rem !important;
 
 }
+/* new css*/
+
+tr{
+  vertical-align: middle;
+  text-align: center;
+}
+.select{
+  float: right;
+  padding: 0.625rem 1rem 0.5rem 0.5rem !important;
+
+}
+.fa-edit,.fa-trash{
+  font-size: 20px !important;
+}

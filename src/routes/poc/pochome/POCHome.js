@@ -1,6 +1,7 @@
 import React from "react";
 import "./POCHome.css";
 import { Link, useNavigate } from "react-router-dom";
+import {MDBContainer,MDBRow,MDBCol,MDBTable,MDBTableHead,MDBTableBody, MDBBtn, MDBIcon} from 'mdb-react-ui-kit';
 //import ExcelImg from "../../../assets/excel.png";
 //import GoogleImg from "../../../assets/google.png";
 
@@ -67,7 +68,128 @@ let POCHome = () => {
 
   return (
     <React.Fragment>
-      <div className="container">
+      <MDBContainer className="py-4">
+        <MDBRow>
+          <MDBCol md="12" className="text-center">
+          <h2>ACTIVE POC</h2>          
+          </MDBCol>
+        </MDBRow>
+        <MDBRow>
+          <MDBCol md="12" className="d-flex justify-content-end">
+            <Link to="/addpoc" className="btn btn-primary">Add</Link>
+          </MDBCol>
+        </MDBRow>
+        <MDBRow className="mt-4">
+          <MDBCol>
+            <MDBTable>
+              <MDBTableHead className="bg-primary text-white">
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">CreatedBy</th>
+                  <th scope="col">Members</th>
+                  <th scope="col">Documents</th>
+                </tr>
+              </MDBTableHead>
+              <MDBTableBody>
+              {dummyData &&
+              dummyData?.map((data) => (
+                <tr>
+                  <td>
+                    <div className="d-flex align-items-center">
+                      <div className="name" onClick={handleNameClick}>
+                        <p className="fw-bold mb-1">{data?.name}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p className="fw-normal mb-1">{data?.description}</p>
+                  </td>
+                  <td>
+                    <span
+                      className={`badge ${
+                        data?.duration >= 5
+                          ? "badge-danger"
+                          : data?.duration >= 3
+                          ? "badge-warning"
+                          : "badge-success"
+                      } rounded-pill d-inline`}
+                    >
+                      {data?.duration} Month
+                    </span>
+                  </td>
+                  <td>{data?.createdBy}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-link btn-sm btn-rounded"
+                    >
+                      {data?.members.length}
+                    </button>
+                  </td>
+                  <td>
+                    <div className="d-flex align-items-center ">
+                      {data?.documents?.map((doc) => (
+                        <>
+                          {doc.includes("docs.google.com") ? (
+                            <a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
+                              {/* <img
+                                src={"../../google.png"}
+                                alt=""
+                                style={{ width: "45px", height: "45px" }}
+                                className="rounded-circle pocHomeGoogleDocsLogo "
+                              /> */}
+                              <MDBIcon className=" fas fa-file-import" />
+                            </a>
+                          ) : doc.includes("docs.excel.com") ? (
+                            <a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
+                              {/* <img
+                                src={"../../excel.png"}
+                                alt=""
+                                style={{ width: "40px", height: "45px" }}
+                                className="rounded-circle pocHomeExcelLogo "
+                              /> */}
+                              <MDBIcon className="fas fa-file-excel"/>
+                            </a>
+                          ) : doc.includes("docs.google.com") &&
+                            doc.includes("docs.excel.com") ? (
+                            <>
+                              <a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
+                                {/* <img
+                                  src={"../../google.png"}
+                                  alt=""
+                                  style={{ width: "45px", height: "45px" }}
+                                  className="rounded-circle pocHomeGoogleDocsLogo "
+                                /> */}
+                                <MDBIcon className="fas fa-file-import" />
+
+                              </a>
+                              <a  href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
+                                {/* <img
+                                  src={"../../excel.png"}
+                                  alt=""
+                                  style={{ width: "40px", height: "45px" }}
+                                  className="rounded-circle pocHomeExcelLogo"
+                                /> */}
+                                <MDBIcon className="fas fa-file-excel" style={{marginLeft:'10px'}}/>
+                              </a>
+                            </>
+                          ) : (
+                            ""
+                          )}
+                        </>
+                      ))}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+              </MDBTableBody>
+            </MDBTable>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
+      {/* <div className="container">
         <div className="pocTitle mt-5 mb-5">
           <h2>ACTIVE POC</h2>
         </div>
@@ -184,7 +306,7 @@ let POCHome = () => {
               ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 };

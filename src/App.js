@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Home from "./layout/components/home/Home";
@@ -13,22 +13,32 @@ import ExcelDoc from "./routes/poc/exceldoc/ExcelDoc";
 import Login from "./routes/auth/login/Login";
 import { AdminRole } from "./Roles";
 import Register from "./routes/auth/register/Register";
-import NotFound from "./layout/components/notfound/NotFound";
+import NotFound from "./components/notfound/NotFound";
 import BenchList from "./routes/bench/benchlist/BenchList";
 import BenchWorklogs from "./routes/bench/benchworklogs/BenchWorklogs";
 import EditEmployeeFields from "./routes/poc/editemployeefields/EditEmployeeFIelds";
-import EmployeeWorklogs from "./modules/EmployeeWorklogs";
+// import EmployeeWorklogs from "./modules/EmployeeWorklogs";
 import EditEmployee from "./routes/bench/EditEmployee";
+
 
 import NewBenchEmployee from "./routes/bench/benchnewemployee/NewBenchEmployee";
 
 import AdminDashboard from "./routes/admindashboard/AdminDashboard";
 import BenchEmployeeDetail from "./routes/bench/benchemployeeDetails/BenchEmployeeDetail";
 import EditBenchEmployee from "./routes/bench/editBenchEmployee/EditBenchEmployee";
+import * as userUtil from './util/userUtil';
+import * as tokenUtil from './util/tokenUtil';
+
 
 export const  BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/`;
 function App() {
   const [showNav, setShowNav] = useState(true);
+  useEffect(()=>{
+    if(userUtil.isLoggedIn){
+      tokenUtil.setAuthToken(userUtil.getToken())
+      localStorage.getItem("access_token")
+    }
+  },[])
 
   return (
     <React.Fragment>
@@ -74,9 +84,9 @@ function App() {
           {AdminRole.role === "ADMIN" && (
             <Route path="/benchworklogs" element={<BenchWorklogs />} />
           )}
-          {AdminRole.role === "EMPLOYEE" && (
+          {/* {AdminRole.role === "EMPLOYEE" && (
             <Route path="/employeeworklogs" element={<EmployeeWorklogs />} />
-          )}
+          )} */}
           {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
             <Route path="/editemployee" element={<EditEmployee />} />
           )}

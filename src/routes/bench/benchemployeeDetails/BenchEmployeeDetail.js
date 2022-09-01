@@ -1,131 +1,103 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate,Link, useParams} from 'react-router-dom'
+import {useNavigate,Link, useParams} from 'react-router-dom';
+import {MDBBtn,MDBCard,MDBCardBody,MDBContainer,MDBRow,MDBCol, MDBListGroup, MDBListGroupItem, MDBCardFooter} from 'mdb-react-ui-kit';
+import { useDispatch, useSelector } from "react-redux";
+import { getBenchId } from "../../../redux/features/bench/bench.feature";
 
 let BenchEmployeeDetail = (props)=>{
     let navigate = useNavigate();
-    let params  = useParams();
-    const [user,setUser] = useState({})
-    const data = [
-      {
-        id: "FL1303",
-        name: "Abhishek Rane",
-        email: "Abhishek.rane@fissionlabs.com",
-        totalWorkExp: 4,
-        totalExpFission: 1,
-        primarySkills: {
-          skillName: "nodejs",
-          totalExp: 1,
-        },
-        reportingManager: "Shwetha Rajpurohit",
-        teamLead: "Adil",
-      },
-      {
-        id: "FL1304",
-        name: "Abhishek",
-        email: "Abhishek.rane@fissionlabs.com",
-        totalWorkExp: 4,
-        totalExpFission: 1,
-        primarySkills: {
-          skillName: "nodejs",
-          totalExp: 1,
-        },
-        reportingManager: "Shwetha Rajpurohit",
-        teamLead: "Adil",
-      },
-      {
-        id: "FL1305",
-        name: "Ganesh",
-        email: "Abhishek.rane@fissionlabs.com",
-        teamLead: "Adil",
-        primarySkills: {
-          skillName: "nodejs",
-          totalExp: 1,
-        },
-        reportingManager: "Shwetha Rajpurohit",
-        totalWorkExp: 4,
-        totalExpinFission: "9",
-        totalExp: 1,
-        notes: "Hello",
-      },
-      {
-        id: "FL1306",
-        name: "Abhishek Rane",
-        email: "Abhishek.rane@fissionlabs.com",
-        totalWorkExp: 4,
-        totalExpFission: 1,
-        primarySkills: {
-          skillName: "nodejs",
-          totalExp: 1,
-        },
-        reportingManager: "Shwetha Rajpurohit",
-        teamLead: "Adil",
-      },
-      {
-        id: "FL1307",
-        name: "Abhishek Rane",
-        email: "Abhishek.rane@fissionlabs.com",
-        teamLead: "Adil",
-        skillName: "nodejs",
-        reportingManager: "Shwetha Rajpurohit",
-        totalWorkExp: 4,
-        totalExpinFission: "3",
-        totalExp: 1,
-      },
-      {
-        id: "FL1308",
-        name: "Abhishek Rane",
-        email: "Abhishek.rane@fissionlabs.com",
-        totalWorkExp: 4,
-        totalExpFission: 1,
-        primarySkills: {
-          skillName: "nodejs",
-          totalExp: 1,
-        },
-        reportingManager: "Shwetha Rajpurohit",
-        teamLead: "Adil",
-      },
-      {
-        id: "FL1309",
-        name: "Abhishek Rane",
-        email: "Abhishek.rane@fissionlabs.com",
-        totalWorkExp: 4,
-        totalExpFission: 1,
-        primarySkills: {
-          skillName: "nodejs",
-          totalExp: 1,
-        },
-        reportingManager: "Shwetha Rajpurohit",
-        teamLead: "Adil",
-      },
-    ];
-    //const user = {}
-    //let [user,setUser] = useState({})
+    let {id}  = useParams();
+    let dispatch = useDispatch();
     useEffect(()=>{
-      const filterData = data.find((itme)=>itme.id === (params.id))
-     console.log(filterData)
-     setUser(filterData)
+      dispatch(getBenchId(id))
     },[])
 
+    let {benchListItem} = useSelector((store)=>{
+      return store['bench']
+    })
+   
+  // let {data} = benchListItem;  
+  // let {name,email,reportingManager,teamLead,notes,status} = data;
     
     return(
         <React.Fragment>
-          {/* <pre>{params}</pre> */}
-        <div className="container py-5">
+          <pre>{JSON.stringify(benchListItem)}</pre>
+          <MDBContainer className="py-5">
+            <MDBRow>
+              <MDBCol md="12" className="d-flex justify-content-end">
+                 <Link to="/editbenchEmployee" className="btn btn-primary m-3">Edit</Link>
+                 <MDBBtn className="btn btn-danger m-3">Delete</MDBBtn>
+              </MDBCol>
+            </MDBRow>
+            <MDBRow>
+              {Object.keys(benchListItem).length >0 ?
+              <MDBCol md="12">
+                  <MDBCard>
+                    <MDBCardBody>
+                       <MDBListGroup>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
+                        <MDBCol md="3">Name</MDBCol>
+                         <MDBCol md="9">{benchListItem.data.name}</MDBCol>
+                        </MDBRow>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
+                        <MDBCol md="3">Email</MDBCol>
+                         <MDBCol md="9">{benchListItem.data.email}</MDBCol>
+                        </MDBRow>
+                        
+                        </MDBListGroupItem>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
+                        <MDBCol md="3">Reporting Manager</MDBCol>
+                         <MDBCol md="9">{benchListItem.data.reportingManager}</MDBCol>
+                        </MDBRow>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
+                        <MDBCol md="3">Team Lead</MDBCol>
+                         <MDBCol md="9">{benchListItem.data.teamLead}</MDBCol>
+                        </MDBRow>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
+                        <MDBCol md="3">Notes</MDBCol>
+                         <MDBCol md="9">{benchListItem.data.notes}</MDBCol>
+                        </MDBRow>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
+                        <MDBCol md="3">Status</MDBCol>
+                         <MDBCol md="9">{benchListItem.data.status}</MDBCol>
+                        </MDBRow>
+                        </MDBListGroupItem>
+                         
+                       </MDBListGroup>
+                    </MDBCardBody>
+                    <MDBCardFooter>
+                    <MDBRow>
+              <MDBCol>
+                <MDBBtn className="btn btn-primary"
+            onClick={() => {
+              navigate("/benchlist");
+            }}>Back</MDBBtn>
+              </MDBCol>
+            </MDBRow>
+                    </MDBCardFooter>
+                  </MDBCard>
+              </MDBCol>:null}
+              
+            </MDBRow>
+            
+          </MDBContainer>
+        {/* <div className="container py-5">
         <div className="row">
           <div className="all-pocdetails-buttons ">
             <div className="editButton ">
               <Link to="/newbenchEmployee" className="btn btn-primary">
                 Edit
               </Link>
-              {/* <button
-                type="button"
-                className="btn btn-primary"
-                data-mdb-toggle="modal"
-                data-mdb-target="#exampleModal"
-                onClick={() => navigate("/newbenchEmployee")}
-              >
-                Edit
-              </button> */}
             </div>
             <div className="deleteButton ">
               <button
@@ -206,16 +178,16 @@ let BenchEmployeeDetail = (props)=>{
           </div>
         </div>
         <div className="text-left py-5">
-          <button
-            className="btn btn-secondary btn-sm"
+          <MDBBtn
+            className="btn btn-primary"
             onClick={() => {
               navigate("/benchlist");
             }}
           >
             Back
-          </button>
+          </MDBBtn>
         </div>
-      </div>
+      </div> */}
       {/* DELETE MODAL */}
       <div
         className="modal fade"

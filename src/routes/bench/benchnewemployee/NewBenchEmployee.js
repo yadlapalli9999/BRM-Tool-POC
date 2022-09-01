@@ -1,20 +1,25 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { MDBBtn,MDBValidation,MDBValidationItem,MDBInput } from "mdb-react-ui-kit";
+import { useLocation, useNavigate } from "react-router-dom";
+import { MDBBtn,MDBValidation,MDBValidationItem,MDBInput,MDBTextArea,MDBCard,MDBCardHeader,MDBCardBody,MDBCardTitle, MDBRow, MDBCol, MDBContainer, MDBFooter, MDBCardFooter } from "mdb-react-ui-kit";
 import "./newbenchEmployee.css";
 
 let NewBenchEmployee = () => {
   const navigate = useNavigate();
   return (
     <React.Fragment>
-      <div className="container-lg">
-        <div className="mt-5 mb-5 text-center">
-          <h2>New Bench Employee</h2>
-        </div>
-        <MDBValidation className="row g-3" novalidate>
+      {/* <div className="container-lg"> */}
+        <MDBContainer breakpoint="lg">
+
+        <div className="d-flex flex-column text-center justify-content-center align-items-center vh-100"> 
+        <MDBCard className="mt-5 mb-5">
+           <MDBCardHeader>
+             <MDBCardTitle className="text-center"><h2>New Bench Employee</h2></MDBCardTitle>
+           </MDBCardHeader>
+           <MDBCardBody>
+           
+           <MDBValidation className="row g-5 novalidate" noValidate>
            <MDBValidationItem className="col-md-4" feedback='Please Enter your name' invalid>
               <MDBInput id='validationCustom01' required name="name" label="Name"/>
-              {/* <div className="vaild-feedback">Looks Good</div> */}
            </MDBValidationItem>
            <MDBValidationItem className="col-md-4" feedback='Please Enter your EmpId' invalid>
               <MDBInput id='validationCustom02' required name="empId" label="EmpId"/>
@@ -25,18 +30,34 @@ let NewBenchEmployee = () => {
            <MDBValidationItem className="col-md-4" feedback='Please Enter your TotalWorkExp' invalid>
               <MDBInput id='validationCustom04' required name="TotalWorkExp" label="TotalWorkExp"/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-4" feedback='Please Enter your TotalWorkExp' invalid>
-              <MDBInput id='validationCustom04' required name="TotalWorkExp" label="TotalWorkExp"/>
+           <MDBValidationItem className="col-md-4" feedback='Please Enter your TotalExpFission' invalid>
+              <MDBInput id='validationCustom05' required name="TotalExpFission" label="TotalExpFission"/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-4" feedback='Please Enter your TotalWorkExp' invalid>
-              <MDBInput id='validationCustom04' required name="TotalWorkExp" label="TotalWorkExp"/>
+           <MDBValidationItem className="col-md-4" feedback='Please Enter your PrimarySkill' invalid>
+              <MDBInput id='validationCustom06' required name="PrimarySkill" label="PrimarySkill"/>
            </MDBValidationItem>
-           <div className='col-12'>
-        <MDBBtn type='submit'>Submit form</MDBBtn>
-        <MDBBtn type='reset'>Reset form</MDBBtn>
+           <MDBValidationItem className="col-md-4" feedback='Please Enter your TotalExp' invalid>
+              <MDBInput id='validationCustom07' required name="TotalExp" label="TotalExp"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-4" feedback='Please Enter your Reporting Manager' invalid>
+              <MDBInput id='validationCustom08' required name="Reporting Manager" label="Reporting Manager"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-4" feedback='Please Enter your Team Lead' invalid>
+              <MDBInput id='validationCustom09' required name="Team Lead" label="TeamLead"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-12" feedback='Please Enter your Team Lead' invalid>
+              <MDBTextArea id='validationTextarea' required name="Team Lead" label="TeamLead"/>
+           </MDBValidationItem>
+           <div className='col-12 text-center'>
+        <MDBBtn className="m-2" type='submit'>Add</MDBBtn>
+        <MDBBtn className="m-2 btn btn-danger" type='reset' onClick={() => navigate("/benchlist")}>Cancel</MDBBtn>
       </div>
-        </MDBValidation>
-        <form className="mt-5">
+        </MDBValidation> 
+           </MDBCardBody> 
+        </MDBCard>
+        </div>
+        </MDBContainer>
+        {/* <form className="mt-5">
           <div className="row mb-2 mt-2">
             <div className="col-4">
               <div className="group">
@@ -156,18 +177,18 @@ let NewBenchEmployee = () => {
           <div className="text-center">
             <MDBBtn className="m-2">Add</MDBBtn>
             <MDBBtn className="btn btn-danger m-2" onClick={() => navigate("/benchlist")}>Cancel</MDBBtn>
-            {/* <button type="submit" className="btn btn-primary  mb-4 newBenchEmployeeAddButton">
+            <button type="submit" className="btn btn-primary  mb-4 newBenchEmployeeAddButton">
               Add
-            </button> */}
-            {/* <button
+            </button>
+            <button
               onClick={() => navigate("/benchlist")}
               className="btn btn-primary  mb-4 "
             >
               Cancel
-            </button> */}
+            </button>
           </div>
-        </form>
-      </div>
+        </form> */}
+      {/* </div> */}
     </React.Fragment>
   );
 };

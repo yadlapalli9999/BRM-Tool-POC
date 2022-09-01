@@ -6,4 +6,4 @@ const rootReducer = {
   bench: benchReducer
 }
 
-export default  rootReducer;
+export default rootReducer;

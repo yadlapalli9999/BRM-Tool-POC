@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {MDBContainer,MDBRow,MDBCol,MDBCard,MDBCardBody,MDBCardTitle, MDBCardHeader, MDBValidation, MDBValidationItem,MDBInput,MDBBtn, MDBTextArea, MDBIcon, MDBTable, MDBTableBody, MDBCardFooter} from 'mdb-react-ui-kit';
 import $ from "jquery";
 import "./EmployeeFields.css";
+import AddResource from "../addresource/AddResource";
 
 const EmployeeFields = () => {
   const navigate = useNavigate();
@@ -64,7 +66,75 @@ const EmployeeFields = () => {
   };
   return (
     <React.Fragment>
-      <div className="container-lg ">
+      <MDBContainer breakpoint="lg">
+         <MDBRow>
+          <MDBCol md="12">
+             <MDBCard className="mt-3 mb-3">
+              <MDBCardHeader className="text-center">
+                 <MDBCardTitle><h2>Add Poc</h2></MDBCardTitle>
+              </MDBCardHeader>
+              <MDBCardBody>
+                <MDBValidation className="row g-5">
+                <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
+              <MDBInput id='validationCustom01' required name="name" label="Name"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
+              <MDBInput id='validationCustom02' required name="name" label="Name"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-12" feedback='Please Enter your name' invalid>
+              <MDBTextArea id='validationCustom03'  required name="name" label="Name"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
+              <MDBInput id='validationCustom03'  required name="name" label="Name"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
+              <MDBInput id='validationCustom03'  required name="name" label="Name"/>
+           </MDBValidationItem>
+           <MDBRow className="m-3">
+            <MDBCol md="12" className="text-center">
+              <MDBBtn className="btn btn-primary m-2">Add</MDBBtn>
+              <MDBBtn onClick={() => navigate("/poc")}
+                className="btn btn-danger m-2">Cancel</MDBBtn>
+            </MDBCol>
+           </MDBRow>
+                </MDBValidation>
+              </MDBCardBody>
+             </MDBCard>
+          </MDBCol>
+         </MDBRow>
+         <MDBRow>
+          <MDBCol md="6">
+          <AddResource/>
+          </MDBCol>
+          {/* <MDBCol md="6">
+            <MDBCard>
+              <MDBCardHeader>
+                <MDBCardTitle><MDBIcon className="fas fa-tasks"/> Members</MDBCardTitle>
+              </MDBCardHeader>
+              <MDBCardBody>
+                 <MDBTable>
+                  <MDBTableBody>
+                  {members &&
+                      members?.map((name, index) => {
+                        return (
+                          <tr key={index + 1}>
+                            <td>{name}</td>
+                          </tr>
+                        );
+                      })}
+                  </MDBTableBody>
+                 </MDBTable>
+              </MDBCardBody>
+              <MDBCardFooter>
+                <MDBBtn className="btn  btn-primary"
+                    onClick={() => setShow(!show)}>Add Resource</MDBBtn>
+              </MDBCardFooter>
+            </MDBCard>
+          </MDBCol>
+         </MDBRow> */}
+         </MDBRow>
+      </MDBContainer>
+      {/* <div className="container-lg ">
         <div className="employeeFieldsTitle mt-5 mb-5">
           <h2> Fields</h2>
         </div>
@@ -129,19 +199,7 @@ const EmployeeFields = () => {
                 <label htmlFor="form3Example4">Created By</label>
               </div>
             </div>
-            {/* <div className="col-4">
-            <div className="group">
-              <input
-                type="number"
-                id="form3Example5"
-                onChange={handleChangeInputFields}
-                value={inputData.TotalExp}
-                name="TotalExp"
-                required
-              />
-              <label htmlFor="form3Example5">Members</label>
-            </div>
-          </div> */}
+            
             <div className="col-4">
               <div className="group">
                 <input
@@ -164,12 +222,7 @@ const EmployeeFields = () => {
                 <h5 className="mb-0">
                   <i className="fas fa-tasks me-2"></i>Members
                 </h5>
-                {/* <input
-                  type="text"
-                  placeholder="Search Member..."
-                  className="search"
-                  onChange={(e) => setQuery(e.target.value)}
-                /> */}
+                
               </div>
 
               <div
@@ -203,9 +256,9 @@ const EmployeeFields = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* ADD RESOURCES MODAL */}
-      <div
+      {/* <div
         className={` ${
           show === true ? "pocDetailsModal modal fade" : "modal fade"
         }`}
@@ -267,8 +320,8 @@ const EmployeeFields = () => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="text-center">
+      </div> */}
+      {/* <div className="text-center">
         <button type="submit" className="btn btn-primary  mb-4 employeeFieldsAddButton">
           Add
         </button>
@@ -278,7 +331,7 @@ const EmployeeFields = () => {
         >
           Cancel
         </button>
-      </div>
+      </div> */}
     </React.Fragment>
   );
 };

@@ -42,6 +42,9 @@
     -moz-transition: 0.2s ease all;
     -webkit-transition: 0.2s ease all;
   }
+  .vh-100{
+    height: 90vh !important;
+  }
   
   /* active state */
   input:focus ~ label,

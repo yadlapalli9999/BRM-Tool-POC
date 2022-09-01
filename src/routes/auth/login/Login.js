@@ -29,7 +29,7 @@ const Login = (props) => {
     //   navigate("/home");
     // }
     if(email && password){
-      dispatch(loginUser({email,password}))
+       dispatch(loginUser(user))
     if (AdminRole.role === "ADMIN") {
       navigate("/dashboard");
     } else if (AdminRole.role === "EMPLOYEE") {

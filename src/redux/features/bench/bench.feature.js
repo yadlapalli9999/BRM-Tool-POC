@@ -1,11 +1,12 @@
 import {  createSlice,createAsyncThunk } from "@reduxjs/toolkit"
 import Axios from 'axios';
-const BASE_URL = `https://brm-tool.ap-south-1.elasticbeanstalk.com/`;
+const BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com`;
 
 const initialState = {
-    benchList:[],
+    benchLists:[],
     loading:false,
-    errorMessage:''
+    errorMessage:'',
+    benchListItem:{}
 }
 
 export const getBench = createAsyncThunk('bench/getBench', async ()=>{
@@ -13,22 +14,40 @@ export const getBench = createAsyncThunk('bench/getBench', async ()=>{
     let response = await Axios.get(dataUrl)
     return response.data;
 });
+export const getBenchId = createAsyncThunk('bench/getBenchId',async(id)=>{
+   let dataUrl = `${BASE_URL}/resources/${id}`;
+   let response = await Axios.get(dataUrl)
+   return response.data
+})
 
 
 const benchSlice = createSlice({
     name:'bench',
-    initialState:initialState,
-    extraReducers: (builder)=>{
-        builder.addCase(getBench.pending,(state,action)=>{
-            state.loading = true
-        }).addCase(getBench.fulfilled,(state,action)=>{
-            state.loading= false;
-            state.benchList = action.payload;
-        }).addCase(getBench.rejected,(state,action)=>{
-            state.loading= false;
-            state.errorMessage = `Oops! Something goes wrong!`
-        })
-     }
+    initialState,
+    extraReducers:{
+        [getBench.pending]:(state,action)=>{
+            state.loading= true
+        },
+        [getBench.fulfilled]:(state,action)=>{
+            state.loading = false;
+            state.benchLists = action.payload;
+        },
+        [getBench.rejected]:(state,action)=>{
+            state.loading = false;
+            state.errorMessage = action.payload
+        },
+        [getBenchId.pending]:(state,action)=>{
+            state.loading = false;
+        },
+        [getBenchId.fulfilled]:(state,action)=>{
+            state.loading = false;
+            state.benchListItem = action.payload
+        },
+        [getBenchId.rejected]:(state,action)=>{
+            state.loading = false;
+            state.errorMessage = action.payload
+        }
+    }
 })
 
 export default benchSlice.reducer;

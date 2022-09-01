@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {MDBContainer,MDBRow,MDBCol,MDBCard,MDBCardHeader,MDBCardTitle,MDBBtn,MDBIcon,MDBInput,MDBTable,MDBTableBody,MDBCardBody,MDBValidation,MDBValidationItem,MDBTextArea} from 'mdb-react-ui-kit';
 import "./EditEmployeeFields.css";
+import AddResource from "../addresource/AddResource";
 
 const EditEmployeeFields = () => {
   const navigate = useNavigate();
@@ -49,6 +51,75 @@ const EditEmployeeFields = () => {
   };
   return (
     <React.Fragment>
+      <MDBContainer breakpoint="lg">
+         <MDBRow>
+          <MDBCol md="12">
+             <MDBCard className="mt-3 mb-3">
+              <MDBCardHeader className="text-center">
+                 <MDBCardTitle><h2>Edit Poc</h2></MDBCardTitle>
+              </MDBCardHeader>
+              <MDBCardBody>
+                <MDBValidation className="row g-5">
+                <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
+              <MDBInput id='validationCustom01' required name="name" label="Name"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
+              <MDBInput id='validationCustom02' required name="name" label="Name"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-12" feedback='Please Enter your name' invalid>
+              <MDBTextArea id='validationCustom03'  required name="name" label="Name"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
+              <MDBInput id='validationCustom03'  required name="name" label="Name"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
+              <MDBInput id='validationCustom03'  required name="name" label="Name"/>
+           </MDBValidationItem>
+           <MDBRow className="m-3">
+            <MDBCol md="12" className="text-center">
+              <MDBBtn className="btn btn-primary m-2">Edit</MDBBtn>
+              <MDBBtn onClick={() => navigate("/poc")}
+                className="btn btn-danger m-2">Cancel</MDBBtn>
+            </MDBCol>
+           </MDBRow>
+                </MDBValidation>
+              </MDBCardBody>
+             </MDBCard>
+          </MDBCol>
+         </MDBRow>
+         <MDBRow>
+          <MDBCol md="6">
+          <AddResource/>
+
+          </MDBCol>
+          {/* <MDBCol md="6">
+            <MDBCard>
+              <MDBCardHeader>
+                <MDBCardTitle><MDBIcon className="fas fa-tasks"/> Members</MDBCardTitle>
+              </MDBCardHeader>
+              <MDBCardBody>
+                 <MDBTable>
+                  <MDBTableBody>
+                  {members &&
+                      members?.map((name, index) => {
+                        return (
+                          <tr key={index + 1}>
+                            <td>{name}</td>
+                          </tr>
+                        );
+                      })}
+                  </MDBTableBody>
+                 </MDBTable>
+              </MDBCardBody>
+              <MDBCardFooter>
+                <MDBBtn className="btn  btn-primary"
+                    onClick={() => setShow(!show)}>Add Resource</MDBBtn>
+              </MDBCardFooter>
+            </MDBCard>
+          </MDBCol>
+         </MDBRow> */}
+         </MDBRow>
+      </MDBContainer>
       <div className="container-lg ">
         <div className="employeeFieldsTitle mt-5 mb-5">
           <h2> Fields</h2>

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import {MDBContainer,MDBRow,MDBCol,MDBCard,MDBCardHeader,MDBCardTitle,MDBCardBody,MDBInput,MDBBtn, MDBListGroup, MDBListGroupItem} from 'mdb-react-ui-kit';
 import $ from "jquery";
 import { Chart, registerables } from "chart.js";
 import "./PocDetails.css";
+import AddResource from "../addresource/AddResource";
 
 Chart.register(...registerables);
 
@@ -55,8 +57,77 @@ const PocDetails = () => {
   };
 
   return (
-    <section>
-      <div className="container py-5">
+    
+    <React.Fragment>
+      <MDBContainer className="py-1">
+        <MDBRow>
+          <MDBCol md="12" className="d-flex justify-content-end">
+            <Link to="/editpoc" className="btn btn-primary m-2">Edit</Link>
+            <MDBBtn className="btn btn-danger m-2">Cancel</MDBBtn>
+          </MDBCol>
+        </MDBRow>
+        <MDBRow className="mt-3">
+          <MDBCol md="12">
+            <MDBCard>
+              <MDBCardBody>
+                 <MDBListGroup>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Name</MDBCol>
+                        <MDBCol md="9">BRM Tool POC</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Description</MDBCol>
+                        <MDBCol md="9">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Cupiditate voluptatem porro optio tempore voluptate modi
+                      non molestias officia dolor aliquid.</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Duration</MDBCol>
+                        <MDBCol md="9">20 Months</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">CreatedBy</MDBCol>
+                        <MDBCol md="9">Dipesh Ingle</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Members</MDBCol>
+                        <MDBCol md="9">Kunal Rokhle , Alok Kumar , Sudhanshu Jain</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Documents</MDBCol>
+                        <MDBCol md="9">Bay Area, San Francisco, CA</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+
+                 </MDBListGroup>
+              </MDBCardBody>
+            </MDBCard>
+          </MDBCol>
+        </MDBRow>
+        <MDBRow className="mt-5">
+          <MDBCol md="6">
+            <AddResource/>
+          </MDBCol >
+          <MDBCol md="2"></MDBCol>
+          <MDBCol md="4" className="justify-content-end">
+          <canvas id="pieChart" width="200" height="200"></canvas>
+
+          </MDBCol>
+
+        </MDBRow>
+      </MDBContainer>
+      {/* <div className="container py-5">
         <div className="row">
           <div className="all-pocdetails-buttons ">
             <div className="editButton ">
@@ -203,16 +274,16 @@ const PocDetails = () => {
               </div>
             </div>
           </div>
-          {/* <!-- pie chart --> */}
+          {/* <!-- pie chart --> 
           <div className="col-md-2"></div>
           <div className="col-md-4">
             <canvas id="pieChart" width="200" height="200"></canvas>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* ADD RESOURCES MODAL */}
-      <div
+      {/* <div
         className={` ${
           show === true ? "pocDetailsModal modal fade" : "modal fade"
         }`}
@@ -268,7 +339,7 @@ const PocDetails = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       {/* EDIT MODAL */}
       {/* <div
@@ -431,7 +502,7 @@ const PocDetails = () => {
           </div>
         </div>
       </div>
-    </section>
+    </React.Fragment>
   );
 };
 

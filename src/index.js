@@ -3,12 +3,16 @@
 // import 'mdbootstrap/css/mdb.css';
 import "@fortawesome/fontawesome-free/css/all.css";
 // import "@mdbootstrap/css/mdb.min.css";
- import 'mdb-react-ui-kit/dist/css/mdb.min.css'
+ //import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 
 // import "mdb-ui-kit/js/mdb.min.js";
+import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 
-// import "mdbootstrap/js/bootstrap.min.js";
+//import "mdbootstrap/js/bootstrap.min.js";
 // import "mdbootstrap/js/popper.min.js";
+// import '@fortawesome/fontawesome-free/css/all.min.css';
+// import 'bootstrap-css-only/css/bootstrap.min.css';
+// import 'mdbreact/dist/css/mdb.css';
 
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -16,9 +20,19 @@ import "./index.css";
 import App from "./App";
 //import "./styles.css"; // customized bootstrap styles
 import reportWebVitals from "./reportWebVitals";
-
+import axios from "axios";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+axios.interceptors.response.use(
+  (response) => {
+    if (response.data.success === false && response.data.message === "Unauthenticated Invalid Token") {
+     alert("Invalid Token")
+    }
+    else {
+      return response;
+    }
+  }
+);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
