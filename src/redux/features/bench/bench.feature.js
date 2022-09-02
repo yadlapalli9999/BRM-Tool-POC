@@ -19,6 +19,11 @@ export const getBenchId = createAsyncThunk('bench/getBenchId',async(id)=>{
    let response = await Axios.get(dataUrl)
    return response.data
 })
+export const createBench = createAsyncThunk('bench/createBench', async (newdata)=>{
+    let dataUrl = `${BASE_URL}/resources`;
+    let response = await Axios.post(dataUrl,newdata)
+    return response.data
+})
 
 
 const benchSlice = createSlice({
@@ -46,6 +51,17 @@ const benchSlice = createSlice({
         [getBenchId.rejected]:(state,action)=>{
             state.loading = false;
             state.errorMessage = action.payload
+        },
+        [createBench.pending]:(state,action)=>{
+            state.loading = true
+        },
+        [createBench.fulfilled]:(state,action)=>{
+            state.loading = false;
+            state.benchLists = action.payload
+        },
+        [createBench.rejected]:(state,action)=>{
+            state.loading = false;
+            StaticRange.errorMessage=action.payload
         }
     }
 })

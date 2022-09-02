@@ -1,10 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MDBBtn,MDBValidation,MDBValidationItem,MDBInput,MDBTextArea,MDBCard,MDBCardHeader,MDBCardBody,MDBCardTitle, MDBRow, MDBCol, MDBContainer, MDBFooter, MDBCardFooter } from "mdb-react-ui-kit";
 import "./newbenchEmployee.css";
+import { useDispatch } from "react-redux";
+import { createBench } from "../../../redux/features/bench/bench.feature";
 
 let NewBenchEmployee = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  let [newBench,setNewBench] = useState({
+    name:'',
+    email:'',
+    emp_id:'',
+    password:'',
+    totalWorkExp:Number,
+    totalExpinFission:Number,
+    primarySkills:[{
+      skillName:'',
+      totalExp:Number
+    }],
+    reportingManager:'',
+    projectName:'',
+    teamLead:'',
+    status:'',
+    notes:''
+  })
+
+  let handleUpdateInput = (event) =>{
+      setNewBench({
+        ...newBench,
+        [event.target.name]:event.target.value
+      })
+  }
+
+  let handleUpdatePrimarySkillsInput = (event)=>{
+    setNewBench({
+      ...newBench,
+      primarySkills:[
+        {
+        ...primarySkills[0],
+        [event.target.name] :event.target.value
+      }]
+    })
+  }
+
+  let {name,email,emp_id,password,totalWorkExp,totalExpinFission,primarySkills,reportingManager,teamLead,status,notes,projectName} = newBench;
+  let handleSubmitForm =(event)=>{
+    event.preventDefault();
+    console.log(newBench)
+    dispatch(createBench(newBench))
+    navigate('/benchlist');
+  }
   return (
     <React.Fragment>
       {/* <div className="container-lg"> */}
@@ -16,37 +62,47 @@ let NewBenchEmployee = () => {
              <MDBCardTitle className="text-center"><h2>New Bench Employee</h2></MDBCardTitle>
            </MDBCardHeader>
            <MDBCardBody>
-           
-           <MDBValidation className="row g-5 novalidate" noValidate>
+           {/* <pre>{JSON.stringify(newBench)}</pre> */}
+           <MDBValidation className="row g-5 novalidate" noValidate onSubmit={handleSubmitForm}>
            <MDBValidationItem className="col-md-4" feedback='Please Enter your name' invalid>
-              <MDBInput id='validationCustom01' required name="name" label="Name"/>
+              <MDBInput id='validationCustom01' type="text" name="name" value={name} onChange={handleUpdateInput} required label="Name"/>
            </MDBValidationItem>
            <MDBValidationItem className="col-md-4" feedback='Please Enter your EmpId' invalid>
-              <MDBInput id='validationCustom02' required name="empId" label="EmpId"/>
+              <MDBInput id='validationCustom02' type="text" required name="emp_id" value={emp_id} onChange={handleUpdateInput} label="EmpId"/>
            </MDBValidationItem>
            <MDBValidationItem className="col-md-4" feedback='Please Enter your Email' invalid>
-              <MDBInput id='validationCustom03' required name="email" label="Email"/>
+              <MDBInput id='validationCustom03' type="email" required name="email" value={email} onChange={handleUpdateInput} label="Email"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-4" feedback='Please Enter your Email' invalid>
+              <MDBInput id='validationCustom04' type="password" required name="password" value={password} onChange={handleUpdateInput} label="Password"/>
            </MDBValidationItem>
            <MDBValidationItem className="col-md-4" feedback='Please Enter your TotalWorkExp' invalid>
-              <MDBInput id='validationCustom04' required name="TotalWorkExp" label="TotalWorkExp"/>
+              <MDBInput id='validationCustom05' type="number" required name="totalWorkExp" value={totalWorkExp} onChange={handleUpdateInput} label="TotalWorkExp"/>
            </MDBValidationItem>
            <MDBValidationItem className="col-md-4" feedback='Please Enter your TotalExpFission' invalid>
-              <MDBInput id='validationCustom05' required name="TotalExpFission" label="TotalExpFission"/>
+              <MDBInput id='validationCustom06' type="number" required name="totalExpinFission" value={totalExpinFission} onChange={handleUpdateInput} label="TotalExpFission"/>
            </MDBValidationItem>
            <MDBValidationItem className="col-md-4" feedback='Please Enter your PrimarySkill' invalid>
-              <MDBInput id='validationCustom06' required name="PrimarySkill" label="PrimarySkill"/>
+              <MDBInput id='validationCustom07' type="text" required name="skillName" value={primarySkills.skillName} onChange={handleUpdatePrimarySkillsInput} label="skillName"/>
            </MDBValidationItem>
            <MDBValidationItem className="col-md-4" feedback='Please Enter your TotalExp' invalid>
-              <MDBInput id='validationCustom07' required name="TotalExp" label="TotalExp"/>
+              <MDBInput id='validationCustom08' type="number" required name="totalExp" value={primarySkills.totalExp} onChange={handleUpdatePrimarySkillsInput} label="TotalExp"/>
            </MDBValidationItem>
+
            <MDBValidationItem className="col-md-4" feedback='Please Enter your Reporting Manager' invalid>
-              <MDBInput id='validationCustom08' required name="Reporting Manager" label="Reporting Manager"/>
+              <MDBInput id='validationCustom09' type="text" required name="reportingManager" value={reportingManager} onChange={handleUpdateInput} label="Reporting Manager"/>
            </MDBValidationItem>
            <MDBValidationItem className="col-md-4" feedback='Please Enter your Team Lead' invalid>
-              <MDBInput id='validationCustom09' required name="Team Lead" label="TeamLead"/>
+              <MDBInput id='validationCustom10'  type="text" required name="teamLead" value={teamLead} onChange={handleUpdateInput} label="TeamLead"/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-12" feedback='Please Enter your Team Lead' invalid>
-              <MDBTextArea id='validationTextarea' required name="Team Lead" label="TeamLead"/>
+           <MDBValidationItem className="col-md-4" feedback='Please Enter your Status' invalid>
+              <MDBInput id='validationCustom11' type="text" required name="projectName" value={projectName} onChange={handleUpdateInput} label="projectName"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-4" feedback='Please Enter your Status' invalid>
+              <MDBInput id='validationCustom12' type="text" required name="status" value={status} onChange={handleUpdateInput} label="Status"/>
+           </MDBValidationItem>
+           <MDBValidationItem className="col-md-13" feedback='Please Enter your notes' invalid>
+              <MDBTextArea id='validationTextarea' required name="notes" value={notes} onChange={handleUpdateInput} label="Notes"/>
            </MDBValidationItem>
            <div className='col-12 text-center'>
         <MDBBtn className="m-2" type='submit'>Add</MDBBtn>

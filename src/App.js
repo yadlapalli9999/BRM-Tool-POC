@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import Home from "./layout/components/home/Home";
+// import Home from "./layout/components/home/Home";
 import Navbar from "./components/navbar/Navbar";
 import EmployeeFields from "./routes/poc/employeefields/EmployeeFields";
 import PocDetails from "./routes/poc/pocdertails/PocDetails";
@@ -48,9 +48,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Login funcNav={setShowNav} />} />
           <Route path="/register" element={<Register funcNav={setShowNav} />} />
-          {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+          {/* {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
             <Route path="/home" element={<Home funcNav={setShowNav} />} />
-          )}
+          )} */}
           {AdminRole.role === "ADMIN" && (
             <Route path="/poc" element={<POCHome />} />
           )}

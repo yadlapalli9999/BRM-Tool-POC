@@ -103,6 +103,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
         </div>
         <div className="row mt-4">
           <div className="col">
+            
             <MDBTable>
               <MDBTableHead>
                 <tr>
@@ -117,6 +118,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
                 </tr>
 
               </MDBTableHead>
+              
               <MDBTableBody>
                 {
                       benchLists.data && benchLists.data
