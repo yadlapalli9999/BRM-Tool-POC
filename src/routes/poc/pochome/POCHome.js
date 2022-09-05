@@ -26,8 +26,8 @@ let POCHome = () => {
     dispatch(getPocList());
   }, []);
 
-  const handleNameClick = () => {
-    navigate("/pocdetails");
+  const handleNameClick = (pocID) => {
+    navigate(`/pocdetails?pocID=${pocID}`);
   };
 
   const getDocIcon = (docLink) => {
@@ -38,12 +38,13 @@ let POCHome = () => {
     }
   };
 
-  const getTableData = (val, data = {}) => {
+  const getTableData = (header, data = {}) => {
+    const val = header.value;
     switch (val) {
       case "name":
         return (
           <div className='d-flex align-items-center'>
-            <div className='name' onClick={handleNameClick}>
+            <div className='name' onClick={() => handleNameClick(data._id)}>
               <p className='fw-bold mb-1'>{data[val]}</p>
             </div>
           </div>
@@ -61,7 +62,7 @@ let POCHome = () => {
                 : "badge-success"
             } rounded-pill d-inline`}
           >
-            {data[val]} Month
+            {data[val]} {header.metric}
           </span>
         );
       case "members":
@@ -121,7 +122,7 @@ let POCHome = () => {
                 {(pocList || []).map((data) => (
                   <tr>
                     {POC_TABLE_HEADERS.map((header) => (
-                      <td>{getTableData(header.value, data)}</td>
+                      <td>{getTableData(header, data)}</td>
                     ))}
                   </tr>
                 ))}
