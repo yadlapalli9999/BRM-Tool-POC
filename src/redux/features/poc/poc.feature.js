@@ -20,7 +20,6 @@ const pocSlice = createSlice({
       state.fetchingPocList = true;
     },
     [getPocList.fulfilled]: (state, action) => {
-      console.log("getpocList", action.payload);
       state.fetchingPocList = false;
       state.pocList = action.payload.data;
     },

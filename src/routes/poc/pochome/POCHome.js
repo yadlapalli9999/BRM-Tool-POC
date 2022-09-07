@@ -32,9 +32,9 @@ let POCHome = () => {
 
   const getDocIcon = (docLink) => {
     if (docLink.includes("docs.google.com")) {
-      return <MDBIcon className=' fas fa-file-import' />;
+      return <MDBIcon className=" fas fa-file-import" />;
     } else if (docLink.includes("docs.excel.com")) {
-      return <MDBIcon className='fas fa-file-excel' />;
+      return <MDBIcon className="fas fa-file-excel" />;
     }
   };
 
@@ -43,21 +43,21 @@ let POCHome = () => {
     switch (val) {
       case "name":
         return (
-          <div className='d-flex align-items-center'>
-            <div className='name' onClick={() => handleNameClick(data._id)}>
-              <p className='fw-bold mb-1'>{data[val]}</p>
+          <div className="d-flex align-items-center">
+            <div className="name" onClick={() => handleNameClick(data._id)}>
+              <p className="fw-bold mb-1">{data[val]}</p>
             </div>
           </div>
         );
       case "description":
-        return <p className='fw-normal mb-1'>{data[val]}</p>;
+        return <p className="fw-normal mb-1">{data[val]}</p>;
       case "duration":
         return (
           <span
             className={`badge ${
-              data?.duration >= 5
+              data[val] >= 5
                 ? "badge-danger"
-                : data?.duration >= 3
+                : data[val] >= 3
                 ? "badge-warning"
                 : "badge-success"
             } rounded-pill d-inline`}
@@ -67,15 +67,15 @@ let POCHome = () => {
         );
       case "members":
         return (
-          <button type='button' className='btn btn-link btn-sm btn-rounded'>
+          <button type="button" className="btn btn-link btn-sm btn-rounded">
             {data[val]?.length || 0}
           </button>
         );
       case "documents":
         return (
-          <div className='d-flex align-items-center '>
+          <div className="d-flex align-items-center ">
             {(data[val] || []).map((doc, docInd) => (
-              <a href={doc} target='_blank' style={{ marginLeft: "1rem" }}>
+              <a href={doc} target="_blank" style={{ marginLeft: "1rem" }}>
                 {getDocIcon(doc)}
               </a>
             ))}
@@ -87,34 +87,34 @@ let POCHome = () => {
   };
 
   return (
-    <MDBContainer className='py-4'>
+    <MDBContainer className="py-4">
       <MDBRow>
-        <MDBCol md='12' className='text-center'>
+        <MDBCol md="12" className="text-center">
           <h2>ACTIVE POC</h2>
         </MDBCol>
       </MDBRow>
       <MDBRow>
-        <MDBCol md='12' className='d-flex justify-content-end'>
-          <Link to='/addpoc' className='btn btn-primary'>
+        <MDBCol md="12" className="d-flex justify-content-end">
+          <Link to="/editpoc" className="btn btn-primary">
             Add
           </Link>
         </MDBCol>
       </MDBRow>
-      <MDBRow className='mt-4'>
+      <MDBRow className="mt-4">
         <MDBCol>
           {fetchingPocList ? (
-            <div className='text-center'>
-              <MDBSpinner role='status' color='primary'>
-                <span className='visually-hidden'>Loading...</span>
+            <div className="text-center">
+              <MDBSpinner role="status" color="primary">
+                <span className="visually-hidden">Loading...</span>
               </MDBSpinner>
               <div>Fetching POC data...</div>
             </div>
           ) : (
             <MDBTable>
-              <MDBTableHead className='bg-primary text-white'>
+              <MDBTableHead className="bg-primary text-white">
                 <tr>
                   {POC_TABLE_HEADERS.map((header) => (
-                    <th scope='col'>{header.label}</th>
+                    <th scope="col">{header.label}</th>
                   ))}
                 </tr>
               </MDBTableHead>
