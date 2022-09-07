@@ -99,7 +99,9 @@ const Login = (props) => {
                                   type="email"
                                   label="UserName"
                                   name="email"
-                                  style={{ marginBottom: "10px" }}
+                                  style={{
+                                    marginBottom: "18px",
+                                  }}
                                   value={email}
                                   onChange={updateInput}
                                 />

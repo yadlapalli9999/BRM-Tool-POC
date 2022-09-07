@@ -36,16 +36,19 @@ let BenchList = () => {
   const [staticModal, setStaticModal] = useState(false);
 
   const toggleShow = () => setStaticModal(!staticModal);
-    let [role,setRole] = useState(true);
+  let [role, setRole] = useState(true);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+  console.log(JSON.stringify(benchLists.data));
   return (
     <React.Fragment>
       <div className="container">
         <pre>{JSON.stringify(benchLists.data)}</pre>
         <div className="row">
           <div className="col-md-6">
-            <h2 className="a1" style={{ marginTop: "30px" }}>Bench List</h2>
+            <h2 className="a1" style={{ marginTop: "30px" }}>
+              Bench List
+            </h2>
           </div>
           <div className="col-md-6">
             <div
@@ -56,6 +59,7 @@ let BenchList = () => {
               <Link
                 to="/newbenchEmployee"
                 className="btn addBtn text-white"
+                style={{ backgroundColor: "#333" }}
               >
                 ADD
               </Link>
@@ -68,26 +72,26 @@ let BenchList = () => {
           <div className="col-md-6">
             <MDBInput
               type="text"
-              label="search"
+              label="Search Name"
               style={{ width: "660px" }}
               onChange={(e) => setQuery(e.target.value)}
             />
           </div>
           <div className="col-md-6 justify-content-center">
-          <select className="select " data-mdb-filter="true">
-          <option className="selectBtn">Select Year</option>
-                <option>1-2</option>
-                <option>2-3</option>
-                <option>3-4</option>
-                <option>4-5</option>
-                <option>5-6</option>
-                <option>6-7</option>
-                <option>7-8</option>
-                <option>8-9</option>
-                <option>9-10</option>
-                <option>10-11</option>
-                <option>11-12</option>
-</select>
+            <select className="select " data-mdb-filter="true">
+              <option className="selectBtn">Select Year</option>
+              <option>1-2</option>
+              <option>2-3</option>
+              <option>3-4</option>
+              <option>4-5</option>
+              <option>5-6</option>
+              <option>6-7</option>
+              <option>7-8</option>
+              <option>8-9</option>
+              <option>9-10</option>
+              <option>10-11</option>
+              <option>11-12</option>
+            </select>
             {/* <div class="dropdown d-flex justify-content-end mb-4">
               <select
                 class="btn btn-rounded  btn-secondary dropdown-toggle"
@@ -113,7 +117,7 @@ let BenchList = () => {
         <div className="row mt-4">
           <div className="col">
             <MDBTable>
-              <MDBTableHead className="table-dark text-white">
+              <MDBTableHead className="table_content text-white">
                 <tr>
                   <th scope="col">EmpId</th>
                   <th scope="col">Name</th>
@@ -143,7 +147,11 @@ let BenchList = () => {
                         <td>{filterData?.name}</td>
                         <td>{filterData.email}</td>
                         <td>{filterData.totalWorkExp}</td>
-                        <td>{filterData.primarySkills[0].skillName}</td>
+                        <td>
+                          {filterData.primarySkills
+                            ? filterData.primarySkills[0]
+                            : "Null"}
+                        </td>
                         {/* <td>{item}</td> */}
                         <td>
                           <a
@@ -156,7 +164,11 @@ let BenchList = () => {
                                 style={{ width: "40px", height: "40px" }}
                                 className="rounded-circle pocHomeExcelLogo "
                               /> */}
-                            <MDBIcon fas icon="list-alt" />
+                            <MDBIcon
+                              fas
+                              icon="list-alt"
+                              className="worklog_icon"
+                            />
                           </a>
                         </td>
                         <td>
@@ -279,7 +291,7 @@ let BenchList = () => {
           </div>
         </div>
       </div>
-      
+
       {/* DELETE MODAL */}
       <MDBModal
         id="exampleModal"

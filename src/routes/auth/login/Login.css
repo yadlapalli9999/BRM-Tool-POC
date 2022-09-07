@@ -30,20 +30,3 @@
 .loginImg {
   width: 320px;
 }
-.form-control {
-  border: none;
-  background-color: #fff;
-}
-#floatingInputCustom {
-  height: 40px;
-  background-color: #fff;
-}
-textarea {
-  background-color: #fff;
-}
-.form-control:focus {
-  border: none;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  background-color: #fff;
-}

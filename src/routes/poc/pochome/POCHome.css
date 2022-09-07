@@ -1,61 +1,73 @@
-.pocTitle{
-    text-align: center;
+.pocTitle {
+  color: #ff5722;
 }
-.table-headings{
-    color: white;
+.table-headings {
+  color: white;
 }
-.all-pochome-buttons{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
+.table_content {
+  background-color: #444;
 }
-.name:hover{
-    cursor: pointer;
+.all-pochome-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
 }
-
-
-
-
+.name:hover {
+  cursor: pointer;
+}
 
 /* form starting stylings ------------------------------- */
 .group {
-    position: relative;
-    margin-bottom: 45px;
-  }
-  .pocHomeInput {
-    background-color: #fbfbfb;
-    padding: 10px 10px 10px 5px;
-    display: block;
-    border: none;
-    border-bottom: 1px solid #757575;
-    width: 100%;
-  }
-  .pocHomeInput:focus {
-    outline: none;
-  }
-  
-  /* LABEL ======================================= */
-  label {
-    color: #999;
-    font-weight: normal;
-    position: absolute;
-    pointer-events: none;
-    left: 5px;
-    top: 10px;
-    transition: 0.2s ease all;
-    -moz-transition: 0.2s ease all;
-    -webkit-transition: 0.2s ease all;
-  }
-  
-  /* active state */
- .pocHomeInput:focus ~ label,
-  .pocHomeInput:valid ~ label {
-    top: -20px;
-    font-size: 14px;
-  }
+  position: relative;
+  margin-bottom: 45px;
+}
+.pocHomeInput {
+  background-color: #fbfbfb;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #757575;
+  width: 100%;
+}
+.pocHomeInput:focus {
+  outline: none;
+}
 
+/* LABEL ======================================= */
+label {
+  color: #999;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
 
-
-
-
+/* active state */
+.pocHomeInput:focus ~ label,
+.pocHomeInput:valid ~ label {
+  top: -20px;
+  font-size: 14px;
+}
+.addBtn {
+  background-color: #333;
+  color: #fff;
+}
+.addBtn:hover {
+  transform: scale(1.03);
+  background-color: #000;
+  color: #fff;
+}
+.doc_icon {
+  color: #333;
+  background-color: white;
+  font-size: 24px;
+}
+.doc_icon:hover {
+  color: #222;
+  transform: scale(1.2);
+}
