@@ -6,26 +6,68 @@
 }
 
 
+.cardsHead{
+  color: #120f1a;
+}
 
-/* CSS */
+.h3-subHead{
+  color: #ff5722;
+  padding: 0;
+}
+
+.adminDashboardTableHead{
+  background-color: #120f1a;
+  color: #fff;
+}
+
+
+
+.table-headings{
+  /* color: #ff5722;
+   */
+   color: #fff;
+   /* align-items: center; */
+
+  }
+
+/* CSS  */
+.bench{ 
+  color: #fff !important;
+}
+
+
+.poc-p{
+  /* background: #fff !important; */
+  background:#fff !important;
+
+}
+
+.poc{
+  color: #231955 !important; 
+}
+
 .button-56 {
+  /* padding: 2px; */
   align-items: initial;
   width: 250px;
+  /* background: #fff; */
   /* background: linear-gradient(to right, #3d3335, #db24db); */
+  /* background: linear-gradient(to right,#fff, #E8630A); */
+  background: #ff5722 ;
 
-  border: 2px solid #111;
-  border-radius: 8px;
+  /* border-radius: 8px; */
+  border: none;
   box-sizing: border-box;
-  /* color: #fff; */
+  color: #fff;
   cursor: pointer;
   display: flex;
   font-family: Inter,sans-serif;
   font-size: 16px;
-  height: 48px;
+  /* height: 48px; */
   justify-content: center;
   line-height: 24px;
   max-width: 100%;
-  padding: 0 25px;
+  /* padding: 0 25px; */
   position: relative;
   text-align: center;
   text-decoration: none;
@@ -35,6 +77,8 @@
 }
 .button-56>h1{
   font-weight: normal;
+  color: #120f1a;
+  /* color: green; */
 }
 
 .button-56:after {
@@ -58,15 +102,31 @@
 
 .button-56:active {
   outline: 0;
+  /* background-color: #120f1a; */
+
 
 }
 
 .button-56:hover {
   outline: 0;
 }
-.admindashboardTableHead{
-  background: linear-gradient(to right, #3d3335, #db24db);
+
+
+.thName{
+  position: relative;
+  left: -3rem;
 }
+
+
+  /* align-items:inherit; */
+
+
+  /* background: linear-gradient(to right, #3d3335, #db24db); */
+
+
+/* .tbody{ */
+  /* text-align: center; */
+/* } */
 
 @media (min-width: 768px) {
   .button-56 {
@@ -75,9 +135,25 @@
 }
 
 .badge{
-  float: right;
+  float:none;
   border-radius: 1.25rem !important;
 }
 .button1:focus{
   background-color: red;
+}
+
+/* CaRDS */
+
+.card-text{
+color: #ff5722;
+}
+
+.card-1{
+  color: #FF1E00;
+}
+.card-2{
+  color: #F6F54D;
+}
+.card-3{
+  color: #2B7A0B;
 }

@@ -22,9 +22,6 @@ let{loading,benchLists,errorMessage} = allBenchLists;
   const [staticModal, setStaticModal] = useState(false);
 
   const toggleShow = () => setStaticModal(!staticModal);
- 
-   
-  
     let [role,setRole] = useState(true);
   const [query, setQuery] = useState("");
  const navigate = useNavigate();
@@ -34,7 +31,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
         <pre>{JSON.stringify(benchLists.data)}</pre>
         <div className="row">
           <div className="col-md-6">
-            <h2 style={{ marginTop: "30px" }}>Bench List</h2>
+            <h2 className="a1" style={{ marginTop: "30px" }}>Bench List</h2>
           </div>
           <div className="col-md-6">
             
@@ -46,7 +43,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
               {/* <MDBBtn> */}
               <Link
                 to="/newbenchEmployee"
-                className="btn btn-primary"
+                className="btn addBtn text-white"
               >
                 ADD
               </Link>
@@ -65,8 +62,8 @@ let{loading,benchLists,errorMessage} = allBenchLists;
             />
           </div>
           <div className="col-md-6 justify-content-center">
-          <select className="select btn btn-primary" data-mdb-filter="true">
-          <option>Select Year</option>
+          <select className="select " data-mdb-filter="true">
+          <option className="selectBtn">Select Year</option>
                 <option>1-2</option>
                 <option>2-3</option>
                 <option>3-4</option>
@@ -105,7 +102,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
           <div className="col">
             
             <MDBTable>
-              <MDBTableHead>
+              <MDBTableHead className="table-dark text-white">
                 <tr>
                   <th scope="col">EmpId</th>
                   <th scope="col">Name</th>
@@ -274,6 +271,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
           </div>
         </div>
       </div>
+      
       {/* DELETE MODAL */}
       <MDBModal id="exampleModal" staticBackdrop tabIndex='-1' show={staticModal} setShow={setStaticModal}>
         <MDBModalDialog className="justify-content-center">

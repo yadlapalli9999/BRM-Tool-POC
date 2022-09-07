@@ -8,7 +8,6 @@ const AdminDashboard = (props) => {
   const [show, setShow] = useState(true);
 
   ChartJS.register(ArcElement, Tooltip, Legend);
-  
 
   const dummyData = [
     {
@@ -125,7 +124,7 @@ const AdminDashboard = (props) => {
   return (
     <>
       {show === false && (
-        <div className="container">
+        <div className="container p-1 part-2 mt-0">
           <div
             style={{
               display: "flex",
@@ -134,31 +133,16 @@ const AdminDashboard = (props) => {
               marginTop: "20px",
             }}
           >
-            <button onClick={() => setShow(true)} className="button-56" style={{background:'wheat !important' ,color:'black !important'}} >
-              {" "}
-              <h1>POC</h1>
+            <button
+              onClick={() => setShow(true)}
+              className="button-56 pt-1 mt-0">
+              <h1 className="bench ">POC</h1>
             </button>
-            <button className="button-56" style={{background:'linear-gradient(to right, #3d3335, #db24db)',color:'white'}}>
-              {" "}
-              <h1>Bench</h1>
+            <button className="button-56 poc-p pt-1 mt-0 ">
+              <h1 className="poc">BENCH</h1>
             </button>
           </div>
           <div className="row mt-5">
-            <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
-              <div className="card">
-                <div className="card-body">
-                  <div className="d-flex justify-content-between px-md-1">
-                    <div>
-                      <h3 className="text-danger">10</h3>
-                      <p className="mb-0">Bench</p>
-                    </div>
-                    <div className="align-self-center">
-                      <i className="fas fa-rocket text-danger fa-3x"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
             <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-4">
               <div className="card">
                 <div className="card-body">
@@ -169,6 +153,22 @@ const AdminDashboard = (props) => {
                     </div>
                     <div className="align-self-center">
                       <i className="far fa-user text-success fa-3x"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
+              <div className="card">
+                <div className="card-body">
+                  <div className="d-flex justify-content-between px-md-1">
+                    <div>
+                      <h3 className="text-danger">10</h3>
+                      <p className="mb-0">Bench</p>
+                    </div>
+                    <div className="align-self-center">
+                      <i className="fas fa-rocket text-danger fa-3x"></i>
                     </div>
                   </div>
                 </div>
@@ -193,26 +193,25 @@ const AdminDashboard = (props) => {
               </div>
             </div>
           </div>
-          <div className="row mt-3">
-            <h3>Leave</h3>
+          <div className="row mt-1">
+            <h3 className="h3-subHead mx-3">Leave</h3>
             <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4 table-responsive">
-              <table className="table align-middle mb-0 bg-white table-hover ">
-                <thead className=" admindashboardTableHead">
+              <table className="table align-middle mb-0 bg-white table-striped table-hover ">
+                <thead className=" adminDashboardTableHead">
                   <tr className="table-headings">
-                    {/* <th>Id</th> */}
-                    <th>Name</th>
+                    <th ><span className="thName">Name</span></th>
                     <th>Date</th>
-                    {/* <th>POC</th> */}
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="tbody">
                   {dummyData &&
                     dummyData?.map((data) => (
                       <tr>
                         <td>
-                          <div className="d-flex align-items-center">
+                          <div className="d-flex ">
                             <div className="name" onClick={handleNameClick}>
-                            <p className="fw-normal mb-1">{data?.name}</p>                            </div>
+                              <p className="fw-normal mb-1">{data?.name}</p>{" "}
+                            </div>
                           </div>
                         </td>
                         {/* <td>
@@ -237,20 +236,7 @@ const AdminDashboard = (props) => {
                 </tbody>
               </table>
             </div>
-            <div className="col-xl-4 col-md-4 col-ms-6 col-12 mb-4">
-              <div className="card">
-                <div className="card-header admindashboardTableHead text-white">
-                   <h3 className="mb-0 text-center">Missed Worklogs</h3>
-                </div>
-                <div className="card-body">
-                  <ul className="list-group">
-                    <li className="list-group-item">
-                      Ramarao <span class="badge bg-danger ms-2">8</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+
             <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
               <div className="card personBench">
                 <div
@@ -288,12 +274,28 @@ const AdminDashboard = (props) => {
                 </div>
               </div>
             </div>
+          
+                            
+            <div className="col-xl-4 col-md-4 col-ms-6 col-12 mb-4">
+              <div className="card">
+                <div className="card-header adminDashboardTableHead text-white">
+                   <h6 className="mb-0 text-center">Missed Worklogs</h6>
+                </div>
+                <div className="card-body">
+                  <ul className="list-group">
+                    <li className="list-group-item">
+                      Ramarao <span class="badge bg-danger ms-2">8</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
 
       {show === true && (
-        <div className="container ">
+        <div className="container p-1 part-2 mt-0">
           <div
             style={{
               display: "flex",
@@ -302,61 +304,66 @@ const AdminDashboard = (props) => {
               marginTop: "14px",
             }}
           >
-            <button className="button-56 " style={{background:'linear-gradient(to right, #3d3335, #db24db)',color:'white'}} >
-              {" "}
-              <h1>POC</h1>
+            {/* style={{background:'linear-gradient(to right, #3d3335, #db24db)',color:'white'} */}
+            <button className="button-56 poc-p  mt-0 pt-2">
+              <h1 className="poc ">POC</h1>
             </button>
-            <button className="button-56 " onClick={() => setShow(false)} style={{background:'wheat !important' ,color:'black !important'}} >
-              {" "}
-              <h1>Bench</h1>
+            <button
+              className="button-56  mt-0 pt-2"
+              onClick={() => setShow(false)}
+            >
+              <h1 className="bench">BENCH</h1>
             </button>
           </div>
           <div className="row mt-5">
-            <h3>Active</h3>
+            <h3 className="h3-subHead">Active</h3>
             <div className="col-xl-8 col-sm-6 col-12 col-md-4 mb-4 table-responsive">
               <table className="table align-middle mb-0 bg-white table-hover  ">
-                <thead className="admindashboardTableHead">
+                <thead className="adminDashboardTableHead">
                   <tr className="table-headings">
-                    <th>Id</th>
+                    <th>Serial No</th>
                     <th>POC Name</th>
                     <th>Duration</th>
                     <th>Created By</th>
+                    <th>Members</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="align-items-center">
                   {dummyData &&
                     dummyData?.map((data) => (
                       <tr>
                         <td>
-                          <div className="d-flex align-items-center">
-                            <div className="name" onClick={handleNameClick}>
-                              <p className="fw-bold mb-1">{data?._id}</p>
-                            </div>
+                          <div className="name" onClick={handleNameClick}>
+                            <p className="fw-bold mb-1">{data?._id}</p>
                           </div>
                         </td>
                         <td>
                           <p className="fw-normal mb-1">POC Name</p>
                         </td>
-                        <td>
-                          <span
+
+                        <td><span
                             className={`badge ${
                               data?.duration >= 5
                                 ? "badge-danger"
                                 : data?.duration >= 3
                                 ? "badge-warning"
                                 : "badge-success"
-                            } rounded-pill d-inline`}
+                            } rounded-pill`}
                           >
                             1 Month
-                          </span>
+                          </span></td>
+                          <td>Team Lead</td>
+
+                        <td className="">
+                        {data?.members.length}
                         </td>
-                        <td>Team Lead</td>
+                     >
+             
                       </tr>
                     ))}
                 </tbody>
               </table>
             </div>
-
             <div
               className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4"
               style={{ height: "300px" }}
@@ -364,47 +371,47 @@ const AdminDashboard = (props) => {
               <Pie data={data} options={{ maintainAspectRatio: false }} />
             </div>
           </div>
-          <div className="row mt-3">
-            <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
+          <div className="row mt-1">
+            <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-1">
               <div className="card">
                 <div className="card-body">
                   <div className="d-flex justify-content-between px-md-1">
                     <div>
-                      <h3 className="text-danger">3</h3>
-                      <p className="mb-0">Inactive</p>
+                      <h3 className="cardsHead">3</h3>
+                      <p className="mb-0 card-text">Initiated</p>
                     </div>
                     <div className="align-self-center">
-                      <i className="fas fa-rocket text-danger fa-3x"></i>
+                      <i className="fas card-1 fa-rocket  fa-3x"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-4">
+            <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-1">
               <div className="card">
                 <div className="card-body">
                   <div className="d-flex justify-content-between px-md-1">
                     <div>
-                      <h3 className="text-success">4</h3>
-                      <p className="mb-0">Hold</p>
+                      <h3 className="cardsHead">4</h3>
+                      <p className="mb-0  card-text">Hold</p>
                     </div>
                     <div className="align-self-center">
-                      <i className="far fa-user text-success fa-3x"></i>
+                      <i className="far  fa-user card-2  fa-3x"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4">
+            <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-1">
               <div className="card">
                 <div className="card-body">
                   <div className="d-flex justify-content-between px-md-1">
                     <div>
-                      <h3 className="text-warning">5</h3>
-                      <p className="mb-0">Completed</p>
+                      <h3 className="cardsHead">5</h3>
+                      <p className="mb-0  card-text">Completed</p>
                     </div>
                     <div className="align-self-center">
-                      <i className="fas fa-chart-pie text-warning fa-3x"></i>
+                      <i className="fas  card-3 fa-chart-pie  fa-3x"></i>
                     </div>
                   </div>
                 </div>
