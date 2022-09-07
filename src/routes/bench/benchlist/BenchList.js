@@ -39,6 +39,7 @@ let BenchList = () => {
   let [role, setRole] = useState(true);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+  console.log(JSON.stringify(benchLists.data));
   return (
     <React.Fragment>
       <div className="container">
@@ -55,7 +56,11 @@ let BenchList = () => {
               style={{ marginTop: "30px", float: "right", marginRight: "10px" }}
             >
               {/* <MDBBtn> */}
-              <Link to="/newbenchEmployee" className="btn addBtn text-white">
+              <Link
+                to="/newbenchEmployee"
+                className="btn addBtn text-white"
+                style={{ backgroundColor: "#333" }}
+              >
                 ADD
               </Link>
               {/* </MDBBtn> */}
@@ -67,7 +72,7 @@ let BenchList = () => {
           <div className="col-md-6">
             <MDBInput
               type="text"
-              label="search"
+              label="Search Name"
               style={{ width: "660px" }}
               onChange={(e) => setQuery(e.target.value)}
             />
@@ -112,7 +117,7 @@ let BenchList = () => {
         <div className="row mt-4">
           <div className="col">
             <MDBTable>
-              <MDBTableHead className="table-dark text-white">
+              <MDBTableHead className="table_content text-white">
                 <tr>
                   <th scope="col">EmpId</th>
                   <th scope="col">Name</th>
@@ -142,7 +147,11 @@ let BenchList = () => {
                         <td>{filterData?.name}</td>
                         <td>{filterData.email}</td>
                         <td>{filterData.totalWorkExp}</td>
-                        <td>{filterData.primarySkills?.[0]?.skillName}</td>
+                        <td>
+                          {filterData.primarySkills
+                            ? filterData.primarySkills[0]
+                            : "Null"}
+                        </td>
                         {/* <td>{item}</td> */}
                         <td>
                           <a
@@ -155,7 +164,11 @@ let BenchList = () => {
                                 style={{ width: "40px", height: "40px" }}
                                 className="rounded-circle pocHomeExcelLogo "
                               /> */}
-                            <MDBIcon fas icon="list-alt" />
+                            <MDBIcon
+                              fas
+                              icon="list-alt"
+                              className="worklog_icon"
+                            />
                           </a>
                         </td>
                         <td>

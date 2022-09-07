@@ -32,9 +32,10 @@ let POCHome = () => {
 
   const getDocIcon = (docLink) => {
     if (docLink.includes("docs.google.com")) {
-      return <MDBIcon className=" fas fa-file-import" />;
+      return <MDBIcon fas icon="file-upload" className="doc_icon" />;
+      // <MDBIcon className=" fas fa-file-import doc_icon" />;
     } else if (docLink.includes("docs.excel.com")) {
-      return <MDBIcon className="fas fa-file-excel" />;
+      return <MDBIcon className="fas fa-file-excel doc_icon" />;
     }
   };
 
@@ -73,9 +74,25 @@ let POCHome = () => {
         );
       case "documents":
         return (
-          <div className="d-flex align-items-center ">
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             {(data[val] || []).map((doc, docInd) => (
-              <a href={doc} target="_blank" style={{ marginLeft: "1rem" }}>
+              <a
+                href={doc}
+                target="_blank"
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
                 {getDocIcon(doc)}
               </a>
             ))}
@@ -90,12 +107,16 @@ let POCHome = () => {
     <MDBContainer className="py-4">
       <MDBRow>
         <MDBCol md="12" className="text-center">
-          <h2>ACTIVE POC</h2>
+          <h2 className="pocTitle">ACTIVE POC</h2>
         </MDBCol>
       </MDBRow>
       <MDBRow>
         <MDBCol md="12" className="d-flex justify-content-end">
-          <Link to="/editpoc" className="btn btn-primary">
+          <Link
+            to="/addpoc"
+            className="btn addBtn"
+            style={{ backgroundColor: "#333" }}
+          >
             Add
           </Link>
         </MDBCol>
@@ -111,14 +132,14 @@ let POCHome = () => {
             </div>
           ) : (
             <MDBTable>
-              <MDBTableHead className="bg-primary text-white">
+              <MDBTableHead className=" table_content text-white">
                 <tr>
                   {POC_TABLE_HEADERS.map((header) => (
                     <th scope="col">{header.label}</th>
                   ))}
                 </tr>
               </MDBTableHead>
-              <MDBTableBody>
+              <MDBTableBody className="align-items-center">
                 {(pocList || []).map((data) => (
                   <tr>
                     {POC_TABLE_HEADERS.map((header) => (
