@@ -1,33 +1,45 @@
 import React, { useEffect, useState } from "react";
 import $ from "jquery";
-import {MDBBtn,MDBInput,MDBTable,MDBTableBody,MDBTableHead,MDBModal,MDBModalDialog,MDBModalContent,
-  MDBModalHeader,MDBModalTitle,MDBModalBody,MDBModalFooter,MDBIcon,MDBSwitch} from 'mdb-react-ui-kit';
+import {
+  MDBBtn,
+  MDBInput,
+  MDBTable,
+  MDBTableBody,
+  MDBTableHead,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalBody,
+  MDBModalFooter,
+  MDBIcon,
+  MDBSwitch,
+} from "mdb-react-ui-kit";
 import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import "./BenchList.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getBench } from "../../../redux/features/bench/bench.feature";
 
 let BenchList = () => {
   let dispatch = useDispatch();
-  
-  useEffect(()=>{
-    dispatch(getBench())
-  },[])
-  let allBenchLists  = useSelector((store)=>{
-    return store['bench']
-})
-let{loading,benchLists,errorMessage} = allBenchLists;
+
+  useEffect(() => {
+    dispatch(getBench());
+  }, []);
+  let allBenchLists = useSelector((store) => {
+    return store["bench"];
+  });
+  let { loading, benchLists, errorMessage } = allBenchLists;
   const [staticModal, setStaticModal] = useState(false);
 
   const toggleShow = () => setStaticModal(!staticModal);
- 
-   
-  
-    let [role,setRole] = useState(true);
+
+  let [role, setRole] = useState(true);
   const [query, setQuery] = useState("");
- const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <React.Fragment>
       <div className="container">
@@ -37,17 +49,12 @@ let{loading,benchLists,errorMessage} = allBenchLists;
             <h2 style={{ marginTop: "30px" }}>Bench List</h2>
           </div>
           <div className="col-md-6">
-            
-
             <div
               className="text-center"
-              style={{ marginTop: "30px",float:'right',marginRight:'10px'}}
+              style={{ marginTop: "30px", float: "right", marginRight: "10px" }}
             >
               {/* <MDBBtn> */}
-              <Link
-                to="/newbenchEmployee"
-                className="btn btn-primary"
-              >
+              <Link to="/newbenchEmployee" className="btn btn-primary">
                 ADD
               </Link>
               {/* </MDBBtn> */}
@@ -65,20 +72,20 @@ let{loading,benchLists,errorMessage} = allBenchLists;
             />
           </div>
           <div className="col-md-6 justify-content-center">
-          <select className="select btn btn-primary" data-mdb-filter="true">
-          <option>Select Year</option>
-                <option>1-2</option>
-                <option>2-3</option>
-                <option>3-4</option>
-                <option>4-5</option>
-                <option>5-6</option>
-                <option>6-7</option>
-                <option>7-8</option>
-                <option>8-9</option>
-                <option>9-10</option>
-                <option>10-11</option>
-                <option>11-12</option>
-</select>
+            <select className="select btn btn-primary" data-mdb-filter="true">
+              <option>Select Year</option>
+              <option>1-2</option>
+              <option>2-3</option>
+              <option>3-4</option>
+              <option>4-5</option>
+              <option>5-6</option>
+              <option>6-7</option>
+              <option>7-8</option>
+              <option>8-9</option>
+              <option>9-10</option>
+              <option>10-11</option>
+              <option>11-12</option>
+            </select>
             {/* <div class="dropdown d-flex justify-content-end mb-4">
               <select
                 class="btn btn-rounded  btn-secondary dropdown-toggle"
@@ -103,7 +110,6 @@ let{loading,benchLists,errorMessage} = allBenchLists;
         </div>
         <div className="row mt-4">
           <div className="col">
-            
             <MDBTable>
               <MDBTableHead>
                 <tr>
@@ -111,53 +117,52 @@ let{loading,benchLists,errorMessage} = allBenchLists;
                   <th scope="col">Name</th>
                   <th scope="col">Email</th>
                   <th scope="col">TotalWorkExp</th>
-                  <th scope="col">Chat</th>
+                  <th scope="col">Skills</th>
                   <th scope="col">Worklogs</th>
                   <th scope="col">Reserved Bench</th>
                   <th scope="col">Actions</th>
                 </tr>
-
               </MDBTableHead>
-              
+
               <MDBTableBody>
-                {
-                      benchLists.data && benchLists.data
-                        ?.filter((filterData) =>
-                          filterData?.name.toLowerCase().includes(query)
-                        )
-                        ?.map((filterData) => (
+                {benchLists.data &&
+                  benchLists.data
+                    ?.filter((filterData) =>
+                      filterData?.name.toLowerCase().includes(query)
+                    )
+                    ?.map((filterData) => (
                       <tr key={filterData._id}>
                         <td>
                           {/* <Link to={`/worklog/${item.id}`}>{item.id}</Link> */}
-                          <Link to={`/empDetails/${filterData._id}`}>{filterData.emp_id}</Link>
+                          <Link to={`/empDetails/${filterData._id}`}>
+                            {filterData.emp_id}
+                          </Link>
                         </td>
                         <td>{filterData?.name}</td>
                         <td>{filterData.email}</td>
                         <td>{filterData.totalWorkExp}</td>
-                        <td>
-                        <a href="https://mail.google.com/chat/u/1/#chat/dm/8_H9X4AAAAE" target="_blank">
-                              {/* <img
-                                src={"../../chat.png"}
-                                alt=""
-                                style={{ maxWidth:'100%'}}
-                                className="rounded-circle pocHomeExcelLogo "
-                              /> */}
-                              <MDBIcon fas icon="comment-alt" />
-                        </a>
-                        </td>
+                        <td>{filterData.primarySkills[0].skillName}</td>
                         {/* <td>{item}</td> */}
-                        <td><a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
-                              {/* <img
+                        <td>
+                          <a
+                            href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0"
+                            target="_blank"
+                          >
+                            {/* <img
                                 src={"../../excel.png"}
                                 alt=""
                                 style={{ width: "40px", height: "40px" }}
                                 className="rounded-circle pocHomeExcelLogo "
                               /> */}
-                              <MDBIcon fas icon="file-excel" />
-                            </a></td>
+                            <MDBIcon fas icon="list-alt" />
+                          </a>
+                        </td>
                         <td>
-                        <MDBSwitch id='flexSwitchCheckDefault' label='Default switch checkbox input' />
-                          </td>
+                          <MDBSwitch
+                            id="flexSwitchCheckDefault"
+                            label="Default switch checkbox input"
+                          />
+                        </td>
                         {/* <td>
                           <Link to="/editbenchEmployee">
                             <i
@@ -178,9 +183,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
                           />
                         </td>
                       </tr>
-                    )
-                  )}
-              
+                    ))}
               </MDBTableBody>
             </MDBTable>
 
@@ -275,19 +278,27 @@ let{loading,benchLists,errorMessage} = allBenchLists;
         </div>
       </div>
       {/* DELETE MODAL */}
-      <MDBModal id="exampleModal" staticBackdrop tabIndex='-1' show={staticModal} setShow={setStaticModal}>
+      <MDBModal
+        id="exampleModal"
+        staticBackdrop
+        tabIndex="-1"
+        show={staticModal}
+        setShow={setStaticModal}
+      >
         <MDBModalDialog className="justify-content-center">
           <MDBModalContent>
             <MDBModalHeader>
-              <MDBModalTitle>Modal title</MDBModalTitle>
-              <MDBBtn className='btn-close' color='none' onClick={toggleShow}></MDBBtn>
+              <MDBModalTitle>Delete Confirmation Modal</MDBModalTitle>
+              <MDBBtn
+                className="btn-close"
+                color="none"
+                onClick={toggleShow}
+              ></MDBBtn>
             </MDBModalHeader>
-            <MDBModalBody>...</MDBModalBody>
+            <MDBModalBody>Are You sure to delete "EmployeeName"</MDBModalBody>
             <MDBModalFooter>
-              <MDBBtn color='secondary' onClick={toggleShow}>
-                Close
-              </MDBBtn>
-              <MDBBtn>Understood</MDBBtn>
+              <MDBBtn onClick={toggleShow}>Close</MDBBtn>
+              <MDBBtn color="danger">Yes</MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
@@ -331,6 +342,5 @@ let{loading,benchLists,errorMessage} = allBenchLists;
     </React.Fragment>
   );
 };
-
 
 export default BenchList;

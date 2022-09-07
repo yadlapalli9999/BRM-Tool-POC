@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../../redux/features/auth/auth.feature";
 import { AdminRole } from "../../../Roles";
 import "./Login.css";
 
+import { MDBInput } from "mdb-react-ui-kit";
+
 const Login = (props) => {
   props.funcNav(false);
 
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    email: String,
-    password: String,
+    email: "",
+    password: "",
   });
 
   const updateInput = (event) => {
@@ -28,15 +30,15 @@ const Login = (props) => {
     //   console.log(user);
     //   navigate("/home");
     // }
-    if(email && password){
-       dispatch(loginUser(user))
-    if (AdminRole.role === "ADMIN") {
-      navigate("/dashboard");
-    } else if (AdminRole.role === "EMPLOYEE") {
-      navigate("/employeeworklogs");
+    if (email && password) {
+      dispatch(loginUser(user));
+      if (AdminRole.role === "ADMIN") {
+        navigate("/dashboard");
+      } else if (AdminRole.role === "EMPLOYEE") {
+        navigate("/employeeworklogs");
+      }
     }
   };
-}
 
   return (
     <React.Fragment>
@@ -61,25 +63,49 @@ const Login = (props) => {
 
                             <form onSubmit={handleLoginForm} className="mt-5">
                               <p>Please login to your account</p>
-                              <div className="form-outline mb-4">
+                              {/* <div className="form-outline mb-4">
                                 <input
                                   type="email"
                                   name="email"
                                   value={email}
                                   onChange={updateInput}
                                   id="form2Example11"
-                                  className="form-control"
+                                  className="form-control input"
                                   placeholder="Phone number or email address"
                                 />
                                 <label
-                                  className="form-label"
+                                  className="form-label label"
                                   htmlFor="form2Example11"
                                 >
                                   Username
                                 </label>
+                              </div> */}
+
+                              {/* <Form.Floating className="mb-3">
+                                <Form.Control
+                                  id="floatingInputCustom"
+                                  type="email"
+                                  name="email"
+                                  placeholder="name@example.com"
+                                  value={email}
+                                  onChange={updateInput}
+                                />
+                                <label htmlFor="floatingInputCustom">
+                                  Email address
+                                </label>
+                              </Form.Floating> */}
+                              <div className="col-md-12">
+                                <MDBInput
+                                  type="email"
+                                  label="UserName"
+                                  name="email"
+                                  style={{ marginBottom: "10px" }}
+                                  value={email}
+                                  onChange={updateInput}
+                                />
                               </div>
 
-                              <div className="form-outline mb-4">
+                              {/* <div className="form-outline mb-4">
                                 <input
                                   type="password"
                                   id="form2Example22"
@@ -94,6 +120,16 @@ const Login = (props) => {
                                 >
                                   Password
                                 </label>
+                              </div> */}
+                              <div className="col-md-12">
+                                <MDBInput
+                                  type="password"
+                                  label="password"
+                                  name="password"
+                                  style={{ marginBottom: "10px" }}
+                                  value={password}
+                                  onChange={updateInput}
+                                />
                               </div>
 
                               <div className="text-center pt-1 mb-5 pb-1">
