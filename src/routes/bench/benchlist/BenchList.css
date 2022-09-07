@@ -46,3 +46,21 @@ tr{
 .fa-edit,.fa-trash{
   font-size: 20px !important;
 }
+
+.a1{
+  color: #ff5722;
+}
+
+.addBtn{
+  background:#2B7A0B;
+  color: #fff;
+}
+
+.selectBtn{
+  color: #000;
+  background: #fff;
+  border: none;
+}
+select,option{
+  border: none;
+}

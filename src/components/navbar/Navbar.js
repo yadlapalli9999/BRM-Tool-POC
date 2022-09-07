@@ -4,7 +4,7 @@ import "./navbar.css";
 let Navbar = () => {
   return (
     <React.Fragment>
-      <nav className="navbar navbar-dark bg-primary navbar-expand-sm">
+      <nav className="navbar navbar-dark bg-primary sticky-top  navbar-expand-sm">
         <div className="container">
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -23,14 +23,16 @@ let Navbar = () => {
                   <i class="fas fa-file navbari" />
                 </Link>
               </li>
-            </ul>
-            <ul className="navbar navbar-nav ml-auto">
-              <li className="nav-item NavbarNavItem">
+            
+            {/* <ul className="navbar navbar-nav ml-auto"> */}
+
+              </ul>
+              <li className="nav-item NavbarLogOut">
                 <Link to="/" className="nav-link">
                   <i className="fas fa-sign-out-alt navbari" />
                 </Link>
               </li>
-            </ul>
+            {/* </ul> */}
           </div>
         </div>
       </nav>

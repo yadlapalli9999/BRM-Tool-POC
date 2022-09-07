@@ -36,8 +36,7 @@ let BenchList = () => {
   const [staticModal, setStaticModal] = useState(false);
 
   const toggleShow = () => setStaticModal(!staticModal);
-
-  let [role, setRole] = useState(true);
+    let [role,setRole] = useState(true);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   return (
@@ -46,7 +45,7 @@ let BenchList = () => {
         <pre>{JSON.stringify(benchLists.data)}</pre>
         <div className="row">
           <div className="col-md-6">
-            <h2 style={{ marginTop: "30px" }}>Bench List</h2>
+            <h2 className="a1" style={{ marginTop: "30px" }}>Bench List</h2>
           </div>
           <div className="col-md-6">
             <div
@@ -54,7 +53,10 @@ let BenchList = () => {
               style={{ marginTop: "30px", float: "right", marginRight: "10px" }}
             >
               {/* <MDBBtn> */}
-              <Link to="/newbenchEmployee" className="btn btn-primary">
+              <Link
+                to="/newbenchEmployee"
+                className="btn addBtn text-white"
+              >
                 ADD
               </Link>
               {/* </MDBBtn> */}
@@ -72,20 +74,20 @@ let BenchList = () => {
             />
           </div>
           <div className="col-md-6 justify-content-center">
-            <select className="select btn btn-primary" data-mdb-filter="true">
-              <option>Select Year</option>
-              <option>1-2</option>
-              <option>2-3</option>
-              <option>3-4</option>
-              <option>4-5</option>
-              <option>5-6</option>
-              <option>6-7</option>
-              <option>7-8</option>
-              <option>8-9</option>
-              <option>9-10</option>
-              <option>10-11</option>
-              <option>11-12</option>
-            </select>
+          <select className="select " data-mdb-filter="true">
+          <option className="selectBtn">Select Year</option>
+                <option>1-2</option>
+                <option>2-3</option>
+                <option>3-4</option>
+                <option>4-5</option>
+                <option>5-6</option>
+                <option>6-7</option>
+                <option>7-8</option>
+                <option>8-9</option>
+                <option>9-10</option>
+                <option>10-11</option>
+                <option>11-12</option>
+</select>
             {/* <div class="dropdown d-flex justify-content-end mb-4">
               <select
                 class="btn btn-rounded  btn-secondary dropdown-toggle"
@@ -111,7 +113,7 @@ let BenchList = () => {
         <div className="row mt-4">
           <div className="col">
             <MDBTable>
-              <MDBTableHead>
+              <MDBTableHead className="table-dark text-white">
                 <tr>
                   <th scope="col">EmpId</th>
                   <th scope="col">Name</th>
@@ -277,6 +279,7 @@ let BenchList = () => {
           </div>
         </div>
       </div>
+      
       {/* DELETE MODAL */}
       <MDBModal
         id="exampleModal"

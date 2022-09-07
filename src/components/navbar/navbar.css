@@ -1,8 +1,21 @@
 .NavbarNavItem{
-padding-right: 6rem;
+margin-right: 6rem;
 }
 
  i{
-   
     font-size: 28px;
+    /* color: #e03600;
+     */
+    color: #000;
+
+    /* -webkit-text-stroke-width: 1px; */
+    /* -webkit-text-stroke-color: #000; */
+}
+
+.NavbarLogOut{
+list-style-type: none;
+}
+
+.navbar{
+  background: linear-gradient(to right, #fff, #fff)
 }
