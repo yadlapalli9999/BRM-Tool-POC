@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./POCHome.css";
 import { Link, useNavigate } from "react-router-dom";
 import {MDBContainer,MDBRow,MDBCol,MDBTable,MDBTableHead,MDBTableBody, MDBBtn, MDBIcon} from 'mdb-react-ui-kit';
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPoc } from "../../../redux/features/poc/poc.feature";
 //import ExcelImg from "../../../assets/excel.png";
 //import GoogleImg from "../../../assets/google.png";
 
 let POCHome = () => {
+  let dispatch = useDispatch();
+  let {pocList} = useSelector((store)=>{return store['poc']})
+  console.log(pocList)
+  useEffect(()=>{
+    dispatch(getAllPoc())
+  },[])
   const dummyData = [
     {
       name: "BRM Tool",
@@ -62,9 +70,9 @@ let POCHome = () => {
 
   const navigate = useNavigate();
 
-  const handleNameClick = () => {
-    navigate("/pocdetails");
-  };
+  // const handleNameClick = () => {
+  //   navigate("/pocdetails");
+  // };
 
   return (
     <React.Fragment>
@@ -93,12 +101,12 @@ let POCHome = () => {
                 </tr>
               </MDBTableHead>
               <MDBTableBody>
-              {dummyData &&
-              dummyData?.map((data) => (
+              {pocList &&
+              pocList?.map((data) => (
                 <tr>
                   <td>
                     <div className="d-flex align-items-center">
-                      <div className="name" onClick={handleNameClick}>
+                      <div className="name" onClick={()=>navigate(`/pocdetails/${data._id}`)}>
                         <p className="fw-bold mb-1">{data?.name}</p>
                       </div>
                     </div>

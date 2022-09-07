@@ -7,9 +7,14 @@ import "datatables.net-dt/css/jquery.dataTables.min.css";
 import "./BenchList.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
-import { getBench } from "../../../redux/features/bench/bench.feature";
+import { deleteBench, getBench, searchBench } from "../../../redux/features/bench/bench.feature";
+import Axios  from "axios";
+import BenchServices from "../../../redux/features/bench/benchServices";
+import { toast } from "react-toastify";
 
 let BenchList = () => {
+  let BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/resources`
+
   let dispatch = useDispatch();
   
   useEffect(()=>{
@@ -18,6 +23,7 @@ let BenchList = () => {
   let allBenchLists  = useSelector((store)=>{
     return store['bench']
 })
+
 let{loading,benchLists,errorMessage} = allBenchLists;
   const [staticModal, setStaticModal] = useState(false);
 
@@ -26,8 +32,38 @@ let{loading,benchLists,errorMessage} = allBenchLists;
    
   
     let [role,setRole] = useState(true);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState({
+    searchValue:''
+  });
  const navigate = useNavigate();
+ let handleDelete = (id)=>{
+  //  Axios.delete(`${BASE_URL}/${id}`).then((res)=>{
+  //   console.log(res)
+  //  }).catch((error)=>{
+  //   console.log(error)
+  //  })
+  BenchServices.remove(id)
+  toast.success('successfully Delete')
+  setInterval(()=>{
+    dispatch(getBench())
+  },1000)
+ }
+  
+ let handleSearch = (event)=>{
+  setQuery({
+    ...query,
+    searchValue:event.target.value
+  })
+  
+  if(query.searchValue.length >2){
+    dispatch((searchBench(query)))
+  }
+  else{
+    dispatch(getBench())
+  }
+ }
+ 
+ 
   return (
     <React.Fragment>
       <div className="container">
@@ -60,8 +96,10 @@ let{loading,benchLists,errorMessage} = allBenchLists;
             <MDBInput
               type="text"
               label="search"
+              value={query.searchValue}
               style={{ width: "660px" }}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={handleSearch}
+              // onChange={(e) => {setSearchValue(e.target.value);dispatch(searchBench(searchValue));console.log(searchValue)}}
             />
           </div>
           <div className="col-md-6 justify-content-center">
@@ -103,7 +141,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
         </div>
         <div className="row mt-4">
           <div className="col">
-            
+            {benchLists.length >0 ?
             <MDBTable>
               <MDBTableHead>
                 <tr>
@@ -121,11 +159,11 @@ let{loading,benchLists,errorMessage} = allBenchLists;
               
               <MDBTableBody>
                 {
-                      benchLists.data && benchLists.data
-                        ?.filter((filterData) =>
-                          filterData?.name.toLowerCase().includes(query)
-                        )
-                        ?.map((filterData) => (
+                    // benchLists&& benchLists?.filter((filterData) =>filterData?.name.toLowerCase().includes(query))?.map((filterData) => (
+
+                      // benchLists && benchLists?.filter((filterData) =>filterData?.name.toLowerCase().includes(searchValue))?.map((filterData) => (
+                      benchLists && benchLists?.map((filterData) => (
+
                       <tr key={filterData._id}>
                         <td>
                           {/* <Link to={`/worklog/${item.id}`}>{item.id}</Link> */}
@@ -167,13 +205,13 @@ let{loading,benchLists,errorMessage} = allBenchLists;
                           </Link>
                         </td> */}
                         <td>
-                          <Link to="/editbenchEmployee">
+                          <Link to={`/editbenchEmployee/${filterData._id}`}>
                             <i className="fas fa-edit text-primary benchListEditi" />
                           </Link>
                           &nbsp;&nbsp;
                           <i
                             data-target="#exampledModal"
-                            onClick={toggleShow}
+                            onClick={()=>handleDelete(filterData._id)}
                             className="fa fa-trash text-danger benchListdeletei"
                           />
                         </td>
@@ -182,7 +220,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
                   )}
               
               </MDBTableBody>
-            </MDBTable>
+            </MDBTable>:null}
 
             {/* <table
               id="dtBasicExample"

@@ -40,16 +40,13 @@ const EmployeeFields = () => {
     navigate("/worklogs");
   };
   const [inputData, setinputData] = useState({
-    Name: "",
-    PrimarySkills: "",
-    TotalWorkExp: "",
-    EmpId: "",
-    TotalExp: "",
-    Notes: "",
-    Email: "",
-    ReportingManager: "",
-    TeamLead: "",
-    TotalExpInFission: "",
+   name:'',
+   createdBy:'',
+   teamLead:'',
+   duration:null,
+   status:'',
+   documents:[],
+   members:[]
   });
 
   const handleChangeInputFields = (e) => {
@@ -78,17 +75,17 @@ const EmployeeFields = () => {
                 <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
               <MDBInput id='validationCustom01' required name="name" label="Name"/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
-              <MDBInput id='validationCustom02' required name="name" label="Name"/>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your Team Lead' invalid>
+              <MDBInput id='validationCustom02' required name="teamLead" label="Team Lead"/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-12" feedback='Please Enter your name' invalid>
-              <MDBTextArea id='validationCustom03'  required name="name" label="Name"/>
+           <MDBValidationItem className="col-md-12" feedback='Please Enter your Description' invalid>
+              <MDBTextArea id='validationCustom03'  required name="description" label="Description"/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
-              <MDBInput id='validationCustom03'  required name="name" label="Name"/>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your CreatedBy' invalid>
+              <MDBInput id='validationCustom03'  required name="createdBy" label="CreatedBy"/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
-              <MDBInput id='validationCustom03'  required name="name" label="Name"/>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your Status' invalid>
+              <MDBInput id='validationCustom03'  required name="status" label="Status"/>
            </MDBValidationItem>
            <MDBRow className="m-3">
             <MDBCol md="12" className="text-center">

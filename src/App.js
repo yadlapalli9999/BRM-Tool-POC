@@ -2,6 +2,8 @@ import React, { useState ,useEffect} from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 // import Home from "./layout/components/home/Home";
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import Navbar from "./components/navbar/Navbar";
 import EmployeeFields from "./routes/poc/employeefields/EmployeeFields";
 import PocDetails from "./routes/poc/pocdertails/PocDetails";
@@ -43,6 +45,7 @@ function App() {
   return (
     <React.Fragment>
       <BrowserRouter>
+      <ToastContainer/>
         {showNav && <Navbar />}
 
         <Routes>
@@ -55,7 +58,7 @@ function App() {
             <Route path="/poc" element={<POCHome />} />
           )}
           {AdminRole.role === "ADMIN" && (
-            <Route path="/pocdetails" element={<PocDetails />} />
+            <Route path="/pocdetails/:id" element={<PocDetails />} />
           )}
           {AdminRole.role === "ADMIN" && (
             <Route path="/employeefields" element={<EmployeeFields />} />
@@ -95,7 +98,7 @@ function App() {
             <Route path="/newbenchEmployee" element={<NewBenchEmployee />} />
           )}
           {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
-            <Route path="/editbenchEmployee" element={<EditBenchEmployee/>} />
+            <Route path="/editbenchEmployee/:id" element={<NewBenchEmployee/>} />
           )}
            {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
             <Route path="/empDetails/:id" element={<BenchEmployeeDetail />} />

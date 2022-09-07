@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {MDBContainer,MDBRow,MDBCol,MDBCard,MDBCardHeader,MDBCardTitle,MDBCardBody,MDBInput,MDBBtn, MDBListGroup, MDBListGroupItem} from 'mdb-react-ui-kit';
 import $ from "jquery";
 import { Chart, registerables } from "chart.js";
 import "./PocDetails.css";
 import AddResource from "../addresource/AddResource";
+import { useDispatch, useSelector } from "react-redux";
+import { getSinglePoc } from "../../../redux/features/poc/poc.feature";
 
 Chart.register(...registerables);
 
+
 const PocDetails = () => {
+  let {singlePoc} = useSelector((store)=>{return store['poc']})
+  console.log(singlePoc)
   const members = [
     {
       id: 1,
@@ -55,6 +60,11 @@ const PocDetails = () => {
   const handlePocDetailsNameClick = () => {
     navigate("/worklogs");
   };
+  let dispatch = useDispatch();
+  let {id} = useParams()
+  useEffect(()=>{
+    dispatch(getSinglePoc(id))
+  },[])
 
   return (
     
@@ -74,27 +84,37 @@ const PocDetails = () => {
                     <MDBListGroupItem>
                        <MDBRow>
                         <MDBCol md="3">Name</MDBCol>
-                        <MDBCol md="9">BRM Tool POC</MDBCol>
+                        <MDBCol md="9">{singlePoc.name}</MDBCol>
                        </MDBRow>
                     </MDBListGroupItem>
                     <MDBListGroupItem>
                        <MDBRow>
                         <MDBCol md="3">Description</MDBCol>
-                        <MDBCol md="9">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Cupiditate voluptatem porro optio tempore voluptate modi
-                      non molestias officia dolor aliquid.</MDBCol>
+                        <MDBCol md="9">{singlePoc.description}</MDBCol>
                        </MDBRow>
                     </MDBListGroupItem>
                     <MDBListGroupItem>
                        <MDBRow>
                         <MDBCol md="3">Duration</MDBCol>
-                        <MDBCol md="9">20 Months</MDBCol>
+                        <MDBCol md="9">{singlePoc.duration}</MDBCol>
                        </MDBRow>
                     </MDBListGroupItem>
                     <MDBListGroupItem>
                        <MDBRow>
                         <MDBCol md="3">CreatedBy</MDBCol>
-                        <MDBCol md="9">Dipesh Ingle</MDBCol>
+                        <MDBCol md="9">{singlePoc.createdBy}</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Team Lead</MDBCol>
+                        <MDBCol md="9">{singlePoc.teamLead}</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Status</MDBCol>
+                        <MDBCol md="9">{singlePoc.status}</MDBCol>
                        </MDBRow>
                     </MDBListGroupItem>
                     <MDBListGroupItem>

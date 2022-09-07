@@ -9,13 +9,13 @@ let BenchEmployeeDetail = (props)=>{
     let {id}  = useParams();
     let dispatch = useDispatch();
     useEffect(()=>{
-      dispatch(getBenchId(id))
+      dispatch(getBenchId({id}))
     },[])
 
     let {benchListItem} = useSelector((store)=>{
       return store['bench']
     })
-   
+     console.log(benchListItem)
   // let {data} = benchListItem;  
   // let {name,email,reportingManager,teamLead,notes,status} = data;
     
@@ -38,38 +38,74 @@ let BenchEmployeeDetail = (props)=>{
                         <MDBListGroupItem>
                         <MDBRow md="12">
                         <MDBCol md="3">Name</MDBCol>
-                         <MDBCol md="9">{benchListItem.data.name}</MDBCol>
+                         <MDBCol md="9">{benchListItem.name}</MDBCol>
                         </MDBRow>
                         </MDBListGroupItem>
                         <MDBListGroupItem>
                         <MDBRow md="12">
                         <MDBCol md="3">Email</MDBCol>
-                         <MDBCol md="9">{benchListItem.data.email}</MDBCol>
+                         <MDBCol md="9">{benchListItem.email}</MDBCol>
                         </MDBRow>
                         
                         </MDBListGroupItem>
                         <MDBListGroupItem>
                         <MDBRow md="12">
+                        <MDBCol md="3">Emp Id</MDBCol>
+                         <MDBCol md="9">{benchListItem.emp_id}</MDBCol>
+                        </MDBRow>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
+                        <MDBCol md="3">Total Work Exp</MDBCol>
+                         <MDBCol md="9">{benchListItem.totalWorkExp}</MDBCol>
+                        </MDBRow>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
+                        <MDBCol md="3">TotalExpinFission</MDBCol>
+                         <MDBCol md="9">{benchListItem.totalExpinFission}</MDBCol>
+                        </MDBRow>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
+                        <MDBCol md="3">Primary SkillName</MDBCol>
+                         <MDBCol md="9">{benchListItem.primarySkills[0].skillName}</MDBCol>
+                        </MDBRow>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
+                        <MDBCol md="3">PrimarySkill TotalExp</MDBCol>
+                         <MDBCol md="9">{benchListItem.primarySkills[0].totalExp}</MDBCol>
+                        </MDBRow>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
+                        <MDBCol md="3">ProjectName</MDBCol>
+                         <MDBCol md="9">{benchListItem.projectName}</MDBCol>
+                        </MDBRow>
+                        </MDBListGroupItem>
+                        <MDBListGroupItem>
+                        <MDBRow md="12">
                         <MDBCol md="3">Reporting Manager</MDBCol>
-                         <MDBCol md="9">{benchListItem.data.reportingManager}</MDBCol>
+                         <MDBCol md="9">{benchListItem.reportingManager}</MDBCol>
                         </MDBRow>
                         </MDBListGroupItem>
                         <MDBListGroupItem>
                         <MDBRow md="12">
                         <MDBCol md="3">Team Lead</MDBCol>
-                         <MDBCol md="9">{benchListItem.data.teamLead}</MDBCol>
+                         <MDBCol md="9">{benchListItem.teamLead}</MDBCol>
                         </MDBRow>
                         </MDBListGroupItem>
                         <MDBListGroupItem>
                         <MDBRow md="12">
                         <MDBCol md="3">Notes</MDBCol>
-                         <MDBCol md="9">{benchListItem.data.notes}</MDBCol>
+                         <MDBCol md="9">{benchListItem.notes}</MDBCol>
                         </MDBRow>
                         </MDBListGroupItem>
                         <MDBListGroupItem>
                         <MDBRow md="12">
                         <MDBCol md="3">Status</MDBCol>
-                         <MDBCol md="9">{benchListItem.data.status}</MDBCol>
+                         <MDBCol md="9">{benchListItem.status}</MDBCol>
                         </MDBRow>
                         </MDBListGroupItem>
                          
