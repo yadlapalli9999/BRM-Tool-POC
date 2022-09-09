@@ -42,12 +42,12 @@ let BenchList = () => {
   return (
     <React.Fragment>
       <div className="container">
-        <pre>{JSON.stringify(benchLists.data)}</pre>
-        <div className="row">
-          <div className="col-md-6">
-            <h2 className="a1" style={{ marginTop: "30px" }}>Bench List</h2>
+        {/* <pre>{JSON.stringify(benchLists.data)}</pre> */}
+        <div className="row mt-3">
+          <div className="col-md-3">
+            <h2 className="a1">Bench List</h2>
           </div>
-          <div className="col-md-6">
+          <div className="col-md-9">
             <div
               className="text-center"
               style={{ marginTop: "30px", float: "right", marginRight: "10px" }}
@@ -65,17 +65,18 @@ let BenchList = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-6">
+          <div className="col-md-3 inp">
             <MDBInput
+
               type="text"
               label="search"
               style={{ width: "660px" }}
               onChange={(e) => setQuery(e.target.value)}
             />
           </div>
-          <div className="col-md-6 justify-content-center">
-          <select className="select " data-mdb-filter="true">
-          <option className="selectBtn">Select Year</option>
+          <div className="col-md-6 ">
+          <select className="select selectBtn mx-5 " data-mdb-filter="true">
+          <option className=" ">Select Year</option>
                 <option>1-2</option>
                 <option>2-3</option>
                 <option>3-4</option>
@@ -143,7 +144,9 @@ let BenchList = () => {
                         <td>{filterData?.name}</td>
                         <td>{filterData.email}</td>
                         <td>{filterData.totalWorkExp}</td>
-                        <td>{filterData.primarySkills[0].skillName}</td>
+                        <td>{filterData.primarySkills
+                            ? filterData.primarySkills[0]
+                            : "Null"}</td>
                         {/* <td>{item}</td> */}
                         <td>
                           <a

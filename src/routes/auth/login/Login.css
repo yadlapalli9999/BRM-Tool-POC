@@ -1,19 +1,62 @@
-.gradient-custom-2 {
+/* .gradient-custom-2 {
   /* fallback for old browsers */
-  background: #fccb90;
+  /* background: #fccb90; */
 
   /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(
+  /* background: -webkit-linear-gradient(
     to right,
     #ee7724,
     #d8363a,
     #dd3675,
     #b44593
-  );
+  ); */
 
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+  /* background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593); */
+/* }  */
+.component{
+  box-shadow: 8px 8px 4px rgb(237, 232, 232);
+
 }
+.signIn{
+  background: #ee7724;
+}
+
+.container-fluid{
+  background-color: #f4f4f4  ;
+}
+.siBtn{
+  color: #ee7724;
+  position: relative;
+  margin-left: 12rem;
+background: #000;
+border-radius: 0.7rem;
+}
+.head-2{
+  color: #ee7724;
+  font-weight: bold;
+
+}
+.separator{
+  display: flex;
+  align-items: center;
+}
+
+.separator p{
+  padding: 0 1rem; /* creates the space */
+}
+
+.separator .line{
+  flex: 1;
+  height: 3px;
+  background-color: #666;
+}
+
+/* .signIn-1{ */
+  /* color: #fff !important; */
+  /* font-weight: 600; */
+  /* font-size:  3rem;; */
+/* } */
 
 /* @media (min-width: 768px) {
     .gradient-form {
@@ -26,8 +69,11 @@
     border-bottom-right-radius: 0.3rem;
   }
 }
-
-.loginImg {
+.google{
+height: 1.5rem;
+width: 1.5rem;
+}
+.logoImg {
   width: 320px;
 }
 .form-control {
@@ -41,9 +87,16 @@
 textarea {
   background-color: #fff;
 }
-.form-control:focus {
+.form-control:focus,.gBtn {
   border: none;
   -webkit-box-shadow: none;
   box-shadow: none;
   background-color: #fff;
 }
+.svgIcon{
+  height: 1rem;
+  width: 1rem;
+}
+/* .gBtn{
+  border: none;
+} */

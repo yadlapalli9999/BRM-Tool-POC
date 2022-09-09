@@ -1,10 +1,20 @@
 .personBench{
     height: 100%;
 }
-.table-responsive {
+.responsive {
   max-height: 296px;
+  /* border-radius: 1.6rem; */
+
 }
 
+.table{
+  /* border: 0px  solid ; */
+  /* padding: 10px; */
+  box-shadow: 5px 10px 15px #EEEEEE ;
+  border-radius: 10px;
+  overflow:hidden;
+
+}
 
 .cardsHead{
   color: #120f1a;
@@ -18,13 +28,17 @@
 .adminDashboardTableHead{
   background-color: #120f1a;
   color: #fff;
+  
 }
-
 
 
 .table-headings{
   /* color: #ff5722;
+
+  
    */
+
+
    color: #fff;
    /* align-items: center; */
 
@@ -35,21 +49,26 @@
   color: #fff !important;
 }
 
-
+.btns{
+  font-size:x-large;
+}
 .poc-p{
   /* background: #fff !important; */
-  background:#fff !important;
+  background: #444 !important;
+  /* border-radius: 5px !important; */
 
 }
 
 .poc{
-  color: #231955 !important; 
+  color: #fff !important; 
+  
 }
 
 .button-56 {
-  /* padding: 2px; */
+  padding: 0px;
   align-items: initial;
-  width: 250px;
+  width: 200px;
+
   /* background: #fff; */
   /* background: linear-gradient(to right, #3d3335, #db24db); */
   /* background: linear-gradient(to right,#fff, #E8630A); */
@@ -112,10 +131,10 @@
 }
 
 
-.thName{
+/* .thName{
   position: relative;
   left: -3rem;
-}
+} */
 
 
   /* align-items:inherit; */
@@ -156,4 +175,11 @@ color: #ff5722;
 }
 .card-3{
   color: #2B7A0B;
+}
+.allBtn{
+  border-radius: 10px;
+  padding: 3pox !important;
+}
+.allP{
+  margin-top: 15px;
 }
