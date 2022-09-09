@@ -3,11 +3,28 @@ import { useNavigate } from "react-router-dom";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import "./AdminDashboard.css";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getPocCount,
+  getResourceCount,
+} from "../../redux/features/dashboard/dashboard.feature";
 
 const AdminDashboard = (props) => {
+  const dispatch = useDispatch();
   const [show, setShow] = useState(true);
-
+  // PocCount
+  const { pocCount, resourceCount } = useSelector((store) => {
+    return store["dashboard"];
+  });
   ChartJS.register(ArcElement, Tooltip, Legend);
+
+  useEffect(() => {
+    props.funcNav(true);
+    dispatch(getPocCount());
+    // console.log(pocCount);
+    // dispatch(getResourceCount());
+    // console.log(resourceCount);
+  }, []);
 
   const dummyData = [
     {
@@ -120,7 +137,6 @@ const AdminDashboard = (props) => {
     ],
   };
 
-  props.funcNav(true);
   return (
     <>
       {show === false && (
@@ -356,14 +372,9 @@ const AdminDashboard = (props) => {
                             1 Month
                           </span>
                         </td>
-<<<<<<< HEAD
-                     
-             
-=======
                         <td>Team Lead</td>
 
                         <td className="">{data?.members.length}</td>
->>>>>>> updated-dashboard
                       </tr>
                     ))}
                 </tbody>
@@ -377,51 +388,69 @@ const AdminDashboard = (props) => {
             </div>
           </div>
           <div className="row mt-4">
-            <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-1">
-              <div className="card">
-                <div className="card-body card-body-bottom">
-                  <div className="d-flex justify-content-between px-md-1">
-                    <div>
-                      <h3 className="cardsHead">3</h3>
-                      <p className="mb-0 card-text">Initiated</p>
-                    </div>
-                    <div className="align-self-center">
-                      <i className="fas card-1 fa-rocket  fa-3x"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-1">
-              <div className="card">
-                <div className="card-body card-body-bottom">
-                  <div className="d-flex justify-content-between px-md-1">
-                    <div>
-                      <h3 className="cardsHead">4</h3>
-                      <p className="mb-0  card-text">Hold</p>
-                    </div>
-                    <div className="align-self-center">
-                      <i className="far  fa-user card-2  fa-3x"></i>
+            {pocCount.map((data) => {
+              return (
+                <>
+                  <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-1">
+                    <div className="card">
+                      <div className="card-body card-body-bottom">
+                        <div className="d-flex justify-content-between px-md-1">
+                          <div>
+                            <h3 className="cardsHead">
+                              {data.IntiatedPocs === undefined || null
+                                ? "No Data"
+                                : data.IntiatedPocs}
+                            </h3>
+                            <p className="mb-0 card-text">Initiated</p>
+                          </div>
+                          <div className="align-self-center">
+                            <i className="fas card-1 fa-rocket  fa-3x"></i>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-1">
-              <div className="card">
-                <div className="card-body card-body-bottom">
-                  <div className="d-flex justify-content-between px-md-1">
-                    <div>
-                      <h3 className="cardsHead">5</h3>
-                      <p className="mb-0  card-text">Completed</p>
-                    </div>
-                    <div className="align-self-center">
-                      <i className="fas  card-3 fa-chart-pie  fa-3x"></i>
+                  <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-1">
+                    <div className="card">
+                      <div className="card-body card-body-bottom">
+                        <div className="d-flex justify-content-between px-md-1">
+                          <div>
+                            <h3 className="cardsHead">
+                              {data.HoldPocs === undefined || null
+                                ? "No Data"
+                                : data.HoldPocs}
+                            </h3>
+                            <p className="mb-0  card-text">Hold</p>
+                          </div>
+                          <div className="align-self-center">
+                            <i className="far  fa-user card-2  fa-3x"></i>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                  <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-1">
+                    <div className="card">
+                      <div className="card-body card-body-bottom">
+                        <div className="d-flex justify-content-between px-md-1">
+                          <div>
+                            <h3 className="cardsHead">
+                              {data.CompletedPocs === undefined || null
+                                ? "No Data"
+                                : data.CompletedPocs}
+                            </h3>
+                            <p className="mb-0  card-text">Completed</p>
+                          </div>
+                          <div className="align-self-center">
+                            <i className="fas  card-3 fa-chart-pie  fa-3x"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              );
+            })}
           </div>
         </div>
       )}

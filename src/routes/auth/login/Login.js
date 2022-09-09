@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../../redux/features/auth/auth.feature";
@@ -8,7 +8,9 @@ import "./Login.css";
 import { MDBInput } from "mdb-react-ui-kit";
 
 const Login = (props) => {
-  props.funcNav(false);
+  useEffect(() => {
+    props.funcNav(false);
+  }, []);
 
   const navigate = useNavigate();
   const [user, setUser] = useState({
