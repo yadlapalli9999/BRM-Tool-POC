@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
+// import { Pie } from "react-chartjs-2";
 import "./AdminDashboard.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getPocCount,
   getResourceCount,
 } from "../../redux/features/dashboard/dashboard.feature";
+import PieChart from "../../util/PieChart";
 
 const AdminDashboard = (props) => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const AdminDashboard = (props) => {
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, dicta?",
       duration: 20,
+      email:"abhishekdivalimeasam12345@gmail.com",
       createdBy: "Dipesh Ingle",
       documents: [
         "https://docs.google.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
@@ -41,13 +43,15 @@ const AdminDashboard = (props) => {
         "62e15a9cf09d35dcf465f2c1",
         "62e7e0684f2e38bf99f1db88",
       ],
-      _id: "1122112321211",
+      id: "1122112321211",
       __v: 0,
     },
     {
       name: "Ayush Gurjar",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
       duration: 4,
+      
+      email:"ayush@gmal.com",
       createdBy: "Dipesh Ingle",
       documents: [
         "https://docs.excel.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
@@ -57,7 +61,7 @@ const AdminDashboard = (props) => {
         "62e15a9cf09d35dcf465f2c1",
         "62e7e0684f2e38bf99f1db88",
       ],
-      _id: "1122112321211",
+      id: "1122112321211",
       __v: 0,
     },
     {
@@ -65,6 +69,8 @@ const AdminDashboard = (props) => {
       description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum architecto eveniet incidunt dolorem magnam rem.",
       duration: 2,
+      
+      email:"surendra@gmail.com",
       createdBy: "Dipesh Ingle",
       documents: [
         "https://docs.google.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
@@ -75,7 +81,7 @@ const AdminDashboard = (props) => {
         "62e15a9cf09d35dcf465f2c1",
         "62e7e0684f2e38bf99f1db88",
       ],
-      _id: "1122112321211",
+      id: "1122112321211",
       __v: 0,
     },
     {
@@ -83,6 +89,8 @@ const AdminDashboard = (props) => {
       description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum architecto eveniet incidunt dolorem magnam rem.",
       duration: 2,
+      
+      email:"singh@gmail.com",
       createdBy: "Dipesh Ingle",
       documents: [
         "https://docs.google.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
@@ -93,7 +101,7 @@ const AdminDashboard = (props) => {
         "62e15a9cf09d35dcf465f2c1",
         "62e7e0684f2e38bf99f1db88",
       ],
-      _id: "1122112321211",
+      id: "1122112321211",
       __v: 0,
     },
   ];
@@ -140,8 +148,8 @@ const AdminDashboard = (props) => {
   return (
     <>
       {show === false && (
-        <div className="container p-1 part-2 mt-0">
-          <div
+        <div className="container p-1 part-2 mt-0 ">
+          <div className="mt-3"
             style={{
               display: "flex",
               justifyContent: "space-evenly",
@@ -151,12 +159,11 @@ const AdminDashboard = (props) => {
           >
             <button
               onClick={() => setShow(true)}
-              className="button-56 pt-1 mt-0  headings_blocks "
-            >
-              <h1 className="bench ">POC</h1>
+              className="button-56 allBtn poc-p  p-2 poc allP mt-0">
+              POC
             </button>
-            <button className="button-56 poc-p pt-1 mt-0  headings_blocks">
-              <h1 className="poc">BENCH</h1>
+            <button className="button-56 allBtn p-2 bench allP  mt-0 ">
+              BENCH
             </button>
           </div>
           <div className="row mt-5">
@@ -210,44 +217,33 @@ const AdminDashboard = (props) => {
               </div>
             </div>
           </div>
-          <div className="row mt-1">
-            <h3 className="h3-subHead mx-3">Leave</h3>
-            <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4 table-responsive">
-              <table className="table align-middle mb-0 bg-white table-striped table-hover  ">
-                <thead className=" adminDashboardTableHead ">
+          <div className="row mb-1  ">
+            <h3 className="h3-subHead mx-3 mt-2 mb-4">InActive</h3>
+            <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4 responsive">
+              
+              <table className="table  align-middle mb-0 bg-whit table-striped table-hover overflow-x:auto">
+                <thead className=" adminDashboardTableHead">
                   <tr className="table-headings">
-                    <th>
-                      <span className="thName">Name</span>
-                    </th>
-                    <th>Email</th>
+                    <th ><span className="thName">Id</span></th>
+                    <th>Name</th>
                   </tr>
                 </thead>
                 <tbody className="tbody">
                   {dummyData &&
                     dummyData?.map((data) => (
                       <tr>
-                        <td>
-                          <div className="d-flex ">
-                            <div className="name" onClick={handleNameClick}>
-                              <p className="fw-normal mb-1">{data?.name}</p>{" "}
-                            </div>
-                          </div>
+                        <td className="fw-normal mb-1 name" onClick={handleNameClick}>
+                          {/* <div className="d-flex "> */}
+                            {/* <div className="" > */}
+                              {data?.id}
+                            {/* </div> */}
+                          {/* </div> */}
                         </td>
                         {/* <td>
                           <p className="fw-normal mb-1">{data?.name}</p>
                         </td> */}
                         <td>
-                          <span
-                            className={`badge ${
-                              data?.duration >= 5
-                                ? "badge-danger"
-                                : data?.duration >= 3
-                                ? "badge-warning"
-                                : "badge-success"
-                            } rounded-pill d-inline`}
-                          >
-                            16-aug-2022
-                          </span>
+                        {data?.name}
                         </td>
                         {/* <td>POC Name</td> */}
                       </tr>
@@ -314,7 +310,7 @@ const AdminDashboard = (props) => {
 
       {show === true && (
         <div className="container p-1 part-2 mt-0">
-          <div
+          <div className="mt-3"
             style={{
               display: "flex",
               justifyContent: "space-evenly",
@@ -323,20 +319,20 @@ const AdminDashboard = (props) => {
             }}
           >
             {/* style={{background:'linear-gradient(to right, #3d3335, #db24db)',color:'white'} */}
-            <button className="button-56 poc-p  mt-0 pt-2 headings_blocks">
-              <h1 className="poc ">POC</h1>
+            <button className="button-56 allBtn  bench allP p-2  mt-0 ">
+              POC
             </button>
             <button
-              className="button-56  mt-0 pt-2 headings_blocks"
+              className="button-56 allBtn poc-p poc p-2 allP mt-0 "
               onClick={() => setShow(false)}
             >
-              <h1 className="bench">BENCH</h1>
+              BENCH
             </button>
           </div>
-          <div className="row mt-5">
-            <h3 className="h3-subHead">Active</h3>
-            <div className="col-xl-8 col-sm-6 col-12 col-md-4 mb-4 table-responsive ">
-              <table className="table align-middle mb-0 bg-white table-hover ">
+          <div className="row mt-3">
+            <h3 className="h3-subHead mx-3">Active</h3>
+            <div className="col-xl-8 col-sm-6 col-12 col-md-4 mb-4 table-responsive">
+              <table className="table align-middle mb-0 tab bg-white table-hover  ">
                 <thead className="adminDashboardTableHead">
                   <tr className="table-headings">
                     <th>Serial No</th>
@@ -352,7 +348,7 @@ const AdminDashboard = (props) => {
                       <tr>
                         <td>
                           <div className="name" onClick={handleNameClick}>
-                            <p className="fw-bold mb-1">{data?._id}</p>
+                            <p className="fw-bold mb-1">{data?.id}</p>
                           </div>
                         </td>
                         <td>
@@ -384,7 +380,10 @@ const AdminDashboard = (props) => {
               className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4"
               style={{ height: "300px" }}
             >
-              <Pie data={data} options={{ maintainAspectRatio: false }} />
+              {/* <Pie data={data} options={{ maintainAspectRatio: false }} />
+               */}
+          <PieChart/>
+
             </div>
           </div>
           <div className="row mt-4">

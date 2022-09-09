@@ -21,9 +21,10 @@ import { useSelector } from "react-redux";
 import "./PocDetails.css";
 import AddResource from "../addresource/AddResource";
 import { POC_TABLE_HEADERS } from "../../Constants";
+// import PieChart from "../../../util/PieChart";
 
 Chart.register(...registerables);
-
+  const status="Initiated";
 const PocDetails = () => {
   const { pocList } = useSelector((store) => {
     return store["poc"];
@@ -32,41 +33,33 @@ const PocDetails = () => {
   const pocID = params.getAll("pocID")[0] || null;
   const [pocData, setPocData] = useState({});
 
-  $(document).ready(function () {
-    var ctx = $("#pieChart");
-    var myLineChart = new Chart(ctx, {
-      type: "pie",
-      data: {
-        labels: ["Kunal Rokhle", "Alok Kumar", "Sudhanshu Jain"],
-        datasets: [
-          {
-            data: [20, 40, 25],
-            backgroundColor: [
-              "rgba(255, 0, 0, 0.5)",
-              "rgba(100, 255, 0, 0.5)",
-              "rgba(200, 50, 255, 0.5)",
-              "rgba(0, 100, 255, 0.5)",
-            ],
-          },
-        ],
-      },
-      options: {
-        title: {
-          display: true,
-          text: "empData",
-        },
-      },
-    });
-  });
+  // $(document).ready(function () {
 
-  useEffect(() => {
-    const data = (pocList || []).find((poc) => poc._id === pocID) || {};
-    const members = (data.members || []).map((mem, ind) => {
-      return { id: mem, memberName: mem.toString() };
-    });
-    setPocData({ ...data, members });
-  }, [pocID]);
-
+  // var ctx = $("#pieChart");
+  // var myLineChart = new Chart(ctx, {
+  //   type: "pie",
+  //   data: {
+  //     labels: ["Kunal Rokhle", "Alok Kumar", "Sudhanshu Jain"],
+  //     datasets: [
+  //       {
+  //         data: [20, 40, 25],
+  //         backgroundColor: [
+  //           "rgba(255, 0, 0, 0.5)",
+  //           "rgba(100, 255, 0, 0.5)",
+  //           "rgba(200, 50, 255, 0.5)",
+  //           "rgba(0, 100, 255, 0.5)",
+  //         ],
+  //       },
+  //     ],
+  //   },
+  //   options: {
+  //     title: {
+  //       display: true,
+  //       text: "empData",
+  //     },
+  //   },
+  // });
+  // });
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
@@ -142,10 +135,25 @@ const PocDetails = () => {
           <MDBCol md="6">
             <AddResource members={pocData.members} />
           </MDBCol>
-          <MDBCol md="2"></MDBCol>
           <MDBCol md="4" className="justify-content-end">
             <canvas id="pieChart" width="200" height="200"></canvas>
+            <AddResource />
           </MDBCol>
+          <MDBCol md="2" className="justify-content-end">
+            <div class="card projectStatus">
+              <div class="card-header text-center">Project Status : { status}</div>
+              <div class="card-body d-flex ">
+                    <button className="btn btn-warning"> STARTED</button>
+                    <button className="btn btn-secondary">HOLD</button>
+                    <button className="btn btn-success">COMPLETED</button>
+              </div>
+              <div class="card-footer text-muted">2 days ago</div>
+            </div>
+          </MDBCol>
+          {/* <MDBCol md='4' className='justify-content-end'> */}
+          {/* <canvas id='pieChart' width='200' height='200'></canvas> */}
+
+          {/* </MDBCol> */}
         </MDBRow>
       </MDBContainer>
       {/* DELETE MODAL */}

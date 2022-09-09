@@ -5,7 +5,10 @@
     justify-content: flex-end;
     margin-bottom: 41px !important;
 }
-
+.projectStatus{
+    width: 40rem;
+    /* height: 25rem; */
+}
 
 .pocDetailsModal{
     display: block !important;
