@@ -135,17 +135,18 @@ const AdminDashboard = (props) => {
           >
             <button
               onClick={() => setShow(true)}
-              className="button-56 pt-1 mt-0">
+              className="button-56 pt-1 mt-0  headings_blocks "
+            >
               <h1 className="bench ">POC</h1>
             </button>
-            <button className="button-56 poc-p pt-1 mt-0 ">
+            <button className="button-56 poc-p pt-1 mt-0  headings_blocks">
               <h1 className="poc">BENCH</h1>
             </button>
           </div>
           <div className="row mt-5">
             <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-4">
               <div className="card">
-                <div className="card-body">
+                <div className="card-body card-body-top">
                   <div className="d-flex justify-content-between px-md-1">
                     <div>
                       <h3 className="text-success">40</h3>
@@ -161,7 +162,7 @@ const AdminDashboard = (props) => {
 
             <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
               <div className="card">
-                <div className="card-body">
+                <div className="card-body card-body-top">
                   <div className="d-flex justify-content-between px-md-1">
                     <div>
                       <h3 className="text-danger">10</h3>
@@ -176,7 +177,7 @@ const AdminDashboard = (props) => {
             </div>
             <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4">
               <div className="card">
-                <div className="card-body">
+                <div className="card-body card-body-top">
                   <div className="d-flex justify-content-between px-md-1">
                     <div>
                       <h3 className="text-warning">20</h3>
@@ -196,11 +197,13 @@ const AdminDashboard = (props) => {
           <div className="row mt-1">
             <h3 className="h3-subHead mx-3">Leave</h3>
             <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4 table-responsive">
-              <table className="table align-middle mb-0 bg-white table-striped table-hover ">
-                <thead className=" adminDashboardTableHead">
+              <table className="table align-middle mb-0 bg-white table-striped table-hover  ">
+                <thead className=" adminDashboardTableHead ">
                   <tr className="table-headings">
-                    <th ><span className="thName">Name</span></th>
-                    <th>Date</th>
+                    <th>
+                      <span className="thName">Name</span>
+                    </th>
+                    <th>Email</th>
                   </tr>
                 </thead>
                 <tbody className="tbody">
@@ -274,12 +277,11 @@ const AdminDashboard = (props) => {
                 </div>
               </div>
             </div>
-          
-                            
+
             <div className="col-xl-4 col-md-4 col-ms-6 col-12 mb-4">
               <div className="card">
                 <div className="card-header adminDashboardTableHead text-white">
-                   <h6 className="mb-0 text-center">Missed Worklogs</h6>
+                  <h6 className="mb-0 text-center">Missed Worklogs</h6>
                 </div>
                 <div className="card-body">
                   <ul className="list-group">
@@ -305,11 +307,11 @@ const AdminDashboard = (props) => {
             }}
           >
             {/* style={{background:'linear-gradient(to right, #3d3335, #db24db)',color:'white'} */}
-            <button className="button-56 poc-p  mt-0 pt-2">
+            <button className="button-56 poc-p  mt-0 pt-2 headings_blocks">
               <h1 className="poc ">POC</h1>
             </button>
             <button
-              className="button-56  mt-0 pt-2"
+              className="button-56  mt-0 pt-2 headings_blocks"
               onClick={() => setShow(false)}
             >
               <h1 className="bench">BENCH</h1>
@@ -317,8 +319,8 @@ const AdminDashboard = (props) => {
           </div>
           <div className="row mt-5">
             <h3 className="h3-subHead">Active</h3>
-            <div className="col-xl-8 col-sm-6 col-12 col-md-4 mb-4 table-responsive">
-              <table className="table align-middle mb-0 bg-white table-hover  ">
+            <div className="col-xl-8 col-sm-6 col-12 col-md-4 mb-4 table-responsive ">
+              <table className="table align-middle mb-0 bg-white table-hover ">
                 <thead className="adminDashboardTableHead">
                   <tr className="table-headings">
                     <th>Serial No</th>
@@ -341,7 +343,8 @@ const AdminDashboard = (props) => {
                           <p className="fw-normal mb-1">POC Name</p>
                         </td>
 
-                        <td><span
+                        <td>
+                          <span
                             className={`badge ${
                               data?.duration >= 5
                                 ? "badge-danger"
@@ -351,13 +354,9 @@ const AdminDashboard = (props) => {
                             } rounded-pill`}
                           >
                             1 Month
-                          </span></td>
-                          <td>Team Lead</td>
-
-                        <td className="">
-                        {data?.members.length}
+                          </span>
                         </td>
-                     >
+                     
              
                       </tr>
                     ))}
@@ -371,10 +370,10 @@ const AdminDashboard = (props) => {
               <Pie data={data} options={{ maintainAspectRatio: false }} />
             </div>
           </div>
-          <div className="row mt-1">
+          <div className="row mt-4">
             <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-1">
               <div className="card">
-                <div className="card-body">
+                <div className="card-body card-body-bottom">
                   <div className="d-flex justify-content-between px-md-1">
                     <div>
                       <h3 className="cardsHead">3</h3>
@@ -389,7 +388,7 @@ const AdminDashboard = (props) => {
             </div>
             <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-1">
               <div className="card">
-                <div className="card-body">
+                <div className="card-body card-body-bottom">
                   <div className="d-flex justify-content-between px-md-1">
                     <div>
                       <h3 className="cardsHead">4</h3>
@@ -404,7 +403,7 @@ const AdminDashboard = (props) => {
             </div>
             <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-1">
               <div className="card">
-                <div className="card-body">
+                <div className="card-body card-body-bottom">
                   <div className="d-flex justify-content-between px-md-1">
                     <div>
                       <h3 className="cardsHead">5</h3>

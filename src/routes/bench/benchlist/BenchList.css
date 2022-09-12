@@ -8,59 +8,81 @@ table.dataTable thead .sorting_desc:after,
 table.dataTable thead .sorting_desc:before,
 table.dataTable thead .sorting_desc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before {
-  bottom: .5em;
+  bottom: 0.5em;
 }
-table.dataTable thead th, table.dataTable thead td{
-    /* border: 1px solid rgba(0, 0, 0, 0.3) ; */
-   border:1px solid rgba(0, 0, 0, 0.15)
+table.dataTable thead th,
+table.dataTable thead td {
+  /* border: 1px solid rgba(0, 0, 0, 0.3) ; */
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
-#dtBasicExample_length,#dtBasicExample_filter{
-    margin-bottom: 25px;
+#dtBasicExample_length,
+#dtBasicExample_filter {
+  margin-bottom: 25px;
 }
 /* .form-switch .form-check-input {width: 3rem !important} */
 
-.form-switch .form-check-input:after,.form-switch .form-check-input:checked[type=checkbox]:after{
-  margin-top: -9px !important
+.form-switch .form-check-input:after,
+.form-switch .form-check-input:checked[type="checkbox"]:after {
+  margin-top: -9px !important;
 }
-.form-switch{
+.form-switch {
   padding-left: 4.5rem !important;
 }
-.form-switch input{
+.form-switch input {
   padding-left: 0px !important;
 }
-.dropdown-toggle{
+.dropdown-toggle {
   padding: 0.625rem 1rem 0.5rem 0.5rem !important;
-
 }
 /* new css*/
 
-tr{
+tr {
   vertical-align: middle;
   text-align: center;
+  font-family: Helvetica, sans-serif;
+  font-size: 16px;
 }
-.select{
+.select {
   float: right;
   padding: 0.625rem 1rem 0.5rem 0.5rem !important;
-
 }
-.fa-edit,.fa-trash{
+.fa-edit,
+.fa-trash {
   font-size: 20px !important;
 }
 
-.a1{
+.a1 {
   color: #ff5722;
 }
 
-.addBtn{
-  background:#2B7A0B;
+.addBtn {
+  background-color: #333;
+  color: #fff;
+}
+.addBtn:hover {
+  transform: scale(1.03);
+  background-color: #000;
   color: #fff;
 }
 
-.selectBtn{
+.selectBtn {
   color: #000;
   background: #fff;
   border: none;
 }
-select,option{
+select,
+option {
   border: none;
+}
+.worklog_icon {
+  color: #333;
+  background-color: white;
+  font-size: 24px;
+}
+.worklog_icon:hover {
+  color: #222;
+  transform: scale(1.2);
+}
+.table_content {
+  background-color: #444;
 }

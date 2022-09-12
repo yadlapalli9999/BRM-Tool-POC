@@ -81,7 +81,9 @@ let{loading,benchLists,errorMessage} = allBenchLists;
         <pre>{JSON.stringify(benchLists.data)}</pre>
         <div className="row">
           <div className="col-md-6">
-            <h2 className="a1" style={{ marginTop: "30px" }}>Bench List</h2>
+            <h2 className="a1" style={{ marginTop: "30px" }}>
+              Bench List
+            </h2>
           </div>
           <div className="col-md-6">
             <div
@@ -92,6 +94,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
               <Link
                 to="/newbenchEmployee"
                 className="btn addBtn text-white"
+                style={{ backgroundColor: "#333" }}
               >
                 ADD
               </Link>
@@ -112,20 +115,20 @@ let{loading,benchLists,errorMessage} = allBenchLists;
             />
           </div>
           <div className="col-md-6 justify-content-center">
-          <select className="select " data-mdb-filter="true">
-          <option className="selectBtn">Select Year</option>
-                <option>1-2</option>
-                <option>2-3</option>
-                <option>3-4</option>
-                <option>4-5</option>
-                <option>5-6</option>
-                <option>6-7</option>
-                <option>7-8</option>
-                <option>8-9</option>
-                <option>9-10</option>
-                <option>10-11</option>
-                <option>11-12</option>
-</select>
+            <select className="select " data-mdb-filter="true">
+              <option className="selectBtn">Select Year</option>
+              <option>1-2</option>
+              <option>2-3</option>
+              <option>3-4</option>
+              <option>4-5</option>
+              <option>5-6</option>
+              <option>6-7</option>
+              <option>7-8</option>
+              <option>8-9</option>
+              <option>9-10</option>
+              <option>10-11</option>
+              <option>11-12</option>
+            </select>
             {/* <div class="dropdown d-flex justify-content-end mb-4">
               <select
                 class="btn btn-rounded  btn-secondary dropdown-toggle"
@@ -152,7 +155,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
           <div className="col">
             {benchLists.length >0 ?
             <MDBTable>
-              <MDBTableHead className="table-dark text-white">
+              <MDBTableHead className="table_content text-white">
                 <tr>
                   <th scope="col">EmpId</th>
                   <th scope="col">Name</th>
@@ -195,7 +198,11 @@ let{loading,benchLists,errorMessage} = allBenchLists;
                                 style={{ width: "40px", height: "40px" }}
                                 className="rounded-circle pocHomeExcelLogo "
                               /> */}
-                            <MDBIcon fas icon="list-alt" />
+                            <MDBIcon
+                              fas
+                              icon="list-alt"
+                              className="worklog_icon"
+                            />
                           </a>
                         </td>
                         <td>
@@ -296,7 +303,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
                             <i
                               className="fas fa-edit text-primary"
                             />
-                             <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> 
+                             <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
                           </Link>
                         </td> }
                         <td>
@@ -318,7 +325,7 @@ let{loading,benchLists,errorMessage} = allBenchLists;
           </div>
         </div>
       </div>
-      
+
       {/* DELETE MODAL */}
       <MDBModal
         id="exampleModal"

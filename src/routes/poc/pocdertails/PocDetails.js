@@ -55,6 +55,15 @@ const PocDetails = () => {
       },
     });
   });
+
+  useEffect(() => {
+    const data = (pocList || []).find((poc) => poc._id === pocID) || {};
+    const members = (data.members || []).map((mem, ind) => {
+      return { id: mem, memberName: mem.toString() };
+    });
+    setPocData({ ...data, members });
+  }, [pocID]);
+
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
@@ -69,9 +78,9 @@ const PocDetails = () => {
 
   const getDocIcon = (docLink) => {
     if (docLink.includes("docs.google.com")) {
-      return <MDBIcon className=' fas fa-file-import' />;
+      return <MDBIcon className=" fas fa-file-import" />;
     } else if (docLink.includes("docs.excel.com")) {
-      return <MDBIcon className='fas fa-file-excel' />;
+      return <MDBIcon className="fas fa-file-excel" />;
     }
   };
 
@@ -81,12 +90,12 @@ const PocDetails = () => {
       case "duration":
         return `${pocData[val]} ${header.metric}`;
       case "members":
-        return (pocData[val] || []).join(",");
+        return (pocData[val] || []).length;
       case "documents":
         return (
-          <div className='d-flex align-items-center '>
+          <div className="d-flex align-items-center ">
             {(pocData[val] || []).map((doc, docInd) => (
-              <a href={doc} target='_blank' style={{ marginLeft: "1rem" }}>
+              <a href={doc} target="_blank" style={{ marginLeft: "1rem" }}>
                 {getDocIcon(doc)}
               </a>
             ))}
@@ -99,17 +108,20 @@ const PocDetails = () => {
 
   return (
     <React.Fragment>
-      <MDBContainer className='py-1'>
+      <MDBContainer className="py-1">
         <MDBRow>
-          <MDBCol md='12' className='d-flex justify-content-end'>
-            <Link to='/editpoc' className='btn btn-primary m-2'>
+          <MDBCol md="12" className="d-flex justify-content-end">
+            <Link
+              to={`/editpoc?pocID=${pocID}`}
+              className="btn btn-primary m-2"
+            >
               Edit
             </Link>
-            <MDBBtn className='btn btn-danger m-2'>Cancel</MDBBtn>
+            <MDBBtn className="btn btn-danger m-2">Cancel</MDBBtn>
           </MDBCol>
         </MDBRow>
-        <MDBRow className='mt-3'>
-          <MDBCol md='12'>
+        <MDBRow className="mt-3">
+          <MDBCol md="12">
             <MDBCard>
               <MDBCardBody>
                  <MDBListGroup>
@@ -167,47 +179,47 @@ const PocDetails = () => {
             </MDBCard>
           </MDBCol>
         </MDBRow>
-        <MDBRow className='mt-5'>
-          <MDBCol md='6'>
-            <AddResource />
+        <MDBRow className="mt-5">
+          <MDBCol md="6">
+            <AddResource members={pocData.members} />
           </MDBCol>
-          <MDBCol md='2'></MDBCol>
-          <MDBCol md='4' className='justify-content-end'>
-            <canvas id='pieChart' width='200' height='200'></canvas>
+          <MDBCol md="2"></MDBCol>
+          <MDBCol md="4" className="justify-content-end">
+            <canvas id="pieChart" width="200" height="200"></canvas>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
       {/* DELETE MODAL */}
       <div
-        className='modal fade'
-        id='exampledModal'
-        tabIndex='-1'
-        aria-labelledby='exampledModalLabel'
-        aria-hidden='true'
+        className="modal fade"
+        id="exampledModal"
+        tabIndex="-1"
+        aria-labelledby="exampledModalLabel"
+        aria-hidden="true"
       >
-        <div className='modal-dialog modal-dialog-centered'>
-          <div className='modal-content'>
-            <div className='modal-header'>
-              <h5 className='modal-title' id='exampledModalLabel'>
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampledModalLabel">
                 Delete
               </h5>
               <button
-                type='button'
-                className='btn-close'
-                data-mdb-dismiss='modal'
-                aria-label='Close'
+                type="button"
+                className="btn-close"
+                data-mdb-dismiss="modal"
+                aria-label="Close"
               ></button>
             </div>
-            <div className='modal-body'>Are You Sure You Want To Delete?</div>
-            <div className='modal-footer'>
+            <div className="modal-body">Are You Sure You Want To Delete?</div>
+            <div className="modal-footer">
               <button
-                type='button'
-                className='btn btn-primary'
-                data-mdb-dismiss='modal'
+                type="button"
+                className="btn btn-primary"
+                data-mdb-dismiss="modal"
               >
                 Close
               </button>
-              <button type='button' className='btn btn-danger'>
+              <button type="button" className="btn btn-danger">
                 Delete
               </button>
             </div>

@@ -83,137 +83,124 @@ let POCHome = () => {
     navigate(`/pocdetails?pocID=${pocID}`);
   };
 
-  // const handleNameClick = () => {
-  //   navigate("/pocdetails");
-  // };
+  const getDocIcon = (docLink) => {
+    if (docLink.includes("docs.google.com")) {
+      return <MDBIcon fas icon="file-upload" className="doc_icon" />;
+      // <MDBIcon className=" fas fa-file-import doc_icon" />;
+    } else if (docLink.includes("docs.excel.com")) {
+      return <MDBIcon className="fas fa-file-excel doc_icon" />;
+    }
+  };
+
+  const getTableData = (header, data = {}) => {
+    const val = header.value;
+    switch (val) {
+      case "name":
+        return (
+          <div className="d-flex align-items-center">
+            <div className="name" onClick={() => handleNameClick(data._id)}>
+              <p className="fw-bold mb-1">{data[val]}</p>
+            </div>
+          </div>
+        );
+      case "description":
+        return <p className="fw-normal mb-1">{data[val]}</p>;
+      case "duration":
+        return (
+          <span
+            className={`badge ${
+              data[val] >= 5
+                ? "badge-danger"
+                : data[val] >= 3
+                ? "badge-warning"
+                : "badge-success"
+            } rounded-pill d-inline`}
+          >
+            {data[val]} {header.metric}
+          </span>
+        );
+      case "members":
+        return (
+          <button type="button" className="btn btn-link btn-sm btn-rounded">
+            {data[val]?.length || 0}
+          </button>
+        );
+      case "documents":
+        return (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            {(data[val] || []).map((doc, docInd) => (
+              <a
+                href={doc}
+                target="_blank"
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {getDocIcon(doc)}
+              </a>
+            ))}
+          </div>
+        );
+      default:
+        return data[val];
+    }
+  };
 
   return (
-    <MDBContainer className='py-4'>
+    <MDBContainer className="py-4">
       <MDBRow>
-        <MDBCol md='12' className='text-center pocTitle'>
-          <h2>ACTIVE POC</h2>
+        <MDBCol md="12" className="text-center">
+          <h2 className="pocTitle">ACTIVE POC</h2>
         </MDBCol>
       </MDBRow>
       <MDBRow>
-        <MDBCol md='12' className='d-flex justify-content-end'>
-          <Link to='/addpoc' className='btn addBtn'>
+        <MDBCol md="12" className="d-flex justify-content-end">
+          <Link
+            to="/addpoc"
+            className="btn addBtn"
+            style={{ backgroundColor: "#333" }}
+          >
             Add
           </Link>
         </MDBCol>
       </MDBRow>
-      <MDBRow className='mt-4'>
+      <MDBRow className="mt-4">
         <MDBCol>
-          {loading ? (
-            <div className='text-center'>
-              <MDBSpinner role='status' color='primary'>
-                <span className='visually-hidden'>Loading...</span>
+          {fetchingPocList ? (
+            <div className="text-center">
+              <MDBSpinner role="status" color="primary">
+                <span className="visually-hidden">Loading...</span>
               </MDBSpinner>
               <div>Fetching POC data...</div>
             </div>
           ) : (
             <MDBTable>
-              
-              <MDBTableHead className='table_content text-white'>
+              <MDBTableHead className=" table_content text-white">
                 <tr>
                   {POC_TABLE_HEADERS.map((header) => (
-                    <th scope='col'>{header.label}</th>
+                    <th scope="col">{header.label}</th>
                   ))}
                 </tr>
               </MDBTableHead>
-              {pocList.length >0 ?
-              <MDBTableBody className="align-item-center">
-              {pocList &&
-              pocList?.map((data) => (
-                <tr>
-                  <td>
-                    <div className="align-items-center">
-                      <div className="name" onClick={()=>navigate(`/pocdetails/${data._id}`)}>
-                        <p className="fw-bold mb-1">{data?.name}</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <p className="fw-normal mb-1">{data?.description}</p>
-                  </td>
-                  <td>
-                    <span
-                      className={`badge ${
-                        data?.duration >= 5
-                          ? "badge-danger"
-                          : data?.duration >= 3
-                          ? "badge-warning"
-                          : "badge-success"
-                      } rounded-pill d-inline`}
-                    >
-                      {data?.duration} Month
-                    </span>
-                  </td>
-                  <td>{data?.createdBy?.name}</td>
-                  <td>
-                    <button
-                      type="button"
-                      className="btn btn-link btn-sm btn-rounded"
-                    >
-                      {data?.members.length}
-                    </button>
-                  </td>
-                  <td>
-                    <div className="d-flex align-items-center ">
-                      {data?.documents?.map((doc) => (
-                        <>
-                          {doc.includes("docs.google.com") ? (
-                            <a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
-                              {/* <img
-                                src={"../../google.png"}
-                                alt=""
-                                style={{ width: "45px", height: "45px" }}
-                                className="rounded-circle pocHomeGoogleDocsLogo "
-                              /> */}
-                              <MDBIcon className=" fas fa-file-import" />
-                            </a>
-                          ) : doc.includes("docs.excel.com") ? (
-                            <a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
-                              {/* <img
-                                src={"../../excel.png"}
-                                alt=""
-                                style={{ width: "40px", height: "45px" }}
-                                className="rounded-circle pocHomeExcelLogo "
-                              /> */}
-                              <MDBIcon className="fas fa-file-excel"/>
-                            </a>
-                          ) : doc.includes("docs.google.com") &&
-                            doc.includes("docs.excel.com") ? (
-                            <>
-                              <a href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
-                                {/* <img
-                                  src={"../../google.png"}
-                                  alt=""
-                                  style={{ width: "45px", height: "45px" }}
-                                  className="rounded-circle pocHomeGoogleDocsLogo "
-                                /> */}
-                                <MDBIcon className="fas fa-file-import" />
-
-                              </a>
-                              <a  href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0" target="_blank">
-                                {/* <img
-                                  src={"../../excel.png"}
-                                  alt=""
-                                  style={{ width: "40px", height: "45px" }}
-                                  className="rounded-circle pocHomeExcelLogo"
-                                /> */}
-                                <MDBIcon className="fas fa-file-excel" style={{marginLeft:'10px'}}/>
-                              </a>
-                            </>
-                          ) : (
-                            ""
-                          )}
-                        </>
-                      ))}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-              </MDBTableBody>:null}
+              <MDBTableBody className="align-items-center">
+                {(pocList || []).map((data) => (
+                  <tr>
+                    {POC_TABLE_HEADERS.map((header) => (
+                      <td>{getTableData(header, data)}</td>
+                    ))}
+                  </tr>
+                ))}
+              </MDBTableBody>
             </MDBTable>
           )}
         </MDBCol>
