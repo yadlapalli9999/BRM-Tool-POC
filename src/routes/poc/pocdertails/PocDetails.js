@@ -1,38 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardHeader,
-  MDBCardTitle,
-  MDBCardBody,
-  MDBInput,
-  MDBBtn,
-  MDBListGroup,
-  MDBListGroupItem,
-  MDBIcon,
-} from "mdb-react-ui-kit";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import {MDBContainer,MDBRow,MDBCol,MDBCard,MDBCardHeader,MDBCardTitle,MDBCardBody,MDBInput,MDBBtn, MDBListGroup, MDBListGroupItem} from 'mdb-react-ui-kit';
 import $ from "jquery";
 import { Chart, registerables } from "chart.js";
-import { useSelector } from "react-redux";
 
 import "./PocDetails.css";
 import AddResource from "../addresource/AddResource";
-import { POC_TABLE_HEADERS } from "../../Constants";
+import { useDispatch, useSelector } from "react-redux";
+import { getSinglePoc } from "../../../redux/features/poc/poc.feature";
 
 Chart.register(...registerables);
 
-const PocDetails = () => {
-  const { pocList } = useSelector((store) => {
-    return store["poc"];
-  });
-  const [params] = useSearchParams();
-  const pocID = params.getAll("pocID")[0] || null;
-  const pocData = (pocList || []).find((poc) => poc._id === pocID);
-  console.log("pocID", pocID, pocData);
 
+const PocDetails = () => {
+  let {singlePoc} = useSelector((store)=>{return store['poc']})
+  console.log(singlePoc)
+  const members = [
+    {
+      id: 1,
+      memberName: "Kunal Rokhle",
+    },
+    {
+      id: 2,
+      memberName: "Alok Kumar",
+    },
+    {
+      id: 3,
+      memberName: "Sudhanshu Jain",
+    },
+  ];
   $(document).ready(function () {
     var ctx = $("#pieChart");
     var myLineChart = new Chart(ctx, {
@@ -65,6 +61,11 @@ const PocDetails = () => {
   const handlePocDetailsNameClick = () => {
     navigate("/worklogs");
   };
+  let dispatch = useDispatch();
+  let {id} = useParams()
+  useEffect(()=>{
+    dispatch(getSinglePoc(id))
+  },[])
 
   const getDocIcon = (docLink) => {
     if (docLink.includes("docs.google.com")) {
@@ -111,18 +112,57 @@ const PocDetails = () => {
           <MDBCol md='12'>
             <MDBCard>
               <MDBCardBody>
-                <MDBListGroup>
-                  {POC_TABLE_HEADERS.map((header) => {
-                    return (
-                      <MDBListGroupItem>
-                        <MDBRow>
-                          <MDBCol md='3'>{header.label}</MDBCol>
-                          <MDBCol md='9'>{getData(header)}</MDBCol>
-                        </MDBRow>
-                      </MDBListGroupItem>
-                    );
-                  })}
-                </MDBListGroup>
+                 <MDBListGroup>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Name</MDBCol>
+                        <MDBCol md="9">{singlePoc.name}</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Description</MDBCol>
+                        <MDBCol md="9">{singlePoc.description}</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Duration</MDBCol>
+                        <MDBCol md="9">{singlePoc.duration}</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">CreatedBy</MDBCol>
+                        <MDBCol md="9">{singlePoc.createdBy}</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Team Lead</MDBCol>
+                        <MDBCol md="9">{singlePoc.teamLead}</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Status</MDBCol>
+                        <MDBCol md="9">{singlePoc.status}</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Members</MDBCol>
+                        <MDBCol md="9">Kunal Rokhle , Alok Kumar , Sudhanshu Jain</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                       <MDBRow>
+                        <MDBCol md="3">Documents</MDBCol>
+                        <MDBCol md="9">Bay Area, San Francisco, CA</MDBCol>
+                       </MDBRow>
+                    </MDBListGroupItem>
+
+                 </MDBListGroup>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>

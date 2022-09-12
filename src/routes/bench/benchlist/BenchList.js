@@ -20,25 +20,61 @@ import "datatables.net-dt/js/dataTables.dataTables";
 import "datatables.net-dt/css/jquery.dataTables.min.css";
 import "./BenchList.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getBench } from "../../../redux/features/bench/bench.feature";
+import { useDispatch,useSelector } from "react-redux";
+import { deleteBench, getBench, searchBench } from "../../../redux/features/bench/bench.feature";
+import Axios  from "axios";
+import BenchServices from "../../../redux/features/bench/benchServices";
+import { toast } from "react-toastify";
 
 let BenchList = () => {
-  let dispatch = useDispatch();
+  let BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/resources`
 
-  useEffect(() => {
-    dispatch(getBench());
-  }, []);
-  let allBenchLists = useSelector((store) => {
-    return store["bench"];
-  });
-  let { loading, benchLists, errorMessage } = allBenchLists;
+  let dispatch = useDispatch();
+  
+  useEffect(()=>{
+    dispatch(getBench())
+  },[])
+  let allBenchLists  = useSelector((store)=>{
+    return store['bench']
+})
+
+let{loading,benchLists,errorMessage} = allBenchLists;
   const [staticModal, setStaticModal] = useState(false);
 
   const toggleShow = () => setStaticModal(!staticModal);
     let [role,setRole] = useState(true);
-  const [query, setQuery] = useState("");
-  const navigate = useNavigate();
+  const [query, setQuery] = useState({
+    searchValue:''
+  });
+ const navigate = useNavigate();
+ let handleDelete = (id)=>{
+  //  Axios.delete(`${BASE_URL}/${id}`).then((res)=>{
+  //   console.log(res)
+  //  }).catch((error)=>{
+  //   console.log(error)
+  //  })
+  BenchServices.remove(id)
+  toast.success('successfully Delete')
+  setInterval(()=>{
+    dispatch(getBench())
+  },1000)
+ }
+  
+ let handleSearch = (event)=>{
+  setQuery({
+    ...query,
+    searchValue:event.target.value
+  })
+  
+  if(query.searchValue.length >2){
+    dispatch((searchBench(query)))
+  }
+  else{
+    dispatch(getBench())
+  }
+ }
+ 
+ 
   return (
     <React.Fragment>
       <div className="container">
@@ -69,8 +105,10 @@ let BenchList = () => {
             <MDBInput
               type="text"
               label="search"
+              value={query.searchValue}
               style={{ width: "660px" }}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={handleSearch}
+              // onChange={(e) => {setSearchValue(e.target.value);dispatch(searchBench(searchValue));console.log(searchValue)}}
             />
           </div>
           <div className="col-md-6 justify-content-center">
@@ -112,6 +150,7 @@ let BenchList = () => {
         </div>
         <div className="row mt-4">
           <div className="col">
+            {benchLists.length >0 ?
             <MDBTable>
               <MDBTableHead className="table-dark text-white">
                 <tr>
@@ -127,12 +166,12 @@ let BenchList = () => {
               </MDBTableHead>
 
               <MDBTableBody>
-                {benchLists.data &&
-                  benchLists.data
-                    ?.filter((filterData) =>
-                      filterData?.name.toLowerCase().includes(query)
-                    )
-                    ?.map((filterData) => (
+                {
+                    // benchLists&& benchLists?.filter((filterData) =>filterData?.name.toLowerCase().includes(query))?.map((filterData) => (
+
+                      // benchLists && benchLists?.filter((filterData) =>filterData?.name.toLowerCase().includes(searchValue))?.map((filterData) => (
+                      benchLists && benchLists?.map((filterData) => (
+
                       <tr key={filterData._id}>
                         <td>
                           {/* <Link to={`/worklog/${item.id}`}>{item.id}</Link> */}
@@ -143,7 +182,7 @@ let BenchList = () => {
                         <td>{filterData?.name}</td>
                         <td>{filterData.email}</td>
                         <td>{filterData.totalWorkExp}</td>
-                        <td>{filterData.primarySkills[0].skillName}</td>
+                        <td>{filterData.primarySkills}</td>
                         {/* <td>{item}</td> */}
                         <td>
                           <a
@@ -174,20 +213,20 @@ let BenchList = () => {
                           </Link>
                         </td> */}
                         <td>
-                          <Link to="/editbenchEmployee">
+                          <Link to={`/editbenchEmployee/${filterData._id}`}>
                             <i className="fas fa-edit text-primary benchListEditi" />
                           </Link>
                           &nbsp;&nbsp;
                           <i
-                            data-target="#exampledModal"
-                            onClick={toggleShow}
+                            data-target="#exampleModal"
+                            onClick={()=>handleDelete(filterData._id)}
                             className="fa fa-trash text-danger benchListdeletei"
                           />
                         </td>
                       </tr>
                     ))}
               </MDBTableBody>
-            </MDBTable>
+            </MDBTable>:null}
 
             {/* <table
               id="dtBasicExample"

@@ -1,37 +1,33 @@
 import React,{useState} from "react";
 import {useNavigate} from 'react-router-dom';
 import {MDBContainer,MDBRow,MDBCol,MDBCard,MDBCardHeader,MDBCardBody,MDBCardTitle, MDBIcon, MDBCardSubTitle, MDBInput, MDBTable, MDBTableBody, MDBFooter, MDBBtn} from 'mdb-react-ui-kit';
-let AddResource = () =>{
-    const members = [
-        {
-          id: 1,
-          memberName: "Kunal Rokhle",
-        },
-        {
-          id: 2,
-          memberName: "Alok Kumar",
-        },
-        {
-          id: 3,
-          memberName: "Sudhanshu Jain",
-        },
-      ];
+let AddResource = (props) =>{
+    // const members = [
+    //     {
+    //       id: 1,
+    //       memberName: "Kunal Rokhle",
+    //     },
+    //     {
+    //       id: 2,
+    //       memberName: "Alok Kumar",
+    //     },
+    //     {
+    //       id: 3,
+    //       memberName: "Sudhanshu Jain",
+    //     },
+    //   ];
       const [show, setShow] = useState(false);
       const [query, setQuery] = useState("");
-      const [resource, setResource] = useState({
-        memberName:''
-      });
+      const [resource, setResource] = useState("");
   const handleResource = (event) => {
     event.preventDefault();
-    members.push(resource);
-    console.log(members);
+    props.members.push(resource);
+    console.log(props.members);
     clearForm();
     setShow(false);
   };
   const clearForm = () => {
-    setResource({
-        memberName:''
-    });
+    setResource("");
   };
       const navigate = useNavigate();
   const handlePocDetailsNameClick = () => {
@@ -57,9 +53,9 @@ let AddResource = () =>{
                         <MDBCardBody>
                            <MDBTable>
                               <MDBTableBody>
-                              {members && members
+                              {props.members && props.members
                         ?.filter((filterMember) =>
-                          filterMember?.memberName.toLowerCase().includes(query)
+                          filterMember?.toLowerCase().includes(query)
                         )
                         ?.map((filterMember,index) => (
                           <tr
@@ -68,7 +64,7 @@ let AddResource = () =>{
                             onClick={handlePocDetailsNameClick}
                           >
                             <td className="align-middle ">
-                              <span>{filterMember?.memberName}</span>
+                              <span>{filterMember}</span>
                             </td>
                           </tr>
                         ))}
@@ -119,12 +115,9 @@ let AddResource = () =>{
             <div className="modal-body mx-3">
               <div className="md-form mb-3">
                 {/* <i className="fas fa-user prefix grey-text"></i> */}
-                <MDBInput value={resource.memberName}
+                <MDBInput value={resource}
                   onChange={(e) => {
-                    setResource({
-                        ...resource,
-                        memberName:e.target.value
-                    });
+                    setResource(e.target.value);
                   }} label="Search By Name , Email"
                   />
                 {/* <input

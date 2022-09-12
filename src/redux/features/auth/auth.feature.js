@@ -9,12 +9,16 @@ const BASE_URL ='http://brm-tool.ap-south-1.elasticbeanstalk.com';
 // const access_token = localStorage.getItem('access_token')
 //   ? localStorage.getItem('access_token')
 //   : null
-
+import API from "../../api";
 const access_token = localStorage.getItem('access_token')
   ? localStorage.getItem('access_token')
-  : null
+  : null;
+//const resourceID = localStorage.getItem('resourceID')? localStorage.getItem('resourceID'):null
+
 const initialState = {
   access_token,
+  resourceID:localStorage.getItem('resourceID'),
+
   userInfo:null,
   isAuthenticated : false,
   loading:false,
@@ -44,18 +48,19 @@ export const loginUser = createAsyncThunk(
   "auth/login",
   async ({ email, password }, {rejectWithValue}) => {
     try {
-      const {data} = await axios.post(
-        `${BASE_URL}/resources/login`,{email,password},
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          }
-        }
-      )
-      setAuthToken(data.access_token);
-      localStorage.setItem("access_token",data.access_token)
-      return data;
+      const {data} = await axios.post(`${BASE_URL}/resources/login`,{email,password})
+        // {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   }
+        // }
+      //)
+      setAuthToken(data.data.access_token);
+      console.log(data)
+      localStorage.setItem('resourceID',data.data.resourceID)
+      localStorage.setItem("access_token",data.data.access_token)
+      return data.data;
       //let data = await response.json()
       // console.log("response", data)
       // if (response.status === 200) {
@@ -75,20 +80,39 @@ export const loginUser = createAsyncThunk(
     }
   }
 )
+
+// export const loginUser = createAsyncThunk("auth/login",async({email,password},{rejectWithValue})=>{
+//   try{
+//     console.log(API)
+//     const data = await API.post("/resources/login",{email,password})
+//     localStorage.setItem('access_token',data.data.access_token)
+//     console.log(data)
+//     return data
+//   }
+//   catch (err) {
+//     console.log('13', err);
+//     return rejectWithValue(err.response.data);
+//   }
+// })
 const authSlice = createSlice({
     name:'auth',
     initialState,
     extrareducers:{
         [loginUser.pending]:(state,action)=>{
-          state.loading= true,
-          state.errorMessage = null;
+          state.loading= true
+          // state.errorMessage = null;
         },
         [loginUser.fulfilled]: (state, action) => {
-          localStorage.setItem('access_token', action.payload.access_token)
+          // localStorage.setItem('access_token',action.payload.access_token)
+          // state.access_token = action.payload.access_token;
+          //localStorage.setItem('access_token', action.payload.data.access_token)
+          //localStorage.setItem('resourceID',action.payload.data.resourceID)
+
             state.loading = false;
-            state.userInfo = action.payload;
-            state.access_token =action.payload.access_token;
-            state.isAuthenticated = true
+            // state.loginData = action.payload;
+             state.access_token = action.payload.access_token;
+            state.resourceID = action.payload.resourceID;
+            // state.isAuthenticated = true
         },
         [loginUser.rejected]: (state, action) => {
           localStorage.removeItem('access_token')
