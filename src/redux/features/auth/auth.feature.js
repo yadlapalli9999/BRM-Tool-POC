@@ -56,11 +56,15 @@ export const loginUser = createAsyncThunk(
         //   }
         // }
       //)
+      // setAuthToken(data.data.access_token);
+      // console.log(data)
+      // localStorage.setItem('resourceID',data.data.resourceID)
+      // localStorage.setItem("access_token",data.data.access_token)
+      // return data.data;
       setAuthToken(data.data.access_token);
-      console.log(data)
-      localStorage.setItem('resourceID',data.data.resourceID)
-      localStorage.setItem("access_token",data.data.access_token)
-      return data.data;
+      localStorage.setItem("access_token", data.data.access_token);
+      console.log(data.data.access_token);
+      return data;
       //let data = await response.json()
       // console.log("response", data)
       // if (response.status === 200) {
@@ -72,9 +76,11 @@ export const loginUser = createAsyncThunk(
       // }
     } catch (error) {
       if(error.reponse && error.reponse.data.message){
+        console.log(error.reponse.data.message);
         return rejectWithValue(error.reponse.data.message)
       }
       else{
+        console.log(error.message);
         return rejectWithValue(error.message)
       }
     }
@@ -103,7 +109,7 @@ const authSlice = createSlice({
           // state.errorMessage = null;
         },
         [loginUser.fulfilled]: (state, action) => {
-          // localStorage.setItem('access_token',action.payload.access_token)
+          localStorage.setItem('access_token',action.payload.access_token)
           // state.access_token = action.payload.access_token;
           //localStorage.setItem('access_token', action.payload.data.access_token)
           //localStorage.setItem('resourceID',action.payload.data.resourceID)

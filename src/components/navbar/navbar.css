@@ -7,7 +7,6 @@ margin-right: 6rem;
     /* color: #e03600;
      */
     color: #000;
-
     /* -webkit-text-stroke-width: 1px; */
     /* -webkit-text-stroke-color: #000; */
 }
@@ -18,4 +17,12 @@ list-style-type: none;
 
 .navbar{
   background: linear-gradient(to right, #fff, #fff)
+}
+i:hover{
+  color: #ff5722;
+  transition:0.2s 0.1s;
+}
+title{
+  color: #000;
+  border: none;
 }

@@ -53,6 +53,9 @@ tr {
 
 .a1 {
   color: #ff5722;
+  position: relative;
+  top: 4rem;
+  /* margin-top: "3rem"; */
 }
 
 .addBtn {
@@ -69,6 +72,8 @@ tr {
   color: #000;
   background: #fff;
   border: none;
+  position: relative;
+  left: 7vw;
 }
 select,
 option {
@@ -85,4 +90,8 @@ option {
 }
 .table_content {
   background-color: #444;
+}
+.inp{
+  position: relative;
+  left: 30vw;
 }

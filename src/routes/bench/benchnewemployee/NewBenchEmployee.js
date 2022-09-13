@@ -19,13 +19,13 @@ let NewBenchEmployee = () => {
 
   
   let [newBench,setNewBench] = useState({
-    id:null,
+    // id:null,
     name:'',
     email:'',
     emp_id:'',
     password:'',
-    totalWorkExp:null ?.toString()|| '',
-    totalExpinFission:null ?.toString()|| '',
+    totalWorkExp:'',
+    totalExpinFission:null?totalExpinFission.toString():'',
     primarySkills:[],
     reportingManager:'',
     projectName:'',
