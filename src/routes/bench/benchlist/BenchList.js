@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import $ from "jquery";
+import $, { data } from "jquery";
+import { dummyData } from "./dummyData";
 import {
   MDBBtn,
   MDBInput,
@@ -22,10 +23,11 @@ import "./BenchList.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getBench } from "../../../redux/features/bench/bench.feature";
+import ReservedBenchModal from "./modals/ReservedBenchModal";
+import BenchDeleteConfirmationModal from "./modals/BenchDeleteConfirmationModal";
 
 let BenchList = () => {
   let dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getBench());
   }, []);
@@ -33,13 +35,22 @@ let BenchList = () => {
     return store["bench"];
   });
   let { loading, benchLists, errorMessage } = allBenchLists;
-  const [staticModal, setStaticModal] = useState(false);
+  console.log(JSON.stringify(benchLists.data));
 
+  const [staticModal, setStaticModal] = useState(false);
   const toggleShow = () => setStaticModal(!staticModal);
   let [role, setRole] = useState(true);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  console.log(JSON.stringify(benchLists.data));
+  const [showBenchModal, setShowBenchModal] = useState(false);
+  const toggleHandlerOff = () => {
+    setShowBenchModal(true);
+  };
+  const [benchDeleteModal, setBenchDeleteModal] = useState(false);
+  const toggleHandlerOn = () => {
+    setBenchDeleteModal(true);
+  };
+  const [hasReserved, setHasReserved] = useState(false);
   return (
     <React.Fragment>
       <div className="container">
@@ -69,7 +80,6 @@ let BenchList = () => {
         <div className="row">
           <div className="col-md-3 inp">
             <MDBInput
-
               type="text"
               label="Search Name"
               style={{ width: "660px" }}
@@ -77,20 +87,20 @@ let BenchList = () => {
             />
           </div>
           <div className="col-md-6 ">
-          <select className="select selectBtn mx-5 " data-mdb-filter="true">
-          <option className=" ">Select Year</option>
-                <option>1-2</option>
-                <option>2-3</option>
-                <option>3-4</option>
-                <option>4-5</option>
-                <option>5-6</option>
-                <option>6-7</option>
-                <option>7-8</option>
-                <option>8-9</option>
-                <option>9-10</option>
-                <option>10-11</option>
-                <option>11-12</option>
-</select>
+            <select className="select selectBtn mx-5 " data-mdb-filter="true">
+              <option className=" ">Select Year</option>
+              <option>1-2</option>
+              <option>2-3</option>
+              <option>3-4</option>
+              <option>4-5</option>
+              <option>5-6</option>
+              <option>6-7</option>
+              <option>7-8</option>
+              <option>8-9</option>
+              <option>9-10</option>
+              <option>10-11</option>
+              <option>11-12</option>
+            </select>
             {/* <div class="dropdown d-flex justify-content-end mb-4">
               <select
                 class="btn btn-rounded  btn-secondary dropdown-toggle"
@@ -128,7 +138,7 @@ let BenchList = () => {
                   <th scope="col">Actions</th>
                 </tr>
               </MDBTableHead>
-
+            
               <MDBTableBody>
                 {benchLists.data &&
                   benchLists.data
@@ -158,11 +168,11 @@ let BenchList = () => {
                             target="_blank"
                           >
                             {/* <img
-                                src={"../../excel.png"}
-                                alt=""
-                                style={{ width: "40px", height: "40px" }}
-                                className="rounded-circle pocHomeExcelLogo "
-                              /> */}
+                src={"../../excel.png"}
+                alt=""
+                style={{ width: "40px", height: "40px" }}
+                className="rounded-circle pocHomeExcelLogo "
+              /> */}
                             <MDBIcon
                               fas
                               icon="list-alt"
@@ -171,19 +181,31 @@ let BenchList = () => {
                           </a>
                         </td>
                         <td>
-                          <MDBSwitch
-                            id="flexSwitchCheckDefault"
-                            label="Default switch checkbox input"
-                          />
+                          {hasReserved && (
+                            <MDBIcon
+                              fas
+                              icon="toggle-on"
+                              className="toggle-on"
+                              onClick={toggleHandlerOn}
+                            />
+                          )}
+                          {!hasReserved && (
+                            <MDBIcon
+                              fas
+                              icon="toggle-off"
+                              className="toggle-off"
+                              onClick={toggleHandlerOff}
+                            />
+                          )}
                         </td>
                         {/* <td>
-                          <Link to="/editbenchEmployee">
-                            <i
-                              className="fas fa-edit text-primary"
-                            />
-                             <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> *
-                          </Link>
-                        </td> */}
+          <Link to="/editbenchEmployee">
+            <i
+              className="fas fa-edit text-primary"
+            />
+             <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> *
+          </Link>
+        </td> */}
                         <td>
                           <Link to="/editbenchEmployee">
                             <i className="fas fa-edit text-primary benchListEditi" />
@@ -198,6 +220,7 @@ let BenchList = () => {
                       </tr>
                     ))}
               </MDBTableBody>
+              ;
             </MDBTable>
 
             {/* <table
@@ -290,7 +313,22 @@ let BenchList = () => {
           </div>
         </div>
       </div>
-
+      {/* ReservedBenchModal */}
+      {showBenchModal && (
+        <ReservedBenchModal
+          setShowBenchModal={setShowBenchModal}
+          showBenchModal={showBenchModal}
+          setHasReserved={setHasReserved}
+        />
+      )}
+      {/* deleteReservedMOdal */}
+      {benchDeleteModal && (
+        <BenchDeleteConfirmationModal
+          benchDeleteModal={benchDeleteModal}
+          setBenchDeleteModal={setBenchDeleteModal}
+          setHasReserved={setHasReserved}
+        />
+      )}
       {/* DELETE MODAL */}
       <MDBModal
         id="exampleModal"

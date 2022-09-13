@@ -4,36 +4,43 @@
 .responsive {
   max-height: 296px;
   /* border-radius: 1.6rem; */
-
 }
 
-.table{
+.table {
   /* border: 0px  solid ; */
   /* padding: 10px; */
-  box-shadow: 5px 10px 15px #EEEEEE ;
+  /* overflow-y: auto; */
+  /* overflow-x: hidden; */
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  width: 100%;
+}
+.activeTable {
+  height: 48vh;
+  margin-bottom: 5rem;
+  /* overflow-y: auto; */
   border-radius: 10px;
-  overflow:hidden;
-
 }
 
-.cardsHead{
+.cardsHead {
   color: #120f1a;
 }
 
 .h3-subHead {
   color: #ff5722;
   padding: 0;
-}
-
-.adminDashboardTableHead {
-  background-color: #120f1a;
-  color: #fff;
   
 }
 
+.adminDashboardTableHead {
+  width: 100%;
+  background-color: #120f1a;
+  color: #fff;
+  padding-left: 10px;
+  border-radius: 20px;
+}
 
-
-.table-headings{
+.table-headings {
   /* color: #ff5722;
 
   
@@ -42,11 +49,8 @@
   /* align-items: center; */
 }
 
-
-   /* color: #fff; */
-   /* align-items: center; */
-
-  
+/* color: #fff; */
+/* align-items: center; */
 
 /* CSS  */
 .headings_blocks {
@@ -62,23 +66,20 @@
 }
 
 /* .poc { */
-  /* color: #231955 !important; */
-  /* ) */
+/* color: #231955 !important; */
+/* ) */
 
-
-.btns{
-  font-size:x-large;
+.btns {
+  font-size: x-large;
 }
-.poc-p{
+.poc-p {
   /* background: #fff !important; */
   background: #444 !important;
   /* border-radius: 5px !important; */
-
 }
 
-.poc{
-  color: #fff !important; 
-  
+.poc {
+  color: #fff !important;
 }
 
 .button-56 {
@@ -142,6 +143,9 @@
 
 .button-56:hover {
   outline: 0;
+}
+.liElement {
+  list-style: none;
 }
 
 /* .thName { */
@@ -211,13 +215,13 @@
 .card-3 {
   color: #2b7a0b;
 }
-.card-3{
-  color: #2B7A0B;
+.card-3 {
+  color: #2b7a0b;
 }
-.allBtn{
+.allBtn {
   border-radius: 10px;
   padding: 3pox !important;
 }
-.allP{
+.allP {
   margin-top: 15px;
 }

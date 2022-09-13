@@ -91,7 +91,19 @@ option {
 .table_content {
   background-color: #444;
 }
-.inp{
+.inp {
   position: relative;
   left: 30vw;
+}
+.toggle-off,
+.toggle-on {
+  color: dodgerblue;
+}
+.toggle-off:hover,
+.toggle-on:hover {
+  color: dodgerblue;
+  cursor: pointer;
+}
+.deleteIcon {
+  cursor: pointer;
 }

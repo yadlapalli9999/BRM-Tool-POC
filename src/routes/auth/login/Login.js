@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../../redux/features/auth/auth.feature";
 import { AdminRole } from "../../../Roles";
 import "./Login.css";
-import google from "../../../util/Img/Google.svg" ;
+import google from "../../../util/Img/Google.svg";
 import { MDBInput } from "mdb-react-ui-kit";
 
 const Login = (props) => {
@@ -35,7 +35,9 @@ const Login = (props) => {
     if (email && password) {
       dispatch(loginUser(user));
       if (AdminRole.role === "ADMIN") {
-        navigate("/dashboard");
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 3000);
       } else if (AdminRole.role === "EMPLOYEE") {
         navigate("/employeeworklogs");
       }
@@ -64,7 +66,9 @@ const Login = (props) => {
                             </div>
 
                             <form onSubmit={handleLoginForm} className="mt-5">
-                              <p className="lead head-2 text-center">Please login to your account</p>
+                              <p className="lead head-2 text-center">
+                                Please login to your account
+                              </p>
                               {/* <div className="form-outline mb-4">
                                 <input
                                   type="email"
@@ -97,12 +101,21 @@ const Login = (props) => {
                                 </label>
                               </Form.Floating> */}
                               <div className="col-md-12 mt-4 mb-4 d-flex">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-1 mx-3 h-1 mt-3 svgIcon">
-  <path fill-rule="evenodd" d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" clip-rule="evenodd" />
-</svg>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                  className="w-1 mx-3 h-1 mt-3 svgIcon"
+                                >
+                                  <path
+                                    fill-rule="evenodd"
+                                    d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
+                                    clip-rule="evenodd"
+                                  />
+                                </svg>
 
                                 <MDBInput
-                                className="w-100"
+                                  className="w-100"
                                   type="email"
                                   label="UserName"
                                   name="email"
@@ -132,9 +145,18 @@ const Login = (props) => {
                                 </label>
                               </div> */}
                               <div className="col-md-12 mt-3 d-flex">
-                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-1 mx-3 h-1 mt-3 svgIcon">
-  <path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd" />
-</svg>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                  className="w-1 mx-3 h-1 mt-3 svgIcon"
+                                >
+                                  <path
+                                    fill-rule="evenodd"
+                                    d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
+                                    clip-rule="evenodd"
+                                  />
+                                </svg>
 
                                 <MDBInput
                                   type="password"
@@ -155,14 +177,21 @@ const Login = (props) => {
                                 </button>
                                 {/* <hr>Or</hr> */}
                                 <div class="separator mt-3">
-  <div class="line"></div>
-  <p className="lead fw-bolder text-dark mt-1">Or</p>
-  <div class="line"></div>
-</div>
+                                  <div class="line"></div>
+                                  <p className="lead fw-bolder text-dark mt-1">
+                                    Or
+                                  </p>
+                                  <div class="line"></div>
+                                </div>
                                 <button
                                   className="btn  gBtn btn-white btn-block text-dark mt-2"
                                   type="submit"
-                                >< img src={google} alt = "Logo of Google for Button " className="google m-2"/>
+                                >
+                                  <img
+                                    src={google}
+                                    alt="Logo of Google for Button "
+                                    className="google m-2"
+                                  />
                                   Sign In With Google
                                 </button>
 
@@ -172,7 +201,7 @@ const Login = (props) => {
                               </div>
 
                               {/* <div className="d-flex align-items-center justify-content-center pb-4"> */}
-                                {/* <p className="mb-0 me-2">
+                              {/* <p className="mb-0 me-2">
                                   Don't have an account?
                                 </p>
                                 <Link
