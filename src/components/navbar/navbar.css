@@ -3,7 +3,7 @@ margin-right: 6rem;
 }
 
  i{
-    font-size: 28px;
+    font-size: 25px;
     /* color: #e03600;
      */
     color: #000;
@@ -22,7 +22,7 @@ i:hover{
   color: #ff5722;
   transition:0.2s 0.1s;
 }
-title{
+/* title{
   color: #000;
   border: none;
-}
+} */

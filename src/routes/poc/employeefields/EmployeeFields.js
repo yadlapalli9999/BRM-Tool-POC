@@ -56,7 +56,7 @@ const EmployeeFields = () => {
     const { name, value } = e.target;
     setinputData({
       ...inputData,
-      [name]: value,
+      [name]: value.value,
     });
   };
 
@@ -76,23 +76,23 @@ const EmployeeFields = () => {
               <MDBCardBody>
                 <MDBValidation className="row g-5">
                 <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
-              <MDBInput id='validationCustom01' required name="name" label="Name"/>
+              <MDBInput id='validationCustom01' required name="name" label="Name" onChange={handleChangeInputFields}/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
-              <MDBInput id='validationCustom02' required name="name" label="Name"/>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your Duration in Months' invalid>
+              <MDBInput id='validationCustom02' required name="name" label="Duration in Months" onChange={handleChangeInputFields}/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-12" feedback='Please Enter your name' invalid>
-              <MDBTextArea id='validationCustom03'  required name="name" label="Name"/>
+           <MDBValidationItem className="col-md-12" feedback='Please Enter your Description' invalid>
+              <MDBTextArea id='validationCustom03'  required name="name" label="Description" onChange={handleChangeInputFields}/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
-              <MDBInput id='validationCustom03'  required name="name" label="Name"/>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your Members' invalid>
+              <MDBInput id='validationCustom03'  required name="name" label="Members" onChange={handleChangeInputFields}/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
-              <MDBInput id='validationCustom03'  required name="name" label="Name"/>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your Documents' invalid>
+              <MDBInput id='validationCustom03'  required name="name" label="Documents"onChange={handleChangeInputFields}/>
            </MDBValidationItem>
            <MDBRow className="m-3">
             <MDBCol md="12" className="text-center">
-              <MDBBtn className="btn btn-primary m-2">Add</MDBBtn>
+              <MDBBtn className="btn btn-primary m-2" onClick={handleSubmit}>Add</MDBBtn>
               <MDBBtn onClick={() => navigate("/poc")}
                 className="btn btn-danger m-2">Cancel</MDBBtn>
             </MDBCol>

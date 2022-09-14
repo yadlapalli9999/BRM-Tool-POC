@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import "./PocDetails.css";
 import AddResource from "../addresource/AddResource";
 import { POC_TABLE_HEADERS } from "../../Constants";
+import ProjectStatus from "../ProjectStatus/ProjectStatus";
 // import PieChart from "../../../util/PieChart";
 
 Chart.register(...registerables);
@@ -32,34 +33,6 @@ const PocDetails = () => {
   const [params] = useSearchParams();
   const pocID = params.getAll("pocID")[0] || null;
   const [pocData, setPocData] = useState({});
-
-  // $(document).ready(function () {
-
-  // var ctx = $("#pieChart");
-  // var myLineChart = new Chart(ctx, {
-  //   type: "pie",
-  //   data: {
-  //     labels: ["Kunal Rokhle", "Alok Kumar", "Sudhanshu Jain"],
-  //     datasets: [
-  //       {
-  //         data: [20, 40, 25],
-  //         backgroundColor: [
-  //           "rgba(255, 0, 0, 0.5)",
-  //           "rgba(100, 255, 0, 0.5)",
-  //           "rgba(200, 50, 255, 0.5)",
-  //           "rgba(0, 100, 255, 0.5)",
-  //         ],
-  //       },
-  //     ],
-  //   },
-  //   options: {
-  //     title: {
-  //       display: true,
-  //       text: "empData",
-  //     },
-  //   },
-  // });
-  // });
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
@@ -131,29 +104,15 @@ const PocDetails = () => {
             </MDBCard>
           </MDBCol>
         </MDBRow>
-        <MDBRow className="mt-5">
-          <MDBCol md="6">
+        <MDBRow className="mt-5 row container">
+        {/* className="col-12 col-md-6 col-lg-6" */}
+          <MDBCol  className="col-md-12 col-sm-12 col-lg-6 col-12">
             <AddResource members={pocData.members} />
           </MDBCol>
-          <MDBCol md="4" className="justify-content-end">
-            <canvas id="pieChart" width="200" height="200"></canvas>
-            <AddResource />
+          {/* className="col-12 col-md-6 col4 col-lg-4 " */}
+          <MDBCol   className="col-md-12 proStatus col-sm-12 col-lg-6 col-12" >
+            <ProjectStatus/>
           </MDBCol>
-          <MDBCol md="2" className="justify-content-end">
-            <div class="card projectStatus">
-              <div class="card-header text-center">Project Status : { status}</div>
-              <div class="card-body d-flex ">
-                    <button className="btn btn-warning"> STARTED</button>
-                    <button className="btn btn-secondary">HOLD</button>
-                    <button className="btn btn-success">COMPLETED</button>
-              </div>
-              <div class="card-footer text-muted">2 days ago</div>
-            </div>
-          </MDBCol>
-          {/* <MDBCol md='4' className='justify-content-end'> */}
-          {/* <canvas id='pieChart' width='200' height='200'></canvas> */}
-
-          {/* </MDBCol> */}
         </MDBRow>
       </MDBContainer>
       {/* DELETE MODAL */}

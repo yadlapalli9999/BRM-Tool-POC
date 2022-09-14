@@ -22,6 +22,7 @@ import "./BenchList.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getBench } from "../../../redux/features/bench/bench.feature";
+// import ProjectStatus from "../../poc/ProjectStatus/ProjectStatus";
 
 let BenchList = () => {
   let dispatch = useDispatch();
@@ -45,10 +46,10 @@ let BenchList = () => {
       <div className="container">
         {/* <pre>{JSON.stringify(benchLists.data)}</pre> */}
         <div className="row mt-3">
-          <div className="col-md-3">
-            <h2 className="a1">Bench List</h2>
+          <div className="col-md-4 mx-4 ">
+            <h2 className="a1 mt-4">Bench List</h2>
           </div>
-          <div className="col-md-9">
+          <div className="col-md-7">
             <div
               className="text-center"
               style={{ marginTop: "30px", float: "right", marginRight: "10px" }}
@@ -66,31 +67,8 @@ let BenchList = () => {
             </div>
           </div>
         </div>
-        <div className="row">
-          <div className="col-md-3 inp">
-            <MDBInput
-
-              type="text"
-              label="Search Name"
-              style={{ width: "660px" }}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </div>
-          <div className="col-md-6 ">
-          <select className="select selectBtn mx-5 " data-mdb-filter="true">
-          <option className=" ">Select Year</option>
-                <option>1-2</option>
-                <option>2-3</option>
-                <option>3-4</option>
-                <option>4-5</option>
-                <option>5-6</option>
-                <option>6-7</option>
-                <option>7-8</option>
-                <option>8-9</option>
-                <option>9-10</option>
-                <option>10-11</option>
-                <option>11-12</option>
-</select>
+        
+          
             {/* <div class="dropdown d-flex justify-content-end mb-4">
               <select
                 class="btn btn-rounded  btn-secondary dropdown-toggle"
@@ -111,11 +89,40 @@ let BenchList = () => {
                 <option>11-12</option>
               </select>
             </div> */}
-          </div>
-        </div>
-        <div className="row mt-4">
-          <div className="col">
-            <MDBTable>
+
+        
+        <div className="row mt-4 container col-md-12 ">
+          <div className=" container table-responsive">
+            <MDBTable className=" caption-top  ">
+              <caption >
+              <div className="row mt-1">
+              <div className="col-md-6 inp">
+              <MDBInput
+              className="w-75"
+              type="text"
+              label="Search Name"
+              style={{ width: "660px" }}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+            </div>
+            <div className="col-md-6 ">
+            <select className="select selectBtn mx-5 " data-mdb-filter="true">
+              <option className=" ">Select Year</option>
+              <option>1-2</option>
+              <option>2-3</option>
+              <option>3-4</option>
+              <option>4-5</option>
+              <option>5-6</option>
+              <option>6-7</option>
+              <option>7-8</option>
+              <option>8-9</option>
+              <option>9-10</option>
+              <option>10-11</option>
+              <option>11-12</option>
+            </select>
+            </div>
+            </div>
+             </caption>
               <MDBTableHead className="table_content text-white">
                 <tr>
                   <th scope="col">EmpId</th>
@@ -199,6 +206,7 @@ let BenchList = () => {
                     ))}
               </MDBTableBody>
             </MDBTable>
+            {/* <ProjectStatus/> */}
 
             {/* <table
               id="dtBasicExample"

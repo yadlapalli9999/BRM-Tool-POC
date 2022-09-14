@@ -107,7 +107,7 @@ let POCHome = () => {
     <MDBContainer className="py-4">
       <MDBRow>
         <MDBCol md="12" className="text-center">
-          <h2 className="pocTitle">ACTIVE POC</h2>
+          <h2 className="pocTitle">POC</h2>
         </MDBCol>
       </MDBRow>
       <MDBRow>

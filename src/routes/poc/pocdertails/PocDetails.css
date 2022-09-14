@@ -41,3 +41,10 @@
     position: relative;
     height: 200px;
 }
+
+
+@media only screen and (min-width: 544px) and (max-width: 991px){
+    .proStatus {
+      margin-top: 2rem;
+    }
+    }

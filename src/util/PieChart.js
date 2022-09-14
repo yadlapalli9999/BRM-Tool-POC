@@ -6,7 +6,7 @@ export default function PieChart() {
     type: "donut",
     series: [50,15,10,25],
     options: {
-      labels: ["Active", "Initiated", "Inactive", "Completed"],
+      labels: ["Active", "Initiated", "IActive", "Completed"],
       legend: {
         show: true,
         position:"top",

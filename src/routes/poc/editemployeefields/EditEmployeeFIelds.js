@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   MDBContainer,
@@ -51,15 +52,7 @@ const EditEmployeeFields = (props) => {
 
   const [inputData, setinputData] = useState({
     Name: "",
-    PrimarySkills: "",
-    TotalWorkExp: "",
-    EmpId: "",
-    TotalExp: "",
-    Notes: "",
-    Email: "",
-    ReportingManager: "",
-    TeamLead: "",
-    TotalExpInFission: "",
+Duration:"",
   });
 
   useEffect(() => {
@@ -71,7 +64,7 @@ const EditEmployeeFields = (props) => {
     const { name, value } = e.target;
     setinputData({
       ...inputData,
-      [name]: value,
+      [name]: value.value,
     });
   };
 
@@ -91,6 +84,7 @@ const EditEmployeeFields = (props) => {
                 </MDBCardTitle>
               </MDBCardHeader>
               <MDBCardBody>
+
                 <MDBValidation className="row g-5">
                   <MDBValidationItem
                     className="col-md-6"
@@ -102,7 +96,8 @@ const EditEmployeeFields = (props) => {
                       required
                       name="name"
                       label="Name"
-                      value={pocData.name}
+                      value={pocData.name }
+                      onChange={handleChangeInputFields}
                     />
                   </MDBValidationItem>
                   <MDBValidationItem
@@ -116,6 +111,8 @@ const EditEmployeeFields = (props) => {
                       name="duration"
                       label="Duration in Months"
                       value={pocData.duration}
+                      onChange={handleChangeInputFields}
+
                     />
                   </MDBValidationItem>
                   <MDBValidationItem
@@ -129,6 +126,8 @@ const EditEmployeeFields = (props) => {
                       name="description"
                       label="Description"
                       value={pocData.description}
+                      onChange={handleChangeInputFields}
+
                     />
                   </MDBValidationItem>
                   <MDBValidationItem
@@ -142,6 +141,8 @@ const EditEmployeeFields = (props) => {
                       name="members"
                       label="Members"
                       value={pocData.members?.length || 0}
+                      onChange={handleChangeInputFields}
+
                     />
                   </MDBValidationItem>
                   <MDBValidationItem
@@ -155,6 +156,8 @@ const EditEmployeeFields = (props) => {
                       name="documents"
                       label="Documents"
                       value={pocData.documents?.length || 0}
+                      onChange={handleChangeInputFields}
+                      
                     />
                   </MDBValidationItem>
                   <MDBRow className="m-3">

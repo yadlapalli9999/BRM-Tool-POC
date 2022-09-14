@@ -53,8 +53,8 @@ export const loginUser = createAsyncThunk(
           }
         }
       )
-      setAuthToken(data.access_token);
-      localStorage.setItem("access_token",data.access_token)
+      setAuthToken(data.data.access_token);
+      localStorage.setItem("access_token",data.data.access_token)
       return data;
       //let data = await response.json()
       // console.log("response", data)

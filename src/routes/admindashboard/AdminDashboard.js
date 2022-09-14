@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 // import { Pie } from "react-chartjs-2";
+
 import "./AdminDashboard.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -33,7 +34,7 @@ const AdminDashboard = (props) => {
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, dicta?",
       duration: 20,
-      email:"abhishekdivalimeasam12345@gmail.com",
+      email: "abhishekdivalimeasam12345@gmail.com",
       createdBy: "Dipesh Ingle",
       documents: [
         "https://docs.google.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
@@ -50,8 +51,8 @@ const AdminDashboard = (props) => {
       name: "Ayush Gurjar",
       description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
       duration: 4,
-      
-      email:"ayush@gmal.com",
+
+      email: "ayush@gmal.com",
       createdBy: "Dipesh Ingle",
       documents: [
         "https://docs.excel.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
@@ -69,8 +70,8 @@ const AdminDashboard = (props) => {
       description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum architecto eveniet incidunt dolorem magnam rem.",
       duration: 2,
-      
-      email:"surendra@gmail.com",
+
+      email: "surendra@gmail.com",
       createdBy: "Dipesh Ingle",
       documents: [
         "https://docs.google.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
@@ -89,8 +90,8 @@ const AdminDashboard = (props) => {
       description:
         "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum architecto eveniet incidunt dolorem magnam rem.",
       duration: 2,
-      
-      email:"singh@gmail.com",
+
+      email: "singh@gmail.com",
       createdBy: "Dipesh Ingle",
       documents: [
         "https://docs.google.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
@@ -149,7 +150,8 @@ const AdminDashboard = (props) => {
     <>
       {show === false && (
         <div className="container p-1 part-2 mt-0 ">
-          <div className="mt-3"
+          <div
+            className="mt-3"
             style={{
               display: "flex",
               justifyContent: "space-evenly",
@@ -159,7 +161,8 @@ const AdminDashboard = (props) => {
           >
             <button
               onClick={() => setShow(true)}
-              className="button-56 allBtn poc-p  p-2 poc allP mt-0">
+              className="button-56 allBtn poc-p  p-2 poc allP mt-0"
+            >
               POC
             </button>
             <button className="button-56 allBtn p-2 bench allP  mt-0 ">
@@ -204,10 +207,7 @@ const AdminDashboard = (props) => {
                   <div className="d-flex justify-content-between px-md-1">
                     <div>
                       <h3 className="text-warning">20</h3>
-                      <p className="mb-0">
-                        {" "}
-                        Person on bench more than 5 months
-                      </p>
+                      <p className="mb-0"> Bench more than 5 months</p>
                     </div>
                     <div className="align-self-center">
                       <i className="fas fa-chart-pie text-warning fa-3x"></i>
@@ -220,11 +220,12 @@ const AdminDashboard = (props) => {
           <div className="row mb-1  ">
             <h3 className="h3-subHead mx-3 mt-2 mb-4">InActive</h3>
             <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4 responsive">
-              
               <table className="table  align-middle mb-0 bg-whit table-striped table-hover overflow-x:auto">
                 <thead className=" adminDashboardTableHead">
                   <tr className="table-headings">
-                    <th ><span className="thName">Id</span></th>
+                    <th>
+                      <span className="thName">Id</span>
+                    </th>
                     <th>Name</th>
                   </tr>
                 </thead>
@@ -232,19 +233,20 @@ const AdminDashboard = (props) => {
                   {dummyData &&
                     dummyData?.map((data) => (
                       <tr>
-                        <td className="fw-normal mb-1 name" onClick={handleNameClick}>
+                        <td
+                          className="fw-normal mb-1 name"
+                          onClick={handleNameClick}
+                        >
                           {/* <div className="d-flex "> */}
-                            {/* <div className="" > */}
-                              {data?.id}
-                            {/* </div> */}
+                          {/* <div className="" > */}
+                          {data?.id}
+                          {/* </div> */}
                           {/* </div> */}
                         </td>
                         {/* <td>
                           <p className="fw-normal mb-1">{data?.name}</p>
                         </td> */}
-                        <td>
-                        {data?.name}
-                        </td>
+                        <td>{data?.name}</td>
                         {/* <td>POC Name</td> */}
                       </tr>
                     ))}
@@ -290,7 +292,7 @@ const AdminDashboard = (props) => {
               </div>
             </div>
 
-            <div className="col-xl-4 col-md-4 col-ms-6 col-12 mb-4">
+            <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
               <div className="card">
                 <div className="card-header adminDashboardTableHead text-white">
                   <h6 className="mb-0 text-center">Missed Worklogs</h6>
@@ -310,7 +312,8 @@ const AdminDashboard = (props) => {
 
       {show === true && (
         <div className="container p-1 part-2 mt-0">
-          <div className="mt-3"
+          <div
+            className="mt-3"
             style={{
               display: "flex",
               justifyContent: "space-evenly",
@@ -329,10 +332,21 @@ const AdminDashboard = (props) => {
               BENCH
             </button>
           </div>
-          <div className="row mt-3">
-            <h3 className="h3-subHead mx-3">Active</h3>
-            <div className="col-xl-8 col-sm-6 col-12 col-md-4 mb-4 table-responsive">
-              <table className="table align-middle mb-0 tab bg-white table-hover  ">
+            {/*  */}
+            
+
+          
+
+          {/*  */}
+          
+          <div className="row card-1 section-padding">
+
+  <div class="col-md-12 col-sm-12 col-lg-8">
+    <div className="table-responsive">
+              <table className="table caption-top align-middle mb-0 tab bg-white table-hover  table-responsive">
+                <caption>
+                  <h3 className="h3-subHead mx-3">Active</h3>
+                </caption>
                 <thead className="adminDashboardTableHead">
                   <tr className="table-headings">
                     <th>Serial No</th>
@@ -376,16 +390,20 @@ const AdminDashboard = (props) => {
                 </tbody>
               </table>
             </div>
+            </div>
             <div
-              className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4"
-              style={{ height: "300px" }}
+              className="col-12 col-md-12  col-lg-4 col-sm-12 d-block mt-5"
+              // style={{ height: "300px" }}
             >
               {/* <Pie data={data} options={{ maintainAspectRatio: false }} />
                */}
-          <PieChart/>
-
+              <div className=" piechart">
+                <PieChart />
+              </div>
             </div>
           </div>
+
+          {/*  */}
           <div className="row mt-4">
             {pocCount.map((data) => {
               return (
