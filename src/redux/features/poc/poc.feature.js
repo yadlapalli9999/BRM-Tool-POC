@@ -1,34 +1,71 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-const BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com`;
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import pocServices from "./pocServices"
 
-const GET_POC_LIST = `${BASE_URL}/poc/filter`;
 
-const initialState = {
-  pocList: [],
-};
 
-export const getPocList = createAsyncThunk("poc/getPocList", async (params) => {
-  const response = await axios.post(GET_POC_LIST, { status: "Active" });
-  return response.data;
-});
+const initialState ={
+    pocList:[],
+    loading:false,
+    errorMessage:'',
+    singlePoc:{}
+}
+
+export const getAllPoc = createAsyncThunk("poc/getAllPoc",async()=>{
+    let response = await pocServices.getAll();
+    console.log(response)
+    return response.data.data
+})
+
+export const getSinglePoc = createAsyncThunk("poc/getSinglePoc",async(id)=>{
+    let response = await pocServices.getSinglePocDetial(id)
+    console.log(response)
+   return response.data.data
+})
+
+export const CreatePOC = createAsyncThunk("poc/CreatePOC", async(newData)=>{
+   let response = await pocServices.createPoc(newData);
+   return response.data
+})
+
 
 const pocSlice = createSlice({
-  name: "poc",
-  initialState,
-  extraReducers: {
-    [getPocList.pending]: (state, action) => {
-      state.fetchingPocList = true;
-    },
-    [getPocList.fulfilled]: (state, action) => {
-      state.fetchingPocList = false;
-      state.pocList = action.payload.data;
-    },
-    [getPocList.rejected]: (state, action) => {
-      state.fetchingPocList = false;
-      state.pocList = action.payload;
-    },
-  },
-});
+    name:'poc',
+    initialState,
+    extraReducers:{
+     [getAllPoc.pending]:(state,action)=>{
+        state.loading = true
+     },
+     [getAllPoc.fulfilled]:(state,action)=>{
+        state.loading=false;
+        state.pocList = action.payload
+     },
+     [getAllPoc.rejected]:(state,action)=>{
+        state.loading = false;
+        state.errorMessage = action.payload
+     },
+     [getSinglePoc.pending]:(state,action)=>{
+        state.loading = true
+     },
+     [getSinglePoc.fulfilled]:(state,action)=>{
+        state.loading=false;
+        state.singlePoc= action.payload
+     },
+     [getSinglePoc.rejected]:(state,action)=>{
+        state.loading = false;
+        state.errorMessage = action.payload
+     },
+     [CreatePOC.pending]:(state,action)=>{
+      state.loading = true;
+     },
+     [CreatePOC.fulfilled]:(state,action)=>{
+      state.loading = false;
+      state.pocList = action.payload
+     },
+     [CreatePOC.rejected]:(state,action)=>{
+      state.loading = false;
+      state.errorMessage = action.payload
+     }
+    }
+})
 
 export default pocSlice.reducer;
