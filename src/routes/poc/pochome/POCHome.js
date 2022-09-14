@@ -71,13 +71,13 @@ let POCHome = () => {
   ];
 
   const navigate = useNavigate();
-  // const { fetchingPocList } = useSelector((store) => {
-  //   return store["poc"];
-  // });
+  const { fetchingPocList } = useSelector((store) => {
+    return store["poc"];
+  });
 
-  // useEffect(() => {
-  //   dispatch(getPocList());
-  // }, []);
+  useEffect(() => {
+    dispatch(getPocList());
+  }, []);
 
   const handleNameClick = (pocID) => {
     navigate(`/pocdetails?pocID=${pocID}`);
