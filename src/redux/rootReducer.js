@@ -4,7 +4,7 @@ import pocReducer from "./features/poc/poc.feature";
 import dashboardReducer from "./features/dashboard/dashboard.feature";
 
 const rootReducer = {
-  auth: authReducer,
+  auth:authReducer,
   bench: benchReducer,
   poc: pocReducer,
   dashboard: dashboardReducer,

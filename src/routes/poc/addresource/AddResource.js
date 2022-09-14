@@ -26,8 +26,8 @@ let AddResource = (props) => {
   });
   const handleResource = (event) => {
     event.preventDefault();
-    members.push(resource);
-    console.log(members);
+    props.members.push(resource);
+    console.log(props.members);
     clearForm();
     setShow(false);
   };

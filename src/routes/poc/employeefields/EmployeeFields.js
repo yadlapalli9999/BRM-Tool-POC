@@ -4,10 +4,13 @@ import {MDBContainer,MDBRow,MDBCol,MDBCard,MDBCardBody,MDBCardTitle, MDBCardHead
 import $ from "jquery";
 import "./EmployeeFields.css";
 import AddResource from "../addresource/AddResource";
+import { useDispatch } from "react-redux";
+import { CreatePOC } from "../../../redux/features/poc/poc.feature";
 
 const EmployeeFields = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const resourceID = localStorage.getItem('resourceID')
   // const members = [
   //   {
   //     id: 1,
@@ -25,31 +28,28 @@ const EmployeeFields = () => {
   const [members, setMembers] = useState([]);
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
-  const [resource, setResource] = useState("");
-  const handleResource = (event) => {
-    event.preventDefault();
-    members.push(resource);
-    console.log(resource);
-    clearForm();
-    setShow(false);
-  };
-  const clearForm = () => {
-    setResource("");
-  };
+  // const [resource, setResource] = useState("");
+  // const handleResource = (event) => {
+  //   event.preventDefault();
+  //   members.push(resource);
+  //   console.log(resource);
+  //   clearForm();
+  //   setShow(false);
+  // };
+  // const clearForm = () => {
+  //   setResource("");
+  // };
   const handlePocDetailsNameClick = () => {
     navigate("/worklogs");
   };
   const [inputData, setinputData] = useState({
-    Name: "",
-    PrimarySkills: "",
-    TotalWorkExp: "",
-    EmpId: "",
-    TotalExp: "",
-    Notes: "",
-    Email: "",
-    ReportingManager: "",
-    TeamLead: "",
-    TotalExpInFission: "",
+   name:'',
+   teamLead:'',
+   description:'',
+   duration:null?.toString() || "",
+   status:'',
+   documents:[],
+   members:[]
   });
 
   const handleChangeInputFields = (e) => {
@@ -59,10 +59,24 @@ const EmployeeFields = () => {
       [name]: value.value,
     });
   };
+  const handleDocuements = (e)=>{
+    setinputData({
+      ...inputData,
+     [e.target.name] :[e.target.value]
+    })
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(inputData);
+    if(!inputData.name || !inputData.members){
+      alert('please form')
+    }
+    else{
+      e.preventDefault();
+      console.log(inputData);
+      dispatch(CreatePOC(inputData))
+      navigate('/poc')
+    }
+   
   };
   return (
     <React.Fragment>
@@ -74,22 +88,33 @@ const EmployeeFields = () => {
                  <MDBCardTitle><h2>Add Poc</h2></MDBCardTitle>
               </MDBCardHeader>
               <MDBCardBody>
-                <MDBValidation className="row g-5">
+                <MDBValidation className="row g-5" onSubmit={handleSubmit}>
                 <MDBValidationItem className="col-md-6" feedback='Please Enter your name' invalid>
-              <MDBInput id='validationCustom01' required name="name" label="Name" onChange={handleChangeInputFields}/>
+              <MDBInput id='validationCustom01' required name="name" value={inputData.name} onChange={handleChangeInputFields} label="Name"/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-6" feedback='Please Enter your Duration in Months' invalid>
-              <MDBInput id='validationCustom02' required name="name" label="Duration in Months" onChange={handleChangeInputFields}/>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your Team Lead' invalid>
+              <MDBInput id='validationCustom02' required name="teamLead" value={inputData.teamLead} onChange={handleDocuements} label="Team Lead"/>
            </MDBValidationItem>
            <MDBValidationItem className="col-md-12" feedback='Please Enter your Description' invalid>
-              <MDBTextArea id='validationCustom03'  required name="name" label="Description" onChange={handleChangeInputFields}/>
+              <MDBTextArea id='validationCustom03'  required name="description" value={inputData.description} onChange={handleChangeInputFields}  label="Description"/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-6" feedback='Please Enter your Members' invalid>
-              <MDBInput id='validationCustom03'  required name="name" label="Members" onChange={handleChangeInputFields}/>
+           {/* <MDBValidationItem className="col-md-6" feedback='Please Enter your CreatedBy' invalid>
+              <MDBInput id='validationCustom04'  required name="createdBy" value={inputData.createdBy} onChange={handleChangeInputFields} label="CreatedBy"/>
+           </MDBValidationItem> */}
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your Status' invalid>
+              <MDBInput id='validationCustom05'  required name="status" value={inputData.status} onChange={handleChangeInputFields} label="Status"/>
            </MDBValidationItem>
-           <MDBValidationItem className="col-md-6" feedback='Please Enter your Documents' invalid>
-              <MDBInput id='validationCustom03'  required name="name" label="Documents"onChange={handleChangeInputFields}/>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your Status' invalid>
+              <MDBInput id='validationCustom06'  required name="duration" value={inputData.duration} onChange={handleChangeInputFields} label="Duration"/>
            </MDBValidationItem>
+           <MDBValidationItem className="col-md-6" feedback='Please Enter your Status' invalid>
+              <MDBInput id='validationCustom06'  required name="documents" value={inputData.documents} onChange={handleDocuements} label="Documents"/>
+           </MDBValidationItem>
+           <MDBRow className="mt-4">
+            <MDBCol md="6">
+             <AddResource members={inputData.members}/>
+            </MDBCol>
+           </MDBRow>
            <MDBRow className="m-3">
             <MDBCol md="12" className="text-center">
               <MDBBtn className="btn btn-primary m-2" onClick={handleSubmit}>Add</MDBBtn>
@@ -103,9 +128,7 @@ const EmployeeFields = () => {
           </MDBCol>
          </MDBRow>
          <MDBRow>
-          <MDBCol md="6">
-          <AddResource/>
-          </MDBCol>
+          
           {/* <MDBCol md="6">
             <MDBCard>
               <MDBCardHeader>

@@ -103,3 +103,19 @@ option {
     width: 50%;
   }
 }
+.inp {
+  position: relative;
+  left: 30vw;
+}
+.toggle-off,
+.toggle-on {
+  color: dodgerblue;
+}
+.toggle-off:hover,
+.toggle-on:hover {
+  color: dodgerblue;
+  cursor: pointer;
+}
+.deleteIcon {
+  cursor: pointer;
+}
