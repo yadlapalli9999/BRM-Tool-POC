@@ -11,6 +11,7 @@ import {
   getPocCount,
   getResourceActive,
   getResourceCount,
+  getInActiveResources,
 } from "../../redux/features/dashboard/dashboard.feature";
 import PieChart from "../../util/PieChart";
 import { MDBSpinner } from "mdb-react-ui-kit";
@@ -19,18 +20,25 @@ const AdminDashboard = (props) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(true);
   // PocCount
-  const { pocCount, resourceActive, resourceCount, dashboardPoc, loading } =
-    useSelector((store) => {
-      return store["dashboard"];
-    });
+  const {
+    pocCount,
+    resourceActive,
+    resourceCount,
+    dashboardPoc,
+    inActiveResources,
+    loading,
+  } = useSelector((store) => {
+    return store["dashboard"];
+  });
   ChartJS.register(ArcElement, Tooltip, Legend);
-
+  console.log(inActiveResources);
   useEffect(() => {
     props.funcNav(true);
     dispatch(getPocCount());
     dispatch(getResourceActive());
     dispatch(getResourceCount());
     dispatch(getAllDashBoardPocs());
+    dispatch(getInActiveResources());
   }, []);
 
   const dummyData = [
@@ -252,21 +260,21 @@ const AdminDashboard = (props) => {
                 })}
               </div>
 
-              <div className="row mb-1  ">
+              <div className="row mb-5   ">
                 <h4 className="h3-subHead mx-3 mt-2 mb-4">IN ACTIVE </h4>
-                <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4 responsive">
+                <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4 responsive activeTable">
                   <table className="table  align-middle mb-0 bg-whit table-striped table-hover overflow-x:auto">
-                    <thead className=" adminDashboardTableHead">
+                    <thead className=" adminDashboardTableHead sticky-top">
                       <tr className="table-headings">
                         <th>
-                          <span className="thName">Id</span>
+                          <span className="thName">Emp ID </span>
                         </th>
                         <th>Name</th>
                       </tr>
                     </thead>
                     <tbody className="tbody">
-                      {dummyData &&
-                        dummyData?.map((data) => (
+                      {inActiveResources.InactiveResources ? (
+                        inActiveResources.InactiveResources.map((data) => (
                           <tr>
                             <td
                               className="fw-normal mb-1 name"
@@ -274,17 +282,22 @@ const AdminDashboard = (props) => {
                             >
                               {/* <div className="d-flex "> */}
                               {/* <div className="" > */}
-                              {data?.id}
+                              {data.emp_id}
                               {/* </div> */}
                               {/* </div> */}
                             </td>
                             {/* <td>
                           <p className="fw-normal mb-1">{data?.name}</p>
                         </td> */}
-                            <td>{data?.name}</td>
+                            <td>{data.name}</td>
                             {/* <td>POC Name</td> */}
                           </tr>
-                        ))}
+                        ))
+                      ) : (
+                        <tr>
+                          <h3>No Data!!</h3>
+                        </tr>
+                      )}
                     </tbody>
                   </table>
                 </div>
@@ -370,7 +383,7 @@ const AdminDashboard = (props) => {
               <div className=" piechart">
                 <PieChart />
               </div> */}
-            {/* </div> */}
+              {/* </div> */}
             </div>
           )}
 

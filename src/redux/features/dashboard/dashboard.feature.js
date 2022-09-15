@@ -12,6 +12,7 @@ const initialState = {
   resourceActive: [],
   resourceCount: [],
   dashboardPoc: [],
+  inActiveResources: [],
   loading: false,
   error: "",
 };
@@ -52,6 +53,14 @@ export const getAllDashBoardPocs = createAsyncThunk(
     //   .then((res) => res.data);
     const response = await dashboardServices.allDashBoardPocs();
     console.log(response.data.data);
+    return response.data.data;
+  }
+);
+
+export const getInActiveResources = createAsyncThunk(
+  "dashboard/getInActiveResources",
+  async () => {
+    const response = await dashboardServices.inActiveResources();
     return response.data.data;
   }
 );
@@ -113,6 +122,19 @@ const dashboardSlice = createSlice({
     [getAllDashBoardPocs.rejected]: (state, action) => {
       state.loading = false;
       state.dashboardPoc = [];
+      state.error = action.error.message || console.log("error occured");
+    },
+    [getInActiveResources.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getInActiveResources.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.inActiveResources = action.payload;
+      state.error = "";
+    },
+    [getInActiveResources.rejected]: (state, action) => {
+      state.loading = false;
+      state.inActiveResources = [];
       state.error = action.error.message || console.log("error occured");
     },
   },

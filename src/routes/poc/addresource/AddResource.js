@@ -21,9 +21,7 @@ let AddResource = (props) => {
   const { members } = props;
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
-  const [resource, setResource] = useState({
-    memberName: "",
-  });
+  const [resource, setResource] = useState("");
   const handleResource = (event) => {
     event.preventDefault();
     props.members.push(resource);
@@ -32,9 +30,7 @@ let AddResource = (props) => {
     setShow(false);
   };
   const clearForm = () => {
-    setResource({
-      memberName: "",
-    });
+    setResource("");
   };
   const navigate = useNavigate();
   const handlePocDetailsNameClick = () => {
@@ -68,7 +64,7 @@ let AddResource = (props) => {
                   {members &&
                     members
                       ?.filter((filterMember) =>
-                        filterMember?.memberName.toLowerCase().includes(query)
+                        filterMember.toLowerCase().includes(query)
                       )
                       ?.map((filterMember, index) => (
                         <tr
@@ -77,7 +73,7 @@ let AddResource = (props) => {
                           onClick={handlePocDetailsNameClick}
                         >
                           <td className="align-middle ">
-                            <span>{filterMember?.memberName}</span>
+                            <span>{filterMember}</span>
                           </td>
                         </tr>
                       ))}
@@ -134,12 +130,9 @@ let AddResource = (props) => {
               <div className="md-form mb-3">
                 {/* <i className="fas fa-user prefix grey-text"></i> */}
                 <MDBInput
-                  value={resource.memberName}
+                  value={resource}
                   onChange={(e) => {
-                    setResource({
-                      ...resource,
-                      memberName: e.target.value,
-                    });
+                    setResource(e.target.value);
                   }}
                   label="Search By Name , Email"
                 />

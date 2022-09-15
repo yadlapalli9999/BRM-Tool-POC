@@ -1,5 +1,6 @@
 .personBench {
   height: 100%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .responsive {
   max-height: 296px;
@@ -18,7 +19,7 @@
 .activeTable {
   height: 48vh;
   margin-bottom: 5rem;
-  /* overflow-y: auto; */
+  overflow-y: auto;
   border-radius: 10px;
 }
 
@@ -29,7 +30,6 @@
 .h3-subHead {
   color: #ff5722;
   padding: 0;
-  
 }
 
 .adminDashboardTableHead {
@@ -131,10 +131,11 @@
   transition: transform 0.2s ease-out;
   z-index: -1;
 }
-.card{
- /* overflow: auto; 
+.card {
+  /* overflow: auto; 
   */
   overflow-wrap: break-word;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .button-56:hover:after {
@@ -246,18 +247,17 @@
   .piechart {
     margin-top: 0rem;
     /* margin:3rem; */
-    /* margin-top: 0.5rem; 
+/* margin-top: 0.5rem; 
   }
 } */
-@media only screen and (min-width: 992px) and (max-width: 1192px){
+@media only screen and (min-width: 992px) and (max-width: 1192px) {
   .piechart {
     margin-top: 7rem;
   }
+}
+
+@media only screen and (min-width: 767px) and (max-width: 992px) {
+  .personBench {
+    margin-left: 3rem;
   }
-
-
-  @media only screen and (min-width: 767px) and (max-width: 992px){
-    .personBench {
-      margin-left: 3rem;
-    }
-    }
+}

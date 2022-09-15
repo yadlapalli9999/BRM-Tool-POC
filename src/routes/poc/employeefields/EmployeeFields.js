@@ -74,7 +74,7 @@ const EmployeeFields = () => {
     const { name, value } = e.target;
     setinputData({
       ...inputData,
-      [name]: value.value,
+      [name]: value,
     });
   };
   const handleDocuements = (e) => {
@@ -86,7 +86,8 @@ const EmployeeFields = () => {
 
   const handleSubmit = (e) => {
     if (!inputData.name || !inputData.members) {
-      alert("please form");
+      alert("please fill form");
+      console.log(inputData.name);
     } else {
       e.preventDefault();
       console.log(inputData);
@@ -196,7 +197,7 @@ const EmployeeFields = () => {
                       label="Documents"
                     />
                   </MDBValidationItem>
-                 <MDBRow className="mt-4">
+                  <MDBRow className="mt-4">
                     <MDBCol md="6">
                       <AddResource members={inputData.members} />
                     </MDBCol>

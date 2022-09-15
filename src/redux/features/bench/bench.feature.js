@@ -50,7 +50,7 @@ export const createBench = createAsyncThunk(
   "bench/createBench",
   async (newData) => {
     let response = await BenchServices.create(newData);
-    //console.log(response)
+    console.log(response.data);
     return response.data;
   }
 );

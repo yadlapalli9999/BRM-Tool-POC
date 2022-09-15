@@ -36,10 +36,11 @@ let BenchList = () => {
 
   let dispatch = useDispatch();
   const [hasReserved, setHasReserved] = useState(false);
+  const [showBenchModal, setShowBenchModal] = useState(false);
 
-  useEffect(() => {
-    dispatch(getBench());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getBench());
+  // }, []);
   useEffect(() => {
     dispatch(getBench());
   }, [hasReserved, setHasReserved]);
@@ -81,7 +82,6 @@ let BenchList = () => {
       dispatch(getBench());
     }
   };
-  const [showBenchModal, setShowBenchModal] = useState(false);
   const [singleResource, setSingleResource] = useState([]);
   const toggleHandlerOff = (id) => {
     const data = benchLists.filter((item) => item._id === id);
@@ -172,85 +172,84 @@ let BenchList = () => {
         <div className="row mt-4">
           <div className="col">
             {benchLists.length > 0 ? (
-        <div className=" container table-responsive">
+              <div className=" container table-responsive">
+                <MDBTable>
+                  <MDBTableHead className="table_content text-white">
+                    <tr>
+                      <th scope="col">EmpId</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">TotalWorkExp</th>
+                      <th scope="col">Skills</th>
+                      <th scope="col">Worklogs</th>
+                      <th scope="col">Reserved Bench</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </MDBTableHead>
 
-              <MDBTable>
-                <MDBTableHead className="table_content text-white">
-                  <tr>
-                    <th scope="col">EmpId</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">TotalWorkExp</th>
-                    <th scope="col">Skills</th>
-                    <th scope="col">Worklogs</th>
-                    <th scope="col">Reserved Bench</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </MDBTableHead>
+                  <MDBTableBody>
+                    {
+                      // benchLists&& benchLists?.filter((filterData) =>filterData?.name.toLowerCase().includes(query))?.map((filterData) => (
 
-                <MDBTableBody>
-                  {
-                    // benchLists&& benchLists?.filter((filterData) =>filterData?.name.toLowerCase().includes(query))?.map((filterData) => (
-
-                    // benchLists && benchLists?.filter((filterData) =>filterData?.name.toLowerCase().includes(searchValue))?.map((filterData) => (
-                    benchLists &&
-                      benchLists?.map((filterData) => (
-                        <tr key={filterData._id}>
-                          <td>
-                            {/* <Link to={`/worklog/${item.id}`}>{item.id}</Link> */}
-                            <Link to={`/empDetails/${filterData._id}`}>
-                              {filterData.emp_id}
-                            </Link>
-                          </td>
-                          <td>{filterData?.name}</td>
-                          <td>{filterData.email}</td>
-                          <td>{filterData.totalWorkExp}</td>
-                          <td>
-                            {filterData.primarySkills
-                              ? filterData.primarySkills
-                              : "NULL"}
-                          </td>
-                          {/* <td>{item}</td> */}
-                          <td>
-                            <a
-                              href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0"
-                              target="_blank"
-                            >
-                              {/* <img
+                      // benchLists && benchLists?.filter((filterData) =>filterData?.name.toLowerCase().includes(searchValue))?.map((filterData) => (
+                      benchLists &&
+                        benchLists?.map((filterData) => (
+                          <tr key={filterData._id}>
+                            <td>
+                              {/* <Link to={`/worklog/${item.id}`}>{item.id}</Link> */}
+                              <Link to={`/empDetails/${filterData._id}`}>
+                                {filterData.emp_id}
+                              </Link>
+                            </td>
+                            <td>{filterData?.name}</td>
+                            <td>{filterData.email}</td>
+                            <td>{filterData.totalWorkExp}</td>
+                            <td>
+                              {filterData.primarySkills
+                                ? filterData.primarySkills
+                                : "NULL"}
+                            </td>
+                            {/* <td>{item}</td> */}
+                            <td>
+                              <a
+                                href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0"
+                                target="_blank"
+                              >
+                                {/* <img
                 src={"../../excel.png"}
                 alt=""
                 style={{ width: "40px", height: "40px" }}
                 className="rounded-circle pocHomeExcelLogo "
               /> */}
-                              <MDBIcon
-                                fas
-                                icon="list-alt"
-                                className="worklog_icon"
-                              />
-                            </a>
-                          </td>
-                          <td>
-                            {filterData.status === "BenchReserved" ? (
-                              <MDBIcon
-                                fas
-                                icon="toggle-on"
-                                className="toggle-on"
-                                onClick={() => {
-                                  toggleHandlerOn(filterData._id);
-                                }}
-                              />
-                            ) : (
-                              <MDBIcon
-                                fas
-                                icon="toggle-off"
-                                className="toggle-off"
-                                onClick={() => {
-                                  toggleHandlerOff(filterData._id);
-                                }}
-                              />
-                            )}
-                          </td>
-                          {/* <td>
+                                <MDBIcon
+                                  fas
+                                  icon="list-alt"
+                                  className="worklog_icon"
+                                />
+                              </a>
+                            </td>
+                            <td>
+                              {filterData.status === "BenchReserved" ? (
+                                <MDBIcon
+                                  fas
+                                  icon="toggle-on"
+                                  className="toggle-on"
+                                  onClick={() => {
+                                    toggleHandlerOn(filterData._id);
+                                  }}
+                                />
+                              ) : (
+                                <MDBIcon
+                                  fas
+                                  icon="toggle-off"
+                                  className="toggle-off"
+                                  onClick={() => {
+                                    toggleHandlerOff(filterData._id);
+                                  }}
+                                />
+                              )}
+                            </td>
+                            {/* <td>
           <Link to="/editbenchEmployee">
             <i
               className="fas fa-edit text-primary"
@@ -258,22 +257,22 @@ let BenchList = () => {
              <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> *
           </Link>
         </td> */}
-                          <td>
-                            <Link to={`/editbenchEmployee/${filterData._id}`}>
-                              <i className="fas fa-edit text-primary benchListEditi" />
-                            </Link>
-                            &nbsp;&nbsp;
-                            <i
-                              data-target="#exampleModal"
-                              onClick={() => handleDelete(filterData._id)}
-                              className="fa fa-trash text-danger benchListdeletei"
-                            />
-                          </td>
-                        </tr>
-                      ))
-                  }
-                </MDBTableBody>
-              </MDBTable>
+                            <td>
+                              <Link to={`/editbenchEmployee/${filterData._id}`}>
+                                <i className="fas fa-edit text-primary benchListEditi" />
+                              </Link>
+                              &nbsp;&nbsp;
+                              <i
+                                data-target="#exampleModal"
+                                onClick={() => handleDelete(filterData._id)}
+                                className="fa fa-trash text-danger benchListdeletei"
+                              />
+                            </td>
+                          </tr>
+                        ))
+                    }
+                  </MDBTableBody>
+                </MDBTable>
               </div>
             ) : (
               <h1>NO Data</h1>

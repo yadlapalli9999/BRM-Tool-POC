@@ -14,10 +14,16 @@ const resourceCount = () => {
 const allDashBoardPocs = () => {
   return API.get(`/poc`);
 };
+
+const inActiveResources = () => {
+  return API.get(`/dashboard/resource/inactive`);
+};
+
 const dashboardServices = {
   pocCount,
   resourceActive,
   resourceCount,
   allDashBoardPocs,
+  inActiveResources,
 };
 export default dashboardServices;
