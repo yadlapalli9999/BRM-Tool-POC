@@ -21,7 +21,7 @@ let BenchEmployeeDetail = (props)=>{
     
     return(
         <React.Fragment>
-          <pre>{JSON.stringify(benchListItem)}</pre>
+          {/* <pre>{JSON.stringify(benchListItem)}</pre> */}
           <MDBContainer className="py-5">
             <MDBRow>
               <MDBCol md="12" className="d-flex justify-content-end">

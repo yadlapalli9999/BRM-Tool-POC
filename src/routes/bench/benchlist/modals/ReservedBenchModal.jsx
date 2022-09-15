@@ -15,6 +15,7 @@ import {
   updateSingleResourceBench,
   getBench,
 } from "../../../../redux/features/bench/bench.feature";
+import "./BenchDeleteConfirmationModal.css";
 
 export default function ReservedBenchModal({
   setShowBenchModal,
@@ -47,6 +48,7 @@ export default function ReservedBenchModal({
       };
       console.log(newObject);
       dispatch(updateSingleResourceBench(newObject));
+      dispatch(getBench());
       setHasReserved(!hasReserved);
       setShowBenchModal(false);
     }
@@ -56,7 +58,12 @@ export default function ReservedBenchModal({
   }, []);
   return (
     <>
-      <MDBModal staticBackdrop tabIndex="-1" show={showBenchModal}>
+      <MDBModal
+        staticBackdrop
+        tabIndex="-1"
+        show={showBenchModal}
+        className="modal"
+      >
         <MDBModalDialog centered>
           <MDBModalContent style={{ backdrop: "static" }}>
             <MDBModalHeader>
