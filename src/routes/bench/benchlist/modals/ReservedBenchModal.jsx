@@ -18,6 +18,7 @@ export default function ReservedBenchModal({
   showBenchModal,
   setHasReserved,
   singleResource,
+  hasReserved,
 }) {
   console.log(singleResource);
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ export default function ReservedBenchModal({
       };
       console.log(newObject);
       dispatch(updateSingleResourceBench(newObject));
-      setHasReserved(true);
+      setHasReserved(!hasReserved);
       setShowBenchModal(false);
     }
   };

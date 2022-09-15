@@ -16,6 +16,7 @@ const BenchDeleteConfirmationModal = ({
   setBenchDeleteModal,
   setHasReserved,
   singleResource,
+  hasReserved,
 }) => {
   const dispatch = useDispatch();
   const deleteHandler = () => {
@@ -31,7 +32,7 @@ const BenchDeleteConfirmationModal = ({
     };
     console.log(newObject);
     dispatch(updateSingleResourceBench(newObject));
-    setHasReserved(false);
+    setHasReserved(!hasReserved);
     setBenchDeleteModal(false);
   };
   return (

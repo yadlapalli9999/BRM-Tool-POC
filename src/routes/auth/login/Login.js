@@ -37,7 +37,7 @@ const Login = (props) => {
       if (AdminRole.role === "ADMIN") {
         setTimeout(() => {
           navigate("/dashboard");
-        }, 3000);
+        }, 2000);
       } else if (AdminRole.role === "EMPLOYEE") {
         navigate("/employeeworklogs");
       }

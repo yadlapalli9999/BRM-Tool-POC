@@ -1,74 +1,29 @@
 import React, { useEffect } from "react";
 import "./POCHome.css";
 import { Link, useNavigate } from "react-router-dom";
-import {MDBContainer,MDBRow,MDBCol,MDBTable,MDBTableHead,MDBTableBody, MDBBtn, MDBIcon,MDBSpinner} from 'mdb-react-ui-kit';
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBTable,
+  MDBTableHead,
+  MDBTableBody,
+  MDBBtn,
+  MDBIcon,
+  MDBSpinner,
+} from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllPoc } from "../../../redux/features/poc/poc.feature";
-//import ExcelImg from "../../../assets/excel.png";
-//import GoogleImg from "../../../assets/google.png";
 import { POC_TABLE_HEADERS } from "../../Constants";
-
 
 let POCHome = () => {
   let dispatch = useDispatch();
-  let {pocList,loading} = useSelector((store)=>{return store['poc']})
-  console.log(pocList)
-  useEffect(()=>{
-    dispatch(getAllPoc())
-  },[])
-  const dummyData = [
-    {
-      name: "BRM Tool",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, dicta?",
-      duration: 20,
-      createdBy: "Dipesh Ingle",
-      documents: [
-        "https://docs.google.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
-      ],
-      members: [
-        "62e8ba7c59e2ad549fba94b3",
-        "62e15a9cf09d35dcf465f2c1",
-        "62e7e0684f2e38bf99f1db88",
-      ],
-      _id: "62e8c8266415e94f7d503cdd",
-      __v: 0,
-    },
-    {
-      name: "CRM Tool",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      duration: 4,
-      createdBy: "Dipesh Ingle",
-      documents: [
-        "https://docs.excel.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
-      ],
-      members: [
-        "62e8ba7c59e2ad549fba94b3",
-        "62e15a9cf09d35dcf465f2c1",
-        "62e7e0684f2e38bf99f1db88",
-      ],
-      _id: "62e8c8266415e94f7d503cdd",
-      __v: 0,
-    },
-    {
-      name: "GRM Tool",
-      description:
-        "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum architecto eveniet incidunt dolorem magnam rem.",
-      duration: 2,
-      createdBy: "Dipesh Ingle",
-      documents: [
-        "https://docs.google.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
-        "https://docs.excel.com/document/d/1n44H2Khq3si4tdyaNQNQT-wVtHiGL2wZ37-mHbJlmk8/edit",
-      ],
-      members: [
-        "62e8ba7c59e2ad549fba94b3",
-        "62e15a9cf09d35dcf465f2c1",
-        "62e7e0684f2e38bf99f1db88",
-      ],
-      _id: "62e8c8266415e94f7d503cdd",
-      __v: 0,
-    },
-  ];
+  let { pocList, loading } = useSelector((store) => {
+    return store["poc"];
+  });
+  useEffect(() => {
+    dispatch(getAllPoc());
+  }, []);
 
   const navigate = useNavigate();
   // const { fetchingPocList } = useSelector((store) => {
@@ -80,49 +35,61 @@ let POCHome = () => {
   // }, []);
 
   const handleNameClick = (pocID) => {
-    navigate(`/pocdetails?pocID=${pocID}`);
+    navigate(`/pocdetails`, { state: { pocId: pocID } });
   };
 
   const getDocIcon = (docLink) => {
     if (docLink.includes("docs.google.com")) {
-      return <MDBIcon fas icon="file-upload" className="doc_icon" />;
-      // <MDBIcon className=" fas fa-file-import doc_icon" />;
+      return <MDBIcon fas icon="file-upload doc_icon" />;
     } else if (docLink.includes("docs.excel.com")) {
       return <MDBIcon className="fas fa-file-excel doc_icon" />;
+    } else {
+      return <MDBIcon fas icon="exclamation-circle doc_icon" />;
     }
   };
 
-  const getTableData = (header, data = {}) => {
+  const getTableData = (header, item) => {
     const val = header.value;
     switch (val) {
       case "name":
         return (
           <div className="d-flex align-items-center">
-            <div className="name" onClick={() => handleNameClick(data._id)}>
-              <p className="fw-bold mb-1">{data[val]}</p>
+            <div className="name" onClick={() => handleNameClick(item._id)}>
+              {/* <Link to={(`/pocdetails`, { state: { pocId: item._id } })}> */}
+              <p className="fw-bold mb-1">{item.name}</p>
+              {/* </Link> */}
             </div>
           </div>
         );
       case "description":
-        return <p className="fw-normal mb-1">{data[val]}</p>;
+        return <p className="fw-normal mb-1">{item.description}</p>;
       case "duration":
         return (
           <span
             className={`badge ${
-              data[val] >= 5
+              item.duration >= 5
                 ? "badge-danger"
-                : data[val] >= 3
+                : item.duration >= 3
                 ? "badge-warning"
                 : "badge-success"
             } rounded-pill d-inline`}
           >
-            {data[val]} {header.metric}
+            {item.duration}
+            {header.metric}
           </span>
+        );
+      case "createdBy":
+        return (
+          <div className="d-flex justify-content-center align-items-center">
+            {item.createdBy === null || undefined
+              ? "No Data"
+              : item.createdBy.name}
+          </div>
         );
       case "members":
         return (
           <button type="button" className="btn btn-link btn-sm btn-rounded">
-            {data[val]?.length || 0}
+            <h5>{item.members.length ? item.members.length : 0}</h5>
           </button>
         );
       case "documents":
@@ -135,7 +102,7 @@ let POCHome = () => {
               alignItems: "center",
             }}
           >
-            {(data[val] || []).map((doc, docInd) => (
+            {item.documents.map((doc) => (
               <a
                 href={doc}
                 target="_blank"
@@ -152,7 +119,7 @@ let POCHome = () => {
           </div>
         );
       default:
-        return data[val];
+        return item;
     }
   };
 
@@ -176,7 +143,7 @@ let POCHome = () => {
       </MDBRow>
       <MDBRow className="mt-4">
         <MDBCol>
-          {fetchingPocList ? (
+          {loading ? (
             <div className="text-center">
               <MDBSpinner role="status" color="primary">
                 <span className="visually-hidden">Loading...</span>
@@ -185,6 +152,7 @@ let POCHome = () => {
             </div>
           ) : (
             <MDBTable>
+              {/* <pre>{JSON.stringify(pocList)}</pre> */}
               <MDBTableHead className=" table_content text-white">
                 <tr>
                   {POC_TABLE_HEADERS.map((header) => (
@@ -193,13 +161,21 @@ let POCHome = () => {
                 </tr>
               </MDBTableHead>
               <MDBTableBody className="align-items-center">
-                {(pocList || []).map((data) => (
-                  <tr>
-                    {POC_TABLE_HEADERS.map((header) => (
-                      <td>{getTableData(header, data)}</td>
-                    ))}
-                  </tr>
-                ))}
+                {/* {pocList.map((item) => (
+                  <>
+                    <p>{item.name}</p>
+                    <p>{item.documents}</p>
+                  </>
+                ))} */}
+
+                {pocList &&
+                  pocList.map((item) => (
+                    <tr>
+                      {POC_TABLE_HEADERS.map((header) => (
+                        <td>{getTableData(header, item)}</td>
+                      ))}
+                    </tr>
+                  ))}
               </MDBTableBody>
             </MDBTable>
           )}

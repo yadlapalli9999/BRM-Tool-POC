@@ -64,10 +64,11 @@ export const loginUser = createAsyncThunk(
       // localStorage.setItem('resourceID',data.data.resourceID)
       // localStorage.setItem("access_token",data.data.access_token)
       // return data.data;
-      setAuthToken(data.data.access_token);
+      // setAuthToken(data.data.access_token);
       localStorage.setItem("access_token", data.data.access_token);
+      localStorage.setItem("resourceID", data.data.resourceID);
       console.log(data.data.access_token);
-      return data;
+      return data.data;
       //let data = await response.json()
       // console.log("response", data)
       // if (response.status === 200) {

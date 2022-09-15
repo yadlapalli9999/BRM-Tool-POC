@@ -28,7 +28,6 @@ import {
   getBench,
   searchBench,
 } from "../../../redux/features/bench/bench.feature";
-import Axios from "axios";
 import BenchServices from "../../../redux/features/bench/benchServices";
 import { toast } from "react-toastify";
 
@@ -373,6 +372,7 @@ let BenchList = () => {
           setShowBenchModal={setShowBenchModal}
           showBenchModal={showBenchModal}
           setHasReserved={setHasReserved}
+          hasReserved={hasReserved}
           singleResource={singleResource}
         />
       )}
@@ -382,6 +382,7 @@ let BenchList = () => {
           benchDeleteModal={benchDeleteModal}
           setBenchDeleteModal={setBenchDeleteModal}
           setHasReserved={setHasReserved}
+          hasReserved={hasReserved}
           singleResource={singleResource}
         />
       )}

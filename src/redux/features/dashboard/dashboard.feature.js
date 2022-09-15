@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import dashboardServices from "./dashboardServices";
 const BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/`;
 const GET_POC_COUNT = `${BASE_URL}dashboard/poc/count`;
 const GET_SOURCE_ACTIVE = `${BASE_URL}dashboard/resource/active`;
@@ -18,34 +19,40 @@ const initialState = {
 export const getPocCount = createAsyncThunk(
   "dashboard/getPocCount",
   async () => {
-    const response = await axios.get(GET_POC_COUNT).then((res) => res.data);
-    console.log(response);
-    return response;
+    // const response = await axios.get(GET_POC_COUNT).then((res) => res.data);
+    const response = await dashboardServices.pocCount();
+    // console.log(response);
+    return response.data.data;
   }
 );
 
 export const getResourceActive = createAsyncThunk(
   "dashboard/getResourceActive",
   async () => {
-    const response = await axios.get(GET_SOURCE_ACTIVE).then((res) => res.data);
-    return response;
+    // const response = await axios.get(GET_SOURCE_ACTIVE).then((res) => res.data);
+    const response = await dashboardServices.resourceActive();
+    // console.log(response);
+    return response.data.data;
   }
 );
 
 export const getResourceCount = createAsyncThunk(
   "dashboard/getResourceCount",
   async () => {
-    const response = await axios.get(GET_SOURCE_COUNT).then((res) => res.data);
-    return response;
+    // const response = await axios.get(GET_SOURCE_COUNT).then((res) => res.data);
+    const response = await dashboardServices.resourceCount();
+    return response.data.data;
   }
 );
 export const getAllDashBoardPocs = createAsyncThunk(
   "dashboard/getAllDashBoardPocs",
   async () => {
-    const response = await axios
-      .get(GET_DASHBOARD_ALL_POCS)
-      .then((res) => res.data);
-    return response;
+    // const response = await axios
+    //   .get(GET_DASHBOARD_ALL_POCS)
+    //   .then((res) => res.data);
+    const response = await dashboardServices.allDashBoardPocs();
+    console.log(response.data.data);
+    return response.data.data;
   }
 );
 
@@ -59,7 +66,7 @@ const dashboardSlice = createSlice({
     },
     [getPocCount.fulfilled]: (state, action) => {
       state.loading = false;
-      state.pocCount = [action.payload.data];
+      state.pocCount = [action.payload];
       state.error = "";
       console.log("success");
     },
@@ -74,7 +81,7 @@ const dashboardSlice = createSlice({
     },
     [getResourceActive.fulfilled]: (state, action) => {
       state.loading = false;
-      state.resourceActive = [action.payload.data];
+      state.resourceActive = [action.payload];
       state.error = "";
     },
     [getResourceActive.rejected]: (state, action) => {
@@ -87,7 +94,7 @@ const dashboardSlice = createSlice({
     },
     [getResourceCount.fulfilled]: (state, action) => {
       state.loading = false;
-      state.resourceCount = [action.payload.data];
+      state.resourceCount = [action.payload];
       state.error = "";
     },
     [getResourceCount.rejected]: (state, action) => {
@@ -100,8 +107,7 @@ const dashboardSlice = createSlice({
     },
     [getAllDashBoardPocs.fulfilled]: (state, action) => {
       state.loading = false;
-      state.dashboardPoc = [action.payload.data];
-      console.log(action.payload);
+      state.dashboardPoc = [action.payload];
       state.error = "";
     },
     [getAllDashBoardPocs.rejected]: (state, action) => {

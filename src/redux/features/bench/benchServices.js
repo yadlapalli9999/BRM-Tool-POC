@@ -1,17 +1,23 @@
 import Axios from "axios";
 import API from "../../api";
 const BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/resources`;
-
+const access_token = localStorage.getItem("access_token");
 const getAll = () => {
-  return Axios.get(`${BASE_URL}`);
+  // const config = {
+  // 	headers: {
+  // 		'Authorization': `Bearer ${access_token}`,
+  // 	}
+  // };
+  //console.log(localStorage.getItem('access_token'))
+  return API.get(`/resources`);
 };
 
 const get = (id) => {
-  return Axios.get(`${BASE_URL}/${id}`);
+  return API.get(`/resources/${id}`);
 };
 
 const create = (newData) => {
-  return Axios.post(`${BASE_URL}`, newData);
+  return API.post(`/resources`, newData);
 };
 
 const update = (newData) => {
@@ -19,21 +25,21 @@ const update = (newData) => {
 
   //  id = data.data._id;
   //console.log(id)
-  return Axios.patch(`${BASE_URL}/${id}`, newData);
+  return API.patch(`/resources/${id}`, newData);
 };
 
 const remove = (id) => {
-  return Axios.delete(`${BASE_URL}/${id}`);
+  return API.delete(`/resources/${id}`);
 };
 
 const searchTitle = (query) => {
   //console.log(searchValue)
-  return Axios.post(`${BASE_URL}/search`, query);
+  return API.post(`/resources/search`, query);
 };
 const updateSingleResource = (newData) => {
   const id = newData._id;
   console.log(id);
-  return Axios.patch(`${BASE_URL}/${id}`, newData);
+  return API.patch(`/resources/${id}`, newData);
 };
 
 const BenchServices = {

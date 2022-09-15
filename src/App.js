@@ -1,9 +1,9 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 // import Home from "./layout/components/home/Home";
-import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/navbar/Navbar";
 import EmployeeFields from "./routes/poc/employeefields/EmployeeFields";
 import PocDetails from "./routes/poc/pocdertails/PocDetails";
@@ -11,7 +11,7 @@ import POCHome from "./routes/poc/pochome/POCHome";
 import PocList from "./routes/poc/poclist/PocList";
 import WorkLogs from "./routes/poc/worklogs/WorkLogs";
 // import GoogleDoc from "./routes/poc/googledoc/GoogleDoc";
-import GoogleDoc  from"./routes/poc/worklogs/WorkLogs";
+import GoogleDoc from "./routes/poc/worklogs/WorkLogs";
 import ExcelDoc from "./routes/poc/exceldoc/ExcelDoc";
 import Login from "./routes/auth/login/Login";
 import { AdminRole } from "./Roles";
@@ -23,30 +23,29 @@ import EditEmployeeFields from "./routes/poc/editemployeefields/EditEmployeeFIel
 // import EmployeeWorklogs from "./modules/EmployeeWorklogs";
 import EditEmployee from "./routes/bench/EditEmployee";
 
-
 import NewBenchEmployee from "./routes/bench/benchnewemployee/NewBenchEmployee";
 
 import AdminDashboard from "./routes/admindashboard/AdminDashboard";
 import BenchEmployeeDetail from "./routes/bench/benchemployeeDetails/BenchEmployeeDetail";
 import EditBenchEmployee from "./routes/bench/editBenchEmployee/EditBenchEmployee";
-import * as userUtil from './util/userUtil';
-import * as tokenUtil from './util/tokenUtil';
+import * as userUtil from "./util/userUtil";
+import * as tokenUtil from "./util/tokenUtil";
+import SinglePocDetails from "./routes/poc/SinglePocDetails/SinglePocDetails";
 
-
-export const  BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/`;
+export const BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/`;
 function App() {
   const [showNav, setShowNav] = useState(true);
-  useEffect(()=>{
-    if(userUtil.isLoggedIn){
-      tokenUtil.setAuthToken(userUtil.getToken())
-      localStorage.getItem("access_token")
+  useEffect(() => {
+    if (userUtil.isLoggedIn) {
+      tokenUtil.setAuthToken(userUtil.getToken());
+      localStorage.getItem("access_token");
     }
-  },[])
+  }, []);
 
   return (
     <React.Fragment>
       <BrowserRouter>
-      <ToastContainer/>
+        <ToastContainer />
         {showNav && <Navbar />}
 
         <Routes>
@@ -59,10 +58,13 @@ function App() {
             <Route path="/poc" element={<POCHome />} />
           )}
           {AdminRole.role === "ADMIN" && (
-            <Route path="/pocdetails/:id" element={<PocDetails />} />
+            <Route path="/pocdetails" element={<PocDetails />} />
           )}
           {AdminRole.role === "ADMIN" && (
             <Route path="/employeefields" element={<EmployeeFields />} />
+          )}
+          {AdminRole.role === "ADMIN" && (
+            <Route path="/singlePocDetails" element={<SinglePocDetails />} />
           )}
           {AdminRole.role === "ADMIN" && (
             <Route path="/worklogs" element={<WorkLogs />} />
@@ -99,9 +101,12 @@ function App() {
             <Route path="/newbenchEmployee" element={<NewBenchEmployee />} />
           )}
           {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
-            <Route path="/editbenchEmployee/:id" element={<NewBenchEmployee/>} />
+            <Route
+              path="/editbenchEmployee/:id"
+              element={<NewBenchEmployee />}
+            />
           )}
-           {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+          {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
             <Route path="/empDetails/:id" element={<BenchEmployeeDetail />} />
           )}
 
