@@ -7,6 +7,7 @@ const initialState = {
   errorMessage: "",
   singlePoc: {},
   newPoc: [],
+  benchLists:[],
 };
 
 export const getAllPoc = createAsyncThunk("poc/getAllPoc", async () => {
@@ -26,10 +27,40 @@ export const CreatePOC = createAsyncThunk("poc/CreatePOC", async (newData) => {
   return response.data.data;
 });
 
+export const getBench = createAsyncThunk("bench/getBench", async () => {
+  const response = await BenchServices.getAll();
+  //console.log(response)
+  return response.data.data;
+});
+
+
+export const searchPOC = createAsyncThunk(
+  "bench/searchBench",
+  async (query) => {
+    console.log(query);
+    let response = await pocServices.searchTitle(query);
+    // console.log(response);
+    console.log(response.data.data);
+
+    return response.data.data;
+  }
+);
+
 const pocSlice = createSlice({
   name: "poc",
   initialState,
   extraReducers: {
+    [getBench.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [getBench.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.benchLists = [...action.payload];
+    },
+    [getBench.rejected]: (state, action) => {
+      state.loading = false;
+      state.errorMessage = action.payload;
+    },
     [getAllPoc.pending]: (state, action) => {
       state.loading = true;
     },
@@ -63,6 +94,20 @@ const pocSlice = createSlice({
     [CreatePOC.rejected]: (state, action) => {
       state.loading = false;
       state.errorMessage = action.payload;
+    },
+    [searchPOC.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [searchPOC.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.benchLists = action.payload;
+      console.log("success")
+    },
+    [searchPOC.rejected]: (state, action) => {
+      state.loading = false;
+      state.errorMessage = action.payload;
+      console.log("Failed")
+
     },
   },
 });

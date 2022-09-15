@@ -84,6 +84,7 @@ export const deleteBench = createAsyncThunk(
     return id;
   }
 );
+
 export const searchBench = createAsyncThunk(
   "bench/searchBench",
   async (query) => {

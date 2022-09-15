@@ -1,5 +1,9 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom";
+import  { searchPOC ,getBench} from "../../../redux/features/poc/poc.feature";
+import { useDispatch,useSelector } from "react-redux";
+
+
 import {
   MDBContainer,
   MDBRow,
@@ -16,28 +20,82 @@ import {
   MDBFooter,
   MDBBtn,
 } from "mdb-react-ui-kit";
+import { queryByRole } from "@testing-library/dom";
+
+
 
 let AddResource = (props) => {
   const { members } = props;
+let dispatch = useDispatch();
+
+
+const searchResult =(value)=>push(value);
+
+
   const [show, setShow] = useState(false);
-  const [query, setQuery] = useState("");
-  const [resource, setResource] = useState({
-    memberName: "",
+  const [query, setQuery] = useState({
+    searchValue: "",
   });
+
+
+  
+  let allBenchLists = useSelector((store) => {
+    return store["poc"];
+  });
+
+  let {benchLists} = allBenchLists;
+console.log(benchLists);
+  // let { loading, benchLists, errorMessage } = allBenchLists;
+
+  const [resource, setResource] = useState("");
+
   const handleResource = (event) => {
+
     event.preventDefault();
-    props.members.push(resource);
+    props.members.push(query.searchValue);
     console.log(props.members);
     clearForm();
     setShow(false);
+
+
   };
   const clearForm = () => {
-    setResource({
-      memberName: "",
-    });
+    setResource("");
   };
+  useEffect(() => {
+    dispatch(getBench());
+  }, [])
+
+  let handleSearch = (event) => {
+    setQuery({
+      ...query,
+      searchValue: event.target.value,
+    });
+//     const reqName=members.filter((item)=>(item==searchValue));
+// console.log(reqName);
+    if (query.searchValue    ) {
+      dispatch(searchPOC(query));
+     dispatch(getBench());
+
+
+     members.searchResult(query);
+
+    // props.members.push(query);
+
+      console.log(query);
+    } else {
+      console.log("search value is not found");
+    }
+  };
+
+  const nameSelector=(name)=>{
+    setQuery({...query,searchValue:name});
+  }
   const navigate = useNavigate();
   const handlePocDetailsNameClick = () => {
+
+
+
     navigate("/worklogs");
   };
   return (
@@ -54,30 +112,37 @@ let AddResource = (props) => {
                   </MDBCardTitle>
                 </MDBCol>
                 <MDBCol md="6">
-                  <MDBInput
-                    type="text"
-                    label="search"
-                    onChange={(e) => setQuery(e.target.value)}
-                  />
+                <MDBInput
+              type="text"
+              label="search"
+              value={query.searchValue}
+              // style={{ width: "660px" }}
+              onChange={handleSearch}
+                          />
+                  
+           
                 </MDBCol>
               </MDBRow>
             </MDBCardHeader>
             <MDBCardBody>
+           
               <MDBTable>
                 <MDBTableBody>
                   {members &&
                     members
-                      ?.filter((filterMember) =>
-                        filterMember?.memberName.toLowerCase().includes(query)
-                      )
-                      ?.map((filterMember, index) => (
+                      // ?.filter((filterMember) =>{
+                      //  return  filterMember.name?.toLowerCase()===query.searchValue.toLowerCase()
+                      // }
+                      // )
+                      // ?
+                      .map((filterMember, index) => (
                         <tr
                           className="fw-normal memberTableRow"
                           key={index + 1}
                           onClick={handlePocDetailsNameClick}
                         >
                           <td className="align-middle ">
-                            <span>{filterMember?.memberName}</span>
+                            <span>{filterMember}</span>
                           </td>
                         </tr>
                       ))}
@@ -134,15 +199,20 @@ let AddResource = (props) => {
               <div className="md-form mb-3">
                 {/* <i className="fas fa-user prefix grey-text"></i> */}
                 <MDBInput
-                  value={resource.memberName}
-                  onChange={(e) => {
-                    setResource({
-                      ...resource,
-                      memberName: e.target.value,
-                    });
-                  }}
+                  value={query.searchValue}
+                  onChange={handleSearch}
                   label="Search By Name , Email"
                 />
+                 <MDBTable>
+                <MDBTableBody>
+                {benchLists &&
+                      benchLists.map((filterData) => (
+                        <tr key={filterData._id}>
+                          <td onClick={()=>{nameSelector(filterData.name)}}>{filterData.name}</td>
+                        </tr>
+                      ))}
+                </MDBTableBody>
+              </MDBTable>
                 {/* <input
                   type="text"
                   id="orangeForm-name"

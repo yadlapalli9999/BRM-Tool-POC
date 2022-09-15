@@ -6,6 +6,15 @@ const getAll = () => {
   // return Axios.get(`${BASE_URL}`)
   return API.get(`/poc`);
 };
+const getAllResources = () => {
+  // const config = {
+  // 	headers: {
+  // 		'Authorization': `Bearer ${access_token}`,
+  // 	}
+  // };
+  //console.log(localStorage.getItem('access_token'))
+  return API.get(`/resources`);
+};
 const getSinglePocDetial = (id) => {
   //   return Axios.get(`${BASE_URL}/${id}`);
   return API.get(`/poc/${id}`);
@@ -14,7 +23,10 @@ const createPoc = (newData) => {
   //   return Axios.post(`${BASE_URL}/${resourceID}`, newData);
   return API.post(`/poc/${resourceID}`, newData);
 };
-
-const pocServices = { getAll, getSinglePocDetial, createPoc };
+const searchTitle = (query) => {
+  //console.log(searchValue)
+  return API.post(`/resources/search`, query);
+};
+const pocServices = { getAll, getSinglePocDetial, createPoc,searchTitle,getAllResources };
 
 export default pocServices;
