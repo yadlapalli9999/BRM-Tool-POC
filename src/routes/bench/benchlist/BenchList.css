@@ -53,8 +53,8 @@ tr {
 
 .a1 {
   color: #ff5722;
-  position: relative;
-  top: 4rem;
+  /* position: relative;
+  top: 4rem; */
   /* margin-top: "3rem"; */
 }
 
@@ -64,16 +64,16 @@ tr {
 }
 .addBtn:hover {
   transform: scale(1.03);
-  background-color: #000;
-  color: #fff;
+  background-color: #fff;
+  color: #ff5722;
 }
 
 .selectBtn {
   color: #000;
   background: #fff;
   border: none;
-  position: relative;
-  left: 7vw;
+  /* position: relative;
+  left: 7vw; */
 }
 select,
 option {
@@ -90,6 +90,18 @@ option {
 }
 .table_content {
   background-color: #444;
+}
+.inp{
+  /* position: relative;
+  left: 30vw; */
+}
+@media screen and (max-width: 786px) {
+  .table {
+    flex-wrap: wrap;
+  }
+  .table .col {
+    width: 50%;
+  }
 }
 .inp {
   position: relative;

@@ -6,6 +6,8 @@ import { AdminRole } from "../../../Roles";
 import "./Login.css";
 import google from "../../../util/Img/Google.svg";
 import { MDBInput } from "mdb-react-ui-kit";
+import { toast , ToastContainer } from "react-toastify";
+
 
 const Login = (props) => {
   useEffect(() => {
@@ -55,7 +57,7 @@ const Login = (props) => {
                   <div className="col-xl-10 component">
                     <div className="card  rounded-3 text-black">
                       <div className="row g-0">
-                        <div className="col-lg-6">
+                        <div className="col-lg-6 col-md-6">
                           <div className="card-body p-md-5 mx-md-4">
                             <div className="text-center">
                               <img
@@ -170,7 +172,7 @@ const Login = (props) => {
 
                               <div className="text-center mt-2 mb-3 p-1">
                                 <button
-                                  className="btn btn-dark siBtn btn-block fa-lg w-50 mt-4"
+                                  className="btn btn-dark   siBtn btn-block fa-lg w-50 mt-4"
                                   type="submit"
                                 >
                                   Sign In
@@ -215,7 +217,7 @@ const Login = (props) => {
                             </form>
                           </div>
                         </div>
-                        <div className="col-lg-6 d-flex align-items-center signIn">
+                        <div className="col-lg-6 col-md-6 d-flex align-items-center signIn">
                           <div className="text-white px-3 py-4 p-md-5 mx-md-4">
                             <h6 className="mb-4 display-6 fw-bolder  signIn-1">
                               We are More than Just A Company
@@ -237,6 +239,7 @@ const Login = (props) => {
         </div>
       </div>
     </React.Fragment>
+      
   );
 };
 

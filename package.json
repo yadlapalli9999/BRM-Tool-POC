@@ -30,6 +30,7 @@
     "react-tooltip": "^4.2.21",
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
+    "tippy.js": "^6.2.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

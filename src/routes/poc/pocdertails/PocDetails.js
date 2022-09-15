@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./PocDetails.css";
 import AddResource from "../addresource/AddResource";
 import { POC_TABLE_HEADERS } from "../../Constants";
+import ProjectStatus from "../ProjectStatus/ProjectStatus";
 // import PieChart from "../../../util/PieChart";
 import { getSinglePoc } from "../../../redux/features/poc/poc.feature";
 
@@ -48,7 +49,6 @@ const PocDetails = () => {
   // console.log(id);
   // const pocID = params.getAll("pocID")[0] || null;
   const [pocData, setPocData] = useState({});
-
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ const PocDetails = () => {
   };
 
   const getData = (header) => {
-    const val = header.value;
+    const val = header.value; 
     switch (val) {
       case "duration":
         return `${pocData[val]} ${header.metric}`;
@@ -196,9 +196,9 @@ const PocDetails = () => {
           <MDBCol md="6">
             <AddResource members={pocData?.members} />
           </MDBCol>
-          <MDBCol md="4" className="justify-content-end">
-            <canvas id="pieChart" width="200" height="200"></canvas>
-            <AddResource />
+          {/* className="col-12 col-md-6 col4 col-lg-4 " */}
+          <MDBCol   className="col-md-12 proStatus col-sm-12 col-lg-6 col-12" >
+            <ProjectStatus/>
           </MDBCol>
           <MDBCol md="2" className="justify-content-end">
             <div class="card projectStatus">
@@ -214,7 +214,7 @@ const PocDetails = () => {
             </div>
           </MDBCol>
          
-        </MDBRow> */}
+        {/* </MDBRow>  */}
           </MDBContainer>
           {/* DELETE MODAL */}
           <div

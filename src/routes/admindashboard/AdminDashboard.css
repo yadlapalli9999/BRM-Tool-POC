@@ -131,6 +131,11 @@
   transition: transform 0.2s ease-out;
   z-index: -1;
 }
+.card{
+ /* overflow: auto; 
+  */
+  overflow-wrap: break-word;
+}
 
 .button-56:hover:after {
   transform: translate(0, 0);
@@ -225,3 +230,34 @@
 .allP {
   margin-top: 15px;
 }
+
+/* @media screen (max-width: 1024px) {
+  .card-1{
+
+  }
+  
+} */
+/* @media (min-width: 1024px) {
+  .piechart {
+    margin-top: 7rem;
+  }
+} */
+/* @media (max-width: 1440px) {
+  .piechart {
+    margin-top: 0rem;
+    /* margin:3rem; */
+    /* margin-top: 0.5rem; 
+  }
+} */
+@media only screen and (min-width: 992px) and (max-width: 1192px){
+  .piechart {
+    margin-top: 7rem;
+  }
+  }
+
+
+  @media only screen and (min-width: 767px) and (max-width: 992px){
+    .personBench {
+      margin-left: 3rem;
+    }
+    }

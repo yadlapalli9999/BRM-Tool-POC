@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import Spinner from "react-bootstrap/Spinner";
 // import { Pie } from "react-chartjs-2";
+
 import "./AdminDashboard.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -360,6 +361,16 @@ const AdminDashboard = (props) => {
                   </div>
                 </div>
               </div>
+              {/* <div
+              className="col-12 col-md-12  col-lg-4 col-sm-12 d-block mt-5"
+              style={{ height: "300px" }}
+            >
+             <Pie data={data} options={{ maintainAspectRatio: false }} />
+               
+              <div className=" piechart">
+                <PieChart />
+              </div> */}
+            {/* </div> */}
             </div>
           )}
 
@@ -385,10 +396,10 @@ const AdminDashboard = (props) => {
                   BENCH
                 </button>
               </div>
-              <div className="row mt-3 ">
+              <div className="row mt-2 ">
                 <>
                   <h4 className="h3-subHead mx-3">ACTIVE</h4>
-                  <div className="col-xl-8 col-sm-6 col-12 col-md-4 mb-4 table-responsive activeTable">
+                  <div className="col-xl-8 col-sm-12 col-12 col-md-4 mb-4 table-responsive activeTable">
                     <table className="table align-middle mb-0 tab bg-white table-hover">
                       <thead className="adminDashboardTableHead sticky-top">
                         <tr className="table-headings ">
@@ -458,7 +469,7 @@ const AdminDashboard = (props) => {
                     </table>
                   </div>
                   <div
-                    className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4 "
+                    className="col-xl-4 col-md-4 col-sm-12 col-12 mb-4 "
                     style={{ height: "300px" }}
                   >
                     {/* <Pie data={data} options={{ maintainAspectRatio: false }} />
@@ -468,7 +479,7 @@ const AdminDashboard = (props) => {
                 </>
                 ;
               </div>
-              <div className="row mt-4 mb-3">
+              <div className="row mt-2 mb-3">
                 {pocCount.map((data) => {
                   return (
                     <>

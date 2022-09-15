@@ -74,7 +74,7 @@ const EmployeeFields = () => {
     const { name, value } = e.target;
     setinputData({
       ...inputData,
-      [name]: value,
+      [name]: value.value,
     });
   };
   const handleDocuements = (e) => {
@@ -196,7 +196,7 @@ const EmployeeFields = () => {
                       label="Documents"
                     />
                   </MDBValidationItem>
-                  <MDBRow className="mt-4">
+                 <MDBRow className="mt-4">
                     <MDBCol md="6">
                       <AddResource members={inputData.members} />
                     </MDBCol>

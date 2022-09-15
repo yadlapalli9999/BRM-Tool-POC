@@ -100,10 +100,10 @@ let BenchList = () => {
       <div className="container">
         {/* <pre>{JSON.stringify(benchLists.data)}</pre> */}
         <div className="row mt-3">
-          <div className="col-md-3">
-            <h2 className="a1">Bench List</h2>
+          <div className="col-md-4 mx-4 ">
+            <h2 className="a1 mt-4">Bench List</h2>
           </div>
-          <div className="col-md-9">
+          <div className="col-md-7">
             <div
               className="text-center"
               style={{ marginTop: "30px", float: "right", marginRight: "10px" }}
@@ -121,7 +121,7 @@ let BenchList = () => {
             </div>
           </div>
         </div>
-        <div className="row">
+        <div className="row col-md-12">
           <div className="col-md-3 inp">
             <MDBInput
               type="text"
@@ -172,6 +172,8 @@ let BenchList = () => {
         <div className="row mt-4">
           <div className="col">
             {benchLists.length > 0 ? (
+        <div className=" container table-responsive">
+
               <MDBTable>
                 <MDBTableHead className="table_content text-white">
                   <tr>
@@ -272,6 +274,7 @@ let BenchList = () => {
                   }
                 </MDBTableBody>
               </MDBTable>
+              </div>
             ) : (
               <h1>NO Data</h1>
             )}
