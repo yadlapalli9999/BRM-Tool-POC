@@ -6,8 +6,7 @@ import { AdminRole } from "../../../Roles";
 import "./Login.css";
 import google from "../../../util/Img/Google.svg";
 import { MDBInput } from "mdb-react-ui-kit";
-import { toast , ToastContainer } from "react-toastify";
-
+import { toast, ToastContainer } from "react-toastify";
 
 const Login = (props) => {
   useEffect(() => {
@@ -36,6 +35,7 @@ const Login = (props) => {
     // }
     if (email && password) {
       dispatch(loginUser(user));
+      toast.success("Account Logging...", { autoClose: 1500 });
       if (AdminRole.role === "ADMIN") {
         setTimeout(() => {
           navigate("/dashboard");
@@ -239,7 +239,6 @@ const Login = (props) => {
         </div>
       </div>
     </React.Fragment>
-      
   );
 };
 

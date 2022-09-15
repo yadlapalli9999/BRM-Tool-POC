@@ -168,7 +168,7 @@ let POCHome = () => {
                   </>
                 ))} */}
 
-                {pocList &&
+                {pocList.length > 0 &&
                   pocList.map((item) => (
                     <tr>
                       {POC_TABLE_HEADERS.map((header) => (

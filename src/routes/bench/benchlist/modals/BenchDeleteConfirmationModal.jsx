@@ -9,7 +9,11 @@ import {
   MDBModalFooter,
 } from "mdb-react-ui-kit";
 import { useDispatch } from "react-redux";
-import { updateSingleResourceBench } from "../../../../redux/features/bench/bench.feature";
+import {
+  getBench,
+  updateSingleResourceBench,
+} from "../../../../redux/features/bench/bench.feature";
+import "./BenchDeleteConfirmationModal.css";
 
 const BenchDeleteConfirmationModal = ({
   benchDeleteModal,
@@ -32,12 +36,18 @@ const BenchDeleteConfirmationModal = ({
     };
     console.log(newObject);
     dispatch(updateSingleResourceBench(newObject));
+    dispatch(getBench());
     setHasReserved(!hasReserved);
     setBenchDeleteModal(false);
   };
   return (
     <>
-      <MDBModal staticBackdrop tabIndex="-1" show={benchDeleteModal}>
+      <MDBModal
+        staticBackdrop
+        tabIndex="-1"
+        show={benchDeleteModal}
+        className="modal"
+      >
         <MDBModalDialog centered>
           <MDBModalContent>
             <MDBModalHeader>
