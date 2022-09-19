@@ -18,6 +18,9 @@ const allDashBoardPocs = () => {
 const inActiveResources = () => {
   return API.get(`/dashboard/resource/inactive`);
 };
+// const pieChartData = () => {
+//   return API.get(`/dashboard/poc/count`);
+// };
 
 const dashboardServices = {
   pocCount,
@@ -25,5 +28,6 @@ const dashboardServices = {
   resourceCount,
   allDashBoardPocs,
   inActiveResources,
+
 };
 export default dashboardServices;

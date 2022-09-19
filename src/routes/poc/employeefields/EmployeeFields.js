@@ -194,7 +194,7 @@ const EmployeeFields = () => {
                       name="documents"
                       value={inputData.documents}
                       onChange={handleDocuements}
-                      label="Documents"
+                      label="Document Link"
                     />
                   </MDBValidationItem>
                   <MDBRow className="mt-4">

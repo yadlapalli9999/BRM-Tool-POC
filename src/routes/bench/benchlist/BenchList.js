@@ -3,6 +3,7 @@ import $, { data } from "jquery";
 import { dummyData } from "./dummyData";
 import ReservedBenchModal from "./modals/ReservedBenchModal";
 import BenchDeleteConfirmationModal from "./modals/BenchDeleteConfirmationModal";
+
 import {
   MDBBtn,
   MDBInput,
@@ -99,55 +100,72 @@ let BenchList = () => {
     <React.Fragment>
       <div className="container">
         {/* <pre>{JSON.stringify(benchLists.data)}</pre> */}
-        <div className="row mt-3">
-          <div className="col-md-4 mx-4 ">
-            <h2 className="a1 mt-4">Bench List</h2>
-          </div>
-          <div className="col-md-7">
+        <div className="text-center">
+          <h2 className="a1 mt-4 mb-4">Bench List</h2>
+        </div>
+        <div className="row  container ">
+          <div className="col-md-1 ">
             <div
-              className="text-center"
-              style={{ marginTop: "30px", float: "right", marginRight: "10px" }}
+              className=" p-1 addBtn bg-dark"
+              // style={{ marginTop: "30px", float: "right", marginRight: "10px" }}
             >
               {/* <MDBBtn> */}
               <Link
                 to="/newbenchEmployee"
-                className="btn addBtn text-white"
-                style={{ backgroundColor: "#333" }}
+                className=" "
+                // style={{ backgroundColor: "#333" }}
               >
-                ADD
+                {/* ADD */}
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  className=" addUserSvg mx-3"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
+                  />
+                </svg>
               </Link>
               {/* </MDBBtn> */}
               {/* <CustomButton/> */}
             </div>
           </div>
-        </div>
-        <div className="row col-md-12">
-          <div className="col-md-3 inp">
-            <MDBInput
-              type="text"
-              label="search"
-              value={query.searchValue}
-              style={{ width: "660px" }}
-              onChange={handleSearch}
-              // onChange={(e) => {setSearchValue(e.target.value);dispatch(searchBench(searchValue));console.log(searchValue)}}
-            />
-          </div>
-          <div className="col-md-6 ">
-            <select className="select selectBtn mx-5 " data-mdb-filter="true">
-              <option className=" ">Select Year</option>
-              <option>1-2</option>
-              <option>2-3</option>
-              <option>3-4</option>
-              <option>4-5</option>
-              <option>5-6</option>
-              <option>6-7</option>
-              <option>7-8</option>
-              <option>8-9</option>
-              <option>9-10</option>
-              <option>10-11</option>
-              <option>11-12</option>
-            </select>
-            {/* <div class="dropdown d-flex justify-content-end mb-4">
+        
+            <div className="col-md-6 offset-md-2 inp">
+              <MDBInput
+                // className="mx-4"
+                type="text"
+                label="search"
+                value={query.searchValue}
+                // style={{ width: "660px" }}
+                onChange={handleSearch}
+                // onChange={(e) => {setSearchValue(e.target.value);dispatch(searchBench(searchValue));console.log(searchValue)}}
+              />
+            </div>
+
+      
+            <div className="col-md-3">
+              <select className="select selectBtn mx-5 " data-mdb-filter="true">
+                <option className=" ">Select Year</option>
+                <option>1-2</option>
+                <option>2-3</option>
+                <option>3-4</option>
+                <option>4-5</option>
+                <option>5-6</option>
+                <option>6-7</option>
+                <option>7-8</option>
+                <option>8-9</option>
+                <option>9-10</option>
+                <option>10-11</option>
+                <option>11-12</option>
+              </select>
+              {/* <div class="dropdown d-flex justify-content-end mb-4">
               <select
                 class="btn btn-rounded  btn-secondary dropdown-toggle"
                 type="button"
@@ -167,14 +185,16 @@ let BenchList = () => {
                 <option>11-12</option>
               </select>
             </div> */}
-          </div>
+            </div>
+          
         </div>
+
         <div className="row mt-4">
           <div className="col">
             {benchLists.length > 0 ? (
               <div className=" container table-responsive">
                 <MDBTable>
-                  <MDBTableHead className="table_content text-white">
+                  <MDBTableHead className="table_content bg-dark text-white">
                     <tr>
                       <th scope="col">EmpId</th>
                       <th scope="col">Name</th>
@@ -370,6 +390,7 @@ let BenchList = () => {
       </div>
       {/* ReservedBenchModal */}
       {showBenchModal && (
+        <div className="modal-backdrop"> 
         <ReservedBenchModal
           setShowBenchModal={setShowBenchModal}
           showBenchModal={showBenchModal}
@@ -377,6 +398,7 @@ let BenchList = () => {
           hasReserved={hasReserved}
           singleResource={singleResource}
         />
+        </div>
       )}
       {/* deleteReservedMOdal */}
       {benchDeleteModal && (

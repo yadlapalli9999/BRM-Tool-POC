@@ -65,6 +65,19 @@ export const getInActiveResources = createAsyncThunk(
   }
 );
 
+// Piechart 
+
+// export const getPieChartData = createAsyncThunk(
+//   "dashboard/getPieChartData",
+//   async () => {
+//     // const response = await axios.get(GET_POC_COUNT).then((res) => res.data);
+//     const response = await dashboardServices.getPieChartData();
+//     // console.log(response);
+//     return response.data.data;
+//   }
+// );
+
+
 const dashboardSlice = createSlice({
   name: "dashboard",
   initialState,
@@ -137,6 +150,19 @@ const dashboardSlice = createSlice({
       state.inActiveResources = [];
       state.error = action.error.message || console.log("error occured");
     },
+    // [getPieChartData.pending]: (state, action) => {
+    //   state.loading = true;
+    // },
+    // [getPieChartData.fulfilled]: (state, action) => {
+    //   state.loading = false;
+    //   state.pieChartData = action.payload;
+    //   state.error = "";
+    // },
+    // [getPieChartData.rejected]: (state, action) => {
+    //   state.loading = false;
+    //   state.pieChartData = [];
+    //   state.error = action.error.message || console.log("error occured");
+    // },
   },
 });
 

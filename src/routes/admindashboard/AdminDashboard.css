@@ -1,5 +1,5 @@
 .personBench {
-  height: 100%;
+  height: 75%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .responsive {
@@ -29,7 +29,13 @@
 
 .h3-subHead {
   color: #ff5722;
+  /* display:inline-flex; */
   padding: 0;
+  /* background: #444 !important; */
+  /* display: inline-block; */
+
+
+
 }
 
 .adminDashboardTableHead {
@@ -260,4 +266,14 @@
   .personBench {
     margin-left: 3rem;
   }
+}
+/* Card modal  */
+.cardModal{
+  background:transparent;
+  /* opacity: -1; */
+
+}
+.modal-backdrop
+{
+    opacity:0.5 !important;
 }

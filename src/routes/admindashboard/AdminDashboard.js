@@ -15,6 +15,7 @@ import {
 } from "../../redux/features/dashboard/dashboard.feature";
 import PieChart from "../../util/PieChart";
 import { MDBSpinner } from "mdb-react-ui-kit";
+import CardsModal from "./CardsModal";
 
 const AdminDashboard = (props) => {
   const dispatch = useDispatch();
@@ -159,6 +160,10 @@ const AdminDashboard = (props) => {
     ],
   };
 
+// Modal for Cards Descrpption
+const [modalShow, setModalShow] = React.useState(false);
+
+
   return (
     <>
       {loading ? (
@@ -171,7 +176,7 @@ const AdminDashboard = (props) => {
       ) : (
         <div>
           {show === false && (
-            <div className="container p-1 part-2 mt-0 ">
+            <div className="container p-1 part-2 mt-0 mb-0 ">
               <div
                 className="mt-3"
                 style={{
@@ -196,7 +201,7 @@ const AdminDashboard = (props) => {
                   return (
                     <>
                       <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-4">
-                        <div className="card">
+                        <div className="card " variant="primary" onClick={() => setModalShow(true)}>
                           <div className="card-body card-body-top">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -216,7 +221,7 @@ const AdminDashboard = (props) => {
                       </div>
 
                       <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
-                        <div className="card">
+                        <div className="card" variant="primary" onClick={() => setModalShow(true)}>
                           <div className="card-body card-body-top">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -235,7 +240,7 @@ const AdminDashboard = (props) => {
                         </div>
                       </div>
                       <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4">
-                        <div className="card">
+                        <div className="card" variant="primary" onClick={() => setModalShow(true)}>
                           <div className="card-body card-body-top">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -260,9 +265,11 @@ const AdminDashboard = (props) => {
                 })}
               </div>
 
-              <div className="row mb-5   ">
-                <h4 className="h3-subHead mx-3 mt-2 mb-4">IN ACTIVE </h4>
-                <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4 responsive activeTable">
+              <div className="row">
+                <h6 className="h3-subHead fs-5 fw-bold text-decoration-underline mx-3 mt-2 ">
+                  IN ACTIVE
+                </h6>
+                <div className="col-xl-4 col-sm-6 col-12 col-md-4  responsive activeTable">
                   <table className="table  align-middle mb-0 bg-whit table-striped table-hover overflow-x:auto">
                     <thead className=" adminDashboardTableHead sticky-top">
                       <tr className="table-headings">
@@ -302,64 +309,60 @@ const AdminDashboard = (props) => {
                   </table>
                 </div>
 
-                <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
+                <div className="col-xl-4 col-md-4 col-sm-6 col-12 ">
                   <div className="card personBench">
                     {resourceActive.map((data) => {
                       return (
-                        <>
-                          <div
-                            className="card-body d-flex align-items-center flex-row justify-content-between"
-                            style={{ height: 0 }}
-                          >
+                        <div className="card-body p-3">
+                          <div className=" mt-4 mb-5 d-flex align-items-center flex-row justify-content-between">
                             <h3 className="mb-0 text-center ">Active</h3>
-                            <div className=" text-center px-md-1 ">
-                              <div style={{ marginRight: "100px" }}>
-                                <h3 className="text-success">
-                                  {data.Active === undefined || null
-                                    ? "No Data"
-                                    : data.Active}
-                                </h3>
-                              </div>
+
+                            <div
+                              className=" text-center "
+                              style={{ marginRight: "100px" }}
+                            >
+                              <h3 className="text-success">
+                                {data.Active === undefined || null
+                                  ? "No Data"
+                                  : data.Active}
+                              </h3>
                             </div>
                           </div>
-                          <div
-                            className="card-body d-flex align-items-center flex-row justify-content-between"
-                            style={{ height: 0 }}
-                          >
+                          <div className="mb-5 d-flex align-items-center flex-row justify-content-between">
                             <h3 className="mb-0 text-center">Inactive</h3>
-                            <div className=" text-center px-md-1 ">
-                              <div style={{ marginRight: "100px" }}>
-                                <h3 className="text-danger">
-                                  {data.Inactive === undefined || null
-                                    ? "No Data"
-                                    : data.Inactive}
-                                </h3>
-                              </div>
+
+                            <div
+                              className=" text-center  "
+                              style={{ marginRight: "100px" }}
+                            >
+                              <h3 className="text-danger">
+                                {data.Inactive === undefined || null
+                                  ? "No Data"
+                                  : data.Inactive}
+                              </h3>
                             </div>
                           </div>
-                          <div
-                            className="card-body d-flex align-items-center flex-row justify-content-between "
-                            style={{ height: 0 }}
-                          >
+                          <div className="mb-5 d-flex align-items-center flex-row justify-content-between ">
                             <h3 className="mb-0 text-center">Project</h3>
-                            <div className=" text-center px-md-1 ">
-                              <div style={{ marginRight: "100px" }}>
-                                <h3 className="text-warning">
-                                  {" "}
-                                  {data.Project === undefined || null
-                                    ? "No Data"
-                                    : data.Project}
-                                </h3>
-                              </div>
+
+                            <div
+                              className=" text-center  "
+                              style={{ marginRight: "100px" }}
+                            >
+                              <h3 className="text-warning">
+                                {data.Project === undefined || null
+                                  ? "No Data"
+                                  : data.Project}
+                              </h3>
                             </div>
                           </div>
-                        </>
+                        </div>
                       );
                     })}
                   </div>
                 </div>
 
-                <div className="col-xl-4 col-md-4 col-ms-6 col-12 mb-4">
+                <div className="col-xl-4 col-md-4 col-ms-6 col-12 ">
                   <div className="card">
                     <div className="card-header adminDashboardTableHead text-white">
                       <h6 className="mb-0 text-center">Missed Worklogs</h6>
@@ -388,7 +391,13 @@ const AdminDashboard = (props) => {
           )}
 
           {show === true && (
+            
             <div className="container p-1 part-2 mt-0">
+              {modalShow === true   && (
+            <div className="modal-backdrop"> <CardsModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      /></div>)}
               <div
                 className="mt-3"
                 style={{
@@ -411,9 +420,13 @@ const AdminDashboard = (props) => {
               </div>
               <div className="row mt-2 ">
                 <>
-                  <h4 className="h3-subHead mx-3">ACTIVE</h4>
-                  <div className="col-xl-8 col-sm-12 col-12 col-md-4 mb-4 table-responsive activeTable">
-                    <table className="table align-middle mb-0 tab bg-white table-hover">
+                  <h6 className="h3-subHead mx-3 fs-5 fw-bold text-decoration-underline ">
+                    {" "}
+                    ACTIVE
+                  </h6>
+
+                  <div className="col-xl-8 col-sm-12 mt-0 col-12 col-md-4 mb-4 table-responsive activeTable">
+                    <table className="table caption-top align-middle mb-0 tab bg-white table-hover">
                       <thead className="adminDashboardTableHead sticky-top">
                         <tr className="table-headings ">
                           <th>ID</th>
@@ -497,7 +510,7 @@ const AdminDashboard = (props) => {
                   return (
                     <>
                       <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-1">
-                        <div className="card">
+                        <div className="card " variant="primary" onClick={() => setModalShow(true)}>
                           <div className="card-body card-body-bottom">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -506,7 +519,7 @@ const AdminDashboard = (props) => {
                                     ? "No Data"
                                     : data.IntiatedPocs}
                                 </h3>
-                                <p className="mb-0 card-text">Initiated</p>
+                                <p className="mb-0 card-text">Idea</p>
                               </div>
                               <div className="align-self-center">
                                 <i className="fas card-1 fa-rocket  fa-3x"></i>
@@ -516,7 +529,7 @@ const AdminDashboard = (props) => {
                         </div>
                       </div>
                       <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-1">
-                        <div className="card">
+                        <div className="card " variant="primary" onClick={() => setModalShow(true)}>
                           <div className="card-body card-body-bottom">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -535,7 +548,7 @@ const AdminDashboard = (props) => {
                         </div>
                       </div>
                       <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-1">
-                        <div className="card">
+                        <div className="card" variant="primary" onClick={() => setModalShow(true)}>
                           <div className="card-body card-body-bottom">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -544,7 +557,7 @@ const AdminDashboard = (props) => {
                                     ? "No Data"
                                     : data.CompletedPocs}
                                 </h3>
-                                <p className="mb-0  card-text">Completed</p>
+                                <p className="mb-0  card-text">Closed</p>
                               </div>
                               <div className="align-self-center">
                                 <i className="fas  card-3 fa-chart-pie  fa-3x"></i>
@@ -553,6 +566,8 @@ const AdminDashboard = (props) => {
                           </div>
                         </div>
                       </div>
+                      
+
                     </>
                   );
                 })}

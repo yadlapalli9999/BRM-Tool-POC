@@ -197,10 +197,10 @@ const PocDetails = () => {
             <AddResource members={pocData?.members} />
           </MDBCol>
           {/* className="col-12 col-md-6 col4 col-lg-4 " */}
-          <MDBCol   className="col-md-12 proStatus col-sm-12 col-lg-6 col-12" >
+          <MDBCol   className="col-md-12 proStatus col-sm-12 col-lg-6 col-12 mt-5" >
             <ProjectStatus/>
           </MDBCol>
-          <MDBCol md="2" className="justify-content-end">
+          {/* <MDBCol md="2" className="justify-content-end">
             <div class="card projectStatus">
               <div class="card-header text-center">
                 Project Status : {status}
@@ -212,7 +212,7 @@ const PocDetails = () => {
               </div>
               <div class="card-footer text-muted">2 days ago</div>
             </div>
-          </MDBCol>
+          </MDBCol> */}
          
         {/* </MDBRow>  */}
           </MDBContainer>

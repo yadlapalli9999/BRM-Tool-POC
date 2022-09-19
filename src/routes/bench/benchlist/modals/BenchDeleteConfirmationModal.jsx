@@ -51,7 +51,7 @@ const BenchDeleteConfirmationModal = ({
         <MDBModalDialog centered>
           <MDBModalContent>
             <MDBModalHeader>
-              <MDBModalTitle>Modal title</MDBModalTitle>
+              <MDBModalTitle></MDBModalTitle>
               <MDBBtn
                 className="btn-close"
                 color="none"

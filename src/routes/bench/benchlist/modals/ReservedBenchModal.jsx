@@ -58,6 +58,7 @@ export default function ReservedBenchModal({
   }, []);
   return (
     <>
+    
       <MDBModal
         staticBackdrop
         tabIndex="-1"
@@ -67,7 +68,7 @@ export default function ReservedBenchModal({
         <MDBModalDialog centered>
           <MDBModalContent style={{ backdrop: "static" }}>
             <MDBModalHeader>
-              <MDBModalTitle>Modal title</MDBModalTitle>
+              <MDBModalTitle className="modalHeader">Project Details</MDBModalTitle>
               <MDBBtn
                 className="btn-close"
                 color="none"
@@ -127,6 +128,7 @@ export default function ReservedBenchModal({
           </MDBModalContent>
         </MDBModalDialog>
       </MDBModal>
+    
     </>
   );
 }
