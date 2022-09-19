@@ -69,13 +69,29 @@ const EmployeeFields = () => {
     documents: [],
     members: [],
   });
-
+  const [statushasError, setStatusHasError] = useState(false);
+  const [durationhasError, setDurationHasError] = useState(false);
   const handleChangeInputFields = (e) => {
     const { name, value } = e.target;
     setinputData({
       ...inputData,
       [name]: value,
     });
+    if (name === "status") {
+      if (!value) {
+        setStatusHasError(true);
+      } else {
+        setStatusHasError(false);
+      }
+    }
+    if (name === "duration") {
+      if (!value) {
+        setDurationHasError(true);
+      } else {
+        setDurationHasError(false);
+      }
+    }
+    console.log(inputData);
   };
   const handleDocuements = (e) => {
     setinputData({
@@ -85,9 +101,16 @@ const EmployeeFields = () => {
   };
 
   const handleSubmit = (e) => {
-    if (!inputData.name || !inputData.members) {
+    console.log(inputData);
+    if (
+      !inputData.name ||
+      !inputData.members ||
+      !inputData.status ||
+      !inputData.duration
+    ) {
       alert("please fill form");
-      console.log(inputData.name);
+      if (!inputData.status) setStatusHasError(true);
+      if (!inputData.duration) setDurationHasError(true);
     } else {
       e.preventDefault();
       console.log(inputData);
@@ -112,7 +135,7 @@ const EmployeeFields = () => {
                 <MDBValidation className="row g-5" onSubmit={handleSubmit}>
                   <MDBValidationItem
                     className="col-md-6"
-                    feedback="Please Enter your name"
+                    feedback="Please Enter your Name"
                     invalid
                   >
                     <MDBInput
@@ -156,36 +179,69 @@ const EmployeeFields = () => {
               <MDBInput id='validationCustom04'  required name="createdBy" value={inputData.createdBy} onChange={handleChangeInputFields} label="CreatedBy"/>
            </MDBValidationItem> */}
                   <MDBValidationItem
-                    className="col-md-6"
-                    feedback="Please Enter your Status"
+                    className="col-md-6 d-flex justify-content-center"
+                    feedback="Please select your Status"
                     invalid
                   >
-                    <MDBInput
+                    <select
+                      id="validationCustom06"
+                      className={`${
+                        statushasError ? "has-Error" : "input-boxes"
+                      }`}
+                      value={inputData.status}
+                      onChange={handleChangeInputFields}
+                      required
+                      name="status"
+                    >
+                      <option className="initial-input">Select Status</option>
+                      <option>idea</option>
+                      <option>Active</option>
+                      <option>Hold</option>
+                      <option>closed</option>
+                    </select>
+                    {/* <MDBInput
                       id="validationCustom05"
                       required
                       name="status"
                       value={inputData.status}
                       onChange={handleChangeInputFields}
                       label="Status"
-                    />
+                    /> */}
                   </MDBValidationItem>
                   <MDBValidationItem
-                    className="col-md-6"
-                    feedback="Please Enter your Status"
+                    className="col-md-6 d-flex justify-content-center"
+                    feedback="Please select your Duration"
                     invalid
                   >
-                    <MDBInput
+                    {/* <MDBInput
                       id="validationCustom06"
                       required
                       name="duration"
                       value={inputData.duration}
                       onChange={handleChangeInputFields}
                       label="Duration"
-                    />
+                    /> */}
+                    <select
+                      id="validationCustom06"
+                      className={`${
+                        durationhasError ? "has-Error" : "input-boxes"
+                      }`}
+                      value={inputData.duration}
+                      onChange={handleChangeInputFields}
+                      required
+                      name="duration"
+                    >
+                      <option className="initial-input">Select Duration</option>
+                      <option>30</option>
+                      <option>45</option>
+                      <option>60</option>
+                      <option>120</option>
+                      <option>180</option>
+                    </select>
                   </MDBValidationItem>
                   <MDBValidationItem
                     className="col-md-6"
-                    feedback="Please Enter your Status"
+                    feedback="Please Enter your Document Link"
                     invalid
                   >
                     <MDBInput
