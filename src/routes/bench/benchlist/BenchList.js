@@ -136,36 +136,35 @@ let BenchList = () => {
               {/* <CustomButton/> */}
             </div>
           </div>
-        
-            <div className="col-md-6 offset-md-2 inp">
-              <MDBInput
-                // className="mx-4"
-                type="text"
-                label="search"
-                value={query.searchValue}
-                // style={{ width: "660px" }}
-                onChange={handleSearch}
-                // onChange={(e) => {setSearchValue(e.target.value);dispatch(searchBench(searchValue));console.log(searchValue)}}
-              />
-            </div>
 
-      
-            <div className="col-md-3">
-              <select className="select selectBtn mx-5 " data-mdb-filter="true">
-                <option className=" ">Select Year</option>
-                <option>1-2</option>
-                <option>2-3</option>
-                <option>3-4</option>
-                <option>4-5</option>
-                <option>5-6</option>
-                <option>6-7</option>
-                <option>7-8</option>
-                <option>8-9</option>
-                <option>9-10</option>
-                <option>10-11</option>
-                <option>11-12</option>
-              </select>
-              {/* <div class="dropdown d-flex justify-content-end mb-4">
+          <div className="col-md-6 offset-md-2 inp">
+            <MDBInput
+              // className="mx-4"
+              type="text"
+              label="search"
+              value={query.searchValue}
+              // style={{ width: "660px" }}
+              onChange={handleSearch}
+              // onChange={(e) => {setSearchValue(e.target.value);dispatch(searchBench(searchValue));console.log(searchValue)}}
+            />
+          </div>
+
+          <div className="col-md-3">
+            <select className="select selectBtn mx-5 " data-mdb-filter="true">
+              <option className=" ">Select Year</option>
+              <option>1-2</option>
+              <option>2-3</option>
+              <option>3-4</option>
+              <option>4-5</option>
+              <option>5-6</option>
+              <option>6-7</option>
+              <option>7-8</option>
+              <option>8-9</option>
+              <option>9-10</option>
+              <option>10-11</option>
+              <option>11-12</option>
+            </select>
+            {/* <div class="dropdown d-flex justify-content-end mb-4">
               <select
                 class="btn btn-rounded  btn-secondary dropdown-toggle"
                 type="button"
@@ -185,8 +184,7 @@ let BenchList = () => {
                 <option>11-12</option>
               </select>
             </div> */}
-            </div>
-          
+          </div>
         </div>
 
         <div className="row mt-4">
@@ -390,14 +388,14 @@ let BenchList = () => {
       </div>
       {/* ReservedBenchModal */}
       {showBenchModal && (
-        <div className="modal-backdrop"> 
-        <ReservedBenchModal
-          setShowBenchModal={setShowBenchModal}
-          showBenchModal={showBenchModal}
-          setHasReserved={setHasReserved}
-          hasReserved={hasReserved}
-          singleResource={singleResource}
-        />
+        <div className="modal-backdrop">
+          <ReservedBenchModal
+            setShowBenchModal={setShowBenchModal}
+            showBenchModal={showBenchModal}
+            setHasReserved={setHasReserved}
+            hasReserved={hasReserved}
+            singleResource={singleResource}
+          />
         </div>
       )}
       {/* deleteReservedMOdal */}

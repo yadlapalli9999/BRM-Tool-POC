@@ -37,6 +37,9 @@ let POCHome = () => {
   const handleNameClick = (pocID) => {
     navigate(`/pocdetails`, { state: { pocId: pocID } });
   };
+  // const editPocHandler = (pocID) => {
+  //   navigate(`/editpoc`, { state: { pocId: pocID } });
+  // };
 
   const getDocIcon = (docLink) => {
     if (docLink.includes("docs.google.com")) {
@@ -53,7 +56,7 @@ let POCHome = () => {
     switch (val) {
       case "name":
         return (
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center justify-content-center">
             <div className="name" onClick={() => handleNameClick(item._id)}>
               {/* <Link to={(`/pocdetails`, { state: { pocId: item._id } })}> */}
               <p className="fw-bold mb-1">{item.name}</p>
@@ -61,16 +64,37 @@ let POCHome = () => {
             </div>
           </div>
         );
-      case "description":
-        return <p className="fw-normal mb-1">{item.description}</p>;
+      case "status":
+        //  <p className="fw-normal mb-1">{item.status}</p>;
+        return (
+          <span
+            className={`badge ${
+              item.status == "closed"
+                ? "badge-danger"
+                : item.status == "Hold"
+                ? "badge-warning"
+                : item.status == "Active"
+                ? "badge-success"
+                : "badge-info"
+            }
+            } rounded-pill d-inline`}
+          >
+            {item.status}
+          </span>
+        );
+
       case "duration":
         return (
           <span
             className={`badge ${
-              item.duration >= 5
+              item.duration == 180
                 ? "badge-danger"
-                : item.duration >= 3
+                : item.duration >= 120
                 ? "badge-warning"
+                : item.duration >= 60
+                ? "badge-info"
+                : item.duration >= 45
+                ? "badge-secondary"
                 : "badge-success"
             } rounded-pill d-inline`}
           >
@@ -116,6 +140,26 @@ let POCHome = () => {
                 {getDocIcon(doc)}
               </a>
             ))}
+          </div>
+        );
+      case "actions":
+        return (
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Link to={`/editpoc/${item._id}`}>
+              <i
+                className="fas fa-edit text-primary editIcon"
+                // onClick={() => {
+                //   editPocHandler(item._id);
+                // }}
+              />
+            </Link>
           </div>
         );
       default:

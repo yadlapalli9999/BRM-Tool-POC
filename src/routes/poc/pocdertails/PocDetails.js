@@ -40,7 +40,7 @@ const PocDetails = () => {
 
   setTimeout(() => {
     setLoader(false);
-  }, 2000);
+  }, 1500);
   const closeHandler = () => {
     setLoader(true);
     navigate("/poc");
@@ -65,7 +65,7 @@ const PocDetails = () => {
   };
 
   const getData = (header) => {
-    const val = header.value; 
+    const val = header.value;
     switch (val) {
       case "duration":
         return `${pocData[val]} ${header.metric}`;
@@ -197,10 +197,10 @@ const PocDetails = () => {
             <AddResource members={pocData?.members} />
           </MDBCol>
           {/* className="col-12 col-md-6 col4 col-lg-4 " */}
-          <MDBCol   className="col-md-12 proStatus col-sm-12 col-lg-6 col-12 mt-5" >
-            <ProjectStatus/>
-          </MDBCol>
-          {/* <MDBCol md="2" className="justify-content-end">
+            <MDBCol className="col-md-12 proStatus col-sm-12 col-lg-6 col-12 mt-5">
+              <ProjectStatus />
+            </MDBCol>
+            {/* <MDBCol md="2" className="justify-content-end">
             <div class="card projectStatus">
               <div class="card-header text-center">
                 Project Status : {status}
@@ -213,8 +213,8 @@ const PocDetails = () => {
               <div class="card-footer text-muted">2 days ago</div>
             </div>
           </MDBCol> */}
-         
-        {/* </MDBRow>  */}
+
+            {/* </MDBRow>  */}
           </MDBContainer>
           {/* DELETE MODAL */}
           <div

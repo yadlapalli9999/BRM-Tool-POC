@@ -1,8 +1,9 @@
 export const POC_TABLE_HEADERS = [
   { label: "Name", value: "name" },
-  { label: "Description", value: "description" },
-  { label: "Duration", value: "duration", metric: "Month" },
+  { label: "Status", value: "status" },
+  { label: "Duration", value: "duration", metric: "Days" },
   { label: "CreatedBy", value: "createdBy" },
   { label: "Members", value: "members" },
   { label: "Documents", value: "documents" },
+  { label: "Actions", value: "actions" },
 ];

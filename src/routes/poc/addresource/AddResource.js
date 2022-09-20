@@ -1,8 +1,7 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import  { searchPOC ,getBench} from "../../../redux/features/poc/poc.feature";
-import { useDispatch,useSelector } from "react-redux";
-
+import { searchPOC, getBench } from "../../../redux/features/poc/poc.feature";
+import { useDispatch, useSelector } from "react-redux";
 
 import {
   MDBContainer,
@@ -22,80 +21,69 @@ import {
 } from "mdb-react-ui-kit";
 import { queryByRole } from "@testing-library/dom";
 
-
-
 let AddResource = (props) => {
   const { members } = props;
-let dispatch = useDispatch();
+  let dispatch = useDispatch();
 
-
-const searchResult =(value)=>push(value);
-
-
+  const searchResult = (value) => push(value);
+  const [isEmpty, setIsEmpty] = useState(true);
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState({
     searchValue: "",
   });
 
-
-  
   let allBenchLists = useSelector((store) => {
     return store["poc"];
   });
 
-  let {benchLists} = allBenchLists;
-console.log(benchLists);
+  let { benchLists } = allBenchLists;
+  console.log(benchLists);
   // let { loading, benchLists, errorMessage } = allBenchLists;
 
   const [resource, setResource] = useState("");
 
   const handleResource = (event) => {
-
     event.preventDefault();
     props.members.push(query.searchValue);
     console.log(props.members);
     clearForm();
     setShow(false);
-
-
   };
   const clearForm = () => {
     setResource("");
   };
   useEffect(() => {
-    dispatch(getBench());
-  }, [])
+    // dispatch(getBench());
+  }, []);
 
   let handleSearch = (event) => {
     setQuery({
       ...query,
       searchValue: event.target.value,
     });
-//     const reqName=members.filter((item)=>(item==searchValue));
-// console.log(reqName);
-    if (query.searchValue    ) {
+    //     const reqName=members.filter((item)=>(item==searchValue));
+    // console.log(reqName);
+    if (query.searchValue.trim()) {
+      setIsEmpty(false);
       dispatch(searchPOC(query));
-     dispatch(getBench());
+      // dispatch(getBench());
 
+      members.searchResult(query);
 
-     members.searchResult(query);
-
-    // props.members.push(query);
+      // props.members.push(query);
 
       console.log(query);
     } else {
+      setIsEmpty(true);
       console.log("search value is not found");
     }
   };
 
-  const nameSelector=(name)=>{
-    setQuery({...query,searchValue:name});
-  }
+  const nameSelector = (name) => {
+    setQuery({ ...query, searchValue: name });
+  };
   const navigate = useNavigate();
   const handlePocDetailsNameClick = () => {
-
-
-
     navigate("/worklogs");
   };
   return (
@@ -112,20 +100,17 @@ console.log(benchLists);
                   </MDBCardTitle>
                 </MDBCol>
                 <MDBCol md="6">
-                <MDBInput
-              type="text"
-              label="search"
-              value={query.searchValue}
-              // style={{ width: "660px" }}
-              onChange={handleSearch}
-                          />
-                  
-           
+                  <MDBInput
+                    type="text"
+                    label="search"
+                    value={query.searchValue}
+                    // style={{ width: "660px" }}
+                    onChange={handleSearch}
+                  />
                 </MDBCol>
               </MDBRow>
             </MDBCardHeader>
             <MDBCardBody>
-           
               <MDBTable>
                 <MDBTableBody>
                   {members &&
@@ -203,16 +188,26 @@ console.log(benchLists);
                   onChange={handleSearch}
                   label="Search By Name , Email"
                 />
-                 <MDBTable>
-                <MDBTableBody>
-                {benchLists &&
-                      benchLists.map((filterData) => (
-                        <tr key={filterData._id}>
-                          <td onClick={()=>{nameSelector(filterData.name)}}>{filterData.name}</td>
-                        </tr>
-                      ))}
-                </MDBTableBody>
-              </MDBTable>
+                <MDBTable>
+                  <MDBTableBody>
+                    {!isEmpty && (
+                      <>
+                        {benchLists &&
+                          benchLists.map((filterData) => (
+                            <tr key={filterData._id}>
+                              <td
+                                onClick={() => {
+                                  nameSelector(filterData.name);
+                                }}
+                              >
+                                {filterData.name}
+                              </td>
+                            </tr>
+                          ))}
+                      </>
+                    )}
+                  </MDBTableBody>
+                </MDBTable>
                 {/* <input
                   type="text"
                   id="orangeForm-name"
