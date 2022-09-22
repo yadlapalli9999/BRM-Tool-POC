@@ -24,7 +24,6 @@ export default function ReservedBenchModal({
   singleResource,
   hasReserved,
 }) {
-  console.log(singleResource);
   const dispatch = useDispatch();
   const [projectsName, setProjectsName] = useState("");
   const [leadName, setLeadName] = useState("");
@@ -33,7 +32,6 @@ export default function ReservedBenchModal({
     if (!projectsName || !leadName || !managerName) {
       alert("Fill all the fields");
     } else {
-      console.log(singleResource);
       const BenchReservedstatus = "BenchReserved";
       const newObject = {
         name: singleResource[0].name,
@@ -46,7 +44,6 @@ export default function ReservedBenchModal({
         reportingManager: managerName,
         _id: singleResource[0]._id,
       };
-      console.log(newObject);
       dispatch(updateSingleResourceBench(newObject));
       dispatch(getBench());
       setHasReserved(!hasReserved);

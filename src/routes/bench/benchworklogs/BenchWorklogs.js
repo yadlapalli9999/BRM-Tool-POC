@@ -167,10 +167,10 @@ const BenchWorklogs = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="modal-footer justify-content-center">
+                  <div className="modal-footer justify-content-center">
                     <button
                       type="button"
-                      class="btn btn-secondary btn-sm"
+                      className="btn btn-secondary btn-sm"
                       onClick={handleWorkLogSubmit}
                     >
                       Add WorkLog
@@ -201,8 +201,6 @@ const BenchWorklogs = () => {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
 
         <table className="table align-middle mb-0 bg-white table-hover">
           <thead className="bg-secondary">
@@ -239,6 +237,8 @@ const BenchWorklogs = () => {
             })}
           </tbody>
         </table>
+        </div>
+      </div>
       </div>
     </React.Fragment>
   );

@@ -44,7 +44,6 @@ const searchResult =(value)=>push(value);
   });
 
   let {benchLists} = allBenchLists;
-console.log(benchLists);
   // let { loading, benchLists, errorMessage } = allBenchLists;
 
   const [resource, setResource] = useState("");
@@ -53,7 +52,6 @@ console.log(benchLists);
 
     event.preventDefault();
     props.members.push(query.searchValue);
-    console.log(props.members);
     clearForm();
     setShow(false);
 
@@ -73,7 +71,7 @@ console.log(benchLists);
     });
 //     const reqName=members.filter((item)=>(item==searchValue));
 // console.log(reqName);
-    if (query.searchValue    ) {
+    if (query.searchValue) {
       dispatch(searchPOC(query));
      dispatch(getBench());
 
@@ -82,9 +80,6 @@ console.log(benchLists);
 
     // props.members.push(query);
 
-      console.log(query);
-    } else {
-      console.log("search value is not found");
     }
   };
 

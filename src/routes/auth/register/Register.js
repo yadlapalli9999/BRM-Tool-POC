@@ -19,7 +19,6 @@ const Register = (props) => {
   const { name, email, password } = user;
   const handleRegisterForm = (event) => {
     event.preventDefault();
-    console.log(user);
     navigate("/");
   };
   return (

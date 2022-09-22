@@ -165,9 +165,9 @@ let BenchList = () => {
                 <option>10-11</option>
                 <option>11-12</option>
               </select>
-              {/* <div class="dropdown d-flex justify-content-end mb-4">
+              {/* <div className"dropdown d-flex justify-content-end mb-4">
               <select
-                class="btn btn-rounded  btn-secondary dropdown-toggle"
+                className"btn btn-rounded  btn-secondary dropdown-toggle"
                 type="button"
                 style={{ fontSize: "1rem" }}
               >
@@ -274,7 +274,7 @@ let BenchList = () => {
             <i
               className="fas fa-edit text-primary"
             />
-             <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> *
+             <label className"form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> *
           </Link>
         </td> */}
                             <td>
@@ -357,8 +357,8 @@ let BenchList = () => {
                               />
                             </a></td>
                         <td>
-                        <div class="form-check form-switch" >
-                          <input class="form-check-input" value={role} onChange={()=>handleInputChange(filterData.id)} type="checkbox"  id="flexSwitchCheck" />
+                        <div className"form-check form-switch" >
+                          <input className"form-check-input" value={role} onChange={()=>handleInputChange(filterData.id)} type="checkbox"  id="flexSwitchCheck" />
                         </div>
                           </td>
                         {/* <td>
@@ -366,7 +366,7 @@ let BenchList = () => {
                             <i
                               className="fas fa-edit text-primary"
                             />
-                             <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
+                             <label className"form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
                           </Link>
                         </td> }
                         <td>

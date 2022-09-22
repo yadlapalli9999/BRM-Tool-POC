@@ -50,7 +50,7 @@ export const createBench = createAsyncThunk(
   "bench/createBench",
   async (newData) => {
     let response = await BenchServices.create(newData);
-    console.log(response.data);
+    // console.log(response.data);
     return response.data;
   }
 );
@@ -68,11 +68,11 @@ export const createBench = createAsyncThunk(
 export const updateBench = createAsyncThunk(
   "bench/updateBench",
   async (newData) => {
-    console.log(newData);
+    // console.log(newData);
 
     let response = await BenchServices.update(newData);
     //console.log(newBench)
-    console.log(response);
+    // console.log(response);
     return response.data.data;
   }
 );
@@ -88,9 +88,7 @@ export const deleteBench = createAsyncThunk(
 export const searchBench = createAsyncThunk(
   "bench/searchBench",
   async (query) => {
-    console.log(query);
     let response = await BenchServices.searchTitle(query);
-    console.log(response);
 
     return response.data.data;
   }
@@ -99,9 +97,9 @@ export const searchBench = createAsyncThunk(
 export const updateSingleResourceBench = createAsyncThunk(
   "bench/updateSingleResourceBench",
   async (newData) => {
-    console.log(newData);
+    // console.log(newData);
     let response = await BenchServices.updateSingleResource(newData);
-    console.log(response);
+    // console.log(response);
   }
 );
 
@@ -147,7 +145,7 @@ const benchSlice = createSlice({
     },
     [updateBench.fulfilled]: (state, action) => {
       state.loading = false;
-      console.log(action.payload);
+      // console.log(action.payload);
       const id = action.payload;
 
       const benchLists = state.benchLists.filter((item) => item._id !== id);

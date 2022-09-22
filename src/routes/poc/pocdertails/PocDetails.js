@@ -201,16 +201,16 @@ const PocDetails = () => {
             <ProjectStatus/>
           </MDBCol>
           {/* <MDBCol md="2" className="justify-content-end">
-            <div class="card projectStatus">
-              <div class="card-header text-center">
+            <div className"card projectStatus">
+              <div className"card-header text-center">
                 Project Status : {status}
               </div>
-              <div class="card-body d-flex ">
+              <div className"card-body d-flex ">
                 <button className="btn btn-warning"> STARTED</button>
                 <button className="btn btn-secondary">HOLD</button>
                 <button className="btn btn-success">COMPLETED</button>
               </div>
-              <div class="card-footer text-muted">2 days ago</div>
+              <div className"card-footer text-muted">2 days ago</div>
             </div>
           </MDBCol> */}
          

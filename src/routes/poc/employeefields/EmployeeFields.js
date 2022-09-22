@@ -28,7 +28,7 @@ const EmployeeFields = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const resourceID = localStorage.getItem("resourceID");
-  console.log(resourceID);
+  // console.log(resourceID);
   // const members = [
   //   {
   //     id: 1,
@@ -87,10 +87,10 @@ const EmployeeFields = () => {
   const handleSubmit = (e) => {
     if (!inputData.name || !inputData.members) {
       alert("please fill form");
-      console.log(inputData.name);
+      // console.log(inputData.name);
     } else {
       e.preventDefault();
-      console.log(inputData);
+      // console.log(inputData);
       dispatch(CreatePOC(inputData));
       setTimeout(() => {
         navigate("/poc");

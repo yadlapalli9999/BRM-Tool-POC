@@ -105,7 +105,7 @@ let NewBenchEmployee = () => {
       alert("please fill form");
     } else {
       if (!id) {
-        console.log(newBench);
+        // console.log(newBench);
         dispatch(createBench(newBench));
         toast.success("created successfully");
         navigate("/benchlist");

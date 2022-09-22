@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import Spinner from "react-bootstrap/Spinner";
 // import { Pie } from "react-chartjs-2";
-
+import BenchModal from "./BenchModal";
 import "./AdminDashboard.css";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -32,7 +32,6 @@ const AdminDashboard = (props) => {
     return store["dashboard"];
   });
   ChartJS.register(ArcElement, Tooltip, Legend);
-  console.log(inActiveResources);
   useEffect(() => {
     props.funcNav(true);
     dispatch(getPocCount());
@@ -41,6 +40,8 @@ const AdminDashboard = (props) => {
     dispatch(getAllDashBoardPocs());
     dispatch(getInActiveResources());
   }, []);
+  // console.log(inActiveResources);
+  // console.log("PocCount data from dashboard", pocCount);
 
   const dummyData = [
     {
@@ -160,12 +161,72 @@ const AdminDashboard = (props) => {
     ],
   };
 
-// Modal for Cards Descrpption
-const [modalShow, setModalShow] = React.useState(false);
+  // Modal for Cards Descrpption
+  const [modalShow, setModalShow] = React.useState(false);
 
+  const [cardStatus, setCardStatus] = useState("");
+  // console.log(resourceActive);
+  const [benchModalShow, setBenchModalShow] = React.useState(false);
+
+  const [benchCardStatus, setBenchCardStatus] = useState("");
+
+  const ideaHandler = () => {
+    setModalShow(true);
+    setCardStatus("Idea");
+  };
+
+  const holdHandler = () => {
+    setModalShow(true);
+    setCardStatus("Hold");
+  };
+
+  const closedHandler = () => {
+    setModalShow(true);
+    setCardStatus("Closed");
+  };
+
+  const benchHandler = () => {
+    setBenchCardStatus("Bench");
+
+    setBenchModalShow(true);
+  };
+
+  const benchReservedHandler = () => {
+    setBenchCardStatus("BenchReserved");
+
+    setBenchModalShow(true);
+  };
+
+  const benchFiveMonthsHandler = () => {
+    setBenchCardStatus("BenchFiveMonths");
+    setBenchModalShow(true);
+  };
+
+  // console.log("Card status is :",cardStatus);
 
   return (
     <>
+      {modalShow === true && (
+        <div className="modal-backdrop">
+          {" "}
+          <CardsModal
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+            cardStatus={cardStatus}
+          />
+        </div>
+      )}
+      {benchModalShow === true && (
+        <div className="modal-backdrop">
+          {" "}
+          <BenchModal
+            show={benchModalShow}
+            onHide={() => setBenchModalShow(false)}
+            benchCardStatus={benchCardStatus}
+          />
+        </div>
+      )}
+
       {loading ? (
         <div className="text-center" style={{ marginTop: "4rem" }}>
           <MDBSpinner role="status" color="primary">
@@ -201,7 +262,11 @@ const [modalShow, setModalShow] = React.useState(false);
                   return (
                     <>
                       <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-4">
-                        <div className="card " variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card "
+                          variant="primary"
+                          onClick={() => benchReservedHandler()}
+                        >
                           <div className="card-body card-body-top">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -221,7 +286,11 @@ const [modalShow, setModalShow] = React.useState(false);
                       </div>
 
                       <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
-                        <div className="card" variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card"
+                          variant="primary"
+                          onClick={() => benchHandler()}
+                        >
                           <div className="card-body card-body-top">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -240,7 +309,11 @@ const [modalShow, setModalShow] = React.useState(false);
                         </div>
                       </div>
                       <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4">
-                        <div className="card" variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card"
+                          variant="primary"
+                          onClick={() => benchFiveMonthsHandler()}
+                        >
                           <div className="card-body card-body-top">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -249,9 +322,7 @@ const [modalShow, setModalShow] = React.useState(false);
                                     ? "No Data"
                                     : data.FiveMonthsonBench}
                                 </h3>
-                                <p className="mb-0">
-                                  Person on bench more than 5 months
-                                </p>
+                                <p className="mb-0">Bench Exceeding 5 months</p>
                               </div>
                               <div className="align-self-center">
                                 <i className="fas fa-chart-pie text-warning fa-3x"></i>
@@ -370,7 +441,8 @@ const [modalShow, setModalShow] = React.useState(false);
                     <div className="card-body">
                       <ul className="list-group">
                         <li className="list-group-item">
-                          Ramarao <span class="badge bg-danger ms-2">8</span>
+                          Ramarao{" "}
+                          <span className="badge bg-danger ms-2">8</span>
                         </li>
                       </ul>
                     </div>
@@ -391,13 +463,7 @@ const [modalShow, setModalShow] = React.useState(false);
           )}
 
           {show === true && (
-            
             <div className="container p-1 part-2 mt-0">
-              {modalShow === true   && (
-            <div className="modal-backdrop"> <CardsModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      /></div>)}
               <div
                 className="mt-3"
                 style={{
@@ -426,7 +492,7 @@ const [modalShow, setModalShow] = React.useState(false);
                   </h6>
 
                   <div className="col-xl-8 col-sm-12 mt-0 col-12 col-md-4 mb-4 table-responsive activeTable">
-                    <table className="table caption-top align-middle mb-0 tab bg-white table-hover">
+                    <table className="table  caption-top align-middle mb-0 tab bg-white table-hover">
                       <thead className="adminDashboardTableHead sticky-top">
                         <tr className="table-headings ">
                           <th>ID</th>
@@ -510,14 +576,18 @@ const [modalShow, setModalShow] = React.useState(false);
                   return (
                     <>
                       <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-1">
-                        <div className="card " variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card "
+                          variant="primary"
+                          onClick={() => ideaHandler()}
+                        >
                           <div className="card-body card-body-bottom">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
                                 <h3 className="cardsHead">
-                                  {data.IntiatedPocs === undefined || null
+                                  {data.ideaPocs === undefined || null
                                     ? "No Data"
-                                    : data.IntiatedPocs}
+                                    : data.ideaPocs}
                                 </h3>
                                 <p className="mb-0 card-text">Idea</p>
                               </div>
@@ -529,7 +599,11 @@ const [modalShow, setModalShow] = React.useState(false);
                         </div>
                       </div>
                       <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-1">
-                        <div className="card " variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card "
+                          variant="primary"
+                          onClick={() => holdHandler()}
+                        >
                           <div className="card-body card-body-bottom">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -548,14 +622,18 @@ const [modalShow, setModalShow] = React.useState(false);
                         </div>
                       </div>
                       <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-1">
-                        <div className="card" variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card"
+                          variant="primary"
+                          onClick={() => closedHandler()}
+                        >
                           <div className="card-body card-body-bottom">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
                                 <h3 className="cardsHead">
-                                  {data.CompletedPocs === undefined || null
+                                  {data.closedPocs === undefined || null
                                     ? "No Data"
-                                    : data.CompletedPocs}
+                                    : data.closedPocs}
                                 </h3>
                                 <p className="mb-0  card-text">Closed</p>
                               </div>
@@ -566,8 +644,6 @@ const [modalShow, setModalShow] = React.useState(false);
                           </div>
                         </div>
                       </div>
-                      
-
                     </>
                   );
                 })}

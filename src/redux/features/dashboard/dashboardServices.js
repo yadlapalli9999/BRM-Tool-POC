@@ -22,12 +22,44 @@ const inActiveResources = () => {
 //   return API.get(`/dashboard/poc/count`);
 // };
 
+//  Cards API Bench  
+
+const ideaPoc = () => {
+  return API.get(`/dashboard/poc/idea`);
+};
+const activePoc = () => {
+  return API.get(`/dashboard/poc/Active`);
+};
+const holdPoc = () => {
+  return API.get(`/dashboard/poc/Hold`);
+};
+const closedPoc = () => {
+  return API.get(`/dashboard/poc/closed`);
+};
+
+//  Cards API Bench  
+const benchReservedPoc = () => {
+  return API.get(`/dashboard/resource/BenchReserved`);
+};
+const benchPoc = () => {
+  return API.get(`/dashboard/resource/Bench`);
+};
+const benchFiveMonthsPoc = () => {
+  return API.get(`/dashboard/resource/5months`);
+};
+
 const dashboardServices = {
   pocCount,
   resourceActive,
   resourceCount,
   allDashBoardPocs,
   inActiveResources,
-
+activePoc,
+holdPoc,
+closedPoc,
+benchReservedPoc,
+benchPoc,
+benchFiveMonthsPoc,
+ideaPoc
 };
 export default dashboardServices;

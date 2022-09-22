@@ -67,7 +67,7 @@ export const loginUser = createAsyncThunk(
       // setAuthToken(data.data.access_token);
       localStorage.setItem("access_token", data.data.access_token);
       localStorage.setItem("resourceID", data.data.resourceID);
-      console.log(data.data.access_token);
+      // console.log(data.data.access_token);
       return data.data;
       //let data = await response.json()
       // console.log("response", data)
@@ -80,10 +80,10 @@ export const loginUser = createAsyncThunk(
       // }
     } catch (error) {
       if (error.reponse && error.reponse.data.message) {
-        console.log(error.reponse.data.message);
+        // console.log(error.reponse.data.message);
         return rejectWithValue(error.reponse.data.message);
       } else {
-        console.log(error.message);
+        // console.log(error.message);
         return rejectWithValue(error.message);
       }
     }

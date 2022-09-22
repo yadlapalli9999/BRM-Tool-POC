@@ -70,7 +70,6 @@ Duration:"",
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(inputData);
   };
   return (
     <React.Fragment>

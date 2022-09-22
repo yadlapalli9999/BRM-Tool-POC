@@ -5,10 +5,10 @@ import "./NotFound.css";
 const NotFound = () => {
   return (
     <>
-      <div class="wrapper row2">
-        <div id="container" class="clear">
-          <section id="fof" class="clear">
-            <div class="hgroup">
+      <div classname="wrapper row2">
+        <div id="container" classname="clear">
+          <section id="fof" classname="clear">
+            <div classname="hgroup">
               <h1>
                 <span>
                   <strong>4</strong>

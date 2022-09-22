@@ -15,7 +15,6 @@ let BenchEmployeeDetail = (props)=>{
     let {benchListItem} = useSelector((store)=>{
       return store['bench']
     })
-     console.log(benchListItem)
   // let {data} = benchListItem;  
   // let {name,email,reportingManager,teamLead,notes,status} = data;
     

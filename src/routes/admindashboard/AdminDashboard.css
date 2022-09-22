@@ -269,11 +269,25 @@
 }
 /* Card modal  */
 .cardModal{
+/* width: 60rem; */
+/* height: 40rem; */
   background:transparent;
   /* opacity: -1; */
 
 }
+
 .modal-backdrop
 {
     opacity:0.5 !important;
 }
+
+.ModaHeadTitle{
+  font-weight: 600;
+  font-size: 130%;
+}
+
+/* .table-fixed tbody {
+  /* height: 100px; */
+  /* overflow-x: scroll; */
+  /* width: 100%; */
+/* } */

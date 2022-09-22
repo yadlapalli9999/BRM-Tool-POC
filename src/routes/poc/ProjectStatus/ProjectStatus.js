@@ -61,8 +61,8 @@ function ProjectStatus() {
 
   return (
     
-      <div class="card projectStatus w-100">
-        <div class="card-header d-flex justify-content-center ">
+      <div className="card projectStatus w-100">
+        <div className="card-header d-flex justify-content-center ">
           
           Project Status <span className="mx-5">: </span> 
           <h6 className=" color bg-white mx-2 ">
@@ -72,7 +72,7 @@ function ProjectStatus() {
           </h6>
     
         </div>
-        <div class="card-body d-flex justify-content-around">
+        <div className="card-body d-flex justify-content-around">
           <button
             style={{
               display: isActive ? "none" : "initial",
@@ -101,7 +101,7 @@ function ProjectStatus() {
             COMPLETED
           </button>
         </div>
-        <div class="card-footer text-muted">2 days ago</div>
+        <div className="card-footer text-muted">2 days ago</div>
       </div>
     
   );
