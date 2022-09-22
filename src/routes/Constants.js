@@ -1,4 +1,5 @@
 export const POC_TABLE_HEADERS = [
+  { label: "Sl Number", value: "serialNumber" },
   { label: "Name", value: "name" },
   { label: "Status", value: "status" },
   { label: "Duration", value: "duration", metric: "Days" },

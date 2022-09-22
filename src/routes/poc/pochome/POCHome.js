@@ -51,9 +51,15 @@ let POCHome = () => {
     }
   };
 
-  const getTableData = (header, item) => {
+  const getTableData = (header, item, index) => {
     const val = header.value;
     switch (val) {
+      case "serialNumber":
+        return (
+          <div className="d-flex align-items-center justify-content-center">
+            {index + 1}
+          </div>
+        );
       case "name":
         return (
           <div className="d-flex align-items-center justify-content-center">
@@ -171,7 +177,8 @@ let POCHome = () => {
     <MDBContainer className="py-4">
       <MDBRow>
         <MDBCol md="12" className="text-center">
-          <h2 className="pocTitle">POC</h2>
+          {/* <h2 className="pocTitle">POC</h2> */}
+          <button className="pocTitle">POC</button>
         </MDBCol>
       </MDBRow>
       <MDBRow>
@@ -213,10 +220,10 @@ let POCHome = () => {
                 ))} */}
 
                 {pocList.length > 0 &&
-                  pocList.map((item) => (
+                  pocList.map((item, index) => (
                     <tr>
                       {POC_TABLE_HEADERS.map((header) => (
-                        <td>{getTableData(header, item)}</td>
+                        <td>{getTableData(header, item, index)}</td>
                       ))}
                     </tr>
                   ))}

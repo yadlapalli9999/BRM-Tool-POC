@@ -21,11 +21,13 @@ const getSinglePocDetial = (id) => {
 };
 const createPoc = (newData) => {
   //   return Axios.post(`${BASE_URL}/${resourceID}`, newData);
+  console.log(resourceID);
   return API.post(`/poc/${resourceID}`, newData);
 };
 
 const updatePoc = (newData) => {
   const pocID = newData._id;
+  console.log(newData);
   const tempObj = {
     name: newData.name,
     members: newData.members,
@@ -34,6 +36,7 @@ const updatePoc = (newData) => {
     description: newData.description,
     documents: [`${newData.documents}`],
     duration: newData.duration,
+    // createdBy: newData.createdBy,
   };
   // console.log(pocID);
   return API.put(`/poc/${pocID}`, tempObj);

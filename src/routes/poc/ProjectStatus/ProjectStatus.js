@@ -1,109 +1,238 @@
 import "../ProjectStatus/ProjectStatus.css";
 import React, { useState, useEffect } from "react";
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+  MDBModalBody,
+  MDBModalFooter,
+} from "mdb-react-ui-kit";
+import { useDispatch } from "react-redux";
+import { updateSinglePoc } from "../../../redux/features/poc/poc.feature";
 
-function ProjectStatus() {
-  // Way-1
-  // const [status, setStatus] = useState(0);
+function ProjectStatus(props) {
+  // utils
+  const dispatch = useDispatch();
 
-  // const handleClick = () => {
-  //   const newStatus = (status + 1) % STATUS_STATES.length;
-  //   setStatus(newStatus);
-  // };
-  // way-2
+  // {Modal states}
 
-  // const STATUS_STATES = ["Pending","Initiated", "Hold", "Completed"];
-  // const STATUS_COLORS = ["black", "orange", "red", "green"];
+  const [centredModal, setCentredModal] = useState(false);
+  const toggleShow = () => setCentredModal(!centredModal);
+  const [clickedStatus, setClickedStatus] = useState("");
 
-  // const Update = ({ color, onClick }) => (
-  //   <svg
-  //     xmlns="http://www.w3.org/2000/svg"
-  //     fill="none"
-  //     viewBox="0 0 24 24"
-  //     stroke-width="1.5"
-  //     stroke="currentColor"
-  //     onClick={onClick}
-  //     style={{ borderRadius: 5, height: 33, width: 50, stroke: color }}
-  //     className="status"
-  //   >
-  //     <path
-  //       stroke-linecap="round"
-  //       stroke-linejoin="round"
-  //       d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-  //     />
-  //   </svg>
-  // );
+  // props states
+  const [status, setStatus] = useState(props.status);
+  const [data, setData] = useState(props.singlePoc);
 
-  //   const text = STATUS_STATES[status];
+  //{ProjectStatus states}
+  const [active, setActive] = useState(false);
+  const [hold, setHold] = useState(false);
+  const [closed, setClosed] = useState(false);
+  const [idea, setIdea] = useState(false);
 
-  const [isActive, setIsActive] = useState(false);
-  const [isOne, setIsOne] = useState(false);
+  // useEffects
+  useEffect(() => {
+    console.log(data);
+    initiators();
+  }, [active, hold, idea, closed, status]);
 
-  const [isTwo, setIsTwo] = useState(false);
+  useEffect(() => {
+    dispatch(updateSinglePoc(data));
+  }, [data]);
 
-  const startedHandleClick = () => {
-    //  toggle
-    setIsActive(true);
-    setIsOne(false);
-    setIsTwo(false);
+  const initiators = () => {
+    if (status === "Active") {
+      setActive(true);
+    } else if (status === "Hold") {
+      setHold(true);
+    } else if (status === "closed") {
+      setClosed(true);
+    } else if (status === "idea") {
+      setIdea(true);
+    }
   };
-  const holdHandleClick = () => {
-    //  toggle
-    setIsActive(false);
-    setIsOne(true);
-    setIsTwo(false);
+
+  const activeHandler = () => {
+    setStatus("Active");
+    setData({ ...data, status: "Active" });
+    setHold(false);
+    setClosed(false);
+    setIdea(false);
+    setCentredModal(false);
   };
-  const completedHandleClick = () => {
-    //  toggle
-    setIsActive(false);
-    setIsOne(false);
-    setIsTwo(true);
+
+  const holdHandler = () => {
+    setStatus("Hold");
+    setData({ ...data, status: "Hold" });
+    setActive(false);
+    setClosed(false);
+    setIdea(false);
+    setCentredModal(false);
+  };
+  const closedHandler = () => {
+    setStatus("closed");
+    setData({ ...data, status: "closed" });
+    setHold(false);
+    setActive(false);
+    setIdea(false);
+    setCentredModal(false);
+  };
+  const ideaHandler = () => {
+    setStatus("idea");
+    setData({ ...data, status: "idea" });
+    setHold(false);
+    setClosed(false);
+    setActive(false);
+    setCentredModal(false);
+  };
+  const confirmationHandler = () => {
+    if (clickedStatus === "Active") {
+      activeHandler();
+    } else if (clickedStatus === "closed") {
+      closedHandler();
+    } else if (clickedStatus === "idea") {
+      ideaHandler();
+    } else if (clickedStatus === "Hold") {
+      holdHandler();
+    }
   };
 
   return (
-    
+    <>
       <div class="card projectStatus w-100">
         <div class="card-header d-flex justify-content-center ">
-          
-          Project Status <span className="mx-5">: </span> 
-          <h6 className=" color bg-white mx-2 ">
-            {!isActive && !isOne && !isTwo ? "Pending" : ""}
-            {isActive ? "Initiated" : ""} {isOne ? "Hold" : ""}
-            {isTwo ? "Completed" : ""}
-          </h6>
-    
+          Project Status <span className="mx-5">: </span>
+          <h6 className=" color bg-white mx-2 ">{status}</h6>
         </div>
         <div class="card-body d-flex justify-content-around">
-          <button
-            style={{
-              display: isActive ? "none" : "initial",
-            }}
-            onClick={startedHandleClick}
-            className="btn control initiated"
-          >
-            INITIATED
-          </button>
-          <button
-            style={{
-              display: isOne ? "none" : "initial",
-            }}
-            onClick={holdHandleClick}
-            className="btn control hold"
-          >
-            HOLD
-          </button>
-          <button
-            style={{
-              display: isTwo ? "none" : "initial",
-            }}
-            onClick={completedHandleClick}
-            className="btn control completed"
-          >
-            COMPLETED
-          </button>
+          {!active && (
+            <button
+              type="button"
+              class="btn btn-success"
+              onClick={() => {
+                setClickedStatus("Active");
+                setCentredModal(true);
+              }}
+            >
+              Active
+            </button>
+          )}
+          {!hold && (
+            <button
+              type="button"
+              class="btn btn-warning"
+              onClick={() => {
+                setClickedStatus("Hold");
+                setCentredModal(true);
+              }}
+            >
+              Hold
+            </button>
+          )}
+          {!closed && (
+            <button
+              type="button"
+              class="btn btn-danger"
+              onClick={() => {
+                setClickedStatus("closed");
+                setCentredModal(true);
+              }}
+            >
+              Closed
+            </button>
+          )}
+          {!idea && (
+            <button
+              type="button"
+              class="btn btn-primary"
+              onClick={() => {
+                setClickedStatus("idea");
+                setCentredModal(true);
+              }}
+            >
+              Idea
+            </button>
+          )}
         </div>
         <div class="card-footer text-muted">2 days ago</div>
       </div>
-    
+      {/* modal */}
+      <>
+        <MDBModal
+          tabIndex="-1"
+          show={centredModal}
+          setShow={setCentredModal}
+          staticBackdrop
+        >
+          <MDBModalDialog centered>
+            <MDBModalContent>
+              <MDBModalHeader>
+                <MDBModalTitle>Status Update Confirmation</MDBModalTitle>
+                <MDBBtn
+                  className="btn-close"
+                  color="none"
+                  onClick={toggleShow}
+                ></MDBBtn>
+              </MDBModalHeader>
+              <MDBModalBody>
+                <p>
+                  Are You sure to change status from{" "}
+                  <strong
+                    style={{
+                      color: `${
+                        active
+                          ? "green"
+                          : hold
+                          ? "#a0a007"
+                          : closed
+                          ? "red"
+                          : "blue"
+                      }`,
+                      fontSize: "20px",
+                    }}
+                  >
+                    {status}
+                  </strong>{" "}
+                  to{" "}
+                  <strong
+                    style={{
+                      color: `${
+                        clickedStatus === "Active"
+                          ? "green"
+                          : clickedStatus === "Hold"
+                          ? "#a0a007"
+                          : clickedStatus === "closed"
+                          ? "red"
+                          : "blue"
+                      }`,
+                      fontSize: "20px",
+                    }}
+                  >
+                    {clickedStatus}
+                  </strong>
+                </p>
+              </MDBModalBody>
+              <MDBModalFooter>
+                <MDBBtn color="primary" onClick={toggleShow}>
+                  Go Back
+                </MDBBtn>
+                <MDBBtn
+                  color="danger"
+                  onClick={() => {
+                    confirmationHandler();
+                  }}
+                >
+                  Update
+                </MDBBtn>
+              </MDBModalFooter>
+            </MDBModalContent>
+          </MDBModalDialog>
+        </MDBModal>
+      </>
+    </>
   );
 }
 

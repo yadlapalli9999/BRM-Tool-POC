@@ -67,4 +67,5 @@ input:valid ~ label {
   outline: none;
   border-radius: 5px;
   color: #333;
+  /* background-color: #a0a007; */
 }

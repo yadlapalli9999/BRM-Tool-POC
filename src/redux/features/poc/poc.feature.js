@@ -18,7 +18,7 @@ export const getAllPoc = createAsyncThunk("poc/getAllPoc", async () => {
 
 export const getSinglePoc = createAsyncThunk("poc/getSinglePoc", async (id) => {
   let response = await pocServices.getSinglePocDetial(id);
-  console.log(response.data.data);
+  // console.log(response.data.data);
   return response.data.data;
 });
 

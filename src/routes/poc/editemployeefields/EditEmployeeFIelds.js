@@ -289,6 +289,11 @@ const EditEmployeeFields = () => {
                           <option>180</option>
                         </select>
                       </MDBValidationItem>
+                      <MDBRow>
+                        <MDBCol md="6">
+                          <AddResource members={inputData.members} />
+                        </MDBCol>
+                      </MDBRow>
                       <MDBRow className="m-3">
                         <MDBCol md="12" className="text-center">
                           <MDBBtn
@@ -315,11 +320,6 @@ const EditEmployeeFields = () => {
                 </MDBCard>
               </MDBCol>
             </MDBRow>
-            {/* <MDBRow>
-              <MDBCol md="6">
-                <AddResource />
-              </MDBCol>
-            </MDBRow> */}
           </MDBContainer>
           {/* ADD RESOURCES MODAL */}
           <div

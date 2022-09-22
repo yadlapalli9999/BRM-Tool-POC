@@ -71,6 +71,7 @@ const EmployeeFields = () => {
   });
   const [statushasError, setStatusHasError] = useState(false);
   const [durationhasError, setDurationHasError] = useState(false);
+
   const handleChangeInputFields = (e) => {
     const { name, value } = e.target;
     setinputData({
@@ -91,6 +92,17 @@ const EmployeeFields = () => {
         setDurationHasError(false);
       }
     }
+    // if (
+    //   inputData.name &&
+    //   inputData.teamLead &&
+    //   inputData.description &&
+    //   inputData.status &&
+    //   inputData.duration &&
+    //   inputData.members &&
+    //   inputData.documents
+    // ) {
+    //   setDisabledButton(false);
+    // }
     console.log(inputData);
   };
   const handleDocuements = (e) => {
@@ -99,6 +111,10 @@ const EmployeeFields = () => {
       [e.target.name]: [e.target.value],
     });
   };
+
+  // disalbed button
+
+  // const [disabledButton, setDisabledButton] = useState(true);
 
   const handleSubmit = (e) => {
     console.log(inputData);
@@ -111,7 +127,11 @@ const EmployeeFields = () => {
       alert("please fill form");
       if (!inputData.status) setStatusHasError(true);
       if (!inputData.duration) setDurationHasError(true);
+    } else if (!inputData.members.length > 0) {
+      alert("no members");
     } else {
+      console.log("454585252455");
+
       e.preventDefault();
       console.log(inputData);
       dispatch(CreatePOC(inputData));
@@ -260,7 +280,12 @@ const EmployeeFields = () => {
                   </MDBRow>
                   <MDBRow className="m-3">
                     <MDBCol md="12" className="text-center">
-                      <MDBBtn className="btn btn-primary m-2">Add</MDBBtn>
+                      <MDBBtn
+                        className="btn btn-primary m-2"
+                        // disabled={disabledButton}
+                      >
+                        Add
+                      </MDBBtn>
                       <MDBBtn
                         onClick={() => navigate("/poc")}
                         className="btn btn-danger m-2"

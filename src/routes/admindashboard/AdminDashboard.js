@@ -160,9 +160,8 @@ const AdminDashboard = (props) => {
     ],
   };
 
-// Modal for Cards Descrpption
-const [modalShow, setModalShow] = React.useState(false);
-
+  // Modal for Cards Descrpption
+  const [modalShow, setModalShow] = React.useState(false);
 
   return (
     <>
@@ -201,7 +200,11 @@ const [modalShow, setModalShow] = React.useState(false);
                   return (
                     <>
                       <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-4">
-                        <div className="card " variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card "
+                          variant="primary"
+                          onClick={() => setModalShow(true)}
+                        >
                           <div className="card-body card-body-top">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -221,7 +224,11 @@ const [modalShow, setModalShow] = React.useState(false);
                       </div>
 
                       <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-4">
-                        <div className="card" variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card"
+                          variant="primary"
+                          onClick={() => setModalShow(true)}
+                        >
                           <div className="card-body card-body-top">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -240,7 +247,11 @@ const [modalShow, setModalShow] = React.useState(false);
                         </div>
                       </div>
                       <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-4">
-                        <div className="card" variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card"
+                          variant="primary"
+                          onClick={() => setModalShow(true)}
+                        >
                           <div className="card-body card-body-top">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -391,13 +402,16 @@ const [modalShow, setModalShow] = React.useState(false);
           )}
 
           {show === true && (
-            
             <div className="container p-1 part-2 mt-0">
-              {modalShow === true   && (
-            <div className="modal-backdrop"> <CardsModal
-        show={modalShow}
-        onHide={() => setModalShow(false)}
-      /></div>)}
+              {modalShow === true && (
+                <div className="modal-backdrop">
+                  {" "}
+                  <CardsModal
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                  />
+                </div>
+              )}
               <div
                 className="mt-3"
                 style={{
@@ -470,20 +484,26 @@ const [modalShow, setModalShow] = React.useState(false);
                                   <td>
                                     <span
                                       className={`badge ${
-                                        data?.duration >= 5
+                                        data.duration == 180
                                           ? "badge-danger"
-                                          : data?.duration >= 3
+                                          : data.duration >= 120
                                           ? "badge-warning"
+                                          : data.duration >= 60
+                                          ? "badge-info"
+                                          : data.duration >= 45
+                                          ? "badge-secondary"
                                           : "badge-success"
-                                      } rounded-pill`}
+                                      } rounded-pill d-inline`}
                                     >
                                       {data?.duration}
-                                      {`Months`}
+                                      {`Days`}
                                     </span>
                                   </td>
                                   <td>
-                                    {/* {data?.createdBy} */}
-                                    {data.name}
+                                    {data.createdBy
+                                      ? data.createdBy.name
+                                      : "No Name"}
+                                    {/* {data.name} */}
                                   </td>
 
                                   <td className="">{data?.members.length}</td>
@@ -510,7 +530,11 @@ const [modalShow, setModalShow] = React.useState(false);
                   return (
                     <>
                       <div className="col-xl-4 col-md-4 col-sm-6 col-12 mb-1">
-                        <div className="card " variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card "
+                          variant="primary"
+                          onClick={() => setModalShow(true)}
+                        >
                           <div className="card-body card-body-bottom">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -529,7 +553,11 @@ const [modalShow, setModalShow] = React.useState(false);
                         </div>
                       </div>
                       <div className="col-xl-4 col-sm-6 col-md-4 col-12 mb-1">
-                        <div className="card " variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card "
+                          variant="primary"
+                          onClick={() => setModalShow(true)}
+                        >
                           <div className="card-body card-body-bottom">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -548,7 +576,11 @@ const [modalShow, setModalShow] = React.useState(false);
                         </div>
                       </div>
                       <div className="col-xl-4 col-sm-6 col-12 col-md-4 mb-1">
-                        <div className="card" variant="primary" onClick={() => setModalShow(true)}>
+                        <div
+                          className="card"
+                          variant="primary"
+                          onClick={() => setModalShow(true)}
+                        >
                           <div className="card-body card-body-bottom">
                             <div className="d-flex justify-content-between px-md-1">
                               <div>
@@ -566,8 +598,6 @@ const [modalShow, setModalShow] = React.useState(false);
                           </div>
                         </div>
                       </div>
-                      
-
                     </>
                   );
                 })}

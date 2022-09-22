@@ -53,8 +53,9 @@ let AddResource = (props) => {
     setResource("");
   };
   useEffect(() => {
-    // dispatch(getBench());
-  }, []);
+    if (query.searchValue.trim()) setIsEmpty(false);
+    if (query.searchValue.trim() == "") setIsEmpty(true);
+  }, [query.searchValue]);
 
   let handleSearch = (event) => {
     setQuery({
@@ -64,8 +65,8 @@ let AddResource = (props) => {
     //     const reqName=members.filter((item)=>(item==searchValue));
     // console.log(reqName);
     if (query.searchValue.trim()) {
-      setIsEmpty(false);
       dispatch(searchPOC(query));
+      // setQuery({ searchValue: "" });
       // dispatch(getBench());
 
       members.searchResult(query);
@@ -74,7 +75,7 @@ let AddResource = (props) => {
 
       console.log(query);
     } else {
-      setIsEmpty(true);
+      // setIsEmpty(true);
       console.log("search value is not found");
     }
   };
@@ -86,6 +87,7 @@ let AddResource = (props) => {
   const handlePocDetailsNameClick = () => {
     navigate("/worklogs");
   };
+  console.log(members);
   return (
     <React.Fragment>
       {/* <MDBContainer> */}
@@ -122,7 +124,7 @@ let AddResource = (props) => {
                       // ?
                       .map((filterMember, index) => (
                         <tr
-                          className="fw-normal memberTableRow"
+                          className="fw-normal memberTableRow "
                           key={index + 1}
                           onClick={handlePocDetailsNameClick}
                         >
@@ -131,6 +133,13 @@ let AddResource = (props) => {
                           </td>
                         </tr>
                       ))}
+                  {members.length === 0 && (
+                    <tr className="fw-normal memberTableRow ">
+                      <td className="align-middle ">
+                        <span>NONE</span>
+                      </td>
+                    </tr>
+                  )}
                 </MDBTableBody>
               </MDBTable>
             </MDBCardBody>
