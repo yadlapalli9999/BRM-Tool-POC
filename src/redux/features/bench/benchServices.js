@@ -39,12 +39,12 @@ const searchTitle = (query) => {
 const updateSingleResource = (newData) => {
   const id = newData._id;
   console.log(id);
-  return API.patch(`/resources/${id}`, newData);
+  return API.put(`/resources/${id}`, newData);
 };
 
-const selectedExperience = (exp)=>{
-  return API.get(`/resources/exp/${exp}`)
-}
+const selectedExperience = (exp) => {
+  return API.get(`/resources/exp/${exp}`);
+};
 
 const BenchServices = {
   getAll,
@@ -54,6 +54,6 @@ const BenchServices = {
   remove,
   searchTitle,
   updateSingleResource,
-  selectedExperience
+  selectedExperience,
 };
 export default BenchServices;
