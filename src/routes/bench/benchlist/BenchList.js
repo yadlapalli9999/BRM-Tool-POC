@@ -136,6 +136,17 @@ let BenchList = () => {
               {/* <CustomButton/> */}
             </div>
           </div>
+          <div className="col-md-6 offset-md-2 inp">
+            <MDBInput
+              // className="mx-4"
+              type="text"
+              label="search"
+              value={query.searchValue}
+              // style={{ width: "660px" }}
+              onChange={handleSearch}
+              // onChange={(e) => {setSearchValue(e.target.value);dispatch(searchBench(searchValue));console.log(searchValue)}}
+            />
+          </div>
 
       
             <div className="col-md-3">
@@ -275,7 +286,6 @@ let BenchList = () => {
                                 className="fa fa-trash text-danger benchListdeletei"
                               />
                             </td>
-                            <td> {data.members ? data.members.length : 0}</td>
 
                           </tr>
                         ))
@@ -379,7 +389,7 @@ let BenchList = () => {
       </div>
       {/* ReservedBenchModal */}
       {showBenchModal && (
-        <div className="modal-backdrop">
+      
           <ReservedBenchModal
             setShowBenchModal={setShowBenchModal}
             showBenchModal={showBenchModal}
@@ -387,7 +397,7 @@ let BenchList = () => {
             hasReserved={hasReserved}
             singleResource={singleResource}
           />
-        </div>
+
       )}
       {/* deleteReservedMOdal */}
       {benchDeleteModal && (

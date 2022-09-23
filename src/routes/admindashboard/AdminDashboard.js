@@ -502,18 +502,9 @@ const AdminDashboard = (props) => {
                           <th>Members</th>
                         </tr>
                       </thead>
+                      {dashboardPoc.length > 0 ?
                       <tbody className="align-items-center ">
-
-                      {/* {dashboardPoc.length === 0 && (
-                        <>
-                          <tbody>
-                            <tr>
-                              <h3>No Data!!</h3>
-                            </tr>
-                          </tbody>
-                        </>
-                      )} */}
-                      {
+                      {dashboardPoc &&
                         dashboardPoc[0].map((data) => {
 
                           return (
@@ -565,6 +556,8 @@ const AdminDashboard = (props) => {
                           );
                         })}
                               </tbody>
+:null}
+
 
                     </table>
                   </div>
