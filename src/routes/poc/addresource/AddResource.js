@@ -23,6 +23,8 @@ import { queryByRole } from "@testing-library/dom";
 
 let AddResource = (props) => {
   const { members } = props;
+  const propValue = props.propValue;
+
   let dispatch = useDispatch();
 
   const searchResult = (value) => push(value);
@@ -40,21 +42,25 @@ let AddResource = (props) => {
   console.log(benchLists);
   // let { loading, benchLists, errorMessage } = allBenchLists;
 
-  const [resource, setResource] = useState("");
-
   const handleResource = (event) => {
-    event.preventDefault();
-    props.members.push(query.searchValue);
-    console.log(props.members);
-    clearForm();
-    setShow(false);
+    if (query.searchValue) {
+      event.preventDefault();
+      props.members.push(query.searchValue);
+      console.log(props.members);
+      props.setEdited(true);
+      clearForm();
+      setShow(false);
+    }
   };
   const clearForm = () => {
-    setResource("");
+    setQuery({
+      searchValue: "",
+    });
   };
   useEffect(() => {
     if (query.searchValue.trim()) setIsEmpty(false);
     if (query.searchValue.trim() == "") setIsEmpty(true);
+    console.log(isEmpty);
   }, [query.searchValue]);
 
   let handleSearch = (event) => {
@@ -64,24 +70,27 @@ let AddResource = (props) => {
     });
     //     const reqName=members.filter((item)=>(item==searchValue));
     // console.log(reqName);
-    if (query.searchValue.trim()) {
+    if (query.searchValue) {
+      setIsEmpty(false);
       dispatch(searchPOC(query));
       // setQuery({ searchValue: "" });
       // dispatch(getBench());
+      // members.push(query);
 
       members.searchResult(query);
 
       // props.members.push(query);
 
-      console.log(query);
+      // console.log(query);
     } else {
-      // setIsEmpty(true);
+      setIsEmpty(true);
       console.log("search value is not found");
     }
   };
+  console.log(query);
 
-  const nameSelector = (name) => {
-    setQuery({ ...query, searchValue: name });
+  const nameSelector = (obj) => {
+    setQuery({ ...query, searchValue: obj });
   };
   const navigate = useNavigate();
   const handlePocDetailsNameClick = () => {
@@ -129,14 +138,20 @@ let AddResource = (props) => {
                           onClick={handlePocDetailsNameClick}
                         >
                           <td className="align-middle ">
-                            <span>{filterMember}</span>
+                            <span>
+                              {propValue === "AddPocState"
+                                ? filterMember
+                                : filterMember.name || filterMember}
+                            </span>
                           </td>
                         </tr>
                       ))}
                   {members.length === 0 && (
                     <tr className="fw-normal memberTableRow ">
                       <td className="align-middle ">
-                        <span>NONE</span>
+                        <span style={{ color: "red" }}>
+                          Members Not Added Yet
+                        </span>
                       </td>
                     </tr>
                   )}
@@ -206,7 +221,12 @@ let AddResource = (props) => {
                             <tr key={filterData._id}>
                               <td
                                 onClick={() => {
-                                  nameSelector(filterData.name);
+                                  // const tempOBj = {
+                                  //   _id: filterData._id,
+                                  //   name: filterData.name,
+                                  // };
+                                  // nameSelector(tempOBj);
+                                  nameSelector(filterData._id);
                                 }}
                               >
                                 {filterData.name}

@@ -35,7 +35,7 @@ function ProjectStatus(props) {
 
   // useEffects
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
     initiators();
   }, [active, hold, idea, closed, status]);
 
@@ -61,7 +61,10 @@ function ProjectStatus(props) {
     setHold(false);
     setClosed(false);
     setIdea(false);
-    setCentredModal(false);
+    setTimeout(() => {
+      setCentredModal(false);
+      props.setEdited(!props.edited);
+    }, 20);
   };
 
   const holdHandler = () => {
@@ -70,7 +73,10 @@ function ProjectStatus(props) {
     setActive(false);
     setClosed(false);
     setIdea(false);
-    setCentredModal(false);
+    setTimeout(() => {
+      setCentredModal(false);
+      props.setEdited(!props.edited);
+    }, 20);
   };
   const closedHandler = () => {
     setStatus("closed");
@@ -78,7 +84,10 @@ function ProjectStatus(props) {
     setHold(false);
     setActive(false);
     setIdea(false);
-    setCentredModal(false);
+    setTimeout(() => {
+      setCentredModal(false);
+      props.setEdited(!props.edited);
+    }, 20);
   };
   const ideaHandler = () => {
     setStatus("idea");
@@ -86,7 +95,10 @@ function ProjectStatus(props) {
     setHold(false);
     setClosed(false);
     setActive(false);
-    setCentredModal(false);
+    setTimeout(() => {
+      setCentredModal(false);
+      props.setEdited(!props.edited);
+    }, 20);
   };
   const confirmationHandler = () => {
     if (clickedStatus === "Active") {

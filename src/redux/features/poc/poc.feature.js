@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   errorMessage: "",
   singlePoc: {},
+  updateSinglePOCValue: {},
   newPoc: [],
   benchLists: [],
 };
@@ -122,7 +123,7 @@ const pocSlice = createSlice({
     },
     [updateSinglePoc.fulfilled]: (state, action) => {
       state.loading = false;
-      state.singlePoc = action.payload;
+      state.updateSinglePOCValue = action.payload;
     },
     [updateSinglePoc.rejected]: (state, action) => {
       state.loading = false;

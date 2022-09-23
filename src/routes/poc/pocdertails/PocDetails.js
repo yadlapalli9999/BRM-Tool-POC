@@ -28,16 +28,28 @@ Chart.register(...registerables);
 const status = "Initiated";
 const PocDetails = () => {
   const location = useLocation();
-  useEffect(() => {
-    dispatch(getSinglePoc(location.state.pocId));
-  }, []);
+
+  ///props state for Project Status component
+  const [edited, setEdited] = useState(false);
+
   const [loader, setLoader] = useState(true);
   // let { id } = useParams();
   let dispatch = useDispatch();
   const { pocList, singlePoc } = useSelector((store) => {
     return store["poc"];
   });
-  console.log("111111", singlePoc);
+
+  //useEffects
+
+  useEffect(() => {
+    dispatch(getSinglePoc(location.state.pocId));
+  }, [singlePoc.status]);
+
+  useEffect(() => {
+    dispatch(getSinglePoc(location.state.pocId));
+    console.log("dispatched from parent component");
+  }, [edited]);
+
   setTimeout(() => {
     setLoader(false);
   }, 800);
@@ -85,7 +97,6 @@ const PocDetails = () => {
         return pocData[val];
     }
   };
-
   return (
     <>
       {loader ? (
@@ -176,7 +187,7 @@ const PocDetails = () => {
                           <MDBCol md="3">Members</MDBCol>
                           <MDBCol md="9">
                             {singlePoc.members.length > 0
-                              ? singlePoc.members.map((item) => item.name)
+                              ? singlePoc.members.map((item) => item.name + ";")
                               : "None"}
                           </MDBCol>
                         </MDBRow>
@@ -197,7 +208,12 @@ const PocDetails = () => {
               </MDBCol>
             </MDBRow>
             <MDBCol className="col-md-12 proStatus col-sm-12 col-lg-6 col-12 mt-5">
-              <ProjectStatus status={singlePoc.status} singlePoc={singlePoc} />
+              <ProjectStatus
+                status={singlePoc.status}
+                singlePoc={singlePoc}
+                setEdited={setEdited}
+                edited={edited}
+              />
             </MDBCol>
           </MDBContainer>
         </React.Fragment>

@@ -23,12 +23,14 @@ import "./EmployeeFields.css";
 import AddResource from "../addresource/AddResource";
 import { useDispatch } from "react-redux";
 import { CreatePOC } from "../../../redux/features/poc/poc.feature";
+import { toast } from "react-toastify";
 
 const EmployeeFields = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const resourceID = localStorage.getItem("resourceID");
   console.log(resourceID);
+  const propValue = "AddPocState";
   // const members = [
   //   {
   //     id: 1,
@@ -92,6 +94,13 @@ const EmployeeFields = () => {
         setDurationHasError(false);
       }
     }
+
+    // if(name==="members"){
+    //   setinputData({
+    //     ...inputData,
+    //     members:
+    //   })
+    // }
     // if (
     //   inputData.name &&
     //   inputData.teamLead &&
@@ -124,17 +133,14 @@ const EmployeeFields = () => {
       !inputData.status ||
       !inputData.duration
     ) {
-      alert("please fill form");
+      alert(" Input fields are neccessary");
       if (!inputData.status) setStatusHasError(true);
       if (!inputData.duration) setDurationHasError(true);
-    } else if (!inputData.members.length > 0) {
-      alert("no members");
     } else {
-      console.log("454585252455");
-
       e.preventDefault();
       console.log(inputData);
       dispatch(CreatePOC(inputData));
+      toast.success("Creating New POC", { autoClose: 800 });
       setTimeout(() => {
         navigate("/poc");
       }, 2000);
@@ -152,7 +158,7 @@ const EmployeeFields = () => {
                 </MDBCardTitle>
               </MDBCardHeader>
               <MDBCardBody>
-                <MDBValidation className="row g-5" onSubmit={handleSubmit}>
+                <MDBValidation className="row g-5">
                   <MDBValidationItem
                     className="col-md-6"
                     feedback="Please Enter your Name"
@@ -199,26 +205,30 @@ const EmployeeFields = () => {
               <MDBInput id='validationCustom04'  required name="createdBy" value={inputData.createdBy} onChange={handleChangeInputFields} label="CreatedBy"/>
            </MDBValidationItem> */}
                   <MDBValidationItem
-                    className="col-md-6 d-flex justify-content-center"
+                    className="col-md-6 d-flex justify-content-center "
                     feedback="Please select your Status"
                     invalid
                   >
-                    <select
-                      id="validationCustom06"
+                    <div
                       className={`${
-                        statushasError ? "has-Error" : "input-boxes"
+                        statushasError ? "has-Error" : "selectBox"
                       }`}
-                      value={inputData.status}
-                      onChange={handleChangeInputFields}
-                      required
-                      name="status"
                     >
-                      <option className="initial-input">Select Status</option>
-                      <option>idea</option>
-                      <option>Active</option>
-                      <option>Hold</option>
-                      <option>closed</option>
-                    </select>
+                      <select
+                        id="validationCustom06"
+                        className="input-boxes"
+                        value={inputData.status}
+                        onChange={handleChangeInputFields}
+                        required
+                        name="status"
+                      >
+                        <option className="initial-input">Select Status</option>
+                        <option>idea</option>
+                        <option>Active</option>
+                        <option>Hold</option>
+                        <option>closed</option>
+                      </select>
+                    </div>
                     {/* <MDBInput
                       id="validationCustom05"
                       required
@@ -241,23 +251,29 @@ const EmployeeFields = () => {
                       onChange={handleChangeInputFields}
                       label="Duration"
                     /> */}
-                    <select
-                      id="validationCustom06"
+                    <div
                       className={`${
-                        durationhasError ? "has-Error" : "input-boxes"
+                        durationhasError ? "has-Error" : "selectBox"
                       }`}
-                      value={inputData.duration}
-                      onChange={handleChangeInputFields}
-                      required
-                      name="duration"
                     >
-                      <option className="initial-input">Select Duration</option>
-                      <option>30</option>
-                      <option>45</option>
-                      <option>60</option>
-                      <option>120</option>
-                      <option>180</option>
-                    </select>
+                      <select
+                        id="validationCustom06"
+                        value={inputData.duration}
+                        onChange={handleChangeInputFields}
+                        required
+                        name="duration"
+                        className="input-boxes"
+                      >
+                        <option className="initial-input">
+                          Select Duration
+                        </option>
+                        <option>30</option>
+                        <option>45</option>
+                        <option>60</option>
+                        <option>120</option>
+                        <option>180</option>
+                      </select>
+                    </div>
                   </MDBValidationItem>
                   <MDBValidationItem
                     className="col-md-6"
@@ -275,7 +291,10 @@ const EmployeeFields = () => {
                   </MDBValidationItem>
                   <MDBRow className="mt-4">
                     <MDBCol md="6">
-                      <AddResource members={inputData.members} />
+                      <AddResource
+                        members={inputData.members}
+                        propValue={propValue}
+                      />
                     </MDBCol>
                   </MDBRow>
                   <MDBRow className="m-3">
@@ -283,6 +302,7 @@ const EmployeeFields = () => {
                       <MDBBtn
                         className="btn btn-primary m-2"
                         // disabled={disabledButton}
+                        onClick={handleSubmit}
                       >
                         Add
                       </MDBBtn>

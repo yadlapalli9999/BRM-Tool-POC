@@ -45,10 +45,11 @@ const EditEmployeeFields = () => {
     members: [],
   });
 
+  const propValue = "editState";
   // console.log(inputData);
   const singlePocData = ({ id }) => {
     pocServices.getSinglePocDetial(id).then((res) => {
-      // console.log(res.data.data);
+      console.log(res.data.data);
       setinputData({ ...res.data.data });
     });
   };
@@ -94,6 +95,7 @@ const EditEmployeeFields = () => {
       memberName: "Sudhanshu Jain",
     },
   ];
+  const [edited, setEdited] = useState(false);
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
   const handlePocDetailsNameClick = () => {
@@ -120,6 +122,7 @@ const EditEmployeeFields = () => {
 
   const handleChangeInputFields = (e) => {
     const { name, value } = e.target;
+    setEdited(true);
     setinputData({
       ...inputData,
       [name]: value,
@@ -147,7 +150,10 @@ const EditEmployeeFields = () => {
     } else if (isValidURL === false) {
       console.log(isValidURL);
       alert("Invalid Document Link");
+    } else if (!edited) {
+      alert("NO changes Made ");
     } else {
+      console.log(setEdited);
       console.log("success");
       dispatch(updateSinglePoc(inputData));
       toast.success("Updated Successfully", { autoClose: 1100 });
@@ -175,11 +181,7 @@ const EditEmployeeFields = () => {
                     </MDBCardTitle>
                   </MDBCardHeader>
                   <MDBCardBody>
-                    <MDBValidation
-                      className="row g-5"
-                      noValidate
-                      onSubmit={handleSubmit}
-                    >
+                    <MDBValidation className="row g-5" noValidate>
                       <MDBValidationItem
                         className="col-md-6"
                         feedback="Please Enter POC name"
@@ -258,49 +260,56 @@ const EditEmployeeFields = () => {
                       </MDBValidationItem>
                       <MDBValidationItem className="col-md-6 d-flex flex-column justify-content-center">
                         <span>Status</span>
-                        <select
-                          id="validationCustom06"
-                          className="input-boxes"
-                          value={inputData.status}
-                          onChange={handleChangeInputFields}
-                          required
-                          name="status"
-                        >
-                          <option>idea</option>
-                          <option>Active</option>
-                          <option>Hold</option>
-                          <option>closed</option>
-                        </select>
+                        <div className="selectBox">
+                          <select
+                            id="validationCustom06"
+                            className="input-boxes"
+                            value={inputData.status}
+                            onChange={handleChangeInputFields}
+                            required
+                            name="status"
+                          >
+                            <option>idea</option>
+                            <option>Active</option>
+                            <option>Hold</option>
+                            <option>closed</option>
+                          </select>
+                        </div>
                       </MDBValidationItem>
                       <MDBValidationItem className="col-md-6 d-flex flex-column justify-content-center">
                         <span>Duration</span>
-                        <select
-                          id="validationCustom06"
-                          className="input-boxes"
-                          value={inputData.duration}
-                          onChange={handleChangeInputFields}
-                          required
-                          name="duration"
-                        >
-                          <option>30</option>
-                          <option>45</option>
-                          <option>60</option>
-                          <option>120</option>
-                          <option>180</option>
-                        </select>
+                        <div className="selectBox">
+                          <select
+                            id="validationCustom06"
+                            className="input-boxes"
+                            value={inputData.duration}
+                            onChange={handleChangeInputFields}
+                            required
+                            name="duration"
+                          >
+                            <option>30</option>
+                            <option>45</option>
+                            <option>60</option>
+                            <option>120</option>
+                            <option>180</option>
+                          </select>
+                        </div>
                       </MDBValidationItem>
                       <MDBRow>
                         <MDBCol md="6">
-                          <AddResource members={inputData.members} />
+                          <AddResource
+                            members={inputData.members}
+                            propValue={propValue}
+                            edited={edited}
+                            setEdited={setEdited}
+                          />
                         </MDBCol>
                       </MDBRow>
                       <MDBRow className="m-3">
                         <MDBCol md="12" className="text-center">
                           <MDBBtn
                             className="btn btn-primary m-2"
-                            // onClick={() => {
-                            //   handleSubmit();
-                            // }}
+                            onClick={handleSubmit}
                           >
                             Edit
                           </MDBBtn>

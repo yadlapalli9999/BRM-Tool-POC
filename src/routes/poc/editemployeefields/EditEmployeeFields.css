@@ -67,5 +67,15 @@ input:valid ~ label {
   outline: none;
   border-radius: 5px;
   color: #333;
-  /* background-color: #a0a007; */
+}
+.selectBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 42px;
+  width: 100%;
+  border: 2px solid #999;
+  border-radius: 5px;
+  margin-top: 6px;
+  margin-bottom: 15px;
 }
