@@ -202,7 +202,7 @@ const AdminDashboard = (props) => {
     setBenchModalShow(true);
   };
 
-  // console.log("Card status is :",cardStatus);
+  console.log("Dashboard status is :",dashboardPoc);
 
   return (
     <>
@@ -512,7 +512,7 @@ const AdminDashboard = (props) => {
                         </>
                       )}
                       {dashboardPoc.length > 0 &&
-                        dashboardPoc[0].map((data) => {
+                        dashboardPoc.map((data) => {
                           return (
                             <>
                               <tbody className="align-items-center ">
