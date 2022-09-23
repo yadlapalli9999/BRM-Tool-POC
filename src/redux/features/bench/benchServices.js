@@ -25,7 +25,7 @@ const update = (newData) => {
 
   //  id = data.data._id;
   //console.log(id)
-  return API.patch(`/resources/${id}`, newData);
+  return API.put(`/resources/${id}`, newData);
 };
 
 const remove = (id) => {
@@ -42,6 +42,10 @@ const updateSingleResource = (newData) => {
   return API.patch(`/resources/${id}`, newData);
 };
 
+const selectedExperience = (exp)=>{
+  return API.get(`/resources/exp/${exp}`)
+}
+
 const BenchServices = {
   getAll,
   get,
@@ -50,5 +54,6 @@ const BenchServices = {
   remove,
   searchTitle,
   updateSingleResource,
+  selectedExperience
 };
 export default BenchServices;

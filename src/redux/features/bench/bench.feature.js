@@ -103,6 +103,13 @@ export const updateSingleResourceBench = createAsyncThunk(
   }
 );
 
+export const selectExperience = createAsyncThunk('bench/selectExperience',async(exp)=>{
+  let response = await BenchServices.selectedExperience(exp);
+  console.log(response)
+  return response.data.data
+})
+
+
 const benchSlice = createSlice({
   name: "bench",
   initialState,
@@ -194,6 +201,17 @@ const benchSlice = createSlice({
       state.loading = false;
       state.errorMessage = action.payload;
     },
+    [selectExperience.pending]:(state,action)=>{
+      state.loading = true
+  },
+  [selectExperience.fulfilled]:(state,action)=>{
+      state.loading = false;
+      state.benchLists = action.payload
+  },
+  [selectExperience.rejected]:(state,action)=>{
+      state.loading = false;
+      state.errorMessage = action.payload
+  }
   },
 });
 
