@@ -502,7 +502,9 @@ const AdminDashboard = (props) => {
                           <th>Members</th>
                         </tr>
                       </thead>
-                      {dashboardPoc.length === 0 && (
+                      <tbody className="align-items-center ">
+
+                      {/* {dashboardPoc.length === 0 && (
                         <>
                           <tbody>
                             <tr>
@@ -510,13 +512,13 @@ const AdminDashboard = (props) => {
                             </tr>
                           </tbody>
                         </>
-                      )}
-                      {dashboardPoc.length > 0 &&
-                        dashboardPoc.map((data) => {
+                      )} */}
+                      {
+                        dashboardPoc[0].map((data) => {
+
                           return (
                             <>
-                              <tbody className="align-items-center ">
-                                <tr>
+                                <tr id={dashboardPoc.emp_id}>
                                   <td>
                                     <div
                                       className="name"
@@ -529,35 +531,41 @@ const AdminDashboard = (props) => {
                                   </td>
                                   <td>
                                     <p className="fw-normal mb-1">
-                                      {data?.name}
+                                    {data.name ? data.name : "No Data"}
                                     </p>
                                   </td>
 
                                   <td>
                                     <span
                                       className={`badge ${
-                                        data?.duration >= 5
+                                        data.duration == 180
                                           ? "badge-danger"
-                                          : data?.duration >= 3
+                                          : data.duration >= 120
                                           ? "badge-warning"
+                                          : data.duration >= 60
+                                          ? "badge-info"
+                                          : data.duration >= 45
+                                          ? "badge-secondary"
                                           : "badge-success"
-                                      } rounded-pill`}
+                                      } rounded-pill d-inline`}
                                     >
                                       {data?.duration}
-                                      {`Months`}
+                                      {`Days`}
                                     </span>
                                   </td>
                                   <td>
-                                    {/* {data?.createdBy} */}
-                                    {data.name}
+                                    {data.createdBy
+                                      ? data.createdBy.name
+                                      : "No Name"}
+                                    {/* {data.name} */}
                                   </td>
-
-                                  <td className="">{data?.members.length}</td>
+                                  <td className="">{data.members ? data.members.length : 0}</td>
                                 </tr>
-                              </tbody>
                             </>
                           );
                         })}
+                              </tbody>
+
                     </table>
                   </div>
                   <div

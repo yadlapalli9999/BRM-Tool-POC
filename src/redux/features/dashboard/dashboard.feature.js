@@ -134,7 +134,7 @@ export const getAllDashBoardPocs = createAsyncThunk(
     //   .get(GET_DASHBOARD_ALL_POCS)
     //   .then((res) => res.data);
     const response = await dashboardServices.allDashBoardPocs();
-    // console.log(response.data.data);
+    console.log(" get all dashbard list from store",response.data.data);
     return response.data.data;
   }
 );

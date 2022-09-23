@@ -85,7 +85,7 @@ function App() {
             <Route path="/addpoc" element={<EmployeeFields />} />
           )}
           {AdminRole.role === "ADMIN" && (
-            <Route path="/editpoc" element={<EditEmployeeFields />} />
+            <Route path="/editpoc/:id" element={<EditEmployeeFields />} />
           )}
           {AdminRole.role === "ADMIN" && (
             <Route path="/benchworklogs" element={<BenchWorklogs />} />
