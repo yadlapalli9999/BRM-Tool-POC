@@ -67,7 +67,7 @@ let Navbar = () => {
               </li>
               <li className="nav-item icon NavbarNavItem">
                 <Link to="/poc" className="nav-link">
-                  <i id="poc" class="fas fa-file " />
+                  <i id="poc" className="fas fa-file " />
                 </Link>
               </li>
 

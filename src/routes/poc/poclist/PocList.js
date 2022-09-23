@@ -3,7 +3,7 @@ import "./PocList.css";
 
 const PocList = () => {
   return (
-    <div class="container">
+    <div className="container">
       <div className="workLogsTitle mt-5 mb-5">
         <h2>POC List</h2>
       </div>

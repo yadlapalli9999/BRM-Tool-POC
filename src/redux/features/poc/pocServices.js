@@ -15,6 +15,8 @@ const getAllResources = () => {
   //console.log(localStorage.getItem('access_token'))
   return API.get(`/resources`);
 };
+
+
 const getSinglePocDetial = (id) => {
   //   return Axios.get(`${BASE_URL}/${id}`);
   return API.get(`/poc/${id}`);

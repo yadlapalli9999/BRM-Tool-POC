@@ -45,7 +45,6 @@ let AddResource = (props) => {
   const handleResource = (event) => {
     event.preventDefault();
     props.members.push(query.searchValue);
-    console.log(props.members);
     clearForm();
     setShow(false);
   };
@@ -177,7 +176,7 @@ let AddResource = (props) => {
           <div className="modal-content">
             <div className="modal-header text-center">
               <h4 className="modal-title w-100 font-weight-bold">
-                <MDBIcon className="fas fa-user" /> Add Resources
+                <MDBIcon className="fas fa-user"/> Add Resources
               </h4>
               <button
                 type="button"

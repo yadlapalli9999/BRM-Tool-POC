@@ -16,6 +16,7 @@ export const getAllPoc = createAsyncThunk("poc/getAllPoc", async () => {
   return response.data.data;
 });
 
+
 export const getSinglePoc = createAsyncThunk("poc/getSinglePoc", async (id) => {
   let response = await pocServices.getSinglePocDetial(id);
   // console.log(response.data.data);
@@ -46,10 +47,9 @@ export const getBench = createAsyncThunk("bench/getBench", async () => {
 export const searchPOC = createAsyncThunk(
   "bench/searchBench",
   async (query) => {
-    console.log(query);
+    // console.log(query);
     let response = await pocServices.searchTitle(query);
     // console.log(response);
-    console.log(response.data.data);
 
     return response.data.data;
   }
@@ -110,7 +110,7 @@ const pocSlice = createSlice({
     [searchPOC.fulfilled]: (state, action) => {
       state.loading = false;
       state.benchLists = action.payload;
-      console.log("success");
+      // console.log("success")
     },
     [searchPOC.rejected]: (state, action) => {
       state.loading = false;
@@ -128,6 +128,7 @@ const pocSlice = createSlice({
       state.loading = false;
       state.errorMessage = action.payload;
     },
+
   },
 });
 

@@ -24,7 +24,7 @@ const BenchDeleteConfirmationModal = ({
 }) => {
   const dispatch = useDispatch();
   const deleteHandler = () => {
-    console.log(singleResource);
+    // console.log(singleResource);
     const BenchReservedstatus = "Bench";
     const newObject = {
       name: singleResource[0].name,
@@ -34,7 +34,7 @@ const BenchDeleteConfirmationModal = ({
       status: BenchReservedstatus,
       _id: singleResource[0]._id,
     };
-    console.log(newObject);
+    // console.log(newObject);
     dispatch(updateSingleResourceBench(newObject));
     dispatch(getBench());
     setHasReserved(!hasReserved);
@@ -43,7 +43,7 @@ const BenchDeleteConfirmationModal = ({
   return (
     <>
       <MDBModal
-        staticBackdrop
+        
         tabIndex="-1"
         show={benchDeleteModal}
         className="modal"

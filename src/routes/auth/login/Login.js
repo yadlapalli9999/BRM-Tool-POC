@@ -110,9 +110,9 @@ const Login = (props) => {
                                   className="w-1 mx-3 h-1 mt-3 svgIcon"
                                 >
                                   <path
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M18.685 19.097A9.723 9.723 0 0021.75 12c0-5.385-4.365-9.75-9.75-9.75S2.25 6.615 2.25 12a9.723 9.723 0 003.065 7.097A9.716 9.716 0 0012 21.75a9.716 9.716 0 006.685-2.653zm-12.54-1.285A7.486 7.486 0 0112 15a7.486 7.486 0 015.855 2.812A8.224 8.224 0 0112 20.25a8.224 8.224 0 01-5.855-2.438zM15.75 9a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                   />
                                 </svg>
 
@@ -154,9 +154,9 @@ const Login = (props) => {
                                   className="w-1 mx-3 h-1 mt-3 svgIcon"
                                 >
                                   <path
-                                    fill-rule="evenodd"
+                                    fillRule="evenodd"
                                     d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z"
-                                    clip-rule="evenodd"
+                                    clipRule="evenodd"
                                   />
                                 </svg>
 
@@ -178,12 +178,12 @@ const Login = (props) => {
                                   Sign In
                                 </button>
                                 {/* <hr>Or</hr> */}
-                                <div class="separator mt-3">
-                                  <div class="line"></div>
+                                <div className="separator mt-3">
+                                  <div className="line"></div>
                                   <p className="lead fw-bolder text-dark mt-1">
                                     Or
                                   </p>
-                                  <div class="line"></div>
+                                  <div className="line"></div>
                                 </div>
                                 <button
                                   className="btn  gBtn btn-white btn-block text-dark mt-2"

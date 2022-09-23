@@ -28,7 +28,7 @@ const EmployeeFields = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const resourceID = localStorage.getItem("resourceID");
-  console.log(resourceID);
+  // console.log(resourceID);
   // const members = [
   //   {
   //     id: 1,
@@ -133,7 +133,7 @@ const EmployeeFields = () => {
       console.log("454585252455");
 
       e.preventDefault();
-      console.log(inputData);
+      // console.log(inputData);
       dispatch(CreatePOC(inputData));
       setTimeout(() => {
         navigate("/poc");
