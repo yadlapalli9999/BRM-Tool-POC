@@ -24,7 +24,7 @@ const BenchDeleteConfirmationModal = ({
 }) => {
   const dispatch = useDispatch();
   const deleteHandler = () => {
-    // console.log(singleResource);
+    console.log(singleResource);
     const BenchReservedstatus = "Bench";
     const newObject = {
       name: singleResource[0].name,
@@ -51,7 +51,9 @@ const BenchDeleteConfirmationModal = ({
         <MDBModalDialog centered>
           <MDBModalContent>
             <MDBModalHeader>
-              <MDBModalTitle></MDBModalTitle>
+              <MDBModalTitle className="modalHeader">
+                Remove From Bench Reserved
+              </MDBModalTitle>
               <MDBBtn
                 className="btn-close"
                 color="none"

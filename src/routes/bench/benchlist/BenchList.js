@@ -3,7 +3,6 @@ import $, { data } from "jquery";
 import { dummyData } from "./dummyData";
 import ReservedBenchModal from "./modals/ReservedBenchModal";
 import BenchDeleteConfirmationModal from "./modals/BenchDeleteConfirmationModal";
-
 import {
   MDBBtn,
   MDBInput,
@@ -28,7 +27,6 @@ import {
   deleteBench,
   getBench,
   searchBench,
-  selectExperience,
 } from "../../../redux/features/bench/bench.feature";
 import BenchServices from "../../../redux/features/bench/benchServices";
 import { toast } from "react-toastify";
@@ -38,11 +36,11 @@ let BenchList = () => {
 
   let dispatch = useDispatch();
   const [hasReserved, setHasReserved] = useState(false);
-  const [showBenchModal, setShowBenchModal] = useState(false);
+  const [previousBenchlist, setPreviousBenchlist] = useState([]);
 
-  // useEffect(() => {
-  //   dispatch(getBench());
-  // }, []);
+  useEffect(() => {
+    dispatch(getBench());
+  }, []);
   useEffect(() => {
     dispatch(getBench());
   }, [hasReserved, setHasReserved]);
@@ -77,106 +75,105 @@ let BenchList = () => {
       ...query,
       searchValue: event.target.value,
     });
+    setPreviousBenchlist(benchLists);
+  };
 
-    if (query.searchValue.length > 2) {
+  const enterHandler = (e) => {
+    if (e.key === "Enter") {
+      // if (event.key === "Enter") {
       dispatch(searchBench(query));
-      clearSearchForm();
+      setQuery({
+        ...query,
+        searchValue: "",
+      });
     } else {
       dispatch(getBench());
     }
   };
+
+  const [showBenchModal, setShowBenchModal] = useState(false);
   const [singleResource, setSingleResource] = useState([]);
   const toggleHandlerOff = (id) => {
     const data = benchLists.filter((item) => item._id === id);
-    setSingleResource(data);
+    const prevDataProp = previousBenchlist.filter((item) => item._id === id);
+    if (benchLists.length > 0) {
+      setSingleResource(data);
+    } else {
+      setSingleResource(prevDataProp);
+    }
     setShowBenchModal(true);
   };
   const [benchDeleteModal, setBenchDeleteModal] = useState(false);
   const toggleHandlerOn = (id) => {
     const data = benchLists.filter((item) => item._id === id);
-    setSingleResource(data);
+    const prevDataProp = previousBenchlist.filter((item) => item._id === id);
+    if (benchLists.length > 0) {
+      setSingleResource(data);
+    } else {
+      setSingleResource(prevDataProp);
+    }
     setBenchDeleteModal(true);
   };
-
-  let clearSearchForm = ()=>{
-    setQuery({
-      searchValue:''
-    })
-   }
-
-  const [exp,setExp] = useState('1/to/2')
-let handleSelect = (event)=>{
-  setExp(event.target.value)
-   dispatch(selectExperience(event.target.value))
- }
 
   return (
     <React.Fragment>
       <div className="container">
         {/* <pre>{JSON.stringify(benchLists.data)}</pre> */}
-        <div className="text-center">
-          <h2 className="a1 mt-4 mb-4">Bench List</h2>
-        </div>
-        <div className="row  container ">
-          <div className="col-md-1 ">
+        <div className="row mt-3">
+          <div className="col-md-4 mx-4 ">
+            <h2 className="a1 mt-4">Bench List</h2>
+          </div>
+          <div className="col-md-7">
             <div
-              className=" p-1 addBtn bg-dark"
-              // style={{ marginTop: "30px", float: "right", marginRight: "10px" }}
+              className="text-center"
+              style={{ marginTop: "30px", float: "right", marginRight: "10px" }}
             >
               {/* <MDBBtn> */}
               <Link
                 to="/newbenchEmployee"
-                className=" "
-                // style={{ backgroundColor: "#333" }}
+                className="btn addBtn text-white"
+                style={{ backgroundColor: "#333" }}
               >
-                {/* ADD */}
-
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  className=" addUserSvg mx-3"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"
-                  />
-                </svg>
+                ADD
               </Link>
               {/* </MDBBtn> */}
               {/* <CustomButton/> */}
             </div>
           </div>
-          <div className="col-md-6 offset-md-2 inp">
+        </div>
+        <div className="row col-md-12">
+          <div className="col-md-3 inp">
             <MDBInput
-              // className="mx-4"
               type="text"
               label="search"
               value={query.searchValue}
-              // style={{ width: "660px" }}
-              onChange={handleSearch}
-              // onChange={(e) => {setSearchValue(e.target.value);dispatch(searchBench(searchValue));console.log(searchValue)}}
+              style={{ width: "660px" }}
+              onChange={(e) => {
+                handleSearch(e);
+              }}
+              onKeyPress={(e) => {
+                enterHandler(e);
+              }}
             />
-          </div>  
-            <div className="col-md-3">
-            <select className="select selectBtn mx-5" value={exp}  data-mdb-filter="true" onChange={handleSelect}>
-                <option className=" " >Select Year</option><option value="1/to/2">1-2</option>
-                <option value="2/to/3">2-3</option>
-                <option value="3/to/4">3-4</option>
-                <option value="4/to/5">4-5</option>
-                <option value="5/to/6">5-6</option>
-                <option value="6/to/7">6-7</option>
-                <option value="7/to/8">7-8</option>
-                <option value="8/to/9">8-9</option>
-                <option value="9/to/10">9-10</option>
-                <option value="10/to/11">10-11</option>
-              </select>
-              {/* <div className"dropdown d-flex justify-content-end mb-4">
+          </div>
+          <div className="col-md-6 ">
+            <select className="select selectBtn mx-5 " data-mdb-filter="true">
+              <option className=" ">Select Year</option>
+              <option>1-2</option>
+              <option>2-3</option>
+              <option>3-4</option>
+              <option>4-5</option>
+              <option>5-6</option>
+              <option>6-7</option>
+              <option>7-8</option>
+              <option>8-9</option>
+              <option>9-10</option>
+              <option>10-11</option>
+              <option>11-12</option>
+            </select>
+            {/* <div class="dropdown d-flex justify-content-end mb-4">
               <select
-                className"btn btn-rounded  btn-secondary dropdown-toggle"
+                class="btn btn-rounded  btn-secondary dropdown-toggle"
                 type="button"
                 style={{ fontSize: "1rem" }}
               >
@@ -196,13 +193,12 @@ let handleSelect = (event)=>{
             </div> */}
           </div>
         </div>
-
         <div className="row mt-4">
           <div className="col">
-            {benchLists.length > 0 ? (
+            {benchLists ? (
               <div className=" container table-responsive">
                 <MDBTable>
-                  <MDBTableHead className="table_content bg-dark text-white">
+                  <MDBTableHead className="table_content text-white">
                     <tr>
                       <th scope="col">EmpId</th>
                       <th scope="col">Name</th>
@@ -220,7 +216,7 @@ let handleSelect = (event)=>{
                       // benchLists&& benchLists?.filter((filterData) =>filterData?.name.toLowerCase().includes(query))?.map((filterData) => (
 
                       // benchLists && benchLists?.filter((filterData) =>filterData?.name.toLowerCase().includes(searchValue))?.map((filterData) => (
-                      benchLists &&
+                      benchLists.length > 0 ? (
                         benchLists?.map((filterData) => (
                           <tr key={filterData._id}>
                             <td>
@@ -282,7 +278,7 @@ let handleSelect = (event)=>{
             <i
               className="fas fa-edit text-primary"
             />
-             <label className"form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> *
+             <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> *
           </Link>
         </td> */}
                             <td>
@@ -296,9 +292,89 @@ let handleSelect = (event)=>{
                                 className="fa fa-trash text-danger benchListdeletei"
                               />
                             </td>
-
                           </tr>
                         ))
+                      ) : previousBenchlist.length > 0 ? (
+                        previousBenchlist?.map((filterData) => (
+                          <tr key={filterData._id}>
+                            <td>
+                              {/* <Link to={`/worklog/${item.id}`}>{item.id}</Link> */}
+                              <Link to={`/empDetails/${filterData._id}`}>
+                                {filterData.emp_id}
+                              </Link>
+                            </td>
+                            <td>{filterData?.name}</td>
+                            <td>{filterData.email}</td>
+                            <td>{filterData.totalWorkExp}</td>
+                            <td>
+                              {filterData.primarySkills
+                                ? filterData.primarySkills
+                                : "NULL"}
+                            </td>
+                            {/* <td>{item}</td> */}
+                            <td>
+                              <a
+                                href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0"
+                                target="_blank"
+                              >
+                                {/* <img
+                src={"../../excel.png"}
+                alt=""
+                style={{ width: "40px", height: "40px" }}
+                className="rounded-circle pocHomeExcelLogo "
+              /> */}
+                                <MDBIcon
+                                  fas
+                                  icon="list-alt"
+                                  className="worklog_icon"
+                                />
+                              </a>
+                            </td>
+                            <td>
+                              {filterData.status === "BenchReserved" ? (
+                                <MDBIcon
+                                  fas
+                                  icon="toggle-on"
+                                  className="toggle-on"
+                                  onClick={() => {
+                                    toggleHandlerOn(filterData._id);
+                                  }}
+                                />
+                              ) : (
+                                <MDBIcon
+                                  fas
+                                  icon="toggle-off"
+                                  className="toggle-off"
+                                  onClick={() => {
+                                    toggleHandlerOff(filterData._id);
+                                  }}
+                                />
+                              )}
+                            </td>
+                            {/* <td>
+          <Link to="/editbenchEmployee">
+            <i
+              className="fas fa-edit text-primary"
+            />
+             <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label> *
+          </Link>
+        </td> */}
+                            <td>
+                              <Link to={`/editbenchEmployee/${filterData._id}`}>
+                                <i className="fas fa-edit text-primary benchListEditi" />
+                              </Link>
+                              &nbsp;&nbsp;
+                              <i
+                                data-target="#exampleModal"
+                                onClick={() => handleDelete(filterData._id)}
+                                className="fa fa-trash text-danger benchListdeletei"
+                              />
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <></>
+                      )
                     }
                   </MDBTableBody>
                 </MDBTable>
@@ -366,8 +442,8 @@ let handleSelect = (event)=>{
                               />
                             </a></td>
                         <td>
-                        <div className"form-check form-switch" >
-                          <input className"form-check-input" value={role} onChange={()=>handleInputChange(filterData.id)} type="checkbox"  id="flexSwitchCheck" />
+                        <div class="form-check form-switch" >
+                          <input class="form-check-input" value={role} onChange={()=>handleInputChange(filterData.id)} type="checkbox"  id="flexSwitchCheck" />
                         </div>
                           </td>
                         {/* <td>
@@ -375,7 +451,7 @@ let handleSelect = (event)=>{
                             <i
                               className="fas fa-edit text-primary"
                             />
-                             <label className"form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
+                             <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
                           </Link>
                         </td> }
                         <td>
@@ -399,15 +475,13 @@ let handleSelect = (event)=>{
       </div>
       {/* ReservedBenchModal */}
       {showBenchModal && (
-      
-          <ReservedBenchModal
-            setShowBenchModal={setShowBenchModal}
-            showBenchModal={showBenchModal}
-            setHasReserved={setHasReserved}
-            hasReserved={hasReserved}
-            singleResource={singleResource}
-          />
-
+        <ReservedBenchModal
+          setShowBenchModal={setShowBenchModal}
+          showBenchModal={showBenchModal}
+          setHasReserved={setHasReserved}
+          hasReserved={hasReserved}
+          singleResource={singleResource}
+        />
       )}
       {/* deleteReservedMOdal */}
       {benchDeleteModal && (

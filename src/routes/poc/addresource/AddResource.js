@@ -32,23 +32,77 @@ let AddResource = (props) => {
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState({
     searchValue: "",
+    searchId: "",
   });
 
   let allBenchLists = useSelector((store) => {
     return store["poc"];
   });
 
-  let {benchLists} = allBenchLists;
+  let { benchLists } = allBenchLists;
   // let { loading, benchLists, errorMessage } = allBenchLists;
 
   const handleResource = (event) => {
     if (query.searchValue) {
-      event.preventDefault();
-      props.members.push(query.searchValue);
-      console.log(props.members);
-      props.setEdited(true);
-      clearForm();
-      setShow(false);
+      if (members.length > 0) {
+        console.log(query.searchId);
+        let duplicate = members.filter((item) => {
+          console.log(item._id, item.searchId, query.searchId.trim());
+          if (item._id) {
+            if (item._id === query.searchId.trim()) {
+              return item;
+            }
+          } else if (item.searchId) {
+            if (item.searchId === query.searchId.trim()) {
+              return item;
+            }
+          }
+        });
+        console.log(duplicate);
+        if (propValue === "editState") {
+          if (duplicate.length > 0) {
+            alert("Member Already exists!");
+          } else {
+            if (query.searchValue) {
+              event.preventDefault();
+              props.members.push(query);
+              console.log(props.members);
+              if (propValue === "editState") {
+                props.setEdited(true);
+              }
+              clearForm();
+              setShow(false);
+            }
+          }
+        } else if (propValue === "AddPocState") {
+          if (duplicate.length > 0) {
+            alert("Member Already Added");
+          } else {
+            if (query.searchValue) {
+              event.preventDefault();
+              props.members.push(query);
+              console.log(props.members);
+              if (propValue === "editState") {
+                props.setEdited(true);
+              }
+              clearForm();
+              setShow(false);
+            }
+          }
+        }
+        duplicate = [];
+      } else {
+        if (query.searchValue) {
+          event.preventDefault();
+          props.members.push(query);
+          console.log(props.members);
+          if (propValue === "editState") {
+            props.setEdited(true);
+          }
+          clearForm();
+          setShow(false);
+        }
+      }
     }
   };
   const clearForm = () => {
@@ -59,7 +113,6 @@ let AddResource = (props) => {
   useEffect(() => {
     if (query.searchValue.trim()) setIsEmpty(false);
     if (query.searchValue.trim() == "") setIsEmpty(true);
-    console.log(isEmpty);
   }, [query.searchValue]);
 
   let handleSearch = (event) => {
@@ -71,22 +124,21 @@ let AddResource = (props) => {
     // console.log(reqName);
     if (query.searchValue) {
       setIsEmpty(false);
-      dispatch(searchPOC(query));
+      dispatch(searchPOC({ searchValue: query.searchValue }));
       // setQuery({ searchValue: "" });
       // dispatch(getBench());
       // members.push(query);
 
-      members.searchResult(query);
+      // members.searchResult(query);
 
       // props.members.push(query);
 
-      // console.log(query);
+      console.log(query);
     } else {
       setIsEmpty(true);
       console.log("search value is not found");
     }
   };
-  console.log(query);
 
   const nameSelector = (obj) => {
     setQuery({ ...query, searchValue: obj });
@@ -95,7 +147,11 @@ let AddResource = (props) => {
   const handlePocDetailsNameClick = () => {
     navigate("/worklogs");
   };
-  console.log(members);
+
+  const addPocResourceHandller = (obj) => {
+    setQuery(obj);
+    setIsEmpty(true);
+  };
   return (
     <React.Fragment>
       {/* <MDBContainer> */}
@@ -136,11 +192,15 @@ let AddResource = (props) => {
                           key={index + 1}
                           onClick={handlePocDetailsNameClick}
                         >
+                          :
                           <td className="align-middle ">
                             <span>
                               {propValue === "AddPocState"
-                                ? filterMember
-                                : filterMember.name || filterMember}
+                                ? filterMember.searchValue
+                                : filterMember.name}
+                              {propValue === "editState"
+                                ? filterMember.searchValue
+                                : filterMember.name}
                             </span>
                           </td>
                         </tr>
@@ -220,12 +280,17 @@ let AddResource = (props) => {
                             <tr key={filterData._id}>
                               <td
                                 onClick={() => {
-                                  // const tempOBj = {
-                                  //   _id: filterData._id,
-                                  //   name: filterData.name,
-                                  // };
+                                  const tempOBj = {
+                                    searchId: filterData._id,
+                                    searchValue: filterData.name,
+                                  };
+                                  if (propValue === "AddPocState") {
+                                    addPocResourceHandller(tempOBj);
+                                  } else if (propValue === "editState") {
+                                    addPocResourceHandller(tempOBj);
+                                  }
                                   // nameSelector(tempOBj);
-                                  nameSelector(filterData._id);
+                                  // nameSelector(filterData._id);
                                 }}
                               >
                                 {filterData.name}

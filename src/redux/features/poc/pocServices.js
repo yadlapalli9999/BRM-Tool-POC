@@ -16,14 +16,13 @@ const getAllResources = () => {
   return API.get(`/resources`);
 };
 
-
 const getSinglePocDetial = (id) => {
   //   return Axios.get(`${BASE_URL}/${id}`);
   return API.get(`/poc/${id}`);
 };
 const createPoc = (newData) => {
   //   return Axios.post(`${BASE_URL}/${resourceID}`, newData);
-  console.log(resourceID);
+
   return API.post(`/poc/${resourceID}`, newData);
 };
 

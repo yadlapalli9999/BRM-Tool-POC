@@ -127,6 +127,7 @@ const EmployeeFields = () => {
 
   const handleSubmit = (e) => {
     console.log(inputData);
+
     if (
       !inputData.name ||
       !inputData.members ||
@@ -138,7 +139,8 @@ const EmployeeFields = () => {
       if (!inputData.duration) setDurationHasError(true);
     } else {
       e.preventDefault();
-      // console.log(inputData);
+      console.log(inputData);
+      // setinputData({ ...inputData, members: tempMembersArray });
       dispatch(CreatePOC(inputData));
       toast.success("Creating New POC", { autoClose: 800 });
       setTimeout(() => {

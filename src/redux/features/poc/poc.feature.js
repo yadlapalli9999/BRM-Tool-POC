@@ -17,7 +17,6 @@ export const getAllPoc = createAsyncThunk("poc/getAllPoc", async () => {
   return response.data.data;
 });
 
-
 export const getSinglePoc = createAsyncThunk("poc/getSinglePoc", async (id) => {
   let response = await pocServices.getSinglePocDetial(id);
   // console.log(response.data.data);
@@ -25,6 +24,9 @@ export const getSinglePoc = createAsyncThunk("poc/getSinglePoc", async (id) => {
 });
 
 export const CreatePOC = createAsyncThunk("poc/CreatePOC", async (newData) => {
+  const tempMembersArray = newData.members.map((item) => item.searchId);
+  newData.members = tempMembersArray;
+
   let response = await pocServices.createPoc(newData);
   // console.log(response.data.data);
   return response.data.data;
@@ -33,6 +35,10 @@ export const CreatePOC = createAsyncThunk("poc/CreatePOC", async (newData) => {
 export const updateSinglePoc = createAsyncThunk(
   "poc/updateSinglePoc",
   async (newData) => {
+    const tempMembersArray = newData.members.map(
+      (item) => item.searchId || item._id
+    );
+    newData.members = tempMembersArray;
     let response = await pocServices.updatePoc(newData);
     // console.log(response.data.data);
     return response.data.data;
@@ -129,7 +135,6 @@ const pocSlice = createSlice({
       state.loading = false;
       state.errorMessage = action.payload;
     },
-
   },
 });
 
