@@ -158,7 +158,9 @@ const EditEmployeeFields = () => {
       console.log(inputData);
       dispatch(updateSinglePoc(inputData));
       toast.success("Updated Successfully", { autoClose: 1100 });
-      navigate("/poc");
+      setTimeout(() => {
+        navigate("/poc");
+      }, 1000);
     }
   };
   return (

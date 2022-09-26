@@ -40,6 +40,7 @@ function ProjectStatus(props) {
   }, [active, hold, idea, closed, status]);
 
   useEffect(() => {
+    console.log(data);
     dispatch(updateSinglePoc(data));
   }, [data]);
 
