@@ -7,12 +7,6 @@ const getAll = () => {
   return API.get(`/poc`);
 };
 const getAllResources = () => {
-  // const config = {
-  // 	headers: {
-  // 		'Authorization': `Bearer ${access_token}`,
-  // 	}
-  // };
-  //console.log(localStorage.getItem('access_token'))
   return API.get(`/resources`);
 };
 
@@ -47,6 +41,11 @@ const searchTitle = (query) => {
   //console.log(searchValue)
   return API.post(`/resources/search`, query);
 };
+
+const searchPocTitle = (query) => {
+  return API.post("/poc/search", query);
+};
+
 const pocServices = {
   getAll,
   getSinglePocDetial,
@@ -54,6 +53,7 @@ const pocServices = {
   searchTitle,
   getAllResources,
   updatePoc,
+  searchPocTitle,
 };
 
 export default pocServices;

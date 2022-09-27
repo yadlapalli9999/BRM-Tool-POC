@@ -62,6 +62,13 @@ export const updatePocStatus = createAsyncThunk(
     return response.data.data;
   }
 );
+export const mainSearchPOC = createAsyncThunk("poc/searc", async (query) => {
+  // console.log(query);
+  let response = await pocServices.searchPocTitle(query);
+  // console.log(response);
+
+  return response.data.data;
+});
 
 export const getBench = createAsyncThunk("bench/getBench", async () => {
   const response = await BenchServices.getAll();
@@ -166,6 +173,19 @@ const pocSlice = createSlice({
     [updatePocStatus.rejected]: (state, action) => {
       state.loading = false;
       state.errorMessage = action.payload;
+    },
+    [mainSearchPOC.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [mainSearchPOC.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.pocList = action.payload;
+      // console.log("success")
+    },
+    [mainSearchPOC.rejected]: (state, action) => {
+      state.loading = false;
+      state.errorMessage = action.payload;
+      console.log("Failed");
     },
   },
 });

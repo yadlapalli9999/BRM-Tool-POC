@@ -132,7 +132,8 @@ const EmployeeFields = () => {
       !inputData.name ||
       !inputData.members ||
       !inputData.status ||
-      !inputData.duration
+      !inputData.duration ||
+      !inputData.documents.length
     ) {
       alert(" Input fields are neccessary");
       if (!inputData.status) setStatusHasError(true);

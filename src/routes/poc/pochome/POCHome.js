@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./POCHome.css";
 import { Link, useNavigate } from "react-router-dom";
 import {
+  MDBInput,
   MDBContainer,
   MDBRow,
   MDBCol,
@@ -13,7 +14,10 @@ import {
   MDBSpinner,
 } from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPoc } from "../../../redux/features/poc/poc.feature";
+import {
+  getAllPoc,
+  mainSearchPOC,
+} from "../../../redux/features/poc/poc.feature";
 import { POC_TABLE_HEADERS } from "../../Constants";
 
 let POCHome = () => {
@@ -38,6 +42,33 @@ let POCHome = () => {
   //   navigate(`/editpoc`, { state: { pocId: pocID } });
   // };
 
+  // ........
+  const [previousPocList, setPreviousPocList] = useState([]);
+
+  const [query, setQuery] = useState({
+    searchValue: "",
+  });
+  let handleSearch = (event) => {
+    setQuery({
+      ...query,
+      searchValue: event.target.value,
+    });
+    setPreviousPocList(pocList);
+  };
+
+  const enterHandler = (e) => {
+    if (e.key === "Enter") {
+      dispatch(mainSearchPOC(query));
+      setQuery({
+        ...query,
+        searchValue: "",
+      });
+    } else {
+      dispatch(getAllPoc());
+      console.log("othre key");
+    }
+  };
+  console.log(pocList);
   const getDocIcon = (docLink) => {
     if (docLink.includes("docs.google.com")) {
       return <MDBIcon fas icon="file-upload doc_icon" />;
@@ -172,14 +203,28 @@ let POCHome = () => {
 
   return (
     <MDBContainer className="py-4">
-      <MDBRow>
+      <MDBRow style={{ marginBottom: "20px" }}>
         <MDBCol md="12" className="text-center">
           {/* <h2 className="pocTitle">POC</h2> */}
           <button className="pocTitle">POC</button>
         </MDBCol>
       </MDBRow>
       <MDBRow>
-        <MDBCol md="12" className="d-flex justify-content-end">
+        <MDBCol md="6">
+          <MDBInput
+            type="text"
+            label="search"
+            value={query.searchValue}
+            // style={{ width: "660px" }}
+            onChange={(e) => {
+              handleSearch(e);
+            }}
+            onKeyPress={(e) => {
+              enterHandler(e);
+            }} // onChange={(e) => {setSearchValue(e.target.value);dispatch(searchBench(searchValue));console.log(searchValue)}}
+          />
+        </MDBCol>
+        <MDBCol md="6" className="d-flex justify-content-end">
           <Link
             to="/addpoc"
             className="btn addBtn"
@@ -189,6 +234,18 @@ let POCHome = () => {
           </Link>
         </MDBCol>
       </MDBRow>
+
+      {/* <MDBRow>
+        <MDBCol md="12" className="d-flex justify-content-end">
+          <Link
+            to="/addpoc"
+            className="btn addBtn"
+            style={{ backgroundColor: "#333" }}
+          >
+            Add
+          </Link>
+        </MDBCol>
+      </MDBRow> */}
       <MDBRow className="mt-4">
         <MDBCol>
           {loading ? (
@@ -208,23 +265,43 @@ let POCHome = () => {
                   ))}
                 </tr>
               </MDBTableHead>
-              <MDBTableBody className="align-items-center">
-                {/* {pocList.map((item) => (
+              {pocList.length ? (
+                <MDBTableBody className="align-items-center">
+                  {/* {pocList.map((item) => (
                   <>
                     <p>{item.name}</p>
                     <p>{item.documents}</p>
                   </>
                 ))} */}
 
-                {pocList.length > 0 &&
-                  pocList.map((item, index) => (
-                    <tr>
-                      {POC_TABLE_HEADERS.map((header) => (
-                        <td>{getTableData(header, item, index)}</td>
-                      ))}
-                    </tr>
-                  ))}
-              </MDBTableBody>
+                  {pocList.length > 0 &&
+                    pocList.map((item, index) => (
+                      <tr>
+                        {POC_TABLE_HEADERS.map((header) => (
+                          <td>{getTableData(header, item, index)}</td>
+                        ))}
+                      </tr>
+                    ))}
+                </MDBTableBody>
+              ) : (
+                <MDBTableBody className="align-items-center">
+                  {/* {pocList.map((item) => (
+                <>
+                  <p>{item.name}</p>
+                  <p>{item.documents}</p>
+                </>
+              ))} */}
+
+                  {previousPocList.length > 0 &&
+                    previousPocList.map((item, index) => (
+                      <tr>
+                        {POC_TABLE_HEADERS.map((header) => (
+                          <td>{getTableData(header, item, index)}</td>
+                        ))}
+                      </tr>
+                    ))}
+                </MDBTableBody>
+              )}
             </MDBTable>
           )}
         </MDBCol>
