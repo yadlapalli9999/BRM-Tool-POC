@@ -26,7 +26,7 @@ function ProjectStatus(props) {
   // props states
   const [status, setStatus] = useState(props.status);
   const [data, setData] = useState(props.singlePoc);
-
+  console.log("data updated", data);
   //{ProjectStatus states}
   const [active, setActive] = useState(false);
   const [hold, setHold] = useState(false);

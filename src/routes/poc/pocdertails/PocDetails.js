@@ -47,7 +47,7 @@ const PocDetails = () => {
 
   useEffect(() => {
     dispatch(getSinglePoc(location.state.pocId));
-    console.log("dispatched from parent component");
+    console.log("dispatched from parent component", singlePoc);
   }, [edited]);
 
   setTimeout(() => {
@@ -187,7 +187,9 @@ const PocDetails = () => {
                           <MDBCol md="3">Members</MDBCol>
                           <MDBCol md="9">
                             {singlePoc.members.length > 0
-                              ? singlePoc.members.map((item) => item.name + ";")
+                              ? singlePoc.members.map(
+                                  (item) => item.name + ",  "
+                                )
                               : "None"}
                           </MDBCol>
                         </MDBRow>

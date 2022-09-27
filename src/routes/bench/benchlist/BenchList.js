@@ -27,6 +27,7 @@ import {
   deleteBench,
   getBench,
   searchBench,
+  selectExperience,
 } from "../../../redux/features/bench/bench.feature";
 import BenchServices from "../../../redux/features/bench/benchServices";
 import { toast } from "react-toastify";
@@ -51,19 +52,17 @@ let BenchList = () => {
   let { loading, benchLists, errorMessage } = allBenchLists;
 
   const [staticModal, setStaticModal] = useState(false);
-  const toggleShow = () => setStaticModal(!staticModal);
+  // const toggleShow = () => setStaticModal(!staticModal);
   let [role, setRole] = useState(true);
   const [query, setQuery] = useState({
     searchValue: "",
   });
   const navigate = useNavigate();
   let handleDelete = (id) => {
-    //  Axios.delete(`${BASE_URL}/${id}`).then((res)=>{
-    //   console.log(res)
-    //  }).catch((error)=>{
-    //   console.log(error)
-    //  })
-    BenchServices.remove(id);
+    BenchServices.remove(deleteId[0]._id);
+    console.log(deleteId[0]._id);
+    setStaticModal(!staticModal);
+    // BenchServices.remove(id);
     toast.success("successfully Delete");
     setInterval(() => {
       dispatch(getBench());
@@ -114,6 +113,20 @@ let BenchList = () => {
     }
     setBenchDeleteModal(true);
   };
+  const [exp, setExp] = useState("1/to/2");
+  let handleSelect = (event) => {
+    setExp(event.target.value);
+    dispatch(selectExperience(event.target.value));
+  };
+  const [deleteId, setDeleteId] = useState([]);
+  const toggleShow = (id) => {
+    setStaticModal(!staticModal);
+    console.log(id);
+    let findObj = benchLists.filter((x) => x._id === id);
+    console.log(findObj);
+    setDeleteId(findObj);
+    //handleDelete(id)
+  };
 
   return (
     <React.Fragment>
@@ -157,19 +170,23 @@ let BenchList = () => {
             />
           </div>
           <div className="col-md-6 ">
-            <select className="select selectBtn mx-5 " data-mdb-filter="true">
+            <select
+              className="select selectBtn mx-5"
+              value={exp}
+              data-mdb-filter="true"
+              onChange={handleSelect}
+            >
               <option className=" ">Select Year</option>
-              <option>1-2</option>
-              <option>2-3</option>
-              <option>3-4</option>
-              <option>4-5</option>
-              <option>5-6</option>
-              <option>6-7</option>
-              <option>7-8</option>
-              <option>8-9</option>
-              <option>9-10</option>
-              <option>10-11</option>
-              <option>11-12</option>
+              <option value="1/to/2">1-2</option>
+              <option value="2/to/3">2-3</option>
+              <option value="3/to/4">3-4</option>
+              <option value="4/to/5">4-5</option>
+              <option value="5/to/6">5-6</option>
+              <option value="6/to/7">6-7</option>
+              <option value="7/to/8">7-8</option>
+              <option value="8/to/9">8-9</option>
+              <option value="9/to/10">9-10</option>
+              <option value="10/to/11">10-11</option>
             </select>
             {/* <div class="dropdown d-flex justify-content-end mb-4">
               <select
@@ -288,7 +305,8 @@ let BenchList = () => {
                               &nbsp;&nbsp;
                               <i
                                 data-target="#exampleModal"
-                                onClick={() => handleDelete(filterData._id)}
+                                // onClick={() => handleDelete(filterData._id)}
+                                onClick={() => toggleShow(filterData._id)}
                                 className="fa fa-trash text-danger benchListdeletei"
                               />
                             </td>
@@ -511,10 +529,14 @@ let BenchList = () => {
                 onClick={toggleShow}
               ></MDBBtn>
             </MDBModalHeader>
-            <MDBModalBody>Are You sure to delete "EmployeeName"</MDBModalBody>
+            <MDBModalBody>
+              Are You sure to delete {deleteId[0]?.name}
+            </MDBModalBody>
             <MDBModalFooter>
               <MDBBtn onClick={toggleShow}>Close</MDBBtn>
-              <MDBBtn color="danger">Yes</MDBBtn>
+              <MDBBtn color="danger" onClick={handleDelete}>
+                Yes
+              </MDBBtn>
             </MDBModalFooter>
           </MDBModalContent>
         </MDBModalDialog>
