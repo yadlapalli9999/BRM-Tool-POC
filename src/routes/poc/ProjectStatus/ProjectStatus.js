@@ -11,7 +11,7 @@ import {
   MDBModalFooter,
 } from "mdb-react-ui-kit";
 import { useDispatch } from "react-redux";
-import { updateSinglePoc } from "../../../redux/features/poc/poc.feature";
+import { updatePocStatus } from "../../../redux/features/poc/poc.feature";
 
 function ProjectStatus(props) {
   // utils
@@ -40,8 +40,8 @@ function ProjectStatus(props) {
   }, [active, hold, idea, closed, status]);
 
   useEffect(() => {
-    console.log(data);
-    dispatch(updateSinglePoc(data));
+    console.log("dispatch ing dat for update", data);
+    dispatch(updatePocStatus(data));
   }, [data]);
 
   const initiators = () => {
@@ -65,7 +65,7 @@ function ProjectStatus(props) {
     setTimeout(() => {
       setCentredModal(false);
       props.setEdited(!props.edited);
-    }, 20);
+    }, 100);
   };
 
   const holdHandler = () => {
@@ -77,7 +77,7 @@ function ProjectStatus(props) {
     setTimeout(() => {
       setCentredModal(false);
       props.setEdited(!props.edited);
-    }, 20);
+    }, 100);
   };
   const closedHandler = () => {
     setStatus("closed");
@@ -88,7 +88,7 @@ function ProjectStatus(props) {
     setTimeout(() => {
       setCentredModal(false);
       props.setEdited(!props.edited);
-    }, 20);
+    }, 100);
   };
   const ideaHandler = () => {
     setStatus("idea");
@@ -99,7 +99,7 @@ function ProjectStatus(props) {
     setTimeout(() => {
       setCentredModal(false);
       props.setEdited(!props.edited);
-    }, 20);
+    }, 100);
   };
   const confirmationHandler = () => {
     if (clickedStatus === "Active") {

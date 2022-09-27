@@ -45,6 +45,24 @@ export const updateSinglePoc = createAsyncThunk(
   }
 );
 
+export const updatePocStatus = createAsyncThunk(
+  "poc/updatePocStatus",
+  async (newData) => {
+    if (newData.members.length == 0) {
+      console.log("hi");
+      newData.members = [];
+    } else if (newData.members[0]._id) {
+      const tempMembersArray = newData.members.map((item) => item._id);
+      newData.members = tempMembersArray;
+      console.log("25252545", newData);
+    }
+    console.log("jhbdcjh", newData);
+    let response = await pocServices.updatePoc(newData);
+    // console.log(response.data.data);
+    return response.data.data;
+  }
+);
+
 export const getBench = createAsyncThunk("bench/getBench", async () => {
   const response = await BenchServices.getAll();
   //console.log(response)
@@ -135,6 +153,17 @@ const pocSlice = createSlice({
       state.updateSinglePOCValue = action.payload;
     },
     [updateSinglePoc.rejected]: (state, action) => {
+      state.loading = false;
+      state.errorMessage = action.payload;
+    },
+    [updatePocStatus.pending]: (state, action) => {
+      state.loading = true;
+    },
+    [updatePocStatus.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.updateSinglePOCValue = action.payload;
+    },
+    [updatePocStatus.rejected]: (state, action) => {
       state.loading = false;
       state.errorMessage = action.payload;
     },

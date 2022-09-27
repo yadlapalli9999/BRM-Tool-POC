@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import moment  from 'moment';
+import moment from "moment";
 import {
   MDBBtn,
   MDBValidation,
@@ -43,17 +43,17 @@ let NewBenchEmployee = () => {
     email: "",
     emp_id: "",
     password: "",
-    totalWorkExp:null? totalWorkExp.toString():'',
-    totalExpinFission:null?totalExpinFission.toString():'',
+    totalWorkExp: null ? totalWorkExp.toString() : "",
+    totalExpinFission: null ? totalExpinFission.toString() : "",
     primarySkills: [],
     reportingManager: "",
     projectName: "",
     teamLead: "",
     status: "",
     notes: "",
-    bench_start_date: '' ,
-    reporting_manager_email:'',
-    spreadsheetId:''
+    bench_start_date: "",
+    reporting_manager_email: "",
+    spreadsheetId: "",
   });
 
   let handleUpdateInput = (event) => {
@@ -111,14 +111,14 @@ let NewBenchEmployee = () => {
       if (!id) {
         // console.log(newBench);
         dispatch(createBench(newBench));
-        toast.success("created successfully");
+        toast.success("created successfully", { autoClose: 700 });
         navigate("/benchlist");
       } else {
         //console.log(newBench)
         console.log(newBench);
         //newBench= {...newBench,primarySkills:[{...newBench.primarySkills}]}
         dispatch(updateBench(newBench));
-        toast.success("updated successfully");
+        toast.success("updated successfully", { autoClose: 700 });
         navigate("/benchlist");
         //console.log( dispatch(updateBench(newBench)))
         //   Axios.patch(`${BASE_URL}/${id}`,newBench).then((res)=>{
@@ -321,17 +321,54 @@ let NewBenchEmployee = () => {
                   />
                 </MDBValidationItem>
 
-                <MDBValidationItem className="col-md-4" feedback='Please Enter your Status' invalid>
-              <MDBInput id='validationCustom13' type="date" required name="bench_start_date" data-date-format="DD MM YYYY" value={moment(newBench.bench_start_date).format("YYYY-MM-DD")} onChange={handleUpdateInput} label="Bench Start Date"/>
-           </MDBValidationItem>
-           <MDBValidationItem className="col-md-4" feedback='Please Enter your reporting manager email' invalid>
-              <MDBInput id='validationCustom14' type="email" required name="reporting_manager_email" value={newBench.reporting_manager_email} onChange={handleUpdateInput} label="Reporting Manager Email"/>
-           </MDBValidationItem>
-           <MDBValidationItem className="col-md-4" feedback='Please Enter your spreadsheetId' invalid>
-              <MDBInput id='validationCustom15' type="text" required name="spreadsheetId" value={newBench.spreadsheetId} onChange={handleUpdateInput} label="spreadsheetId"/>
-           </MDBValidationItem>
-
-
+                <MDBValidationItem
+                  className="col-md-4"
+                  feedback="Please Enter your Status"
+                  invalid
+                >
+                  <MDBInput
+                    id="validationCustom13"
+                    type="date"
+                    required
+                    name="bench_start_date"
+                    data-date-format="DD MM YYYY"
+                    value={moment(newBench.bench_start_date).format(
+                      "YYYY-MM-DD"
+                    )}
+                    onChange={handleUpdateInput}
+                    label="Bench Start Date"
+                  />
+                </MDBValidationItem>
+                <MDBValidationItem
+                  className="col-md-4"
+                  feedback="Please Enter your reporting manager email"
+                  invalid
+                >
+                  <MDBInput
+                    id="validationCustom14"
+                    type="email"
+                    required
+                    name="reporting_manager_email"
+                    value={newBench.reporting_manager_email}
+                    onChange={handleUpdateInput}
+                    label="Reporting Manager Email"
+                  />
+                </MDBValidationItem>
+                <MDBValidationItem
+                  className="col-md-4"
+                  feedback="Please Enter your spreadsheetId"
+                  invalid
+                >
+                  <MDBInput
+                    id="validationCustom15"
+                    type="text"
+                    required
+                    name="spreadsheetId"
+                    value={newBench.spreadsheetId}
+                    onChange={handleUpdateInput}
+                    label="spreadsheetId"
+                  />
+                </MDBValidationItem>
 
                 <MDBValidationItem
                   className="col-md-13"
@@ -346,8 +383,6 @@ let NewBenchEmployee = () => {
                     onChange={handleUpdateInput}
                     label="Notes"
                   />
-
-
                 </MDBValidationItem>
                 <div className="col-12 text-center">
                   <MDBBtn className="m-2" type="submit">
