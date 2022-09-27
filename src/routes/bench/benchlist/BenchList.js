@@ -37,14 +37,12 @@ let BenchList = () => {
 
   let dispatch = useDispatch();
   const [hasReserved, setHasReserved] = useState(false);
+  const [hasDeleted, setHasDeleted] = useState(false);
   const [previousBenchlist, setPreviousBenchlist] = useState([]);
 
   useEffect(() => {
     dispatch(getBench());
-  }, []);
-  useEffect(() => {
-    dispatch(getBench());
-  }, [hasReserved, setHasReserved]);
+  }, [hasReserved, setHasReserved, hasDeleted]);
   let allBenchLists = useSelector((store) => {
     return store["bench"];
   });
@@ -62,11 +60,12 @@ let BenchList = () => {
     BenchServices.remove(deleteId[0]._id);
     console.log(deleteId[0]._id);
     setStaticModal(!staticModal);
+    setHasDeleted(!hasDeleted);
     // BenchServices.remove(id);
-    toast.success("successfully Delete");
-    setInterval(() => {
-      dispatch(getBench());
-    }, 1000);
+    toast.success("Deleted Successfully ", { autoClose: 700 });
+    // setInterval(() => {
+    //   dispatch(getBench());
+    // }, 1000);
   };
 
   let handleSearch = (event) => {

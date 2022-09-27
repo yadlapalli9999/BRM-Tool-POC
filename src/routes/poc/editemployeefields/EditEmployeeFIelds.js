@@ -229,7 +229,7 @@ const EditEmployeeFields = () => {
                           onChange={handleChangeInputFields}
                         />
                       </MDBValidationItem>
-                      <MDBValidationItem
+                      {/* <MDBValidationItem
                         className="col-md-6"
                         feedback="Members"
                         invalid
@@ -246,21 +246,8 @@ const EditEmployeeFields = () => {
                           }
                           // onChange={handleChangeInputFields}
                         />
-                      </MDBValidationItem>
-                      <MDBValidationItem
-                        className="col-md-6"
-                        feedback="Documents"
-                        invalid
-                      >
-                        <MDBInput
-                          id="validationCustom03"
-                          required
-                          name="documents"
-                          label="Documents"
-                          value={inputData.documents}
-                          onChange={handleChangeInputFields}
-                        />
-                      </MDBValidationItem>
+                      </MDBValidationItem> */}
+
                       <MDBValidationItem className="col-md-6 d-flex flex-column justify-content-center">
                         <span>Status</span>
                         <div className="selectBox">
@@ -297,6 +284,21 @@ const EditEmployeeFields = () => {
                             <option>180</option>
                           </select>
                         </div>
+                      </MDBValidationItem>
+                      <MDBValidationItem
+                        className="col-md-6"
+                        feedback="Documents"
+                        invalid
+                      >
+                        <MDBInput
+                          id="validationCustom03"
+                          required
+                          name="documents"
+                          label="Documents"
+                          value={inputData.documents}
+                          onChange={handleChangeInputFields}
+                          className="document-field"
+                        />
                       </MDBValidationItem>
                       <MDBRow>
                         <MDBCol md="6">

@@ -166,13 +166,13 @@ let AddResource = (props) => {
                   </MDBCardTitle>
                 </MDBCol>
                 <MDBCol md="6">
-                  <MDBInput
+                  {/* <MDBInput
                     type="text"
                     label="search"
                     value={query.searchValue}
                     // style={{ width: "660px" }}
                     onChange={handleSearch}
-                  />
+                  /> */}
                 </MDBCol>
               </MDBRow>
             </MDBCardHeader>

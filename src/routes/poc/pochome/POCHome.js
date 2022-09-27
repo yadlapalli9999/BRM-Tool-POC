@@ -22,6 +22,7 @@ let POCHome = () => {
     return store["poc"];
   });
   useEffect(() => {
+    console.log("initial loading");
     dispatch(getAllPoc());
   }, []);
 
@@ -29,10 +30,6 @@ let POCHome = () => {
   const { fetchingPocList } = useSelector((store) => {
     return store["poc"];
   });
-
-  // useEffect(() => {
-  //   dispatch(getPocList());
-  // }, []);
 
   const handleNameClick = (pocID) => {
     navigate(`/pocdetails`, { state: { pocId: pocID } });

@@ -58,8 +58,6 @@ tr {
   /* margin-top: "3rem"; */
 }
 
-
-
 .selectBtn {
   color: #000;
   background: #fff;
@@ -83,10 +81,7 @@ option {
 .table_content {
   background-color: #444;
 }
-.inp{
-  /* position: relative;
-  left: 30vw; */
-}
+
 @media screen and (max-width: 786px) {
   .table {
     flex-wrap: wrap;
@@ -96,8 +91,7 @@ option {
   }
 }
 .inp {
-  /* position: relative;
-  left: 30vw; */
+  margin-left: 24px;
 }
 .toggle-off,
 .toggle-on {
@@ -112,18 +106,16 @@ option {
   cursor: pointer;
 }
 
-.addUserSvg{
+.addUserSvg {
   width: 2rem;
   height: 2rem;
   stroke: #ff5722 !important;
-  
 }
 .addBtn:hover {
   transform: scale(1.03);
   background-color: #444;
   color: #fff;
 }
-
 
 .addBtn {
   background-color: #444;

@@ -79,14 +79,17 @@ const pocSlice = createSlice({
     },
     [getAllPoc.pending]: (state, action) => {
       state.loading = true;
+      console.log("loading");
     },
     [getAllPoc.fulfilled]: (state, action) => {
       state.loading = false;
       state.pocList = action.payload;
+      console.log("fullfilled");
     },
     [getAllPoc.rejected]: (state, action) => {
       state.loading = false;
       state.errorMessage = action.payload;
+      console.log("rejected");
     },
     [getSinglePoc.pending]: (state, action) => {
       state.loading = true;

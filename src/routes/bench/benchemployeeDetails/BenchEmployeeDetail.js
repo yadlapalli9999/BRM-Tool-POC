@@ -1,132 +1,144 @@
 import React, { useEffect, useState } from "react";
-import {useNavigate,Link, useParams} from 'react-router-dom';
-import {MDBBtn,MDBCard,MDBCardBody,MDBContainer,MDBRow,MDBCol, MDBListGroup, MDBListGroupItem, MDBCardFooter} from 'mdb-react-ui-kit';
+import { useNavigate, Link, useParams } from "react-router-dom";
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBListGroup,
+  MDBListGroupItem,
+  MDBCardFooter,
+} from "mdb-react-ui-kit";
 import { useDispatch, useSelector } from "react-redux";
 import { getBenchId } from "../../../redux/features/bench/bench.feature";
 
-let BenchEmployeeDetail = (props)=>{
-    let navigate = useNavigate();
-    let {id}  = useParams();
-    let dispatch = useDispatch();
-    useEffect(()=>{
-      dispatch(getBenchId({id}))
-    },[])
+let BenchEmployeeDetail = (props) => {
+  let navigate = useNavigate();
+  let { id } = useParams();
+  let dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getBenchId({ id }));
+  }, []);
 
-    let {benchListItem} = useSelector((store)=>{
-      return store['bench']
-    })
-  // let {data} = benchListItem;  
+  let { benchListItem } = useSelector((store) => {
+    return store["bench"];
+  });
+  // let {data} = benchListItem;
   // let {name,email,reportingManager,teamLead,notes,status} = data;
-    
-    return(
-        <React.Fragment>
-          {/* <pre>{JSON.stringify(benchListItem)}</pre> */}
-          <MDBContainer className="py-5">
-            <MDBRow>
-              <MDBCol md="12" className="d-flex justify-content-end">
-                 <Link to="/editbenchEmployee" className="btn btn-primary m-3">Edit</Link>
-                 <MDBBtn className="btn btn-danger m-3">Delete</MDBBtn>
-              </MDBCol>
-            </MDBRow>
-            <MDBRow>
-              {Object.keys(benchListItem).length >0 ?
-              <MDBCol md="12">
-                  <MDBCard>
-                    <MDBCardBody>
-                       <MDBListGroup>
-                        <MDBListGroupItem>
-                        <MDBRow md="12">
+
+  return (
+    <React.Fragment>
+      {/* <pre>{JSON.stringify(benchListItem)}</pre> */}
+      <MDBContainer className="py-5">
+        <MDBRow>
+          <MDBCol md="12" className="d-flex justify-content-center">
+            <MDBBtn className="btn btn-warning m-3">Bench Details</MDBBtn>
+          </MDBCol>
+        </MDBRow>
+        <MDBRow>
+          {Object.keys(benchListItem).length > 0 ? (
+            <MDBCol md="12">
+              <MDBCard>
+                <MDBCardBody>
+                  <MDBListGroup>
+                    <MDBListGroupItem>
+                      <MDBRow md="12">
                         <MDBCol md="3">Name</MDBCol>
-                         <MDBCol md="9">{benchListItem.name}</MDBCol>
-                        </MDBRow>
-                        </MDBListGroupItem>
-                        <MDBListGroupItem>
-                        <MDBRow md="12">
+                        <MDBCol md="9">{benchListItem.name}</MDBCol>
+                      </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                      <MDBRow md="12">
                         <MDBCol md="3">Email</MDBCol>
-                         <MDBCol md="9">{benchListItem.email}</MDBCol>
-                        </MDBRow>
-                        
-                        </MDBListGroupItem>
-                        <MDBListGroupItem>
-                        <MDBRow md="12">
+                        <MDBCol md="9">{benchListItem.email}</MDBCol>
+                      </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                      <MDBRow md="12">
                         <MDBCol md="3">Emp Id</MDBCol>
-                         <MDBCol md="9">{benchListItem.emp_id}</MDBCol>
-                        </MDBRow>
-                        </MDBListGroupItem>
-                        <MDBListGroupItem>
-                        <MDBRow md="12">
+                        <MDBCol md="9">{benchListItem.emp_id}</MDBCol>
+                      </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                      <MDBRow md="12">
                         <MDBCol md="3">Total Work Exp</MDBCol>
-                         <MDBCol md="9">{benchListItem.totalWorkExp}</MDBCol>
-                        </MDBRow>
-                        </MDBListGroupItem>
-                        <MDBListGroupItem>
-                        <MDBRow md="12">
+                        <MDBCol md="9">{benchListItem.totalWorkExp}</MDBCol>
+                      </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                      <MDBRow md="12">
                         <MDBCol md="3">TotalExpinFission</MDBCol>
-                         <MDBCol md="9">{benchListItem.totalExpinFission}</MDBCol>
-                        </MDBRow>
-                        </MDBListGroupItem>
-                        <MDBListGroupItem>
-                        <MDBRow md="12">
+                        <MDBCol md="9">
+                          {benchListItem.totalExpinFission}
+                        </MDBCol>
+                      </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                      <MDBRow md="12">
                         <MDBCol md="3">Primary SkillName</MDBCol>
-                         <MDBCol md="9">{benchListItem?.primarySkills}</MDBCol>
-                        </MDBRow>
-                        </MDBListGroupItem>
-                        {/* <MDBListGroupItem>
+                        <MDBCol md="9">{benchListItem?.primarySkills}</MDBCol>
+                      </MDBRow>
+                    </MDBListGroupItem>
+                    {/* <MDBListGroupItem>
                         <MDBRow md="12">
                         <MDBCol md="3">PrimarySkill TotalExp</MDBCol>
                          <MDBCol md="9">{benchListItem.primarySkills[0].totalExp}</MDBCol>
                         </MDBRow>
                         </MDBListGroupItem> */}
-                        <MDBListGroupItem>
-                        <MDBRow md="12">
+                    <MDBListGroupItem>
+                      <MDBRow md="12">
                         <MDBCol md="3">ProjectName</MDBCol>
-                         <MDBCol md="9">{benchListItem.projectName}</MDBCol>
-                        </MDBRow>
-                        </MDBListGroupItem>
-                        <MDBListGroupItem>
-                        <MDBRow md="12">
+                        <MDBCol md="9">{benchListItem.projectName}</MDBCol>
+                      </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                      <MDBRow md="12">
                         <MDBCol md="3">Reporting Manager</MDBCol>
-                         <MDBCol md="9">{benchListItem.reportingManager}</MDBCol>
-                        </MDBRow>
-                        </MDBListGroupItem>
-                        <MDBListGroupItem>
-                        <MDBRow md="12">
+                        <MDBCol md="9">{benchListItem.reportingManager}</MDBCol>
+                      </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                      <MDBRow md="12">
                         <MDBCol md="3">Team Lead</MDBCol>
-                         <MDBCol md="9">{benchListItem.teamLead}</MDBCol>
-                        </MDBRow>
-                        </MDBListGroupItem>
-                        <MDBListGroupItem>
-                        <MDBRow md="12">
+                        <MDBCol md="9">{benchListItem.teamLead}</MDBCol>
+                      </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                      <MDBRow md="12">
                         <MDBCol md="3">Notes</MDBCol>
-                         <MDBCol md="9">{benchListItem.notes}</MDBCol>
-                        </MDBRow>
-                        </MDBListGroupItem>
-                        <MDBListGroupItem>
-                        <MDBRow md="12">
+                        <MDBCol md="9">{benchListItem.notes}</MDBCol>
+                      </MDBRow>
+                    </MDBListGroupItem>
+                    <MDBListGroupItem>
+                      <MDBRow md="12">
                         <MDBCol md="3">Status</MDBCol>
-                         <MDBCol md="9">{benchListItem.status}</MDBCol>
-                        </MDBRow>
-                        </MDBListGroupItem>
-                         
-                       </MDBListGroup>
-                    </MDBCardBody>
-                    <MDBCardFooter>
-                    <MDBRow>
-              <MDBCol>
-                <MDBBtn className="btn btn-primary"
-            onClick={() => {
-              navigate("/benchlist");
-            }}>Back</MDBBtn>
-              </MDBCol>
-            </MDBRow>
-                    </MDBCardFooter>
-                  </MDBCard>
-              </MDBCol>:null}
-              
-            </MDBRow>
-            
-          </MDBContainer>
-        {/* <div className="container py-5">
+                        <MDBCol md="9">{benchListItem.status}</MDBCol>
+                      </MDBRow>
+                    </MDBListGroupItem>
+                  </MDBListGroup>
+                </MDBCardBody>
+                <MDBCardFooter>
+                  <MDBRow>
+                    <MDBCol>
+                      <MDBBtn
+                        className="btn btn-primary"
+                        onClick={() => {
+                          navigate("/benchlist");
+                        }}
+                      >
+                        Back
+                      </MDBBtn>
+                    </MDBCol>
+                  </MDBRow>
+                </MDBCardFooter>
+              </MDBCard>
+            </MDBCol>
+          ) : null}
+        </MDBRow>
+      </MDBContainer>
+      {/* <div className="container py-5">
         <div className="row">
           <div className="all-pocdetails-buttons ">
             <div className="editButton ">
