@@ -86,3 +86,7 @@ label {
   font-size: 30px;
   cursor: pointer;
 }
+
+.form-outline {
+  width: 200px;
+}

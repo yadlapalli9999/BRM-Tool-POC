@@ -64,8 +64,9 @@ let POCHome = () => {
         searchValue: "",
       });
     } else {
-      dispatch(getAllPoc());
-      console.log("othre key");
+      if (query.searchValue === "") {
+        dispatch(getAllPoc());
+      }
     }
   };
   console.log(pocList);
@@ -215,7 +216,6 @@ let POCHome = () => {
             type="text"
             label="search"
             value={query.searchValue}
-            // style={{ width: "660px" }}
             onChange={(e) => {
               handleSearch(e);
             }}
