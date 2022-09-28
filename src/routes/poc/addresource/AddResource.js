@@ -192,7 +192,6 @@ let AddResource = (props) => {
                           key={index + 1}
                           onClick={handlePocDetailsNameClick}
                         >
-                          :
                           <td className="align-middle ">
                             <span>
                               {propValue === "AddPocState"
@@ -279,6 +278,7 @@ let AddResource = (props) => {
                           benchLists.map((filterData) => (
                             <tr key={filterData._id}>
                               <td
+                                style={{ cursor: "pointer" }}
                                 onClick={() => {
                                   const tempOBj = {
                                     searchId: filterData._id,
@@ -289,8 +289,6 @@ let AddResource = (props) => {
                                   } else if (propValue === "editState") {
                                     addPocResourceHandller(tempOBj);
                                   }
-                                  // nameSelector(tempOBj);
-                                  // nameSelector(filterData._id);
                                 }}
                               >
                                 {filterData.name}

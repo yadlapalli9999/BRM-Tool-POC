@@ -1,36 +1,36 @@
-.status{
-    width: 5rem;
-    height: 5rem;
+.status {
+  width: 5rem;
+  height: 5rem;
 }
-.card-header{
-    color: #fff;
-    background: #000;
-    
+.card-header {
+  color: #fff;
+  background: #000;
 }
-.color{
-    color: #ff5722;
-    padding:0.3rem 1.2rem 0.3rem 1.2rem;
-    /* display: inline-block; */
+.color {
+  color: #ff5722;
+  padding: 0.3rem 1.2rem 0.3rem 1.2rem;
+  /* display: inline-block; */
 }
-.initiated{
-    background: #FF7F3F;
-    color: #fff;
-    font-weight: 700;
+.initiated {
+  background: #ff7f3f;
+  color: #fff;
+  font-weight: 700;
 }
-.hold{
-    background: #C21010;
-    color: #fff;
-    font-weight: 700;
-
+.hold {
+  background: #c21010;
+  color: #fff;
+  font-weight: 700;
 }
-.completed{
-    background: #2B7A0B;
-    color: #fff;
-    font-weight: 700;
-
+.completed {
+  background: #2b7a0b;
+  color: #fff;
+  font-weight: 700;
 }
-.control:hover{
-    color:#000;
-    font-weight: 700;
-    /* color: #ff5722; */
+.control:hover {
+  color: #000;
+  font-weight: 700;
+  /* color: #ff5722; */
+}
+.projectStatus {
+  height: 200px;
 }

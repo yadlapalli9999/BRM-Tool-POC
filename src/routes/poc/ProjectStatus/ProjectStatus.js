@@ -115,16 +115,16 @@ function ProjectStatus(props) {
 
   return (
     <>
-      <div class="card projectStatus w-100">
-        <div class="card-header d-flex justify-content-center ">
+      <div className="card projectStatus w-100">
+        <div className="card-header d-flex justify-content-center ">
           Project Status <span className="mx-5">: </span>
           <h6 className=" color bg-white mx-2 ">{status}</h6>
         </div>
-        <div class="card-body d-flex justify-content-around">
+        <div className="card-body d-flex justify-content-around">
           {!active && (
             <button
               type="button"
-              class="btn btn-success"
+              className="btn btn-success"
               onClick={() => {
                 setClickedStatus("Active");
                 setCentredModal(true);
@@ -136,7 +136,7 @@ function ProjectStatus(props) {
           {!hold && (
             <button
               type="button"
-              class="btn btn-warning"
+              className="btn btn-warning"
               onClick={() => {
                 setClickedStatus("Hold");
                 setCentredModal(true);

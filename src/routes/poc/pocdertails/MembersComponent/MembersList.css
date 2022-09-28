@@ -1,0 +1,15 @@
+.memberName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 40px;
+  background-color: #ff5722;
+  color: #ffffff;
+  font-weight: 500;
+  border-radius: 10px;
+}
+.membersStatus {
+  height: 200px;
+  overflow-y: auto;
+}

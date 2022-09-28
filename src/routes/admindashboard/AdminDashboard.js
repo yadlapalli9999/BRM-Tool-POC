@@ -202,7 +202,7 @@ const AdminDashboard = (props) => {
     setBenchModalShow(true);
   };
 
-  console.log("Dashboard status is :",dashboardPoc);
+  console.log("Dashboard status is :", dashboardPoc);
 
   return (
     <>
@@ -502,63 +502,62 @@ const AdminDashboard = (props) => {
                           <th>Members</th>
                         </tr>
                       </thead>
-                      {dashboardPoc.length > 0 ?
-                      <tbody className="align-items-center ">
-                      {dashboardPoc &&
-                        dashboardPoc[0].map((data) => {
-
-                          return (
-                            <>
-                                <tr id={dashboardPoc.emp_id}>
-                                  <td>
-                                    <div
-                                      className="name"
-                                      onClick={handleNameClick}
-                                    >
-                                      <p className="fw-bold mb-1">
-                                        {data._id.slice(-6)}
+                      {dashboardPoc.length > 0 ? (
+                        <tbody className="align-items-center ">
+                          {dashboardPoc &&
+                            dashboardPoc[0].map((data) => {
+                              return (
+                                <>
+                                  <tr id={dashboardPoc.emp_id}>
+                                    <td>
+                                      <div
+                                        className="name"
+                                        onClick={handleNameClick}
+                                      >
+                                        <p className="fw-bold mb-1">
+                                          {data._id.slice(-6)}
+                                        </p>
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <p className="fw-normal mb-1">
+                                        {data.name ? data.name : "No Data"}
                                       </p>
-                                    </div>
-                                  </td>
-                                  <td>
-                                    <p className="fw-normal mb-1">
-                                    {data.name ? data.name : "No Data"}
-                                    </p>
-                                  </td>
+                                    </td>
 
-                                  <td>
-                                    <span
-                                      className={`badge ${
-                                        data.duration == 180
-                                          ? "badge-danger"
-                                          : data.duration >= 120
-                                          ? "badge-warning"
-                                          : data.duration >= 60
-                                          ? "badge-info"
-                                          : data.duration >= 45
-                                          ? "badge-secondary"
-                                          : "badge-success"
-                                      } rounded-pill d-inline`}
-                                    >
-                                      {data?.duration}
-                                      {`Days`}
-                                    </span>
-                                  </td>
-                                  <td>
-                                    {data.createdBy
-                                      ? data.createdBy.name
-                                      : "No Name"}
-                                    {/* {data.name} */}
-                                  </td>
-                                  <td className="">{data.members ? data.members.length : 0}</td>
-                                </tr>
-                            </>
-                          );
-                        })}
-                              </tbody>
-:null}
-
-
+                                    <td>
+                                      <span
+                                        className={`badge ${
+                                          data.duration == 180
+                                            ? "badge-danger"
+                                            : data.duration >= 120
+                                            ? "badge-warning"
+                                            : data.duration >= 60
+                                            ? "badge-info"
+                                            : data.duration >= 45
+                                            ? "badge-secondary"
+                                            : "badge-success"
+                                        } rounded-pill d-inline`}
+                                      >
+                                        {data?.duration}
+                                        {`Days`}
+                                      </span>
+                                    </td>
+                                    <td>
+                                      {data.createdBy
+                                        ? data.createdBy.name
+                                        : "No Name"}
+                                      {/* {data.name} */}
+                                    </td>
+                                    <td className="">
+                                      {data.members ? data.members.length : 0}
+                                    </td>
+                                  </tr>
+                                </>
+                              );
+                            })}
+                        </tbody>
+                      ) : null}
                     </table>
                   </div>
                   <div
@@ -570,7 +569,6 @@ const AdminDashboard = (props) => {
                     <PieChart />
                   </div>
                 </>
-                ;
               </div>
               <div className="row mt-2 mb-3">
                 {pocCount.map((data) => {

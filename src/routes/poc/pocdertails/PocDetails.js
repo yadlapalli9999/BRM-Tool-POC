@@ -23,6 +23,7 @@ import { POC_TABLE_HEADERS } from "../../Constants";
 import ProjectStatus from "../ProjectStatus/ProjectStatus";
 // import PieChart from "../../../util/PieChart";
 import { getSinglePoc } from "../../../redux/features/poc/poc.feature";
+import MembersList from "./MembersComponent/MembersList";
 
 Chart.register(...registerables);
 const status = "Initiated";
@@ -97,6 +98,11 @@ const PocDetails = () => {
         return pocData[val];
     }
   };
+
+  const docsHandler = (link) => {
+    window.open(link, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <>
       {loader ? (
@@ -182,25 +188,40 @@ const PocDetails = () => {
                           </MDBCol>
                         </MDBRow>
                       </MDBListGroupItem>
-                      <MDBListGroupItem>
+                      {/* <MDBListGroupItem>
                         <MDBRow>
                           <MDBCol md="3">Members</MDBCol>
                           <MDBCol md="9">
-                            {singlePoc.members.length > 0
-                              ? singlePoc.members.map(
+                            {singlePoc.members.length > 0 ? (
+                              <span className="membersName">
+                                {singlePoc.members.map(
                                   (item) => item.name + ",  "
-                                )
-                              : "None"}
+                                )}
+                              </span>
+                            ) : (
+                              <span className="membersNameERROR">None</span>
+                            )}
                           </MDBCol>
                         </MDBRow>
-                      </MDBListGroupItem>
+                      </MDBListGroupItem> */}
                       <MDBListGroupItem>
                         <MDBRow>
                           <MDBCol md="3">Documents</MDBCol>
                           <MDBCol md="9">
-                            {singlePoc.documents.length > 0
-                              ? singlePoc.documents
-                              : "Null"}
+                            {singlePoc.documents.length > 0 ? (
+                              <MDBBtn
+                                className="mx-2"
+                                color="info"
+                                size="sm"
+                                onClick={() => {
+                                  docsHandler(singlePoc.documents);
+                                }}
+                              >
+                                Docs
+                              </MDBBtn>
+                            ) : (
+                              "Null"
+                            )}
                           </MDBCol>
                         </MDBRow>
                       </MDBListGroupItem>
@@ -209,14 +230,17 @@ const PocDetails = () => {
                 </MDBCard>
               </MDBCol>
             </MDBRow>
-            <MDBCol className="col-md-12 proStatus col-sm-12 col-lg-6 col-12 mt-5">
+            {/* <MDBCol className="col-md-12 proStatus col-sm-12 col-lg-6 col-12 mt-5"> */}
+            <div className="d-flex align-items-start bg-light mt-4 mb-5 gap-5">
               <ProjectStatus
                 status={singlePoc.status}
                 singlePoc={singlePoc}
                 setEdited={setEdited}
                 edited={edited}
               />
-            </MDBCol>
+              <MembersList members={singlePoc.members} />
+            </div>
+            {/* </MDBCol> */}
           </MDBContainer>
         </React.Fragment>
       )}

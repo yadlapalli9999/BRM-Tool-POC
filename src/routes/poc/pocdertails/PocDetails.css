@@ -1,50 +1,56 @@
-.all-pocdetails-buttons{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-end;
-    margin-bottom: 41px !important;
+.all-pocdetails-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 41px !important;
 }
-.projectStatus{
-    width: 40rem;
-    /* height: 25rem; */
-}
-
-.pocDetailsModal{
-    display: block !important;
-    opacity: 1 !important;
-
-}
-.pocDetailsModalDialog{
-
-    transform: none !important;
-}
-.pocDetailsClose{
-    outline: none;
-    border: none;
-    background-color: white;
-    font-weight: bolder;
-    font-size: x-large;
-}
-.pocDetailsLabel{
-    position: initial;
+.projectStatus {
+  width: 40rem;
+  /* height: 25rem; */
 }
 
-.editButton  {
-    margin-right: 30px;
+.pocDetailsModal {
+  display: block !important;
+  opacity: 1 !important;
+}
+.pocDetailsModalDialog {
+  transform: none !important;
+}
+.pocDetailsClose {
+  outline: none;
+  border: none;
+  background-color: white;
+  font-weight: bolder;
+  font-size: x-large;
+}
+.pocDetailsLabel {
+  position: initial;
 }
 
-.memberTableRow{
-    cursor: pointer;
-}
-.memberCard{
-    position: relative;
-    height: 200px;
+.editButton {
+  margin-right: 30px;
 }
 
+.memberTableRow {
+  cursor: pointer;
+}
+.memberCard {
+  position: relative;
+  height: 200px;
+}
 
-@media only screen and (min-width: 544px) and (max-width: 991px){
-    .proStatus {
-      margin-top: 2rem;
-    }
-    }
+.membersName {
+  font-size: 18px;
+  color: #e17706;
+}
+.membersNameERROR {
+  font-size: 18px;
+  color: #a10808;
+}
+
+@media only screen and (min-width: 544px) and (max-width: 991px) {
+  .proStatus {
+    margin-top: 2rem;
+  }
+}

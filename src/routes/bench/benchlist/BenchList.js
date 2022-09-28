@@ -249,18 +249,11 @@ let BenchList = () => {
                                 ? filterData.primarySkills
                                 : "NULL"}
                             </td>
-                            {/* <td>{item}</td> */}
                             <td>
                               <a
-                                href="https://docs.google.com/spreadsheets/d/1IGanhXOmHlCZbrIyyT0lle4KOoePEZ0wRh2f2OVtwPU/edit#gid=0"
+                                href={`http://docs.google.com/spreadsheets/d/${filterData.spreadsheetId}`}
                                 target="_blank"
                               >
-                                {/* <img
-                src={"../../excel.png"}
-                alt=""
-                style={{ width: "40px", height: "40px" }}
-                className="rounded-circle pocHomeExcelLogo "
-              /> */}
                                 <MDBIcon
                                   fas
                                   icon="list-alt"
