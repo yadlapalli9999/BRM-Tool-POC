@@ -111,7 +111,7 @@ let AddResource = (props) => {
     });
   };
   useEffect(() => {
-    if (query.searchValue.trim()) setIsEmpty(false);
+    // if (query.searchValue.trim()) setIsEmpty(false);
     if (query.searchValue.trim() == "") setIsEmpty(true);
   }, [query.searchValue]);
 
@@ -180,30 +180,20 @@ let AddResource = (props) => {
               <MDBTable>
                 <MDBTableBody>
                   {members &&
-                    members
-                      // ?.filter((filterMember) =>{
-                      //  return  filterMember.name?.toLowerCase()===query.searchValue.toLowerCase()
-                      // }
-                      // )
-                      // ?
-                      .map((filterMember, index) => (
-                        <tr
-                          className="fw-normal memberTableRow "
-                          key={index + 1}
-                          onClick={handlePocDetailsNameClick}
-                        >
-                          <td className="align-middle ">
-                            <span>
-                              {propValue === "AddPocState"
-                                ? filterMember.searchValue
-                                : filterMember.name}
-                              {propValue === "editState"
-                                ? filterMember.searchValue
-                                : filterMember.name}
-                            </span>
-                          </td>
-                        </tr>
-                      ))}
+                    members.map((filterMember, index) => (
+                      <tr className="fw-normal memberTableRow " key={index + 1}>
+                        <td className="align-middle ">
+                          <span>
+                            {propValue === "AddPocState"
+                              ? filterMember.searchValue
+                              : filterMember.name}
+                            {propValue === "editState"
+                              ? filterMember.searchValue
+                              : filterMember.name}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
                   {members.length === 0 && (
                     <tr className="fw-normal memberTableRow ">
                       <td className="align-middle ">
