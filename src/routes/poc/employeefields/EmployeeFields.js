@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   MDBContainer,
@@ -48,6 +48,7 @@ const EmployeeFields = () => {
   const [members, setMembers] = useState([]);
   const [show, setShow] = useState(false);
   const [query, setQuery] = useState("");
+  const [membersData, setMembersData] = useState([]);
   // const [resource, setResource] = useState("");
   // const handleResource = (event) => {
   //   event.preventDefault();
@@ -59,6 +60,13 @@ const EmployeeFields = () => {
   // const clearForm = () => {
   //   setResource("");
   // };
+
+  // useEffects
+
+  useEffect(() => {
+    setinputData({ ...inputData, members: membersData });
+  }, [membersData]);
+
   const handlePocDetailsNameClick = () => {
     navigate("/worklogs");
   };
@@ -297,6 +305,8 @@ const EmployeeFields = () => {
                       <AddResource
                         members={inputData.members}
                         propValue={propValue}
+                        setMembersData={setMembersData}
+                        membersData={membersData}
                       />
                     </MDBCol>
                   </MDBRow>

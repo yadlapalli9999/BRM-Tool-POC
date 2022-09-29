@@ -101,11 +101,11 @@ const EditEmployeeFields = () => {
   const handlePocDetailsNameClick = () => {
     navigate("/worklogs");
   };
+  const [membersData, setMembersData] = useState([]);
 
-  // useEffect(() => {
-  //   const data = (pocList || []).find((poc) => poc._id === pocID) || {};
-  //   setPocData({ ...data });
-  // }, [pocID]);
+  useEffect(() => {
+    setinputData({ ...inputData, members: membersData });
+  }, [membersData]);
 
   useEffect(() => {
     const [link] = inputData.documents;
@@ -307,6 +307,8 @@ const EditEmployeeFields = () => {
                             propValue={propValue}
                             edited={edited}
                             setEdited={setEdited}
+                            setMembersData={setMembersData}
+                            membersData={membersData}
                           />
                         </MDBCol>
                       </MDBRow>

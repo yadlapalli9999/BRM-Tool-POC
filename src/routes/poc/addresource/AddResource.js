@@ -22,7 +22,8 @@ import {
 import { queryByRole } from "@testing-library/dom";
 
 let AddResource = (props) => {
-  const { members } = props;
+  const { members, setMembersData } = props;
+
   const propValue = props.propValue;
 
   let dispatch = useDispatch();
@@ -152,6 +153,41 @@ let AddResource = (props) => {
     setQuery(obj);
     setIsEmpty(true);
   };
+  const removeHandler = (member) => {
+    // const tempArray = members.filter(
+    //   (item) => item.searchId !== member.searchId
+    // );
+    // console.log(tempArray);
+    // setMembersData(tempArray);
+    if (propValue === "editState") {
+      if (member.searchId) {
+        const tempArray = members.filter((item) => {
+          if (item._id && item._id !== member.searchId) {
+            return item;
+          }
+          if (item.searchId && item.searchId !== member.searchId) {
+            return item;
+          }
+        });
+
+        setMembersData(tempArray);
+      }
+      if (member._id) {
+        const tempArray = members.filter((item) => {
+          if (item._id && item._id !== member._id) {
+            props.setEdited(true);
+            return item;
+          }
+          if (item.searchId && item.searchId !== member._id) {
+            return item;
+          }
+        });
+
+        setMembersData(tempArray);
+      }
+    }
+  };
+
   return (
     <React.Fragment>
       {/* <MDBContainer> */}
@@ -182,7 +218,7 @@ let AddResource = (props) => {
                   {members &&
                     members.map((filterMember, index) => (
                       <tr className="fw-normal memberTableRow " key={index + 1}>
-                        <td className="align-middle ">
+                        <td className="d-flex justify-content-around align-items-center ">
                           <span>
                             {propValue === "AddPocState"
                               ? filterMember.searchValue
@@ -190,6 +226,14 @@ let AddResource = (props) => {
                             {propValue === "editState"
                               ? filterMember.searchValue
                               : filterMember.name}
+                          </span>
+                          <span
+                            className="btn btn-danger"
+                            onClick={() => {
+                              removeHandler(filterMember);
+                            }}
+                          >
+                            X
                           </span>
                         </td>
                       </tr>
@@ -247,7 +291,10 @@ let AddResource = (props) => {
                 className="close pocDetailsClose"
                 data-dismiss="modal"
                 aria-label="Close"
-                onClick={() => setShow(!show)}
+                onClick={() => {
+                  setShow(!show);
+                  setQuery({ ...query, searchValue: "" });
+                }}
               >
                 <span aria-hidden="true">&times;</span>
               </button>
