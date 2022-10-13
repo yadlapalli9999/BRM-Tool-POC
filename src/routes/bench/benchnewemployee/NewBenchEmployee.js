@@ -36,6 +36,7 @@ let NewBenchEmployee = () => {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [statushasError, setStatusHasError] = useState(false);
 
   let [newBench, setNewBench] = useState({
     // id:null,
@@ -112,15 +113,18 @@ let NewBenchEmployee = () => {
         // console.log(newBench);
         dispatch(createBench(newBench));
         toast.success("created successfully", { autoClose: 700 });
-        navigate("/benchlist");
+        setInterval(()=>{
+          navigate("/benchlist");
+        },1000)
       } else {
         //console.log(newBench)
         console.log(newBench);
         //newBench= {...newBench,primarySkills:[{...newBench.primarySkills}]}
         dispatch(updateBench(newBench));
         toast.success("updated successfully", { autoClose: 700 });
-        navigate("/benchlist");
-        //console.log( dispatch(updateBench(newBench)))
+       // setInterval(()=>{
+          navigate("/benchlist");
+        //},1000)        //console.log( dispatch(updateBench(newBench)))
         //   Axios.patch(`${BASE_URL}/${id}`,newBench).then((res)=>{
         //     console.log(res)
         //      console.log(res)
@@ -305,7 +309,7 @@ let NewBenchEmployee = () => {
                     label="projectName"
                   />
                 </MDBValidationItem>
-                <MDBValidationItem
+                {/* <MDBValidationItem
                   className="col-md-4"
                   feedback="Please Enter your Status"
                   invalid
@@ -319,7 +323,33 @@ let NewBenchEmployee = () => {
                     onChange={handleUpdateInput}
                     label="Status(Bench,BenchReserved,InProject)"
                   />
-                </MDBValidationItem>
+                </MDBValidationItem> */}
+                <MDBValidationItem
+                    className="col-md-4 d-flex justify-content-center "
+                    feedback="Please select your Status"
+                    invalid
+                  >
+                    <div
+                      className={`${
+                        statushasError ? "has-Error" : "selectBoxs"
+                      }`}
+                    >
+                      <select
+                        id="validationCustom12"
+                        className="input-boxes"
+                        value={newBench.status}
+                        onChange={handleUpdateInput}
+                        required
+                        name="status"
+                      >
+                        <option className="initial-input">Select Status</option>
+                        <option>Bench</option>
+                        <option>BenchReserved</option>
+                        <option>InProject</option>
+                      </select>
+                    </div>
+                    
+                  </MDBValidationItem>
 
                 <MDBValidationItem
                   className="col-md-4"

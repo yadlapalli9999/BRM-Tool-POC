@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../../redux/features/auth/auth.feature";
 import { AdminRole } from "../../../Roles";
@@ -7,12 +7,12 @@ import "./Login.css";
 import google from "../../../util/Img/Google.svg";
 import { MDBInput } from "mdb-react-ui-kit";
 import { toast, ToastContainer } from "react-toastify";
+import { getBench } from "../../../redux/features/bench/bench.feature";
 
 const Login = (props) => {
   useEffect(() => {
     props.funcNav(false);
   }, []);
-
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -26,7 +26,20 @@ const Login = (props) => {
     });
   };
   const dispatch = useDispatch();
+  let resourceID = localStorage.getItem('resourceID')
+  let role = localStorage.getItem('role')
+
   const { email, password } = user;
+  // useEffect(()=>{
+  //   dispatch(getBench())
+  //   let {benchLists} = useSelector((state)=>{return state['bench']})
+
+  //   let userInfo = benchLists.find((item)=> item._id ===resourceID )
+  //   let role = userInfo?.role
+
+  // },[])
+  
+  //let role = userInfo?.role
   const handleLoginForm = (event) => {
     event.preventDefault();
     // if (email && password) {
@@ -36,12 +49,13 @@ const Login = (props) => {
     if (email && password) {
       dispatch(loginUser(user));
       toast.success("Account Logging...", { autoClose: 1500 });
-      if (AdminRole.role === "ADMIN") {
+      if (role === "admin") {
         setTimeout(() => {
           navigate("/dashboard");
         }, 2000);
-      } else if (AdminRole.role === "EMPLOYEE") {
-        navigate("/employeeworklogs");
+      }
+      else if(role === "resource"){
+        navigate("/workloglist");
       }
     }
   };

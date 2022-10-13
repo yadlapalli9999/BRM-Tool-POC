@@ -219,7 +219,7 @@ let AddResource = (props) => {
                     members.map((filterMember, index) => (
                       <tr className="fw-normal memberTableRow " key={index + 1}>
                         <td className="d-flex justify-content-around align-items-center ">
-                          <span>
+                          <span style={{width:'50%'}}>
                             {propValue === "AddPocState"
                               ? filterMember.searchValue
                               : filterMember.name}
@@ -227,7 +227,7 @@ let AddResource = (props) => {
                               ? filterMember.searchValue
                               : filterMember.name}
                           </span>
-                          <span
+                          <span 
                             className="btn btn-danger"
                             onClick={() => {
                               removeHandler(filterMember);
@@ -364,21 +364,6 @@ let AddResource = (props) => {
   );
 };
 
-AddResource.defaultProps = {
-  members: [
-    {
-      id: 1,
-      memberName: "Kunal Rokhle",
-    },
-    {
-      id: 2,
-      memberName: "Alok Kumar",
-    },
-    {
-      id: 3,
-      memberName: "Sudhanshu Jain",
-    },
-  ],
-};
+
 
 export default AddResource;

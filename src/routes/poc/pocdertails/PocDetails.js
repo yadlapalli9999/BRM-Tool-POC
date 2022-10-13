@@ -210,7 +210,7 @@ const PocDetails = () => {
                           <MDBCol md="9">
                             {singlePoc.documents.length > 0 ? (
                               <MDBBtn
-                                className="mx-2"
+                                // className="mx-2"
                                 color="info"
                                 size="sm"
                                 onClick={() => {

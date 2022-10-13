@@ -31,17 +31,31 @@ import EditBenchEmployee from "./routes/bench/editBenchEmployee/EditBenchEmploye
 import * as userUtil from "./util/userUtil";
 import * as tokenUtil from "./util/tokenUtil";
 import SinglePocDetails from "./routes/poc/SinglePocDetails/SinglePocDetails";
+import WorkLogLists from "./routes/worklogs/workloglists/WorkLogLists";
+import NewWorkLog from "./routes/worklogs/newworklog/NewWorkLog";
+import { useDispatch, useSelector } from "react-redux";
+import { getBench } from "./redux/features/bench/bench.feature";
 
 export const BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/`;
 function App() {
+  let dispatch = useDispatch();
+  // let {benchLists} = useSelector((state)=>{ return state['bench']})
+  // console.log(benchLists)
   const [showNav, setShowNav] = useState(true);
+  let resourceID = localStorage.getItem('resourceID')
+  console.log(resourceID)
+  let role = localStorage.getItem('role');
+
   useEffect(() => {
     if (userUtil.isLoggedIn) {
       tokenUtil.setAuthToken(userUtil.getToken());
       localStorage.getItem("access_token");
-    }
-  }, []);
 
+    }
+    //dispatch(getBench())
+  }, []);
+  
+  
   return (
     <React.Fragment>
       <BrowserRouter>
@@ -51,66 +65,78 @@ function App() {
         <Routes>
           <Route path="/" element={<Login funcNav={setShowNav} />} />
           <Route path="/register" element={<Register funcNav={setShowNav} />} />
-          {/* {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+          {/* {(AdminRole.role === "admin" || AdminRole.role === "EMPLOYEE") && (
             <Route path="/home" element={<Home funcNav={setShowNav} />} />
           )} */}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/poc" element={<POCHome />} />
           )}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/pocdetails" element={<PocDetails />} />
           )}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/employeefields" element={<EmployeeFields />} />
           )}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/singlePocDetails" element={<SinglePocDetails />} />
           )}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/worklogs" element={<WorkLogs />} />
           )}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/poclist" element={<PocList />} />
           )}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/googledocs" element={<GoogleDoc />} />
           )}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/exceldocs" element={<ExcelDoc />} />
           )}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/benchlist" element={<BenchList />} />
           )}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/addpoc" element={<EmployeeFields />} />
           )}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/editpoc/:id" element={<EditEmployeeFields />} />
           )}
-          {AdminRole.role === "ADMIN" && (
+          {role === "admin" && (
             <Route path="/benchworklogs" element={<BenchWorklogs />} />
           )}
           {/* {AdminRole.role === "EMPLOYEE" && (
             <Route path="/employeeworklogs" element={<EmployeeWorklogs />} />
           )} */}
-          {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+          {(role === "admin" || role === "EMPLOYEE") && (
             <Route path="/editemployee" element={<EditEmployee />} />
           )}
 
-          {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+          {(role === "admin" ||role === "EMPLOYEE") && (
             <Route path="/newbenchEmployee" element={<NewBenchEmployee />} />
           )}
-          {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+          {(role === "admin" || role === "EMPLOYEE") && (
             <Route
               path="/editbenchEmployee/:id"
               element={<NewBenchEmployee />}
             />
           )}
-          {(AdminRole.role === "ADMIN" || AdminRole.role === "EMPLOYEE") && (
+          
+          {(role === "admin" || role === "EMPLOYEE") && (
             <Route path="/empDetails/:id" element={<BenchEmployeeDetail />} />
           )}
+          {(role==="admin") && (
+            <Route path="/workloglist" element={<WorkLogLists />} />
+          )}
 
-          {AdminRole.role === "ADMIN" && (
+          {(role === "resource") && (
+            <Route path="/workloglist" element={<WorkLogLists />} />
+          )}
+
+          {(role === "admin" || role === "resource") && (
+            <Route path="/newworklog" element={<NewWorkLog />} />
+          )}
+
+          {role === "admin" && (
             <Route
               path="/dashboard"
               element={<AdminDashboard funcNav={setShowNav} />}

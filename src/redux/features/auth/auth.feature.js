@@ -15,10 +15,10 @@ const access_token = localStorage.getItem("access_token")
   : null;
 //const resourceID = localStorage.getItem('resourceID')? localStorage.getItem('resourceID'):null
 
-const initialState = {
+let initialState = {
   access_token,
   resourceID: localStorage.getItem("resourceID"),
-
+   role:localStorage.getItem('role'),
   userInfo: null,
   isAuthenticated: false,
   loading: false,
@@ -65,8 +65,16 @@ export const loginUser = createAsyncThunk(
       // localStorage.setItem("access_token",data.data.access_token)
       // return data.data;
       // setAuthToken(data.data.access_token);
+      // access_token = data.data.access_token;
+      // console.log(access_token)
+      // resourceID = data.data.resourceID;
+      // console.log(resourceID);
+      // role = data.data.role
+      // console.log(role)
       localStorage.setItem("access_token", data.data.access_token);
       localStorage.setItem("resourceID", data.data.resourceID);
+      localStorage.setItem("role", data.data.role)
+      
       // console.log(data.data.access_token);
       return data.data;
       //let data = await response.json()
@@ -113,14 +121,18 @@ const authSlice = createSlice({
     },
     [loginUser.fulfilled]: (state, action) => {
       localStorage.setItem("access_token", action.payload.access_token);
+      localStorage.setItem("resourceID", action.payload.resourceID);
+
+      localStorage.setItem("role", action.payload.role);
+
       // state.access_token = action.payload.access_token;
       //localStorage.setItem('access_token', action.payload.data.access_token)
       //localStorage.setItem('resourceID',action.payload.data.resourceID)
 
       state.loading = false;
-      // state.loginData = action.payload;
       state.access_token = action.payload.access_token;
       state.resourceID = action.payload.resourceID;
+      state.role = action.payload.role
       // state.isAuthenticated = true
     },
     [loginUser.rejected]: (state, action) => {

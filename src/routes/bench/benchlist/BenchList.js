@@ -33,6 +33,11 @@ import BenchServices from "../../../redux/features/bench/benchServices";
 import { toast } from "react-toastify";
 
 let BenchList = () => {
+  let allBenchLists = useSelector((store) => {
+    return store["bench"];
+  });
+
+  let { loading, benchLists, errorMessage } = allBenchLists;
   let BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/resources`;
 
   let dispatch = useDispatch();
@@ -43,11 +48,7 @@ let BenchList = () => {
   useEffect(() => {
     dispatch(getBench());
   }, [hasReserved, setHasReserved, hasDeleted]);
-  let allBenchLists = useSelector((store) => {
-    return store["bench"];
-  });
-
-  let { loading, benchLists, errorMessage } = allBenchLists;
+  
 
   const [staticModal, setStaticModal] = useState(false);
   // const toggleShow = () => setStaticModal(!staticModal);
@@ -250,7 +251,7 @@ let BenchList = () => {
                                 : "NULL"}
                             </td>
                             <td>
-                              <a
+                              {/* <a
                                 href={`http://docs.google.com/spreadsheets/d/${filterData.spreadsheetId}`}
                                 target="_blank"
                               >
@@ -259,7 +260,14 @@ let BenchList = () => {
                                   icon="list-alt"
                                   className="worklog_icon"
                                 />
-                              </a>
+                              </a> */}
+                              <Link to="/workloglist">
+                              <MDBIcon
+                                  fas
+                                  icon="list-alt"
+                                  className="worklog_icon"
+                                />
+                              </Link>
                             </td>
                             <td>
                               {filterData.status === "BenchReserved" ? (
