@@ -7,6 +7,7 @@ import "./navbar.css";
 import { toast, ToastContainer } from "react-toastify";
 
 let Navbar = () => {
+  let role = sessionStorage.getItem('role')
   tippy("#home", {
     content: "HOME",
     placement: "bottom",
@@ -43,9 +44,9 @@ let Navbar = () => {
     interactive: true,
   });
   const logOutHandler = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("resourceID");
-    localStorage.removeItem("role");
+    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("resourceID");
+    sessionStorage.removeItem("role");
     toast.success("Account Logged Out", { autoClose: 1500 });
   };
 
@@ -55,6 +56,7 @@ let Navbar = () => {
         <div className="container">
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav me-auto mb-1 ">
+              {role === "admin" ? <>
               <li className="nav-item icon NavbarNavItem">
                 <Link to="/dashboard" className="nav-link">
                   <i id="home" className="fas fa-home " />
@@ -72,6 +74,8 @@ let Navbar = () => {
                 </Link>
               </li>
 
+              </>:null}
+              
               {/* <ul className="navbar navbar-nav ml-auto"> */}
             </ul>
 

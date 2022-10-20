@@ -6,7 +6,7 @@ const GET_POC_COUNT = `${BASE_URL}dashboard/poc/count`;
 const GET_SOURCE_ACTIVE = `${BASE_URL}dashboard/resource/active`;
 const GET_SOURCE_COUNT = `${BASE_URL}dashboard/resource/count`;
 const GET_DASHBOARD_ALL_POCS = `${BASE_URL}poc`;
-// const access_token = localStorage.getItem("access_token");
+// const access_token = sessionStorage.getItem("access_token");
 const initialState = {
   pocCount: [],
   // active

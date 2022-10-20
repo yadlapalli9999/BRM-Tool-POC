@@ -28,7 +28,7 @@ import { toast } from "react-toastify";
 const EmployeeFields = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const resourceID = localStorage.getItem("resourceID");
+  const resourceID = sessionStorage.getItem("resourceID");
   console.log(resourceID);
   const propValue = "AddPocState";
   // const members = [

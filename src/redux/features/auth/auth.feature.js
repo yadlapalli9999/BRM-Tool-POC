@@ -3,22 +3,22 @@ import axios from "axios";
 import { setAuthToken } from "../../../util/tokenUtil";
 import AuthService from "../../services/auth/auth.service";
 import { setMessage } from "./message";
-//const user = JSON.parse(localStorage.getItem("user"));
+//const user = JSON.parse(sessionStorage.getItem("user"));
 const BASE_URL = "http://brm-tool.ap-south-1.elasticbeanstalk.com";
 // initialize userToken from local storage
-// const access_token = localStorage.getItem('access_token')
-//   ? localStorage.getItem('access_token')
+// const access_token = sessionStorage.getItem('access_token')
+//   ? sessionStorage.getItem('access_token')
 //   : null
 import API from "../../api";
-const access_token = localStorage.getItem("access_token")
-  ? localStorage.getItem("access_token")
+const access_token = sessionStorage.getItem("access_token")
+  ? sessionStorage.getItem("access_token")
   : null;
-//const resourceID = localStorage.getItem('resourceID')? localStorage.getItem('resourceID'):null
+//const resourceID = sessionStorage.getItem('resourceID')? sessionStorage.getItem('resourceID'):null
 
 let initialState = {
   access_token,
-  resourceID: localStorage.getItem("resourceID"),
-  role:localStorage.getItem('role'),
+  resourceID: sessionStorage.getItem("resourceID"),
+  role:sessionStorage.getItem('role'),
   userInfo: null,
   isAuthenticated: false,
   loading: false,
@@ -61,8 +61,8 @@ export const loginUser = createAsyncThunk(
       //)
       // setAuthToken(data.data.access_token);
       // console.log(data)
-      // localStorage.setItem('resourceID',data.data.resourceID)
-      // localStorage.setItem("access_token",data.data.access_token)
+      // sessionStorage.setItem('resourceID',data.data.resourceID)
+      // sessionStorage.setItem("access_token",data.data.access_token)
       // return data.data;
       // setAuthToken(data.data.access_token);
       // access_token = data.data.access_token;
@@ -71,16 +71,16 @@ export const loginUser = createAsyncThunk(
       // console.log(resourceID);
       // role = data.data.role
       // console.log(role)
-      localStorage.setItem("access_token", data.data.access_token);
-      localStorage.setItem("resourceID", data.data.resourceID);
-      localStorage.setItem("role", data.data.role)
+      sessionStorage.setItem("access_token", data.data.access_token);
+      sessionStorage.setItem("resourceID", data.data.resourceID);
+      sessionStorage.setItem("role", data.data.role)
       
       // console.log(data.data.access_token);
       return data.data;
       //let data = await response.json()
       // console.log("response", data)
       // if (response.status === 200) {
-      //   localStorage.setItem("token", data.access_token)
+      //   sessionStorage.setItem("token", data.access_token)
       //   console(data.access_token)
       //   return {user:data}
       // } else {
@@ -102,7 +102,7 @@ export const loginUser = createAsyncThunk(
 //   try{
 //     console.log(API)
 //     const data = await API.post("/resources/login",{email,password})
-//     localStorage.setItem('access_token',data.data.access_token)
+//     sessionStorage.setItem('access_token',data.data.access_token)
 //     console.log(data)
 //     return data
 //   }
@@ -120,14 +120,14 @@ const authSlice = createSlice({
       // state.errorMessage = null;
     },
     [loginUser.fulfilled]: (state, action) => {
-      localStorage.setItem("access_token", action.payload.access_token);
-      localStorage.setItem("resourceID", action.payload.resourceID);
+      sessionStorage.setItem("access_token", action.payload.access_token);
+      sessionStorage.setItem("resourceID", action.payload.resourceID);
 
-      localStorage.setItem("role", action.payload.role);
+      sessionStorage.setItem("role", action.payload.role);
 
       // state.access_token = action.payload.access_token;
-      //localStorage.setItem('access_token', action.payload.data.access_token)
-      //localStorage.setItem('resourceID',action.payload.data.resourceID)
+      //sessionStorage.setItem('access_token', action.payload.data.access_token)
+      //sessionStorage.setItem('resourceID',action.payload.data.resourceID)
 
       state.loading = false;
       state.access_token = action.payload.access_token;
@@ -136,7 +136,7 @@ const authSlice = createSlice({
       state.isAuthenticated = true
     },
     [loginUser.rejected]: (state, action) => {
-      localStorage.removeItem("access_token");
+      sessionStorage.removeItem("access_token");
       state.loading = false;
       state.errorMessage = null;
       state.isAuthenticated = false;

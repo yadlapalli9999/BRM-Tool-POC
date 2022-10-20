@@ -26,19 +26,9 @@ const Login = (props) => {
     });
   };
   const dispatch = useDispatch();
-  let resourceID = localStorage.getItem('resourceID')
- 
+  let role = useSelector(store=>store.auth.role)
+  let resourceID = useSelector(store=>store.auth.resourceID)
   const { email, password } = user;
-  // useEffect(()=>{
-  //   dispatch(getBench())
-  //   let {benchLists} = useSelector((state)=>{return state['bench']})
-
-  //   let userInfo = benchLists.find((item)=> item._id ===resourceID )
-  //   let role = userInfo?.role
-
-  // },[])
-  
-  //let role = userInfo?.role
   const handleLoginForm = (event) => {
     event.preventDefault();
     // if (email && password) {
@@ -49,13 +39,19 @@ const Login = (props) => {
       dispatch(loginUser(user)).then(() => {
         toast.success("Account Logging...", { autoClose: 1500 });
         
-        let role = localStorage.getItem('role')
+          
+          console.log(role)
+          console.log(resourceID)
+
+
         if (role === "admin") {
+         
             navigate("/dashboard");
         }
         else if(role === "resource"){
-          navigate("/workloglist");
+            navigate(`/worklog/resource/${resourceID}/all`);
         }
+
       });
     
     }
