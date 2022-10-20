@@ -18,7 +18,7 @@ const access_token = localStorage.getItem("access_token")
 let initialState = {
   access_token,
   resourceID: localStorage.getItem("resourceID"),
-   role:localStorage.getItem('role'),
+  role:localStorage.getItem('role'),
   userInfo: null,
   isAuthenticated: false,
   loading: false,
@@ -133,7 +133,7 @@ const authSlice = createSlice({
       state.access_token = action.payload.access_token;
       state.resourceID = action.payload.resourceID;
       state.role = action.payload.role
-      // state.isAuthenticated = true
+      state.isAuthenticated = true
     },
     [loginUser.rejected]: (state, action) => {
       localStorage.removeItem("access_token");

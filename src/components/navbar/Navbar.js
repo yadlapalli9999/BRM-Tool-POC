@@ -45,6 +45,7 @@ let Navbar = () => {
   const logOutHandler = () => {
     localStorage.removeItem("access_token");
     localStorage.removeItem("resourceID");
+    localStorage.removeItem("role");
     toast.success("Account Logged Out", { autoClose: 1500 });
   };
 

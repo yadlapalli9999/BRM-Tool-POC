@@ -22,9 +22,7 @@ import BenchWorklogs from "./routes/bench/benchworklogs/BenchWorklogs";
 import EditEmployeeFields from "./routes/poc/editemployeefields/EditEmployeeFIelds";
 // import EmployeeWorklogs from "./modules/EmployeeWorklogs";
 import EditEmployee from "./routes/bench/EditEmployee";
-
 import NewBenchEmployee from "./routes/bench/benchnewemployee/NewBenchEmployee";
-
 import AdminDashboard from "./routes/admindashboard/AdminDashboard";
 import BenchEmployeeDetail from "./routes/bench/benchemployeeDetails/BenchEmployeeDetail";
 import EditBenchEmployee from "./routes/bench/editBenchEmployee/EditBenchEmployee";
@@ -44,7 +42,7 @@ function App() {
   const [showNav, setShowNav] = useState(true);
   let resourceID = localStorage.getItem('resourceID')
   console.log(resourceID)
-  let role = localStorage.getItem('role');
+  
 
   useEffect(() => {
     if (userUtil.isLoggedIn) {
@@ -54,8 +52,7 @@ function App() {
     }
     //dispatch(getBench())
   }, []);
-  
-  
+  let role = useSelector((state) => state.auth.role);
   return (
     <React.Fragment>
       <BrowserRouter>
@@ -68,81 +65,47 @@ function App() {
           {/* {(AdminRole.role === "admin" || AdminRole.role === "EMPLOYEE") && (
             <Route path="/home" element={<Home funcNav={setShowNav} />} />
           )} */}
+        
           {role === "admin" && (
+            <>
             <Route path="/poc" element={<POCHome />} />
-          )}
-          {role === "admin" && (
             <Route path="/pocdetails" element={<PocDetails />} />
-          )}
-          {role === "admin" && (
             <Route path="/employeefields" element={<EmployeeFields />} />
-          )}
-          {role === "admin" && (
             <Route path="/singlePocDetails" element={<SinglePocDetails />} />
-          )}
-          {role === "admin" && (
             <Route path="/worklogs" element={<WorkLogs />} />
-          )}
-          {role === "admin" && (
             <Route path="/poclist" element={<PocList />} />
-          )}
-          {role === "admin" && (
             <Route path="/googledocs" element={<GoogleDoc />} />
-          )}
-          {role === "admin" && (
             <Route path="/exceldocs" element={<ExcelDoc />} />
-          )}
-          {role === "admin" && (
             <Route path="/benchlist" element={<BenchList />} />
-          )}
-          {role === "admin" && (
             <Route path="/addpoc" element={<EmployeeFields />} />
-          )}
-          {role === "admin" && (
             <Route path="/editpoc/:id" element={<EditEmployeeFields />} />
-          )}
-          {role === "admin" && (
             <Route path="/benchworklogs" element={<BenchWorklogs />} />
+            <Route
+              path="/dashboard"
+              element={<AdminDashboard funcNav={setShowNav} />}
+            />
+            </>
           )}
           {/* {AdminRole.role === "EMPLOYEE" && (
             <Route path="/employeeworklogs" element={<EmployeeWorklogs />} />
           )} */}
           {(role === "admin" || role === "EMPLOYEE") && (
+            <>
             <Route path="/editemployee" element={<EditEmployee />} />
-          )}
-
-          {(role === "admin" ||role === "EMPLOYEE") && (
             <Route path="/newbenchEmployee" element={<NewBenchEmployee />} />
-          )}
-          {(role === "admin" || role === "EMPLOYEE") && (
             <Route
               path="/editbenchEmployee/:id"
               element={<NewBenchEmployee />}
             />
+             <Route path="/empDetails/:id" element={<BenchEmployeeDetail />} />
+            </>
           )}
-          
-          {(role === "admin" || role === "EMPLOYEE") && (
-            <Route path="/empDetails/:id" element={<BenchEmployeeDetail />} />
-          )}
-          {(role==="admin") && (
+          { (role === "admin" || role === "resource") && (
+            <>
             <Route path="/workloglist" element={<WorkLogLists />} />
-          )}
-
-          {(role === "resource") && (
-            <Route path="/workloglist" element={<WorkLogLists />} />
-          )}
-
-          {(role === "admin" || role === "resource") && (
             <Route path="/newworklog" element={<NewWorkLog />} />
+            </>
           )}
-
-          {role === "admin" && (
-            <Route
-              path="/dashboard"
-              element={<AdminDashboard funcNav={setShowNav} />}
-            />
-          )}
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

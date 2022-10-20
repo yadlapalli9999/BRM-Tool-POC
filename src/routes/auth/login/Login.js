@@ -27,8 +27,7 @@ const Login = (props) => {
   };
   const dispatch = useDispatch();
   let resourceID = localStorage.getItem('resourceID')
-  let role = localStorage.getItem('role')
-
+ 
   const { email, password } = user;
   // useEffect(()=>{
   //   dispatch(getBench())
@@ -47,16 +46,18 @@ const Login = (props) => {
     //   navigate("/home");
     // }
     if (email && password) {
-      dispatch(loginUser(user));
-      toast.success("Account Logging...", { autoClose: 1500 });
-      if (role === "admin") {
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 2000);
-      }
-      else if(role === "resource"){
-        navigate("/workloglist");
-      }
+      dispatch(loginUser(user)).then(() => {
+        toast.success("Account Logging...", { autoClose: 1500 });
+        
+        let role = localStorage.getItem('role')
+        if (role === "admin") {
+            navigate("/dashboard");
+        }
+        else if(role === "resource"){
+          navigate("/workloglist");
+        }
+      });
+    
     }
   };
 
