@@ -43,59 +43,7 @@ let initialState = {
 //       }
 //     }
 //   );
-export const logOutUser = createAsyncThunk(
-  "auth/login",
-  async ({ email, password }, { rejectWithValue }) => {
-    try {
-      const { data } = await axios.post(`${BASE_URL}/resources/login`, {
-        email,
-        password,
-      });
-      // {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   }
-      // }
-      //)
-      // setAuthToken(data.data.access_token);
-      // console.log(data)
-      // localStorage.setItem('resourceID',data.data.resourceID)
-      // localStorage.setItem("access_token",data.data.access_token)
-      // return data.data;
-      // setAuthToken(data.data.access_token);
-      // access_token = data.data.access_token;
-      // console.log(access_token)
-      // resourceID = data.data.resourceID;
-      // console.log(resourceID);
-      // role = data.data.role
-      // console.log(role)
-      localStorage.setItem("access_token", data.data.access_token);
-      localStorage.setItem("resourceID", data.data.resourceID);
-      localStorage.setItem("role", data.data.role)
-      
-      // console.log(data.data.access_token);
-      return data.data;
-      //let data = await response.json()
-      // console.log("response", data)
-      // if (response.status === 200) {
-      //   localStorage.setItem("token", data.access_token)
-      //   console(data.access_token)
-      //   return {user:data}
-      // } else {
-      //   return thunkAPI.rejectWithValue(data)
-      // }
-    } catch (error) {
-      if (error.reponse && error.reponse.data.message) {
-        // console.log(error.reponse.data.message);
-        return rejectWithValue(error.reponse.data.message);
-      } else {
-        // console.log(error.message);
-        return rejectWithValue(error.message);
-      }
-    }
-  }
-);
+
 export const loginUser = createAsyncThunk(
   "auth/login",
   async ({ email, password }, { rejectWithValue }) => {
@@ -166,12 +114,6 @@ export const loginUser = createAsyncThunk(
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers:{
-    logout:() => {
-      initialState.role = ""
-      return initialState;
-    }
-  },
   extrareducers: {
     [loginUser.pending]: (state, action) => {
       state.loading = true;
@@ -204,4 +146,3 @@ const authSlice = createSlice({
   },
 });
 export default authSlice.reducer;
-export const { logout } = authSlice.actions
