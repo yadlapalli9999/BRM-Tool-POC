@@ -1,6 +1,6 @@
 import Axios from "axios";
 const BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/poc`;
-const resourceID = sessionStorage.getItem("resourceID");
+const resourceID = localStorage.getItem("resourceID");
 import API from "../../api";
 const getAll = () => {
   // return Axios.get(`${BASE_URL}`)

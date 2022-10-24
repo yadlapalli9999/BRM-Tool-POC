@@ -1,5 +1,5 @@
 import API from "../../api";
-const resourceID = sessionStorage.getItem("resourceID");
+const resourceID = localStorage.getItem("resourceID");
 
 
 const getAll = () => {

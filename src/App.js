@@ -41,7 +41,7 @@ function App() {
   // let {benchLists} = useSelector((state)=>{ return state['bench']})
   // console.log(benchLists)
   const [showNav, setShowNav] = useState(true);
-  let resourceID = sessionStorage.getItem('resourceID')
+  let resourceID = localStorage.getItem('resourceID')
   let {benchListItem} = useSelector(store=>{return store['bench']})
   console.log(benchListItem)
   console.log(resourceID)
@@ -49,14 +49,14 @@ function App() {
   useEffect(() => {
     if (userUtil.isLoggedIn) {
       tokenUtil.setAuthToken(userUtil.getToken());
-      sessionStorage.getItem("access_token");
+      localStorage.getItem("access_token");
 
     }
     dispatch(getBenchId({resourceID}))
 
     //dispatch(getBench())
   }, [dispatch]);
-  let role = useSelector((state) => state.auth.role);
+ 
   return (
     <React.Fragment>
       <BrowserRouter>

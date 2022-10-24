@@ -8,7 +8,7 @@ const login = (email, password) => {
       })
       .then((response) => {
         if (response.data.accessToken) {
-          sessionStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem("user", JSON.stringify(response.data));
           // console.log(JSON.stringify(response.data))
         }
         return response.data;
@@ -16,7 +16,7 @@ const login = (email, password) => {
   };
 
   const logout = () => {
-    sessionStorage.removeItem("user");
+    localStorage.removeItem("user");
   };  
   
 const authService = {login,logout}
