@@ -32,6 +32,7 @@ import SinglePocDetails from "./routes/poc/SinglePocDetails/SinglePocDetails";
 import WorkLogLists from "./routes/worklogs/workloglists/WorkLogLists";
 import NewWorkLog from "./routes/worklogs/newworklog/NewWorkLog";
 import { useDispatch, useSelector } from "react-redux";
+import RequireAccess from "./RequireAccess"
 import { getBench, getBenchId } from "./redux/features/bench/bench.feature";
 
 export const BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/`;
@@ -40,7 +41,7 @@ function App() {
   // let {benchLists} = useSelector((state)=>{ return state['bench']})
   // console.log(benchLists)
   const [showNav, setShowNav] = useState(true);
-  let resourceID = sessionStorage.getItem('resourceID')
+  let resourceID = localStorage.getItem('resourceID')
   let {benchListItem} = useSelector(store=>{return store['bench']})
   console.log(benchListItem)
   console.log(resourceID)
@@ -48,14 +49,14 @@ function App() {
   useEffect(() => {
     if (userUtil.isLoggedIn) {
       tokenUtil.setAuthToken(userUtil.getToken());
-      sessionStorage.getItem("access_token");
+      localStorage.getItem("access_token");
 
     }
     dispatch(getBenchId({resourceID}))
 
     //dispatch(getBench())
   }, [dispatch]);
-  let role = useSelector((state) => state.auth.role);
+ 
   return (
     <React.Fragment>
       <BrowserRouter>
@@ -69,46 +70,39 @@ function App() {
             <Route path="/home" element={<Home funcNav={setShowNav} />} />
           )} */}
         
-          {role === "admin" && (
-            <>
-            <Route path="/poc" element={<POCHome />} />
-            <Route path="/pocdetails" element={<PocDetails />} />
-            <Route path="/employeefields" element={<EmployeeFields />} />
-            <Route path="/singlePocDetails" element={<SinglePocDetails />} />
-            <Route path="/worklog/resource/:id/all" element={<WorkLogLists />} />
-            <Route path="/poclist" element={<PocList />} />
-            <Route path="/googledocs" element={<GoogleDoc />} />
-            <Route path="/exceldocs" element={<ExcelDoc />} />
-            <Route path="/benchlist" element={<BenchList />} />
-            <Route path="/addpoc" element={<EmployeeFields />} />
-            <Route path="/editpoc/:id" element={<EditEmployeeFields />} />
-            <Route path="/benchworklogs" element={<BenchWorklogs />} />
-            <Route
+            <Route path="/poc" element={<RequireAccess><POCHome /></RequireAccess>} />
+            <Route path="/pocdetails" element={<RequireAccess><PocDetails /></RequireAccess>} />
+            <Route path="/employeefields" element={<RequireAccess><EmployeeFields /></RequireAccess>} />
+            <Route path="/singlePocDetails" element={<RequireAccess><SinglePocDetails /></RequireAccess>} />
+            <Route path="/worklogs" element={<RequireAccess><WorkLogs /></RequireAccess>} />
+            <Route path="/poclist" element={<RequireAccess><PocList /></RequireAccess>} />
+            <Route path="/googledocs" element={<RequireAccess><GoogleDoc /></RequireAccess>} />
+            <Route path="/exceldocs" element={<RequireAccess><ExcelDoc /></RequireAccess>} />
+            <Route path="/benchlist" element={<RequireAccess><BenchList /></RequireAccess>} />
+            <Route path="/addpoc" element={<RequireAccess><EmployeeFields /></RequireAccess>} />
+            <Route path="/editpoc/:id" element={<RequireAccess><EditEmployeeFields /></RequireAccess>} />
+            <Route path="/benchworklogs" element={<RequireAccess><BenchWorklogs /></RequireAccess>} />
+           
+         
+           <Route
               path="/dashboard"
-              element={<AdminDashboard funcNav={setShowNav} />}
+              element={<RequireAccess><AdminDashboard funcNav={setShowNav} /></RequireAccess>}
             />
-            </>
-          )}
           {/* {AdminRole.role === "EMPLOYEE" && (
             <Route path="/employeeworklogs" element={<EmployeeWorklogs />} />
           )} */}
-          {(role === "admin" || role === "EMPLOYEE") && (
-            <>
-            <Route path="/editemployee" element={<EditEmployee />} />
-            <Route path="/newbenchEmployee" element={<NewBenchEmployee />} />
+        
+            <Route path="/editemployee" element={<RequireAccess><EditEmployee /></RequireAccess>} />
+            <Route path="/newbenchEmployee" element={<RequireAccess><NewBenchEmployee /></RequireAccess>} />
             <Route
               path="/editbenchEmployee/:id"
-              element={<NewBenchEmployee />}
+              element={<RequireAccess><NewBenchEmployee /></RequireAccess>}
             />
-             <Route path="/empDetails/:id" element={<BenchEmployeeDetail />} />
-            </>
-          )}
-          { (role === "admin" || role === "resource") && (
-            <>
-            <Route path="/worklog/resource/:id/all" element={<WorkLogLists />} />
-            <Route path="/worklog/:id" element={<NewWorkLog />} />
-            </>
-          )}
+            <Route path="/empDetails/:id" element={<RequireAccess><BenchEmployeeDetail /></RequireAccess>} />
+            <Route path="/workloglist"  element={<RequireAccess><WorkLogLists funcNav={setShowNav} /></RequireAccess>} />
+            <Route path="/newworklog" element={<RequireAccess><NewWorkLog /></RequireAccess>} />
+           
+        
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

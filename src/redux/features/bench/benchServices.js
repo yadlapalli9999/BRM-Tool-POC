@@ -1,14 +1,14 @@
 import Axios from "axios";
 import API from "../../api";
 const BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/resources`;
-const access_token = sessionStorage.getItem("access_token");
+const access_token = localStorage.getItem("access_token");
 const getAll = () => {
   // const config = {
   // 	headers: {
   // 		'Authorization': `Bearer ${access_token}`,
   // 	}
   // };
-  //console.log(sessionStorage.getItem('access_token'))
+  //console.log(localStorage.getItem('access_token'))
   return API.get(`/resources`);
 };
 

@@ -13,6 +13,7 @@ const Login = (props) => {
   useEffect(() => {
     props.funcNav(false);
   }, []);
+
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -26,9 +27,11 @@ const Login = (props) => {
     });
   };
   const dispatch = useDispatch();
-  let role = useSelector(store=>store.auth.role)
-  let resourceID = useSelector(store=>store.auth.resourceID)
+  let resourceID = localStorage.getItem('resourceID')
   const { email, password } = user;
+
+  
+  //let role = userInfo?.role
   const handleLoginForm = (event) => {
     event.preventDefault();
     // if (email && password) {
@@ -36,22 +39,14 @@ const Login = (props) => {
     //   navigate("/home");
     // }
     if (email && password) {
-      dispatch(loginUser(user)).then(() => {
+      dispatch(loginUser(user)).then((data) => {
         toast.success("Account Logging...", { autoClose: 1500 });
-        
-          
-          console.log(role)
-          console.log(resourceID)
-
-
-        if (role === "admin") {
-         
-            navigate("/dashboard");
+        if (data.payload.role === "admin") {
+          navigate("/dashboard");
         }
-        else if(role === "resource"){
-            navigate(`/worklog/resource/${resourceID}/all`);
-        }
-
+        else if (data.payload.role === "resource") {
+          navigate("/workloglist");
+        }   
       });
     
     }

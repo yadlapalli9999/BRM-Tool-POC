@@ -7,13 +7,14 @@ import { getAllWorklogList } from "../../../redux/features/worklogs/worklog.feat
 import { WORKLOG_TABLE_HEADERS } from "./worklogconstant";
 import './workloglist.css'
 
-const WorkLogLists = () => {
+const WorkLogLists = (props) => {
    let dispatch = useDispatch();
-   let resourceID = sessionStorage.getItem('resourceID')
+   let resourceID = localStorage.getItem('resourceID')
    let {worklogList} = useSelector((state)=>{ return state['worklogs']})
    console.log(worklogList)
   useEffect(()=>{
     dispatch(getAllWorklogList())
+    props.funcNav(true);
   },[])
   const lists = [
     {
@@ -33,7 +34,7 @@ const WorkLogLists = () => {
       "pocId": "POC1239"
     }
   ]
-  const role = sessionStorage.getItem('role')
+  const role = localStorage.getItem('role')
   const getTableData = (header, item, index) => {
     const val = header.value;
     switch (val) {

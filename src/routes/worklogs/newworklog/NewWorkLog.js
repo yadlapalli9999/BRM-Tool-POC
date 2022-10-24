@@ -22,7 +22,7 @@ const NewWorkLog = (props)=>{
        pocId:''
     })
    // let [pocId,setPocId] = useState('')
-    let resourceID = sessionStorage.getItem('resourceID')
+    let resourceID = localStorage.getItem('resourceID')
     useEffect(()=>{
       dispatch(getAllPoc())
     },[])
