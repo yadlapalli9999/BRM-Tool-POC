@@ -1,10 +1,13 @@
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from 'react-router-dom'
 import { WORKLOG_TABLE_HEADERS } from "./worklogconstant";
 import './workloglist.css'
 
-const WorkLogLists = () => {
+const WorkLogLists = (props) => {
+  useEffect(() => {
+    props.funcNav(true);
+  }, []);
   const lists = [
     {
       "id": "1",

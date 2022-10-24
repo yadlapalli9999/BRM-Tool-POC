@@ -13,6 +13,7 @@ const Login = (props) => {
   useEffect(() => {
     props.funcNav(false);
   }, []);
+
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: "",
@@ -27,16 +28,8 @@ const Login = (props) => {
   };
   const dispatch = useDispatch();
   let resourceID = localStorage.getItem('resourceID')
- 
   const { email, password } = user;
-  // useEffect(()=>{
-  //   dispatch(getBench())
-  //   let {benchLists} = useSelector((state)=>{return state['bench']})
 
-  //   let userInfo = benchLists.find((item)=> item._id ===resourceID )
-  //   let role = userInfo?.role
-
-  // },[])
   
   //let role = userInfo?.role
   const handleLoginForm = (event) => {
@@ -46,16 +39,14 @@ const Login = (props) => {
     //   navigate("/home");
     // }
     if (email && password) {
-      dispatch(loginUser(user)).then(() => {
+      dispatch(loginUser(user)).then((data) => {
         toast.success("Account Logging...", { autoClose: 1500 });
-        
-        let role = localStorage.getItem('role')
-        if (role === "admin") {
-            navigate("/dashboard");
+        if (data.payload.role === "admin") {
+          navigate("/dashboard");
         }
-        else if(role === "resource"){
+        else if (data.payload.role === "resource") {
           navigate("/workloglist");
-        }
+        }   
       });
     
     }
