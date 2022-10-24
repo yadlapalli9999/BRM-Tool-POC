@@ -132,6 +132,7 @@ let BenchList = () => {
     <React.Fragment>
       <div className="container">
         {/* <pre>{JSON.stringify(benchLists.data)}</pre> */}
+        {/* <div class="row" style="margin-bottom: 20px;"><div class="col-md-12 text-center"><button class="pocTitle">POC</button></div></div> */}
         <div className="row mt-3">
           <div className="col-md-4 mx-4 ">
             <h2 className="a1 mt-4">Bench List</h2>
@@ -261,7 +262,7 @@ let BenchList = () => {
                                   className="worklog_icon"
                                 />
                               </a> */}
-                              <Link to="/workloglist">
+                              <Link to={`/worklog/resource/${filterData._id}/all`}>
                               <MDBIcon
                                   fas
                                   icon="list-alt"

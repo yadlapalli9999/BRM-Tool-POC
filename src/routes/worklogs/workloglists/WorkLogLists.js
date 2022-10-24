@@ -1,13 +1,21 @@
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
 import React, { useEffect } from "react";
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from 'react-router-dom';
+import moment from "moment";
+import { getAllWorklogList } from "../../../redux/features/worklogs/worklog.feature";
 import { WORKLOG_TABLE_HEADERS } from "./worklogconstant";
 import './workloglist.css'
 
 const WorkLogLists = (props) => {
-  useEffect(() => {
+   let dispatch = useDispatch();
+   let resourceID = sessionStorage.getItem('resourceID')
+   let {worklogList} = useSelector((state)=>{ return state['worklogs']})
+   console.log(worklogList)
+  useEffect(()=>{
+    dispatch(getAllWorklogList())
     props.funcNav(true);
-  }, []);
+  },[])
   const lists = [
     {
       "id": "1",
@@ -26,7 +34,7 @@ const WorkLogLists = (props) => {
       "pocId": "POC1239"
     }
   ]
-  const role = localStorage.getItem('role')
+  const role = sessionStorage.getItem('role')
   const getTableData = (header, item, index) => {
     const val = header.value;
     switch (val) {
@@ -79,7 +87,9 @@ const WorkLogLists = (props) => {
       case "logDate":
         return (
           <div className="d-flex justify-content-center align-items-center">
-            {item.logDate}
+            {moment(item.logDate).format(
+                      "YYYY-MM-DD"
+                    )}
           </div>
         );
       case "pocId":
@@ -115,7 +125,7 @@ const WorkLogLists = (props) => {
           { role === "resource" &&
             <MDBCol >
               <Link
-                to="/newworklog"
+                to={`/worklog/${resourceID}`}
                 className="btn addBtn"
                 style={{ backgroundColor: "#333", float: "right" }}
               >
@@ -135,10 +145,10 @@ const WorkLogLists = (props) => {
               </tr>
             </MDBTableHead>
             {
-              lists.length > 0 ? (
+              worklogList.length > 0 ? (
                 <MDBTableBody>
-                  {lists.length > 0 &&
-                    lists.map((item, index) => (
+                  {worklogList.length > 0 &&
+                    worklogList.map((item, index) => (
                       <tr>
                         {WORKLOG_TABLE_HEADERS.map((header) => (
                           <td>{getTableData(header, item, index)}</td>

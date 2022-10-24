@@ -72,7 +72,6 @@ let Navbar = () => {
                   <i id="poc" className="fas fa-file " />
                 </Link>
               </li>
-
               {/* <ul className="navbar navbar-nav ml-auto"> */}
             </ul>
            } 

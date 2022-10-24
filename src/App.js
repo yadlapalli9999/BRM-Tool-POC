@@ -32,8 +32,8 @@ import SinglePocDetails from "./routes/poc/SinglePocDetails/SinglePocDetails";
 import WorkLogLists from "./routes/worklogs/workloglists/WorkLogLists";
 import NewWorkLog from "./routes/worklogs/newworklog/NewWorkLog";
 import { useDispatch, useSelector } from "react-redux";
-import { getBench } from "./redux/features/bench/bench.feature";
 import RequireAccess from "./RequireAccess"
+import { getBench, getBenchId } from "./redux/features/bench/bench.feature";
 
 export const BASE_URL = `http://brm-tool.ap-south-1.elasticbeanstalk.com/`;
 function App() {
@@ -41,17 +41,21 @@ function App() {
   // let {benchLists} = useSelector((state)=>{ return state['bench']})
   // console.log(benchLists)
   const [showNav, setShowNav] = useState(true);
-  let resourceID = localStorage.getItem('resourceID')
-  
-
+  let resourceID = sessionStorage.getItem('resourceID')
+  let {benchListItem} = useSelector(store=>{return store['bench']})
+  console.log(benchListItem)
+  console.log(resourceID)
+  //let dispatch = useDispatch();
   useEffect(() => {
     if (userUtil.isLoggedIn) {
       tokenUtil.setAuthToken(userUtil.getToken());
-      localStorage.getItem("access_token");
+      sessionStorage.getItem("access_token");
 
     }
+    dispatch(getBenchId({resourceID}))
+
     //dispatch(getBench())
-  }, []);
+  }, [dispatch]);
   let role = useSelector((state) => state.auth.role);
   return (
     <React.Fragment>

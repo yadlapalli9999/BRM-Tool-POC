@@ -1,27 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import Select from 'react-select';
 
 import {MDBContainer,MDBCard,MDBCardHeader,MDBCardTitle,MDBValidation,MDBValidationItem,MDBInput,MDBBtn,MDBCardBody, MDBTextArea} from 'mdb-react-ui-kit'
+import { useDispatch, useSelector } from "react-redux";
+import { createNewWorklog } from "../../../redux/features/worklogs/worklog.feature";
+import { getAllPoc,mainSearchPOC } from "../../../redux/features/poc/poc.feature";
 // import { min } from "moment";
 const NewWorkLog = (props)=>{
-    let pocMemmber = ["JMJ", "Frequncy","BRM","KKK"]
-    let [query,setQuery] = useState('')
+  let {pocList} = useSelector((state)=>{return state['poc']})
+  console.log(pocList)
 
-    let navigate = useNavigate()
+
+    let navigate = useNavigate();
+    let dispatch = useDispatch();
     let [newWorklog,setNewWorklog] = useState({
        taskDetails:'',
        taskDescription:'',
-       duration:'',
+       duration:null?.toString() || "",
        logDate:'',
        pocId:''
-
     })
-    let chnageHandle = (e)=>{
-        setQuery(e.target.value)
-        const mm =pocMemmber.find(item=>item == e.target.value)
-        console.log(mm)
-    }
+   // let [pocId,setPocId] = useState('')
+    let resourceID = sessionStorage.getItem('resourceID')
+    useEffect(()=>{
+      dispatch(getAllPoc())
+    },[])
+    //const searchInput = useRef();
+
+    let options = pocList.map(item =>(
+      {value:`${item._id}`,label:`${item.name}`})
+    )
+    console.log(options)
     
+    const handleChange = (e) => {
+      //searchInput.current.querySelector("input").value = "";
+      //console.log(JSON.stringify(e.target.value));
+      console.log(e.value)
+      newWorklog.pocId = e.target
+      setNewWorklog({
+        ...newWorklog,
+        // pocId:e.target,
+        pocId:e.value
+      })
+    };
+
+  
     const textArea = document.querySelector("MDBTextArea");
     const textRowCount = textArea ? textArea.value.split("/n").length : 0;
     const rows = textRowCount + 1;
@@ -35,12 +59,15 @@ const NewWorkLog = (props)=>{
             [event.target.name]:event.target.value
         })
     }
+    
+    
     const handleSubmitWorklog =(event)=>{
         event.preventDefault();
+      //  let newData = {newWorklog,pocId }
         console.log(newWorklog)
-        console.log(newWorklog.taskDescription)
-        props.lists.push(newWorklog)
-        navigate('/workloglist')
+        // console.log(pocId.value);
+       dispatch(createNewWorklog(newWorklog))
+      navigate(`/worklog/resource/${resourceID}/all`)
     }
     return(
         <React.Fragment>
@@ -111,15 +138,22 @@ const NewWorkLog = (props)=>{
                   feedback="Please Enter your PocId"
                   invalid
                 >
-                  <MDBInput
+                  <Select
+                  value={newWorklog.pocId.label}
+       onChange={handleChange}
+       options={options}
+       isSearchable="true"
+     />
+                  {/* <MDBInput
                     id="validationCustom05"
                     type="text"
                     required
                     name="pocId"
-                    value={query}
-                    onChange={chnageHandle}
+                    value={newWorklog.pocId}
+                    onChange={handleWorkLogChange}
                     label="PocId"
-                  />
+                  /> */}
+                  
                 </MDBValidationItem>
                
 
@@ -149,7 +183,7 @@ const NewWorkLog = (props)=>{
                   <MDBBtn
                     className="m-2 btn btn-danger"
                     type="reset"
-                    onClick={() => navigate("/workloglist")}
+                    onClick={() => navigate(`/worklog/resource/${resourceID}/all`)}
                   >
                     Cancel
                   </MDBBtn>
