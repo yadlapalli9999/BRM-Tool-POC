@@ -82,6 +82,8 @@ function App() {
             <Route path="/addpoc" element={<RequireAccess><EmployeeFields /></RequireAccess>} />
             <Route path="/editpoc/:id" element={<RequireAccess><EditEmployeeFields /></RequireAccess>} />
             <Route path="/benchworklogs" element={<RequireAccess><BenchWorklogs /></RequireAccess>} />
+            <Route path="/empDetails/:id" element={<RequireAccess><BenchEmployeeDetail/></RequireAccess>} />
+
            
          
            <Route
@@ -99,8 +101,8 @@ function App() {
               element={<RequireAccess><NewBenchEmployee /></RequireAccess>}
             />
             <Route path="/empDetails/:id" element={<RequireAccess><BenchEmployeeDetail /></RequireAccess>} />
-            <Route path="/workloglist"  element={<RequireAccess><WorkLogLists funcNav={setShowNav} /></RequireAccess>} />
-            <Route path="/newworklog" element={<RequireAccess><NewWorkLog /></RequireAccess>} />
+            <Route path="/workloglist/resource/:id/all"  element={<RequireAccess><WorkLogLists funcNav={setShowNav} /></RequireAccess>} />
+            <Route path="/newworklog/:id" element={<RequireAccess><NewWorkLog /></RequireAccess>} />
            
         
           <Route path="*" element={<NotFound />} />

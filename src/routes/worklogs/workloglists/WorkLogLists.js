@@ -1,9 +1,9 @@
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from "mdb-react-ui-kit";
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
 import moment from "moment";
-import { getAllWorklogList } from "../../../redux/features/worklogs/worklog.feature";
+import { getAllWorklogList, selectWorklog } from "../../../redux/features/worklogs/worklog.feature";
 import { WORKLOG_TABLE_HEADERS } from "./worklogconstant";
 import './workloglist.css'
 
@@ -12,6 +12,11 @@ const WorkLogLists = (props) => {
    let resourceID = localStorage.getItem('resourceID')
    let {worklogList} = useSelector((state)=>{ return state['worklogs']})
    console.log(worklogList)
+   const [exp, setExp] = useState("presentweek");
+  let handleSelect = (event) => {
+    setExp(event.target.value);
+    dispatch(selectWorklog(event.target.value));
+  };
   useEffect(()=>{
     dispatch(getAllWorklogList())
     props.funcNav(true);
@@ -114,18 +119,20 @@ const WorkLogLists = (props) => {
         <MDBRow >
           <MDBCol >
             <select className="btn addBtn dropdown-toggle"
+            value={exp}
+            onChange={handleSelect}
               type="button">
-              <option>Select Dates</option>
-              <option>Present Week</option>
-              <option>Last Week</option>
-              <option>Present Month</option>
-              <option>Last Month</option>
+              <option value="">Select Dates</option>
+              <option value="presentweek">Present Week</option>
+              <option value="lastweek">Last Week</option>
+              <option value="presentmonth">Present Month</option>
+              <option value="lastmonth">Last Month</option>
             </select>
           </MDBCol>
           { role === "resource" &&
             <MDBCol >
               <Link
-                to={`/worklog/${resourceID}`}
+                to={`/newworklog/${resourceID}`}
                 className="btn addBtn"
                 style={{ backgroundColor: "#333", float: "right" }}
               >

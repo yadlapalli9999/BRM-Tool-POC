@@ -47,7 +47,7 @@ let BenchList = () => {
 
   useEffect(() => {
     dispatch(getBench());
-  }, [hasReserved, setHasReserved, hasDeleted]);
+  }, [hasReserved, setHasReserved, hasDeleted,dispatch]);
   
 
   const [staticModal, setStaticModal] = useState(false);
@@ -62,6 +62,7 @@ let BenchList = () => {
     console.log(deleteId[0]._id);
     setStaticModal(!staticModal);
     setHasDeleted(!hasDeleted);
+    dispatch(getBench())
     // BenchServices.remove(id);
     toast.success("Deleted Successfully ", { autoClose: 700 });
     // setInterval(() => {
@@ -262,7 +263,7 @@ let BenchList = () => {
                                   className="worklog_icon"
                                 />
                               </a> */}
-                              <Link to={`/worklog/resource/${filterData._id}/all`}>
+                              <Link to={`/workloglist/resource/${filterData._id}/all`}>
                               <MDBIcon
                                   fas
                                   icon="list-alt"

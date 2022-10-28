@@ -20,6 +20,12 @@ export const createNewWorklog = createAsyncThunk("worklog/createNewWorklog", asy
     return response.data
 })
 
+export const selectWorklog = createAsyncThunk('worklog/selectWorklog',async(exp)=>{
+  let response = await worklogService.selectedWorklog(exp)
+  console.log(response)
+  return response.data.data
+})
+
 
 const worklogSlice =  createSlice({
     name:'worklogs',
@@ -45,6 +51,18 @@ const worklogSlice =  createSlice({
         state.worklogList = [...action.payload];
       },
       [createNewWorklog.rejected]: (state, action) => {
+        state.loading = false;
+        state.errorMessage = action.payload;
+      },
+
+      [selectWorklog.pending]: (state, action) => {
+        state.loading = true;
+      },
+      [selectWorklog.fulfilled]: (state, action) => {
+        state.loading = false;
+        state.worklogList = [...action.payload];
+      },
+      [selectWorklog.rejected]: (state, action) => {
         state.loading = false;
         state.errorMessage = action.payload;
       }

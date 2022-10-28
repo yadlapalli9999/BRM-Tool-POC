@@ -78,23 +78,15 @@ let NewBenchEmployee = () => {
   };
   const getBenchIdItem = ({ id }) => {
     BenchServices.get(id).then((res) => {
-      // console.log(res.data)
       setNewBench({ ...res.data.data });
-      // if(res.data.data.primarySkills){
-      // setNewBench({...res.data.data,primarySkills:{...res.data.data.primarySkills[0]}})
-      // }
+     
     });
   };
 
-  //let {name,email,emp_id,password,totalWorkExp,totalExpinFission,primarySkills,reportingManager,teamLead,status,notes,projectName} = newBench;
   useEffect(() => {
     if (id) {
+     getBenchIdItem({ id });
       //dispatch(getBenchId({id}))
-      getBenchIdItem({ id });
-      //console.log(benchListItem.data)
-      // if( benchListItem && benchListItem.primarySkills){
-      //    setNewBench({...benchListItem,primarySkills:{...benchListItem.primarySkills[0]}})
-      //  }
     }
   }, [id]);
 
@@ -119,22 +111,12 @@ let NewBenchEmployee = () => {
       } else {
         //console.log(newBench)
         console.log(newBench);
-        //newBench= {...newBench,primarySkills:[{...newBench.primarySkills}]}
         dispatch(updateBench(newBench));
         toast.success("updated successfully", { autoClose: 700 });
-       // setInterval(()=>{
+        setInterval(()=>{
           navigate("/benchlist");
-        //},1000)        //console.log( dispatch(updateBench(newBench)))
-        //   Axios.patch(`${BASE_URL}/${id}`,newBench).then((res)=>{
-        //     console.log(res)
-        //      console.log(res)
-        //  }).catch((error)=>{
-        //     console.error(error)
-        //   })
-
-        //dispatch(updateBench({_id:newBench._id,newBench:newBench}))
-
-        //navigate('/benchlist')
+        },2000)
+        
       }
     }
   };

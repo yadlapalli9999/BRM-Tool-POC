@@ -12,8 +12,12 @@ const createWorklog = (newData)=>{
 
 }
 
+const selectedWorklog = (exp) => {
+    return API.get(`/worklog/resource/${resourceID}/${exp}`);
+  };
 
 
-  const worklogService = {getAll,createWorklog}
+
+  const worklogService = {getAll,createWorklog,selectedWorklog}
 
   export default worklogService;

@@ -45,7 +45,7 @@ const Login = (props) => {
           navigate("/dashboard");
         }
         else if (data.payload.role === "resource") {
-          navigate("/workloglist");
+          navigate(`/workloglist/resource/${resourceID}/all`);
         }   
       });
     

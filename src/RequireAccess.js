@@ -16,7 +16,9 @@ export default function RequireAccess({children}) {
                                 "/benchworklogs",
                                 "/editemployee",
                                 "/newbenchEmployee",
-                                "/editbenchEmployee"
+                                "/editbenchEmployee",
+                                "/empDetails",
+                                "/workloglist"
                             ] 
     const resourceAccesPath = ["/workloglist","/newworklog"]
     const employeeAccessPath = [ "/editemployee",

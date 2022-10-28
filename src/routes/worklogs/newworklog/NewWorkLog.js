@@ -67,7 +67,7 @@ const NewWorkLog = (props)=>{
         console.log(newWorklog)
         // console.log(pocId.value);
        dispatch(createNewWorklog(newWorklog))
-      navigate(`/worklog/resource/${resourceID}/all`)
+      navigate(`/workloglist/resource/${resourceID}/all`)
     }
     return(
         <React.Fragment>
@@ -183,7 +183,7 @@ const NewWorkLog = (props)=>{
                   <MDBBtn
                     className="m-2 btn btn-danger"
                     type="reset"
-                    onClick={() => navigate(`/worklog/resource/${resourceID}/all`)}
+                    onClick={() => navigate(`/workloglist/resource/${resourceID}/all`)}
                   >
                     Cancel
                   </MDBBtn>
