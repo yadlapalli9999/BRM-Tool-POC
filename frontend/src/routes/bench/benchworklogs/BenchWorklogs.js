@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import "./BenchWorklogs.css";
-const EmployeeWorkLogs = () => {
+const BenchWorklogs = () => {
   const [workLogList, setWorkLogList] = useState([
     {
       duration: 8,
@@ -51,35 +51,11 @@ const EmployeeWorkLogs = () => {
     <React.Fragment>
       <div className="container">
         <div className="row">
-          <div
-            className="col-md-6 workLogsTitle mt-5 mb-3 text-center"
-            style={{ display: "inline-block", width: "50%" }}
-          >
-            <h2>Work Logs</h2>
+          <div className="col-md-6 workLogsTitle mt-5 mb-3 text-center w-50 d.inline-block">
+            <h2 className="text-center benchWorkLogsTitle">Work Logs</h2>
           </div>
-          <div
-            className="col-md-6 workLogsTitle mt-5 mb-3"
-            style={{ display: "inline-block", width: "50%", float: "right" }}
-          >
+          <div className="col-md-6 workLogsTitle mt-5 mb-3  d.inline-block w-50 .float-right ">
             <div class="dropdown">
-              <Link
-                className="dropdown-toggle align-items-center hidden-arrow"
-                to="#"
-                id="navbarDropdownMenuAvatar"
-                role="button"
-                data-mdb-toggle="dropdown"
-                aria-expanded="false"
-                style={{ display: "inline-block", float: "right" }}
-              >
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                  className="rounded-circle"
-                  height="50"
-                  alt="Black and White Portrait of a Man"
-                  loading="lazy"
-                />{" "}
-                &nbsp; &nbsp; Ramarao
-              </Link>
               <ul
                 className="dropdown-menu dropdown-menu-end"
                 aria-labelledby="navbarDropdownMenuAvatar"
@@ -132,7 +108,7 @@ const EmployeeWorkLogs = () => {
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <div className="modal-body  mx-3">
+                  <div className="modal-body was-validated mx-3">
                     <div className="row mb-3">
                       <div className="col-md-6">
                         <div className="md-form mb-0">
@@ -144,7 +120,6 @@ const EmployeeWorkLogs = () => {
                             onChange={UpdateInput}
                             className="form-control"
                             placeholder="taskDetails"
-                            style={{ height: "100px" }}
                           />
                         </div>
                       </div>
@@ -208,20 +183,10 @@ const EmployeeWorkLogs = () => {
               </div>
             </div>
 
-            <div className="row">
-              <div class="text-left col-md-6">
-                <Link
-                  to="#"
-                  className="btn btn-secondary btn-rounded mb-4"
-                  data-toggle="modal"
-                  data-target="#modalContactForm"
-                >
-                  Add WorkLog
-                </Link>
-              </div>
+            <div className="row d-flex justify-content-end mb-3">
               <div className="col-md-6">
                 <button
-                  className=" btn btn-secondary btn-rounded"
+                  className=" btn btn-secondary btn-rounded "
                   style={{ float: "right" }}
                 >
                   <select
@@ -247,7 +212,6 @@ const EmployeeWorkLogs = () => {
               <th>Task Decritption</th>
               <th>Duration</th>
               <th>Log Date</th>
-              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -270,73 +234,14 @@ const EmployeeWorkLogs = () => {
                   </td>
                   <td>{data.duration}</td>
                   <td>{data.logDate}</td>
-                  <td>
-                    <a
-                      href="#"
-                      class="btn btn-primary btn-rounded mb-4"
-                      data-toggle="modal"
-                      data-target="#modalContactForm"
-                    >
-                      <i className="fa fa-edit" />{" "}
-                    </a>{" "}
-                    &nbsp;&nbsp;&nbsp;
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      data-mdb-toggle="modal"
-                      data-mdb-target="#exampledModal"
-                      onClick={() => {
-                        deleteTask(data.id);
-                      }}
-                    >
-                      {" "}
-                      <i className="fa fa-trash" />
-                    </button>
-                  </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
-        <div
-          className="modal fade"
-          id="exampledModal"
-          tabIndex="-1"
-          aria-labelledby="exampledModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampledModalLabel">
-                  Delete
-                </h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-mdb-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div className="modal-body">Are You Sure You Want To Delete?</div>
-              <div className="modal-footer">
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  data-mdb-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-danger">
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </React.Fragment>
   );
 };
 
-export default EmployeeWorkLogs;
+export default BenchWorklogs;
